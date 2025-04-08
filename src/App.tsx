@@ -1,17 +1,17 @@
-import {Route, HashRouter, Routes} from 'react-router-dom';
+import {Route, BrowserRouter as Router, Routes} from 'react-router-dom';
 import Home from './pages/Home';
 import CollegeNavbar from './appComponents/navBar/CollegeNavbar';
 
 function App() {
   return (
     <div className="flex flex-col w-full">
-      <HashRouter>
+      <Router basename="/btcstagartala">
         <CollegeNavbar />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/home" element={<Home />} />
         </Routes>
-      </HashRouter>
+      </Router>
     </div>
   );
 }
