@@ -1,0 +1,59 @@
+@import 'tailwindcss';
+
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  background-color: #f3f4f6;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow: auto;
+}
+
+@layer utilities {
+  @keyframes ticker {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  .animate-ticker {
+    animation: ticker 10s linear infinite;
+    /* Make sure this is wide enough to contain two copies of the content */
+    min-width: 200%;
+  }
+
+  @keyframes blink {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.3;
+    }
+  }
+
+  .animate-blink {
+    animation: blink 1s ease-in-out infinite;
+  }
+}
+
+.custom-dot-list-style .react-multi-carousel-dot button {
+  border: 2px solid #d1d5db;
+  background: transparent;
+}
+
+.custom-dot-list-style .react-multi-carousel-dot--active button {
+  background: white;
+  border-color: #d1d5db;
+}
