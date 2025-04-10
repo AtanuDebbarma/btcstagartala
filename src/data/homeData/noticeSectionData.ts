@@ -1,11 +1,5 @@
 import {Assets} from '@/assets/assetData';
-export type NoticeType = {
-  id: number;
-  name: string;
-  url: string;
-  createdAt: string; // ISO date string
-  content: string;
-};
+import {Accreditation, NoticeType} from '@/types/homeTypes';
 
 // Sample notice data
 export const notices: NoticeType[] = [
@@ -56,12 +50,6 @@ export const notices: NoticeType[] = [
   },
 ];
 
-export type Accreditation = {
-  id: number;
-  name: string;
-  logo: string;
-  isMoreButton?: boolean; // optional flag
-};
 export const accreditations: Accreditation[] = [
   {
     id: 1,

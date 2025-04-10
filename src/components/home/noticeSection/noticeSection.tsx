@@ -1,10 +1,6 @@
-import {
-  Accreditation,
-  accreditations,
-  notices,
-  NoticeType,
-} from '@/data/noticeSectionData';
+import {accreditations, notices} from '@/data/homeData/noticeSectionData';
 import {NavButton, AccreditationCard, NoticeItem} from './noticeSectionItems';
+import {Accreditation, NoticeType} from '@/types/homeTypes';
 
 export const NoticeSection = () => {
   return (
@@ -23,7 +19,7 @@ export const NoticeSection = () => {
             <div className="mt-2">
               <h2 className="text-2xl font-bold mb-6 relative inline-block tracking-wide">
                 Recognitions & Accreditations
-                <span className="absolute -bottom-1 left-0 w-1/2 h-1 bg-yellow-400 rounded"></span>
+                <span className="absolute -bottom-1 right-0 w-1/2 h-1 bg-yellow-400 rounded"></span>
               </h2>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">

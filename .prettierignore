@@ -2,5 +2,5 @@ node_modules/
 dist
 index.html
 build/
-eslint.config.js
-tailwind.config.js
+tailwind.config.ts
+src/index.css

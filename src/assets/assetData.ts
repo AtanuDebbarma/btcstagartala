@@ -3,6 +3,7 @@ import GovTripura from './GovTripura.jpg';
 import UGC from './UGC.jpg';
 import TripuraUniv from './TripuraUniv.jpg';
 import NAAC from './NAAC.jpg';
+import logo from './logo.jpg';
 
 export type LinkType = {
   logo: string;
@@ -28,7 +29,7 @@ export type CarouselType = {
 
 export const Assets: {link: LinkType; carousel: CarouselType} = {
   link: {
-    logo: 'https://btcstagartala.org/wp-content/uploads/2024/07/cropped-cropped-cropped-Bhavans_Tripura_Vidya_Mandir_logo-120x120.jpg',
+    logo: logo,
     topEmblem: topEmblemUrl,
     govTripura: GovTripura,
     ugc: UGC,

@@ -1,3 +1,4 @@
+import CollegeResources from '@/components/home/collegeResources';
 import {CustomCarousel} from '@/components/home/customCarousel';
 import NewsTicker from '@/components/home/newsTicker';
 import {NoticeSection} from '@/components/home/noticeSection/noticeSection';
@@ -12,7 +13,7 @@ const Home = () => {
       <NoticeSection />
       <SmallAboutCard />
       <StatsBanner />
-      <div className="h-50"></div>
+      <CollegeResources />
     </div>
   );
 };

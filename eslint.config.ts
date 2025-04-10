@@ -11,7 +11,7 @@ import eslintPluginReact from 'eslint-plugin-react';
 
 export default tseslint.config(
   {
-    ignores: ['dist', 'node_modules', 'index.html', 'eslint.config.js'],
+    ignores: ['dist', 'node_modules', 'index.html', 'src/index.css'],
   },
   {
     files: ['**/*.{ts,tsx,js,jsx,css,scss}'],
@@ -58,7 +58,7 @@ export default tseslint.config(
 
       'react-refresh/only-export-components': [
         'warn',
-        { allowConstantExport: true },
+        {allowConstantExport: true},
       ],
 
       'prettier/prettier': 'error',
