@@ -1,4 +1,4 @@
-import {NoticeType} from '@/data/homeData/noticeSectionData';
+import {NoticeType} from '@/types/homeTypes';
 
 export const NoticeItem = ({notice}: {notice: NoticeType}) => {
   return (
