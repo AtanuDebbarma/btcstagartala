@@ -33,12 +33,12 @@ export const MobileMenu = ({setMenuOpen}: MobileMenuProps) => {
   }, [setMenuOpen]);
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex justify-start">
+    <div className="bg-opacity-50 fixed inset-0 z-50 flex justify-start bg-black">
       <div
         ref={menuRef}
-        className="fixed inset-y-0 left-0 w-3/4 max-w-xs bg-blue-700 text-white p-5 transform transition-transform duration-300 ease-in-out translate-x-0">
+        className="fixed inset-y-0 left-0 w-3/4 max-w-xs translate-x-0 transform bg-blue-700 p-5 text-white transition-transform duration-300 ease-in-out">
         <button
-          className="absolute top-3 right-3 text-white text-xl"
+          className="absolute top-3 right-3 text-xl text-white"
           onClick={() => setMenuOpen(false)}>
           <i className="fa-solid fa-times"></i>
         </button>

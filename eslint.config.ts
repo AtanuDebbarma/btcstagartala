@@ -11,7 +11,13 @@ import eslintPluginReact from 'eslint-plugin-react';
 
 export default tseslint.config(
   {
-    ignores: ['dist', 'node_modules', 'index.html', 'src/index.css'],
+    ignores: [
+      'dist',
+      'node_modules',
+      'eslint.config.ts',
+      'index.html',
+      'src/index.css',
+    ],
   },
   {
     files: ['**/*.{ts,tsx,js,jsx,css,scss}'],
@@ -66,6 +72,7 @@ export default tseslint.config(
       'no-console': 'off',
       'import/no-unresolved': 'error',
       'node/no-missing-require': 'off',
+      'no-unused-vars': 'off',
     },
   },
   {

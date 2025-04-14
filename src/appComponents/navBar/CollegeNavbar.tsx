@@ -22,18 +22,18 @@ const CollegeNavbar = () => {
   }, []);
 
   return (
-    <div className="flex flex-col w-full font-sans">
+    <div className="flex w-full flex-col font-sans">
       <div ref={topRef}>
         <TopBar />
         <LogoSection />
       </div>
 
       <nav
-        className={`flex bg-blue-600 text-white md:justify-center md:items-center justify-start items-start px-4 py-1 transition-all duration-300 z-50 ${
-          isSticky ? 'fixed top-0 left-0 right-0 shadow-md' : ''
+        className={`z-50 flex items-start justify-start bg-blue-600 px-4 py-1 text-white transition-all duration-300 md:items-center md:justify-center ${
+          isSticky ? 'fixed top-0 right-0 left-0 shadow-md' : ''
         }`}>
         <button
-          className="md:hidden text-white focus:outline-none"
+          className="text-white focus:outline-none md:hidden"
           onClick={() => setMenuOpen(true)}>
           <i className="fa-solid fa-bars text-xl"></i>
         </button>

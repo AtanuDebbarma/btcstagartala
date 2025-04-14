@@ -1,4 +1,4 @@
-// .prettierrc.js
+// .prettierrc.cjs
 module.exports = {
   arrowParens: 'avoid',
   bracketSameLine: true,
@@ -6,4 +6,6 @@ module.exports = {
   singleQuote: true,
   trailingComma: 'all',
   endOfLine: 'lf',
+  plugins: ['prettier-plugin-tailwindcss'],
+  printWidth: 80,
 };

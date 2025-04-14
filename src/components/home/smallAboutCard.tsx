@@ -3,22 +3,22 @@ import {Assets} from '@/assets/assetData';
 export const SmallAboutCard = () => {
   return (
     <div className="mt-20">
-      <div className="flex w-full justify-center items-center">
-        <h2 className="text-2xl font-bold mb-6 relative inline-block tracking-wide">
-          Champion School at a Glance
-          <span className="absolute -bottom-1 right-0 w-1/2 h-1 bg-yellow-400 rounded"></span>
+      <div className="flex w-full items-center justify-center">
+        <h2 className="relative mb-6 inline-block text-2xl font-bold tracking-wide">
+          Our College at a Glance
+          <span className="absolute right-0 -bottom-1 h-1 w-1/2 rounded bg-yellow-400"></span>
         </h2>
       </div>
-      <div className="max-w-7xl mx-auto mt-3 px-10 xl:px-0">
-        <div className="w-full bg-gray-200 rounded-lg shadow-lg overflow-hidden">
-          <div className="flex flex-col lg:flex-row px-5 py-10 gap-10 lg:gap-0 ">
+      <div className="mx-auto mt-3 max-w-7xl px-10 xl:px-0">
+        <div className="w-full overflow-hidden rounded-lg bg-gray-200 shadow-lg">
+          <div className="flex flex-col gap-10 px-5 py-10 lg:flex-row lg:gap-0">
             {/* Left Content Section */}
-            <div className="px-6 md:px-2 lg:px-5 md:w-[80%] flex flex-col justify-between md:ml-20 md:mr-20 lg:ml-auto lg:mr-auto">
+            <div className="flex flex-col justify-between px-6 md:mr-20 md:ml-20 md:w-[80%] md:px-2 lg:mr-auto lg:ml-auto lg:px-5">
               <div>
-                <h1 className="text-2xl sm:text-2xl font-bold text-gray-800 mb-4">
+                <h1 className="mb-4 text-2xl font-bold text-gray-800 sm:text-2xl">
                   Bhavan’s Tripura College of Science & Technology
                 </h1>
-                <p className="text-sm sm:text-base text-gray-700 leading-relaxed text-justify">
+                <p className="text-justify text-sm leading-relaxed text-gray-700 sm:text-base">
                   Bharatiya Vidya Bhavan authority was requested by the
                   Government of Tripura to set up a college of Science &
                   Technology to teach non-conventional subjects that are not
@@ -37,28 +37,28 @@ export const SmallAboutCard = () => {
                   BVB functionaries.
                 </p>
               </div>
-              <span className="mt-4 text-sm sm:text-base text-gray-700 font-medium flex items-center cursor-default">
+              <span className="mt-4 flex cursor-default items-center text-sm font-medium text-gray-700 sm:text-base">
                 Need to know about our campus.
                 <a
                   href="#"
-                  className="ml-1 text-blue-500 font-bold hover:underline">
+                  className="ml-1 font-bold text-blue-500 hover:underline">
                   Know More →
                 </a>
               </span>
             </div>
 
             {/* Right Image Section */}
-            <div className="px-6  md:px-2 lg:px-5 md:w-[80%] md:ml-20 md:mr-20 lg:ml-auto lg:mr-auto flex flex-col justify-between lg:justify-center">
+            <div className="flex flex-col justify-between px-6 md:mr-20 md:ml-20 md:w-[80%] md:px-2 lg:mr-auto lg:ml-auto lg:justify-center lg:px-5">
               <img
                 src={Assets.link.aboutShortImg}
                 alt="College Image"
-                className="w-full h-auto max-h-[350px] object-cover rounded-md"
+                className="h-auto max-h-[350px] w-full rounded-md object-cover"
               />
-              <span className="mt-4 text-sm sm:text-base text-gray-700 font-medium flex items-center cursor-default">
+              <span className="mt-4 flex cursor-default items-center text-sm font-medium text-gray-700 sm:text-base">
                 Need to know about our courses.
                 <a
                   href="#"
-                  className="ml-1 text-blue-500 font-bold hover:underline">
+                  className="ml-1 font-bold text-blue-500 hover:underline">
                   Know More →
                 </a>
               </span>

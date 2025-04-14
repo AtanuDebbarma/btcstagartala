@@ -1,3 +1,5 @@
+import {Timestamp} from 'firebase/firestore';
+
 /**
  * Represents types for Notice Board
  */
@@ -41,4 +43,19 @@ export type CollegeResourcesTypes = {
   title: string;
   image: string;
   alt: string;
+};
+
+/**
+ * Represents types for Carousel mode
+ */
+export type CarouselModeType = 'ADD' | 'DELETE' | 'EDIT' | 'DIM' | '';
+
+/**
+ * Represents types for Firebase Backend Corusel Images
+ */
+export type CarouselImage = {
+  id: string;
+  imageUrl: string;
+  imageOrder: number;
+  createdAt: Timestamp | null;
 };

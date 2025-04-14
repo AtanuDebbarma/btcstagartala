@@ -1,34 +1,34 @@
 import {Assets} from '../../assets/assetData';
 
 export const LogoSection = () => (
-  <div className="bg-white py-3 px-6 border-b">
-    <div className="flex flex-col md:flex-row justify-evenly items-center">
+  <div className="border-b bg-white px-6 py-3">
+    <div className="flex flex-col items-center justify-evenly md:flex-row">
       {/* Logo and College Info */}
       <div className="flex items-center">
         <img
           src={Assets.link.logo}
           alt="College Logo"
-          className="w-16 md:w-20 mr-3"
+          className="mr-3 w-16 md:w-20"
         />
         <div>
-          <h1 className="text-blue-600 text-lg md:text-2xl font-bold">
+          <h1 className="text-lg font-bold text-blue-600 md:text-2xl">
             Bhavan’s Tripura College of Science & Technology
           </h1>
           <p className="text-sm">Recognized by NCTE and UGC</p>
           <p className="text-sm">Affiliated with Tripura University & SCERT</p>
           <p className="text-sm">
             Accredited by NAAC with{' '}
-            <span className="text-red-500 font-bold">'B++' Grade</span>
+            <span className="font-bold text-red-500">'B++' Grade</span>
           </p>
         </div>
       </div>
 
       {/* Contact & Socials */}
-      <div className="mt-4 md:mt-0 flex flex-col md:flex-row items-center md:justify-end gap-8">
+      <div className="mt-2 flex flex-col items-center gap-0 sm:mt-4 sm:gap-8 md:mt-0 md:flex-row md:justify-end">
         <div className="flex items-center">
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6 text-blue-500 mr-2"
+            className="mr-2 h-6 w-6 text-blue-500"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor">
@@ -45,25 +45,25 @@ export const LogoSection = () => (
           </div>
         </div>
         <div className="flex flex-col items-center">
-          <p className="font-medium xl:mt-4 mt-10">FOLLOW US ON:</p>
-          <div className="flex space-x-2 mt-1 ">
+          <p className="mt-4 font-medium sm:mt-10 xl:mt-4">FOLLOW US ON:</p>
+          <div className="mt-1 flex space-x-2">
             <a
               href="https://www.facebook.com/people/BTCST/100068331848822/?mibextid=ZbWKwL"
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-blue-600 text-white p-2 rounded-full flex items-center justify-center aspect-square">
+              className="flex aspect-square items-center justify-center rounded-full bg-blue-600 p-2 text-white">
               <i className="fa-brands fa-facebook text-lg"></i>
             </a>
             <a
               href="https://www.instagram.com/btcst.agartala.official"
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-blue-400 text-white p-2 rounded-full flex items-center justify-center aspect-square">
+              className="flex aspect-square items-center justify-center rounded-full bg-blue-400 p-2 text-white">
               <i className="fa-brands fa-instagram text-lg"></i>
             </a>
           </div>
         </div>
-        <div className="mt-4 md:mt-0 w-25">
+        <div className="mt-4 w-25 md:mt-0">
           <img
             src={Assets.link.topEmblem}
             alt="College Emblem"

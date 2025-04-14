@@ -5,8 +5,8 @@ import CountUp from 'react-countup';
 
 export const StatsBanner = () => {
   return (
-    <div className="w-full bg-blue-600 py-6 px-4 mt-20">
-      <div className="max-w-6xl mx-auto flex flex-wrap justify-between items-center gap-4">
+    <div className="mt-20 w-full bg-blue-600 px-4 py-6">
+      <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4">
         {stats.map((stat: StatsBannerTypes, index) => {
           const {number, suffix} = parseCount(stat.count);
 

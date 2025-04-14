@@ -2,12 +2,12 @@ import {NoticeType} from '@/types/homeTypes';
 
 export const NoticeItem = ({notice}: {notice: NoticeType}) => {
   return (
-    <div className="mb-4 pb-4 border-b border-gray-200 last:border-0">
+    <div className="mb-4 border-b border-gray-200 pb-4 last:border-0">
       <p className="text-gray-800">{notice.content}</p>
       {notice.name.includes('View') && (
         <a
           href={notice.url}
-          className="text-blue-500 hover:underline inline-flex items-center mt-1">
+          className="mt-1 inline-flex items-center text-blue-500 hover:underline">
           → View
         </a>
       )}
@@ -19,12 +19,12 @@ export const NavButton = ({text, px}: {text: string; px?: string}) => {
   return (
     <div>
       <div
-        className={`bg-[#0a2540] text-white py-4 ${
+        className={`bg-[#0a2540] py-4 text-white ${
           px ?? 'px-15 md:px-12'
-        } rounded-sm shadow-md text-center`}>
-        <h3 className="text-lg font-semibold uppercase relative inline-block tracking-wide text-nowrap">
+        } rounded-sm text-center shadow-md`}>
+        <h3 className="relative inline-block text-lg font-semibold tracking-wide text-nowrap uppercase">
           {text}
-          <span className="mt-2 absolute -bottom-1 left-1/4 w-1/2 h-[3px] bg-yellow-400 rounded"></span>
+          <span className="absolute -bottom-1 left-1/4 mt-2 h-[3px] w-1/2 rounded bg-yellow-400"></span>
         </h3>
       </div>
     </div>
@@ -42,8 +42,8 @@ export const AccreditationCard = ({
 }) => {
   if (isMoreButton) {
     return (
-      <div className="bg-blue-500 text-white p-3 rounded-md shadow flex flex-row justify-center items-center min-h-[30px] md:min-h-[150px]">
-        <p className="font-semibold text-sm mb-1">More Accreditations</p>
+      <div className="flex min-h-[30px] flex-row items-center justify-center rounded-md bg-blue-500 p-3 text-white shadow md:min-h-[150px]">
+        <p className="mb-1 text-sm font-semibold">More Accreditations</p>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           className="h-4 w-4"
@@ -62,13 +62,13 @@ export const AccreditationCard = ({
   }
 
   return (
-    <div className="bg-white p-3 rounded-md shadow flex flex-col items-center justify-center text-center min-h-[150px]">
+    <div className="flex min-h-[150px] flex-col items-center justify-center rounded-md bg-white p-3 text-center shadow">
       <img
         src={logo}
         alt={name}
-        className="w-auto h-[65px] mb-2 object-contain"
+        className="mb-2 h-[65px] w-auto object-contain"
       />
-      <p className="text-sm text-gray-800 text-center">{name}</p>
+      <p className="text-center text-sm text-gray-800">{name}</p>
     </div>
   );
 };
