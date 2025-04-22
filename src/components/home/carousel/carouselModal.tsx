@@ -29,6 +29,7 @@ export const CarouselModal = ({
 }: Props) => {
   const modalRef = useRef<HTMLDivElement>(null);
   const [loading, setLoading] = useState<boolean>(false);
+  const [processSuccess, setProcessSuccess] = useState<boolean>(false);
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -59,7 +60,7 @@ export const CarouselModal = ({
       <div
         ref={modalRef}
         className="relative flex w-[90%] max-w-md flex-col items-center rounded-xl bg-white p-6 text-black shadow-lg">
-        {!loading && (
+        {!loading && !processSuccess && (
           <div>
             <i
               onClick={handleClose}
@@ -86,8 +87,17 @@ export const CarouselModal = ({
             />
           </div>
         )}
+        {processSuccess && (
+          <div className="flex flex-col items-center justify-center">
+            <h2 className="mb-8 text-center text-4xl font-bold text-black">
+              SUCCESS
+            </h2>
+            <p className="mt-5 text-4xl">✅</p>
+          </div>
+        )}
         {(mode === 'ADD' || mode === 'EDIT' || mode === 'DELETE') &&
-          !loading && (
+          !loading &&
+          !processSuccess && (
             <ImageForm
               mode={mode}
               setOpenModal={setOpenModal}
@@ -96,6 +106,7 @@ export const CarouselModal = ({
               setLoading={setLoading}
               setCarouselImages={setCarouselImages}
               setAutoPlay={setAutoPlay}
+              setProcessSuccess={setProcessSuccess}
             />
           )}
         {mode === 'DIM' && !loading && (
@@ -105,6 +116,7 @@ export const CarouselModal = ({
             setDimensions={setDimensions}
             setLoading={setLoading}
             setAutoPlay={setAutoPlay}
+            setProcessSuccess={setProcessSuccess}
           />
         )}
       </div>

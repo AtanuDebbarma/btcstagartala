@@ -8,6 +8,7 @@ export const getCarouselBtnsConfig = (
     type: CarouselModeType,
     order: number,
     url: string,
+    image_public_id: string,
     createdAt: Timestamp | null,
   ) => void,
 ) => [
@@ -22,6 +23,7 @@ export const getCarouselBtnsConfig = (
         'EDIT',
         image.imageOrder,
         image.imageUrl,
+        image.image_public_id,
         image.createdAt,
       ),
   },
@@ -36,6 +38,7 @@ export const getCarouselBtnsConfig = (
         'DELETE',
         image.imageOrder,
         image.imageUrl,
+        image.image_public_id,
         image.createdAt,
       ),
   },
@@ -44,6 +47,6 @@ export const getCarouselBtnsConfig = (
     iconClass: 'fa-solid fa-plus' as const,
     iconColor: 'text-green-600',
     hoverColor: 'hover:text-green-800',
-    onClick: () => handleModal(image.id, 'ADD', 0, '', null),
+    onClick: () => handleModal(image.id, 'ADD', 0, '', '', null),
   },
 ];

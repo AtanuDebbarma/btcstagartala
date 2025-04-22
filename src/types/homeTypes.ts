@@ -57,5 +57,6 @@ export type CarouselImage = {
   id: string;
   imageUrl: string;
   imageOrder: number;
+  image_public_id: string;
   createdAt: Timestamp | null;
 };

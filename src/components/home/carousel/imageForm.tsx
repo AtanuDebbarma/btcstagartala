@@ -15,6 +15,7 @@ type PropTypes = {
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
   setCarouselImages: React.Dispatch<React.SetStateAction<CarouselImage[]>>;
   setAutoPlay: React.Dispatch<React.SetStateAction<boolean>>;
+  setProcessSuccess: React.Dispatch<React.SetStateAction<boolean>>;
 };
 export const ImageForm = ({
   mode,
@@ -24,11 +25,13 @@ export const ImageForm = ({
   setLoading,
   setCarouselImages,
   setAutoPlay,
+  setProcessSuccess,
 }: PropTypes) => {
   const [formValues, setFormValues] = useState<CarouselImage>({
     id: selectedImage.id,
     imageUrl: mode === 'ADD' ? '' : selectedImage.imageUrl,
     imageOrder: mode === 'ADD' ? totalCount + 1 : selectedImage.imageOrder || 0,
+    image_public_id: mode === 'ADD' ? '' : selectedImage.image_public_id,
     createdAt: mode === 'ADD' ? null : selectedImage.createdAt,
   });
   const [uploadError, setUploadError] = useState<string>('');
@@ -82,6 +85,7 @@ export const ImageForm = ({
       tempImage,
       setUploading,
       setUploadError,
+      setProcessSuccess,
     );
   };
   const handleOnEdit = () => {
@@ -94,6 +98,7 @@ export const ImageForm = ({
       tempImage,
       setUploading,
       setUploadError,
+      setProcessSuccess,
     );
   };
   const handleOnDelete = () => {
@@ -103,6 +108,9 @@ export const ImageForm = ({
       setLoading,
       setCarouselImages,
       setAutoPlay,
+      setUploading,
+      setUploadError,
+      setProcessSuccess,
     );
   };
 

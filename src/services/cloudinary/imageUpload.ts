@@ -16,7 +16,6 @@ export async function uploadCarouselToCloudinary(file: File): Promise<{
     'upload_preset',
     import.meta.env.VITE_CLOUDINARY_CAROUSEL_PRESET,
   );
-
   const res = await fetch(url, {
     method: 'POST',
     body: formData,

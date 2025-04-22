@@ -32,6 +32,7 @@ export const CustomCarouselMain: React.FC = () => {
     id: '',
     imageUrl: '',
     imageOrder: 0,
+    image_public_id: '',
     createdAt: null,
   });
   const {loading: dimLoading, error: dimError} =
@@ -44,12 +45,19 @@ export const CustomCarouselMain: React.FC = () => {
     type: CarouselModeType,
     order: number,
     url: string,
+    image_public_id: string,
     createdAt: Timestamp | null,
   ) => {
     setAutoPlay(false);
     setOpenModal(true);
     setMode(type);
-    setSelectedImage({id: id, imageUrl: url, imageOrder: order, createdAt});
+    setSelectedImage({
+      id: id,
+      imageUrl: url,
+      imageOrder: order,
+      image_public_id,
+      createdAt,
+    });
   };
 
   return (
@@ -68,7 +76,7 @@ export const CustomCarouselMain: React.FC = () => {
             <button
               onMouseEnter={() => setMouseEnterDimensions(true)}
               onMouseLeave={() => setMouseEnterDimensions(false)}
-              onClick={() => handleModal('', 'DIM', 0, '', null)}
+              onClick={() => handleModal('', 'DIM', 0, '', '', null)}
               className="absolute top-5 right-10 z-50 cursor-pointer rounded bg-white/80 shadow-md transition-all duration-200 hover:bg-white hover:text-blue-800 focus:outline-none active:scale-90 active:bg-white/90"
               title="Adjust dimensions">
               <i className="fa-solid fa-expand text-md px-2 py-2 font-bold text-blue-600" />
@@ -111,7 +119,7 @@ export const CustomCarouselMain: React.FC = () => {
           </Carousel>
         </div>
       )}
-      {openModal && (
+      {openModal && isAdmin && (
         <CarouselModal
           openModal={openModal}
           setOpenModal={setOpenModal}

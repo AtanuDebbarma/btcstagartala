@@ -8,6 +8,7 @@ type PropTypes = {
   setOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
   setAutoPlay: React.Dispatch<React.SetStateAction<boolean>>;
+  setProcessSuccess: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 const InputField = ({
@@ -40,6 +41,7 @@ export const DimentionsAdjustForm = ({
   setDimensions,
   setLoading,
   setAutoPlay,
+  setProcessSuccess,
 }: PropTypes) => {
   const [formValues, setFormValues] = useState<Dimensions>({
     default: dimensions?.default || 350,
@@ -63,6 +65,8 @@ export const DimentionsAdjustForm = ({
   const handleClose = () => {
     setAutoPlay(true);
     setOpenModal(false);
+    setProcessSuccess(false);
+    setLoading(false);
   };
 
   const handleUpdate = () => {
@@ -72,6 +76,7 @@ export const DimentionsAdjustForm = ({
       setLoading,
       setDimensions,
       setAutoPlay,
+      setProcessSuccess,
     );
   };
 

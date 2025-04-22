@@ -27,6 +27,7 @@ interface PROPS {
     type: CarouselModeType,
     order: number,
     url: string,
+    image_public_id: string,
     createdAt: Timestamp | null,
   ) => void;
 }
