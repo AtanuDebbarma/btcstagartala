@@ -4,7 +4,8 @@ import {
   handleEdit,
 } from '@/helpers/carouselHelpers/carouselUpdateHelpers';
 import {CarouselImage, CarouselModeType} from '@/types/homeTypes';
-import React, {useState} from 'react';
+import {validateImageFileType} from '@/utils/fileValidation';
+import React, {useEffect, useRef, useState} from 'react';
 
 type PropTypes = {
   mode: CarouselModeType;
@@ -27,9 +28,13 @@ export const ImageForm = ({
   const [formValues, setFormValues] = useState<CarouselImage>({
     id: selectedImage.id,
     imageUrl: mode === 'ADD' ? '' : selectedImage.imageUrl,
-    createdAt: mode === 'ADD' ? null : selectedImage.createdAt,
     imageOrder: mode === 'ADD' ? totalCount + 1 : selectedImage.imageOrder || 0,
+    createdAt: mode === 'ADD' ? null : selectedImage.createdAt,
   });
+  const [uploadError, setUploadError] = useState<string>('');
+  const [uploading, setUploading] = useState<boolean>(false);
+  const [tempImage, setTempImage] = useState<File | null>(null);
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
@@ -40,6 +45,33 @@ export const ImageForm = ({
       [name]: name === 'imageOrder' ? parseInt(value) : value,
     }));
   };
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    const {error} = validateImageFileType(file);
+    if (error) {
+      setUploadError(
+        'Only image files (.jpg, .png, webp, .jpeg, .bmp) are allowed.',
+      );
+      return;
+    } else {
+      setTempImage(file);
+    }
+    setUploadError('');
+  };
+
+  useEffect(() => {
+    if (tempImage) {
+      const imageURL = URL.createObjectURL(tempImage);
+
+      // Cleanup
+      return () => {
+        URL.revokeObjectURL(imageURL);
+      };
+    }
+  }, [tempImage]);
+
   const handleOnAdd = () => {
     handleAdd(
       setOpenModal,
@@ -47,6 +79,9 @@ export const ImageForm = ({
       setLoading,
       setCarouselImages,
       setAutoPlay,
+      tempImage,
+      setUploading,
+      setUploadError,
     );
   };
   const handleOnEdit = () => {
@@ -56,6 +91,9 @@ export const ImageForm = ({
       setLoading,
       setCarouselImages,
       setAutoPlay,
+      tempImage,
+      setUploading,
+      setUploadError,
     );
   };
   const handleOnDelete = () => {
@@ -69,8 +107,15 @@ export const ImageForm = ({
   };
 
   const handleClose = () => {
+    if (fileInputRef.current) {
+      fileInputRef.current.value = '';
+    }
     setAutoPlay(true);
     setOpenModal(false);
+    setUploadError('');
+    setUploading(false);
+    setTempImage(null);
+    setLoading(false);
   };
 
   return (
@@ -84,7 +129,7 @@ export const ImageForm = ({
           value={formValues.imageOrder}
           onChange={handleChange}
           disabled={mode !== 'ADD'}
-          className="mt-1 w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+          className="mt-1 w-full cursor-pointer rounded-md border border-gray-300 p-2 shadow-sm hover:bg-gray-300 focus:border-blue-500 focus:ring-blue-500">
           {[...Array(totalCount + 1)].map((_, i) => {
             const order = i + 1;
             const isAddNew = order === totalCount + 1;
@@ -96,25 +141,70 @@ export const ImageForm = ({
           })}
         </select>
       </div>
-      <div>
+      <div className="flex flex-col gap-1">
         <label className="block text-sm font-medium text-gray-700">
-          Image URL
+          {mode === 'ADD'
+            ? 'Select Image'
+            : mode === 'EDIT'
+              ? 'Edit Image'
+              : 'Delete Image'}
         </label>
-        <input
-          disabled={mode === 'DELETE' && true}
-          type="text"
-          name="imageUrl"
-          value={formValues.imageUrl}
-          onChange={handleChange}
-          className="mt-1 w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-          placeholder="Enter image URL"
-        />
+        {mode !== 'DELETE' && (
+          <>
+            <label
+              htmlFor="file-upload"
+              className="mt-1 h-full w-full cursor-pointer rounded-md border border-gray-300 p-2 shadow-sm hover:bg-gray-300">
+              Upload Image
+            </label>
+            <input
+              id="file-upload"
+              type="file"
+              accept="image/*"
+              disabled={uploading}
+              onChange={handleFileChange}
+              className="hidden"
+              ref={fileInputRef}
+            />
+          </>
+        )}
+        {uploading && (
+          <p className="mt-1 text-sm text-blue-600">Uploading...</p>
+        )}
+        {uploadError && (
+          <p className="mt-1 text-sm text-red-500">{uploadError}</p>
+        )}
+        {(tempImage || mode === 'DELETE' || mode === 'EDIT') && (
+          <div className="relative mt-2 inline-block max-h-48">
+            <img
+              src={
+                tempImage
+                  ? URL.createObjectURL(tempImage)
+                  : mode === 'DELETE' || mode === 'EDIT'
+                    ? selectedImage.imageUrl
+                    : ''
+              }
+              alt="Preview"
+              className="max-h-48 rounded-md object-contain shadow-md"
+            />
+
+            {tempImage && (
+              <i
+                onClick={() => {
+                  setTempImage(null);
+                  if (fileInputRef.current) {
+                    fileInputRef.current.value = ''; // Reset file input value
+                  }
+                }}
+                className="fa-solid fa-times absolute top-1 right-1 cursor-pointer text-gray-100 hover:text-red-500"></i>
+            )}
+          </div>
+        )}
       </div>
 
       <div className="mt-6 flex justify-center space-x-4">
         <button
           onClick={handleClose}
-          className="rounded-md bg-gray-300 px-4 py-2 text-gray-700 hover:bg-gray-400">
+          className="cursor-pointer rounded-md bg-gray-300 px-4 py-2 text-gray-700 hover:bg-gray-400">
           Cancel
         </button>
         <button
@@ -125,7 +215,7 @@ export const ImageForm = ({
                 ? handleOnEdit
                 : handleOnDelete
           }
-          className="rounded-md bg-blue-600 px-4 py-2 text-white hover:bg-blue-700">
+          className="cursor-pointer rounded-md bg-blue-600 px-4 py-2 text-white hover:bg-blue-500">
           {mode === 'ADD' ? 'Add' : mode === 'EDIT' ? 'Update' : 'Delete'}
         </button>
       </div>

@@ -10,7 +10,7 @@ function App() {
   return (
     <AuthWrapper>
       <div className="flex w-full flex-col">
-        <Router basename="/btcstagartala">
+        <Router>
           <CollegeNavbar />
           <Routes>
             <Route path={RouteNames.DEFAULT} element={<Home />} />

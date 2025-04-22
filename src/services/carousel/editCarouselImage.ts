@@ -36,6 +36,12 @@ export const getImageDocByOrder = async (
 export const updateImageDoc = async (
   ref: DocumentReference<DocumentData>,
   updatedFields: Partial<CarouselImage>,
-) => {
-  await updateDoc(ref, updatedFields);
+): Promise<boolean> => {
+  try {
+    await updateDoc(ref, updatedFields);
+    return true;
+  } catch (error) {
+    console.error('Failed to update document:', error);
+    return false;
+  }
 };
