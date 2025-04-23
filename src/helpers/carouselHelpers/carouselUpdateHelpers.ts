@@ -6,7 +6,11 @@ import {
 } from '@/services/carousel/editCarouselImage';
 import {updateCarouselDimensions} from '@/services/carousel/editDimentions';
 import {Dimensions} from '@/services/carousel/fetchDimentions';
-import {uploadCarouselToCloudinary} from '@/services/cloudinary/imageUpload';
+import {
+  sendAddCarouselImageToBackend,
+  sendDeleteCarouselImageToBackend,
+  sendEditCarouselImageToBackend,
+} from '@/services/cloudinary/sendtoBackend';
 import {CarouselImage} from '@/types/homeTypes';
 import React from 'react';
 
@@ -18,7 +22,7 @@ export const handleAdd = async (
   setAutoPlay: React.Dispatch<React.SetStateAction<boolean>>,
   tempImage: File | null,
   setUploading: React.Dispatch<React.SetStateAction<boolean>>,
-  setUploadError: React.Dispatch<React.SetStateAction<string>>,
+  handleUploadErrorMessage: (message: string) => void,
   setProcessSuccess: React.Dispatch<React.SetStateAction<boolean>>,
 ) => {
   setAutoPlay(false);
@@ -27,31 +31,36 @@ export const handleAdd = async (
     if (!tempImage) {
       setLoading(false);
       setUploading(false);
-      setUploadError('Please select an image to upload.');
+      handleUploadErrorMessage('Please select an image to upload.');
       return;
     }
 
     // Upload image to Cloudinary
-    const {data} = await uploadCarouselToCloudinary(tempImage);
+    const {success, asset} = await sendAddCarouselImageToBackend(
+      tempImage,
+      handleUploadErrorMessage,
+    );
 
-    if (!data || !data.secure_url) {
+    if (success || !asset.url) {
       setLoading(false);
       setUploading(false);
-      setUploadError('Please select an image to upload.');
       return;
     }
     const updatedImage: CarouselImage = {
       ...formValues,
-      imageUrl: data.secure_url,
-      image_public_id: data.public_id,
+      imageUrl: asset.url,
+      image_public_id: asset.public_id,
     };
 
-    const success = await addCarouselImage(updatedImage, setCarouselImages);
+    const firebaseAddSuccess = await addCarouselImage(
+      updatedImage,
+      setCarouselImages,
+    );
 
-    if (success) {
+    if (firebaseAddSuccess) {
       setLoading(false);
       setProcessSuccess(true);
-      setUploadError('');
+      handleUploadErrorMessage('');
       setUploading(false);
       setTimeout(() => {
         setOpenModal(false);
@@ -62,7 +71,9 @@ export const handleAdd = async (
       setLoading(false);
       setAutoPlay(false);
       setUploading(false);
-      setUploadError('Failed to add image! Please check values and try again.');
+      handleUploadErrorMessage(
+        'Failed to add image! Please check values and try again.',
+      );
       return;
     }
   } catch (err) {
@@ -73,7 +84,7 @@ export const handleAdd = async (
     setOpenModal(false);
     setAutoPlay(true);
     setUploading(false);
-    setUploadError('');
+    handleUploadErrorMessage('');
   }
 };
 
@@ -85,7 +96,7 @@ export const handleEdit = async (
   setAutoPlay: React.Dispatch<React.SetStateAction<boolean>>,
   tempImage: File | null,
   setUploading: React.Dispatch<React.SetStateAction<boolean>>,
-  setUploadError: React.Dispatch<React.SetStateAction<string>>,
+  handleUploadErrorMessage: (message: string) => void,
   setProcessSuccess: React.Dispatch<React.SetStateAction<boolean>>,
 ) => {
   setAutoPlay(false);
@@ -98,42 +109,46 @@ export const handleEdit = async (
       alert('No image found with this imageOrder');
       setLoading(false);
       setUploading(false);
-      setUploadError('No image found with this imageOrder');
+      handleUploadErrorMessage('No image found with this imageOrder');
       return;
     }
     if (!tempImage) {
       setLoading(false);
       setUploading(false);
-      setUploadError('Please select an image to upload.');
+      handleUploadErrorMessage('Please select an image to upload.');
       return;
     }
 
     // Upload image to Cloudinary
-    const {data} = await uploadCarouselToCloudinary(tempImage);
+    const {success, asset} = await sendEditCarouselImageToBackend(
+      selectedImage.image_public_id,
+      tempImage,
+      handleUploadErrorMessage,
+    );
 
-    if (!data || !data.secure_url) {
+    if (!success || !asset.url) {
       setLoading(false);
       setUploading(false);
-      setUploadError('Please select an image to upload.');
       return;
     }
     const updatedImage: CarouselImage = {
       ...selectedImage,
-      imageUrl: data.secure_url,
-      image_public_id: data.public_id,
+      imageUrl: asset.url,
+      image_public_id: asset.public_id,
     };
 
     //Update the Firestore document
-    const success = await updateImageDoc(result.ref, {
+    const firebaseEditSuccess = await updateImageDoc(result.ref, {
       imageUrl: updatedImage.imageUrl,
       imageOrder: updatedImage.imageOrder,
+      image_public_id: updatedImage.image_public_id,
     });
 
-    if (success) {
+    if (firebaseEditSuccess) {
       setLoading(false);
       setProcessSuccess(true);
       setUploading(false);
-      setUploadError('');
+      handleUploadErrorMessage('');
       //Update local state
       setCarouselImages(prev => {
         // Find and update the image in local state
@@ -152,7 +167,9 @@ export const handleEdit = async (
       setLoading(false);
       setAutoPlay(false);
       setUploading(false);
-      setUploadError('Failed to add image! Please check values and try again.');
+      handleUploadErrorMessage(
+        'Failed to add image! Please check values and try again.',
+      );
       return;
     }
   } catch (err) {
@@ -163,7 +180,7 @@ export const handleEdit = async (
     setOpenModal(false);
     setAutoPlay(true);
     setUploading(false);
-    setUploadError('');
+    handleUploadErrorMessage('');
   }
 };
 
@@ -174,7 +191,7 @@ export const handleDelete = async (
   setCarouselImages: React.Dispatch<React.SetStateAction<CarouselImage[]>>,
   setAutoPlay: React.Dispatch<React.SetStateAction<boolean>>,
   setUploading: React.Dispatch<React.SetStateAction<boolean>>,
-  setUploadError: React.Dispatch<React.SetStateAction<string>>,
+  handleUploadErrorMessage: (message: string) => void,
   setProcessSuccess: React.Dispatch<React.SetStateAction<boolean>>,
 ) => {
   setAutoPlay(false);
@@ -183,7 +200,17 @@ export const handleDelete = async (
   if (!imageToDelete) {
     setLoading(false);
     setUploading(false);
-    setUploadError('No mage Selected!');
+    handleUploadErrorMessage('No mage Selected!');
+    setProcessSuccess(false);
+    return;
+  }
+  const {success} = await sendDeleteCarouselImageToBackend(
+    imageToDelete.image_public_id,
+    handleUploadErrorMessage,
+  );
+  if (!success) {
+    setLoading(false);
+    setUploading(false);
     setProcessSuccess(false);
     return;
   }
@@ -214,7 +241,7 @@ export const handleDelete = async (
     setLoading(false);
     setProcessSuccess(true);
     setUploading(false);
-    setUploadError('');
+    handleUploadErrorMessage('');
     setTimeout(() => {
       setOpenModal(false);
       setAutoPlay(true);
@@ -227,7 +254,7 @@ export const handleDelete = async (
     setOpenModal(false);
     setAutoPlay(true);
     setUploading(false);
-    setUploadError('');
+    handleUploadErrorMessage('');
   }
 };
 

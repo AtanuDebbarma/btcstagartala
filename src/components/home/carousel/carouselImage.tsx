@@ -70,7 +70,7 @@ export const CarouselImages = ({
       )}
 
       <img
-        src={image.imageUrl}
+        src={totalLength === 0 ? backupCarousel : image.imageUrl}
         alt={`Carousel ${image.imageOrder}`}
         style={{objectFit: !dimError ? objectFitValue : 'cover'}}
         className="h-full w-full shadow-md"

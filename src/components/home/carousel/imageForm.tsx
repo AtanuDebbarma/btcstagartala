@@ -84,7 +84,7 @@ export const ImageForm = ({
       setAutoPlay,
       tempImage,
       setUploading,
-      setUploadError,
+      handleUploadErrorMessage,
       setProcessSuccess,
     );
   };
@@ -97,11 +97,20 @@ export const ImageForm = ({
       setAutoPlay,
       tempImage,
       setUploading,
-      setUploadError,
+      handleUploadErrorMessage,
       setProcessSuccess,
     );
   };
   const handleOnDelete = () => {
+    if (totalCount === 1 || totalCount === 0) {
+      setOpenModal(true);
+      setAutoPlay(false);
+      handleUploadErrorMessage(
+        'At least one image is required. Edit Image instead',
+      );
+      setLoading(false);
+      return;
+    }
     handleDelete(
       setOpenModal,
       formValues,
@@ -109,7 +118,7 @@ export const ImageForm = ({
       setCarouselImages,
       setAutoPlay,
       setUploading,
-      setUploadError,
+      handleUploadErrorMessage,
       setProcessSuccess,
     );
   };
@@ -120,10 +129,13 @@ export const ImageForm = ({
     }
     setAutoPlay(true);
     setOpenModal(false);
-    setUploadError('');
+    handleUploadErrorMessage('');
     setUploading(false);
     setTempImage(null);
     setLoading(false);
+  };
+  const handleUploadErrorMessage = (message: string) => {
+    setUploadError(message);
   };
 
   return (
