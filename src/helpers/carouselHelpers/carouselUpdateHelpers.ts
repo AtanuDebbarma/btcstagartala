@@ -41,7 +41,7 @@ export const handleAdd = async (
       handleUploadErrorMessage,
     );
 
-    if (success || !asset.url) {
+    if (!success || !asset.url) {
       setLoading(false);
       setUploading(false);
       return;
@@ -266,11 +266,10 @@ export const handleDimUpdate = async (
   setAutoPlay: React.Dispatch<React.SetStateAction<boolean>>,
   setProcessSuccess: React.Dispatch<React.SetStateAction<boolean>>,
 ) => {
-  let success = false;
   setAutoPlay(false);
   setLoading(true);
   try {
-    success = await updateCarouselDimensions(formValues);
+    const success = await updateCarouselDimensions(formValues);
     if (success) {
       setDimensions(formValues);
       setProcessSuccess(true);
