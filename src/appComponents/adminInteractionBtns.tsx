@@ -14,7 +14,7 @@ export const AdminInteractionBtns = ({
   hoverColor,
 }: PROPS) => {
   return (
-    <div className="flex w-full items-center">
+    <div className="flex w-full items-center transition-transform duration-150 ease-in-out active:scale-90">
       <button
         onClick={handleModal}
         title={title}

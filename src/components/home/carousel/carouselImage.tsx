@@ -61,7 +61,7 @@ export const CarouselImages = ({
       dimensions={dimensions}
       key={image.imageOrder}
       style={{border: mouseEnterDimensions ? '10px solid #043f9e' : 'none'}}
-      className="flex w-full items-center justify-center">
+      className="flex w-full cursor-grab items-center justify-center">
       {isAdmin && (
         <>
           <CarouselCounter image={image} totalLength={totalLength} />
@@ -70,7 +70,7 @@ export const CarouselImages = ({
       )}
 
       <img
-        src={totalLength === 0 ? backupCarousel : image.imageUrl}
+        src={image.imageUrl}
         alt={`Carousel ${image.imageOrder}`}
         style={{objectFit: !dimError ? objectFitValue : 'cover'}}
         className="h-full w-full shadow-md"

@@ -13,5 +13,10 @@ export const createAdminSlice: StateCreator<
   AdminSliceType
 > = set => ({
   user: null,
-  setUser: (user: User | null) => set({user}),
+  setUser: (user: User | null) => {
+    set((state: AdminSliceType) => ({
+      ...state,
+      user,
+    }));
+  },
 });

@@ -33,16 +33,24 @@ export const MobileMenu = ({setMenuOpen}: MobileMenuProps) => {
   }, [setMenuOpen]);
 
   return (
-    <div className="bg-opacity-50 fixed inset-0 z-50 flex justify-start bg-black">
+    <div className="bg-opacity-50 fixed inset-0 z-50 flex justify-start bg-black/50">
       <div
         ref={menuRef}
-        className="fixed inset-y-0 left-0 w-3/4 max-w-xs translate-x-0 transform bg-blue-700 p-5 text-white transition-transform duration-300 ease-in-out">
+        style={{
+          scrollbarWidth: 'none',
+          msOverflowStyle: 'none',
+        }}
+        className="fixed inset-y-0 left-0 w-3/4 max-w-xs translate-x-0 transform overflow-auto bg-blue-700 p-5 pb-10 text-white transition-transform duration-300 ease-in-out">
         <button
-          className="absolute top-3 right-3 text-xl text-white"
-          onClick={() => setMenuOpen(false)}>
+          className="absolute top-3 right-3 text-xl text-white transition-transform duration-150 ease-in-out active:scale-90"
+          onClick={() =>
+            setTimeout(() => {
+              setMenuOpen(false);
+            }, 200)
+          }>
           <i className="fa-solid fa-times"></i>
         </button>
-        <MobileLinks />
+        <MobileLinks setMenuOpen={setMenuOpen} />
       </div>
     </div>
   );

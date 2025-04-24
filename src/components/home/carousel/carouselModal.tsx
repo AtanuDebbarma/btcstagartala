@@ -2,36 +2,41 @@ import {CarouselImage, CarouselModeType} from '@/types/homeTypes';
 import {Dispatch, SetStateAction, useEffect, useRef, useState} from 'react';
 import {ImageForm} from './imageForm';
 import {ClipLoader} from 'react-spinners';
-import {Dimensions} from '@/services/carousel/fetchDimentions';
 import {DimentionsAdjustForm} from './dimentionsAdjust';
+import {appStore} from '@/appStore/appStore';
 
 interface Props {
   openModal: boolean;
   setOpenModal: Dispatch<SetStateAction<boolean>>;
   mode: CarouselModeType;
-  dimensions: Dimensions;
-  setDimensions: Dispatch<SetStateAction<Dimensions>>;
   selectedImage: CarouselImage;
   totalCount: number;
-  setCarouselImages: Dispatch<SetStateAction<CarouselImage[]>>;
   setAutoPlay: Dispatch<SetStateAction<boolean>>;
 }
 export const CarouselModal = ({
   openModal,
   setOpenModal,
   mode,
-  dimensions,
-  setDimensions,
   selectedImage,
   totalCount,
-  setCarouselImages,
   setAutoPlay,
 }: Props) => {
   const modalRef = useRef<HTMLDivElement>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [processSuccess, setProcessSuccess] = useState<boolean>(false);
+  const [uploading, setUploading] = useState<boolean>(false);
+
+  const {dimensions, setDimensions, setCarouselImages} = appStore(state => ({
+    dimensions: state.dimensions,
+    setDimensions: state.setDimensions,
+    setCarouselImages: state.setCarouselImages,
+  }));
+
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
+      if (loading || uploading) {
+        return;
+      }
       if (
         modalRef.current &&
         !modalRef.current.contains(event.target as Node)
@@ -48,11 +53,16 @@ export const CarouselModal = ({
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [openModal, setOpenModal, setAutoPlay]);
+  }, [openModal, loading, uploading, setOpenModal, setAutoPlay]);
 
   const handleClose = () => {
-    setOpenModal(false);
+    if (loading || uploading) {
+      return;
+    }
     setAutoPlay(true);
+    setTimeout(() => {
+      setOpenModal(false);
+    }, 200);
   };
 
   return (
@@ -64,7 +74,7 @@ export const CarouselModal = ({
           <div>
             <i
               onClick={handleClose}
-              className="fa-solid fa-times absolute top-4 right-4 cursor-pointer text-gray-500 hover:text-black"></i>
+              className="fa-solid fa-times absolute top-4 right-4 cursor-pointer text-gray-500 transition-transform duration-150 ease-in-out hover:text-black active:scale-90"></i>
             {mode !== 'DIM' && (
               <h2 className="text-center text-lg font-semibold">
                 {mode} IMAGE
@@ -103,17 +113,21 @@ export const CarouselModal = ({
               setOpenModal={setOpenModal}
               selectedImage={selectedImage}
               totalCount={totalCount}
+              loading={loading}
               setLoading={setLoading}
+              uploading={uploading}
+              setUploading={setUploading}
               setCarouselImages={setCarouselImages}
               setAutoPlay={setAutoPlay}
               setProcessSuccess={setProcessSuccess}
             />
           )}
-        {mode === 'DIM' && !loading && (
+        {mode === 'DIM' && !loading && !processSuccess && (
           <DimentionsAdjustForm
             setOpenModal={setOpenModal}
             dimensions={dimensions}
             setDimensions={setDimensions}
+            loading={loading}
             setLoading={setLoading}
             setAutoPlay={setAutoPlay}
             setProcessSuccess={setProcessSuccess}

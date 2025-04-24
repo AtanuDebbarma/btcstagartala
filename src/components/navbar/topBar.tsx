@@ -53,22 +53,37 @@ export const TopBar = () => {
           </p>
         </div>
         <div className="mt-2 flex items-center space-x-3 md:mt-0">
+          {!isAdmin && (
+            <a
+              href="#"
+              className="rounded bg-yellow-600 px-3 py-1 text-sm font-bold text-black transition-transform duration-150 ease-in-out hover:bg-yellow-700 active:scale-90">
+              <span className="animate-blink"> ADMISSIONS - APPLY</span>
+            </a>
+          )}
           <a
             href="#"
-            className="rounded bg-yellow-600 px-3 py-1 text-sm font-bold text-black hover:bg-yellow-700">
+            className="rounded bg-yellow-600 px-3 py-1 text-xs font-bold text-black transition-transform duration-150 ease-in-out hover:bg-yellow-700 active:scale-90 sm:text-sm">
             <span className="animate-blink"> ADMISSIONS - APPLY</span>
           </a>
-          <a href="#" className="text-sm hover:text-blue-300">
+
+          <a
+            href="#"
+            className="text-sm transition-transform duration-150 ease-in-out hover:text-blue-300 active:scale-90">
             NOTICE
           </a>
-          {!isAdmin ? (
-            <Link to={RouteNames.ADMIN} className="text-sm hover:text-blue-300">
-              ADMIN
-            </Link>
-          ) : (
+          <Link
+            to={RouteNames.CONTACT}
+            className="text-sm transition-transform duration-150 ease-in-out hover:text-blue-300 active:scale-90">
+            CONTACT
+          </Link>
+          {!isAdmin ? null : (
             <button
-              onClick={() => setShowLogoutModal(true)}
-              className="rounded bg-blue-700 px-3 py-1 text-sm hover:text-blue-300">
+              onClick={() =>
+                setTimeout(() => {
+                  setShowLogoutModal(true);
+                }, 200)
+              }
+              className="rounded bg-blue-700 px-3 py-1 text-sm transition-transform duration-150 ease-in-out hover:text-blue-300 active:scale-90">
               LOGOUT
             </button>
           )}
@@ -85,13 +100,21 @@ export const TopBar = () => {
             <p className="mb-6">Are you sure you want to log out?</p>
             <div className="flex justify-end space-x-3">
               <button
-                className="rounded bg-gray-200 px-4 py-2 text-sm hover:bg-gray-300"
-                onClick={() => setShowLogoutModal(false)}>
+                className="rounded bg-gray-200 px-4 py-2 text-sm transition-transform duration-150 ease-in-out hover:bg-gray-300 active:scale-90"
+                onClick={() =>
+                  setTimeout(() => {
+                    setShowLogoutModal(false);
+                  }, 200)
+                }>
                 Cancel
               </button>
               <button
-                className="rounded bg-blue-700 px-4 py-2 text-sm text-white hover:bg-orange-600"
-                onClick={handleLogout}>
+                className="rounded bg-blue-700 px-4 py-2 text-sm text-white hover:bg-blue-600"
+                onClick={() =>
+                  setTimeout(() => {
+                    handleLogout;
+                  }, 200)
+                }>
                 OK
               </button>
             </div>

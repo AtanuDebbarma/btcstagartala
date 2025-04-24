@@ -6,7 +6,7 @@ import React from 'react';
 
 export const CustomLeftArrow = ({onClick}: {onClick?: () => void}) => (
   <button
-    className="absolute top-1/2 left-2 z-10 -translate-y-1/2 rounded-full bg-white/80 p-3 shadow-lg hover:bg-white"
+    className="absolute top-1/2 left-2 z-10 -translate-y-1/2 cursor-pointer rounded-full bg-white/80 p-3 shadow-lg transition-transform duration-150 ease-in-out hover:bg-white active:scale-90"
     onClick={onClick}>
     <i className="fas fa-chevron-left text-xl text-gray-700"></i>
   </button>
@@ -14,7 +14,7 @@ export const CustomLeftArrow = ({onClick}: {onClick?: () => void}) => (
 
 export const CustomRightArrow = ({onClick}: {onClick?: () => void}) => (
   <button
-    className="absolute top-1/2 right-2 z-10 -translate-y-1/2 rounded-full bg-white/80 p-3 shadow-lg hover:bg-white"
+    className="absolute top-1/2 right-2 z-10 -translate-y-1/2 cursor-pointer rounded-full bg-white/80 p-3 shadow-lg transition-transform duration-150 ease-in-out hover:bg-white active:scale-90"
     onClick={onClick}>
     <i className="fas fa-chevron-right text-xl text-gray-700"></i>
   </button>
@@ -35,7 +35,7 @@ export const CarouselEditButtons = ({image, handleModal}: PROPS) => {
   return (
     <div
       key={image.imageOrder}
-      className="absolute top-5 left-1/2 z-50 flex -translate-x-1/2 -translate-y-1/2 items-center rounded-full bg-white px-4 py-2 shadow-md">
+      className="absolute top-5 left-1/2 z-50 flex -translate-x-1/2 -translate-y-1/2 cursor-default items-center rounded-full bg-white px-4 py-2 shadow-md">
       {getCarouselBtnsConfig(image, handleModal).map((btn, index) => (
         <React.Fragment key={btn.title}>
           <AdminInteractionBtns

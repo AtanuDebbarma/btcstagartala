@@ -35,6 +35,7 @@ export const sendDeleteCarouselImageToBackend = async (
       method: 'POST',
       headers: {
         Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json', // ← ADD THIS
       },
       body: JSON.stringify({public_id: publicId}),
     });

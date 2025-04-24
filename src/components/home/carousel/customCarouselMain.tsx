@@ -1,22 +1,17 @@
-import React, {useState} from 'react';
+import {useState} from 'react';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import {ClipLoader} from 'react-spinners';
 import {appStore} from '@/appStore/appStore';
-import {useFetchCarouselImages} from '@/services/carousel/carouselFetchHook';
 import {CarouselModal} from './carouselModal';
 import {CarouselImage, CarouselModeType} from '@/types/homeTypes';
 import {Timestamp} from 'firebase/firestore';
 import {responsive} from '@/data/homeData/carouselData';
-import {
-  defaultDimValues,
-  Dimensions,
-  useCarouselDimensions,
-} from '@/services/carousel/fetchDimentions';
 import {CustomLeftArrow, CustomRightArrow} from './carouselButtons';
 import {CarouselImages} from './carouselImage';
+import {CarouselFallback} from './carouselFallback';
 
-export const CustomCarouselMain: React.FC = () => {
+export const CustomCarouselMain = () => {
   const {user} = appStore(state => ({
     user: state.user,
   }));
@@ -24,10 +19,20 @@ export const CustomCarouselMain: React.FC = () => {
   const [openModal, setOpenModal] = useState<boolean>(false);
   const [autoplay, setAutoPlay] = useState<boolean>(true);
   const [mode, setMode] = useState<CarouselModeType>('');
-  const [dimensions, setDimensions] = useState<Dimensions>(defaultDimValues);
+
+  const {dimensions, dimLoading, dimError, carouselImages, loading, error} =
+    appStore(state => ({
+      dimensions: state.dimensions,
+      dimLoading: state.dimLoading,
+      dimError: state.dimError,
+      carouselImages: state.carouselImages,
+      loading: state.loading,
+      error: state.error,
+    })); // app state
+
   const [mouseEnterDimensions, setMouseEnterDimensions] =
     useState<boolean>(false);
-  const [carouselImages, setCarouselImages] = useState<CarouselImage[]>([]);
+
   const [selectedImage, setSelectedImage] = useState<CarouselImage>({
     id: '',
     imageUrl: '',
@@ -35,10 +40,6 @@ export const CustomCarouselMain: React.FC = () => {
     image_public_id: '',
     createdAt: null,
   });
-  const {loading: dimLoading, error: dimError} =
-    useCarouselDimensions(setDimensions);
-
-  const {loading, error} = useFetchCarouselImages(setCarouselImages);
 
   const handleModal = (
     id: string,
@@ -49,15 +50,17 @@ export const CustomCarouselMain: React.FC = () => {
     createdAt: Timestamp | null,
   ) => {
     setAutoPlay(false);
-    setOpenModal(true);
-    setMode(type);
-    setSelectedImage({
-      id: id,
-      imageUrl: url,
-      imageOrder: order,
-      image_public_id,
-      createdAt,
-    });
+    setTimeout(() => {
+      setOpenModal(true);
+      setMode(type);
+      setSelectedImage({
+        id: id,
+        imageUrl: url,
+        imageOrder: order,
+        image_public_id,
+        createdAt,
+      });
+    }, 200);
   };
 
   return (
@@ -72,16 +75,11 @@ export const CustomCarouselMain: React.FC = () => {
         </div>
       ) : (
         <div>
-          {isAdmin && (
-            <button
-              onMouseEnter={() => setMouseEnterDimensions(true)}
-              onMouseLeave={() => setMouseEnterDimensions(false)}
-              onClick={() => handleModal('', 'DIM', 0, '', '', null)}
-              className="absolute top-5 right-10 z-50 cursor-pointer rounded bg-white/80 shadow-md transition-all duration-200 hover:bg-white hover:text-blue-800 focus:outline-none active:scale-90 active:bg-white/90"
-              title="Adjust dimensions">
-              <i className="fa-solid fa-expand text-md px-2 py-2 font-bold text-blue-600" />
-            </button>
-          )}
+          <CarouselFallback
+            isAdmin={isAdmin}
+            setMouseEnterDimensions={setMouseEnterDimensions}
+            handleModal={handleModal}
+          />
           <Carousel
             swipeable
             draggable
@@ -124,11 +122,10 @@ export const CustomCarouselMain: React.FC = () => {
           openModal={openModal}
           setOpenModal={setOpenModal}
           mode={mode}
-          dimensions={dimensions}
-          setDimensions={setDimensions}
           selectedImage={selectedImage}
-          totalCount={(carouselImages && carouselImages.length) || 0}
-          setCarouselImages={setCarouselImages}
+          totalCount={
+            (!loading && !error && carouselImages && carouselImages.length) || 0
+          }
           setAutoPlay={setAutoPlay}
         />
       )}

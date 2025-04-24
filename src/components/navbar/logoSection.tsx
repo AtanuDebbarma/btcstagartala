@@ -14,8 +14,8 @@ export const LogoSection = () => (
           <h1 className="text-lg font-bold text-blue-600 md:text-2xl">
             Bhavan’s Tripura College of Science & Technology
           </h1>
-          <p className="text-sm">Recognized by NCTE and UGC</p>
-          <p className="text-sm">Affiliated with Tripura University & SCERT</p>
+          <p className="text-sm">Recognized by AICTE and UGC</p>
+          <p className="text-sm">Affiliated with Tripura University</p>
           <p className="text-sm">
             Accredited by NAAC with{' '}
             <span className="font-bold text-red-500">'B++' Grade</span>
@@ -51,14 +51,14 @@ export const LogoSection = () => (
               href="https://www.facebook.com/people/BTCST/100068331848822/?mibextid=ZbWKwL"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex aspect-square items-center justify-center rounded-full bg-blue-600 p-2 text-white">
+              className="flex aspect-square items-center justify-center rounded-full bg-blue-600 p-2 text-white transition-transform duration-150 ease-in-out hover:bg-blue-800 active:scale-90">
               <i className="fa-brands fa-facebook text-lg"></i>
             </a>
             <a
               href="https://www.instagram.com/btcst.agartala.official"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex aspect-square items-center justify-center rounded-full bg-blue-400 p-2 text-white">
+              className="flex aspect-square items-center justify-center rounded-full bg-blue-400 p-2 text-white transition-transform duration-150 ease-in-out hover:bg-blue-600 active:scale-90">
               <i className="fa-brands fa-instagram text-lg"></i>
             </a>
           </div>

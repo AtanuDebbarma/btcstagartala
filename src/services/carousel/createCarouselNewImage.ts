@@ -2,6 +2,7 @@ import {
   collection,
   addDoc,
   getDocs,
+  updateDoc,
   orderBy,
   query,
   Timestamp,
@@ -10,18 +11,19 @@ import {
 } from 'firebase/firestore';
 import {db} from '../firebase';
 import {CarouselImage} from '@/types/homeTypes';
-import {Dispatch, SetStateAction} from 'react';
+import {appStore} from '@/appStore/appStore';
 
 /**
  * Adds a new image to the carousel and shifts all subsequent image orders by +1.
  * @param {CarouselImage} newImage - The new image to add, with an imageOrder that is >= 1.
- * @param {Dispatch<SetStateAction<CarouselImage[]>>} setCarouselImages - A React state setter for the `carouselImages` state.
+ * @param {(carouselImages: CarouselImage[] | []) => Promise<void>} setCarouselImages - A React state setter for the `carouselImages` state.
  * @returns {Promise<{success: boolean}>} - A promise that resolves to an object with a single key of `success`, which is a boolean indicating whether the image was added successfully.
  */
 export const addCarouselImage = async (
   newImage: CarouselImage,
-  setCarouselImages: Dispatch<SetStateAction<CarouselImage[]>>,
+  setCarouselImages: (carouselImages: CarouselImage[] | []) => Promise<void>,
 ): Promise<{success: boolean}> => {
+  const {carouselImages} = appStore.getState();
   try {
     const imagesRef = collection(db, 'carouselImages');
 
@@ -31,7 +33,11 @@ export const addCarouselImage = async (
       where('imageOrder', '>=', newImage.imageOrder),
       orderBy('imageOrder'),
     );
+
     const snapshot = await getDocs(q);
+    if (snapshot.empty) {
+      console.log('No existing images — first image being added');
+    }
 
     const batch = writeBatch(db);
 
@@ -45,34 +51,39 @@ export const addCarouselImage = async (
 
     await batch.commit();
 
-    // Step 3: Add new image with createdAt
     const createdAt = Timestamp.now();
+    const {id: _, ...imageData} = newImage;
+
     const docRef = await addDoc(imagesRef, {
-      ...newImage,
+      ...imageData,
       createdAt,
     });
 
-    // Step 4: Update local state manually
-    setCarouselImages(prev => {
-      // Shift imageOrder in local state as well
-      const updated = prev.map(img => {
-        if (img.imageOrder >= newImage.imageOrder) {
-          return {...img, imageOrder: img.imageOrder + 1};
-        }
-        return img;
-      });
-
-      // Add new image into local state
-      const newImageWithMeta: CarouselImage = {
-        ...newImage,
-        id: docRef.id,
-        createdAt,
-      };
-
-      return [...updated, newImageWithMeta].sort(
-        (a, b) => a.imageOrder - b.imageOrder,
-      );
+    await updateDoc(docRef, {
+      id: docRef.id,
+    }).catch(err => {
+      console.warn('Failed to update document with ID field:', err);
     });
+
+    // Update Zustand store
+    const updatedImages = (carouselImages ?? []).map(img => {
+      if (img.imageOrder >= newImage.imageOrder) {
+        return {...img, imageOrder: img.imageOrder + 1};
+      }
+      return img;
+    });
+
+    const newImageWithMeta: CarouselImage = {
+      ...newImage,
+      id: docRef.id,
+      createdAt,
+    };
+
+    const newState = [...updatedImages, newImageWithMeta].sort(
+      (a, b) => a.imageOrder - b.imageOrder,
+    );
+
+    await setCarouselImages(newState);
 
     return {success: true};
   } catch (error) {

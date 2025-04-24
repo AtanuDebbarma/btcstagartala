@@ -1,4 +1,5 @@
 import {NoticeType} from '@/types/homeTypes';
+import {useNavigate} from 'react-router-dom';
 
 export const NoticeItem = ({notice}: {notice: NoticeType}) => {
   return (
@@ -14,10 +15,23 @@ export const NoticeItem = ({notice}: {notice: NoticeType}) => {
     </div>
   );
 };
+interface Props {
+  text: string;
+  px?: string;
+  url: string;
+}
 
-export const NavButton = ({text, px}: {text: string; px?: string}) => {
+export const NavButton = ({text, px, url}: Props) => {
+  const navigation = useNavigate();
+  const handleClick = () => {
+    setTimeout(() => {
+      navigation(`/pdf-viewer?file=${url}`);
+    }, 200);
+  };
   return (
-    <div>
+    <button
+      onClick={handleClick}
+      className="cursor-pointer transition-transform duration-150 ease-in-out focus:outline-none active:scale-90">
       <div
         className={`bg-[#0a2540] py-4 text-white ${
           px ?? 'px-15 md:px-12'
@@ -27,7 +41,7 @@ export const NavButton = ({text, px}: {text: string; px?: string}) => {
           <span className="absolute -bottom-1 left-1/4 mt-2 h-[3px] w-1/2 rounded bg-yellow-400"></span>
         </h3>
       </div>
-    </div>
+    </button>
   );
 };
 

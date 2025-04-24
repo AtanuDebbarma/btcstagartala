@@ -1,13 +1,8 @@
-import {
-  useState,
-  useEffect,
-  useCallback,
-  Dispatch,
-  SetStateAction,
-  useRef,
-} from 'react';
+import {useEffect, useCallback, useRef} from 'react';
 import {collection, getDocs} from 'firebase/firestore';
 import {db} from '../firebase';
+import {appStore} from '@/appStore/appStore';
+import {defaultDimValues} from '@/appStore/carousel/carouselDimentionsSlice';
 
 export type Dimensions = {
   default: number;
@@ -18,23 +13,16 @@ export type Dimensions = {
   objectFit: string;
 };
 
-export const defaultDimValues = {
-  default: 350,
-  minWidth_410: 375,
-  minWidth_430: 400,
-  minWidth_820: 430,
-  minWidth_1024: 480,
-  objectFit: 'cover',
-};
-export const useCarouselDimensions = (
-  setDimensions: Dispatch<SetStateAction<Dimensions>>,
-) => {
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
+export const useCarouselDimensions = () => {
   const isMountedRef = useRef<boolean>(false);
+  const {setDimensions, setDimLoading, setDimError} = appStore(state => ({
+    setDimensions: state.setDimensions,
+    setDimLoading: state.setDimLoading,
+    setDimError: state.setDimError,
+  }));
 
   const fetchDimensions = useCallback(async () => {
-    setLoading(true);
+    await setDimLoading(true);
     try {
       const querySnapshot = await getDocs(collection(db, 'carouselDimentions'));
 
@@ -43,8 +31,8 @@ export const useCarouselDimensions = (
         const data = firstDoc.data();
 
         if (isMountedRef.current) {
-          setLoading(false);
-          setDimensions({
+          await setDimLoading(false);
+          await setDimensions({
             default: data.default ?? 350,
             minWidth_410: data.minWidth_410 ?? 375,
             minWidth_430: data.minWidth_430 ?? 400,
@@ -52,25 +40,26 @@ export const useCarouselDimensions = (
             minWidth_1024: data.minWidth_1024 ?? 480,
             objectFit: data.objectFit ?? 'cover',
           });
-          setError(false);
+          console.log('Carousel dimensions fetched successfully');
+          await setDimError(false);
         }
       } else {
         if (isMountedRef.current) {
-          setError(false);
-          setDimensions(defaultDimValues);
-          setLoading(false);
+          await setDimError(false);
+          await setDimensions(defaultDimValues);
+          console.log('Carousel dimensions failed');
+          await setDimLoading(false);
         }
       }
     } catch (err) {
       if (isMountedRef.current) {
         console.error('Error fetching carousel dimensions:', err);
-        setLoading(false);
-        setError(true);
-        setDimensions(defaultDimValues);
+        await setDimLoading(false);
+        await setDimError(true);
+        await setDimensions(defaultDimValues);
       }
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [setDimError, setDimLoading, setDimensions]);
 
   useEffect(() => {
     isMountedRef.current = true;
@@ -79,6 +68,4 @@ export const useCarouselDimensions = (
       isMountedRef.current = false;
     };
   }, [fetchDimensions]);
-
-  return {loading, error: !!error};
 };

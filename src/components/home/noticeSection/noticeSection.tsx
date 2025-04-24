@@ -1,8 +1,42 @@
 import {accreditations, notices} from '@/data/homeData/noticeSectionData';
 import {NavButton, AccreditationCard, NoticeItem} from './noticeSectionItems';
-import {Accreditation, NoticeType} from '@/types/homeTypes';
+import {
+  Accreditation,
+  NoticeType,
+  ProspectusAndAdmissionFormType,
+} from '@/types/homeTypes';
+import {appStore} from '@/appStore/appStore';
 
 export const NoticeSection = () => {
+  const prospectusAndAdmission: ProspectusAndAdmissionFormType[] | [] =
+    appStore(state => state.prospectusAndAdmission);
+
+  const RenderProspectus = () => {
+    return prospectusAndAdmission.map(
+      (item: ProspectusAndAdmissionFormType, index) => {
+        if (item.name === 'Prospectus') {
+          return (
+            <NavButton
+              key={item.id || `prospectus-${index}`}
+              text="PROSPECTUS"
+              px="px-18 md:px-17"
+              url={item.url}
+            />
+          );
+        } else if (item.name === 'Admission_Form') {
+          return (
+            <NavButton
+              key={item.id || `admission-${index}`}
+              text="ADMISSION FORM"
+              url={item.url}
+            />
+          );
+        }
+        return null; // Return null for items that don't match any condition
+      },
+    );
+  };
+
   return (
     <div className="mt-12 w-full bg-gray-100 p-4 lg:mt-20">
       <div className="mx-auto max-w-7xl">
@@ -11,8 +45,7 @@ export const NoticeSection = () => {
           <div className="flex w-full flex-col items-center gap-6 lg:items-start">
             {/* Nav Buttons Row */}
             <div className="flex flex-col gap-5 md:flex-row md:gap-20 lg:gap-18 xl:gap-40">
-              <NavButton text="PROSPECTUS" px="px-18 md:px-17" />
-              <NavButton text="ADMISSION FORM" />
+              <RenderProspectus />
             </div>
 
             {/* Recognitions & Accreditations Section */}

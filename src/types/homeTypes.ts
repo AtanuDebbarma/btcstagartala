@@ -60,3 +60,11 @@ export type CarouselImage = {
   image_public_id: string;
   createdAt: Timestamp | null;
 };
+
+export type ProspectusAndAdmissionFormType = {
+  id: string;
+  url: string;
+  name: 'Prospectus' | 'Admission_Form';
+  public_id: string;
+  createdAt: Timestamp | null;
+};

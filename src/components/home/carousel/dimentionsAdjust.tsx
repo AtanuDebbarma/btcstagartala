@@ -3,9 +3,10 @@ import {Dimensions} from '@/services/carousel/fetchDimentions';
 import {handleDimUpdate} from '@/helpers/carouselHelpers/carouselUpdateHelpers';
 
 type PropTypes = {
-  dimensions: Dimensions;
-  setDimensions: React.Dispatch<React.SetStateAction<Dimensions>>;
+  dimensions: Dimensions | null;
+  setDimensions: (dimensions: Dimensions | null) => Promise<void>;
   setOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
+  loading: boolean;
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
   setAutoPlay: React.Dispatch<React.SetStateAction<boolean>>;
   setProcessSuccess: React.Dispatch<React.SetStateAction<boolean>>;
@@ -39,6 +40,7 @@ export const DimentionsAdjustForm = ({
   setOpenModal,
   dimensions,
   setDimensions,
+  loading,
   setLoading,
   setAutoPlay,
   setProcessSuccess,
@@ -63,10 +65,11 @@ export const DimentionsAdjustForm = ({
   };
 
   const handleClose = () => {
+    if (loading) {
+      return;
+    }
     setAutoPlay(true);
     setOpenModal(false);
-    setProcessSuccess(false);
-    setLoading(false);
   };
 
   const handleUpdate = () => {

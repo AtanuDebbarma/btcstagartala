@@ -47,6 +47,6 @@ export const getCarouselBtnsConfig = (
     iconClass: 'fa-solid fa-plus' as const,
     iconColor: 'text-green-600',
     hoverColor: 'hover:text-green-800',
-    onClick: () => handleModal(image.id, 'ADD', 0, '', '', null),
+    onClick: () => handleModal('', 'ADD', 0, '', '', null),
   },
 ];

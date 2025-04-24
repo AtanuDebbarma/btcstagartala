@@ -12,8 +12,11 @@ type PropTypes = {
   setOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
   selectedImage: CarouselImage;
   totalCount: number;
+  loading: boolean;
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
-  setCarouselImages: React.Dispatch<React.SetStateAction<CarouselImage[]>>;
+  uploading: boolean;
+  setUploading: React.Dispatch<React.SetStateAction<boolean>>;
+  setCarouselImages: (carouselImages: CarouselImage[] | []) => Promise<void>;
   setAutoPlay: React.Dispatch<React.SetStateAction<boolean>>;
   setProcessSuccess: React.Dispatch<React.SetStateAction<boolean>>;
 };
@@ -22,7 +25,10 @@ export const ImageForm = ({
   setOpenModal,
   selectedImage,
   totalCount,
+  loading,
   setLoading,
+  uploading,
+  setUploading,
   setCarouselImages,
   setAutoPlay,
   setProcessSuccess,
@@ -35,7 +41,6 @@ export const ImageForm = ({
     createdAt: mode === 'ADD' ? null : selectedImage.createdAt,
   });
   const [uploadError, setUploadError] = useState<string>('');
-  const [uploading, setUploading] = useState<boolean>(false);
   const [tempImage, setTempImage] = useState<File | null>(null);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
@@ -76,64 +81,84 @@ export const ImageForm = ({
   }, [tempImage]);
 
   const handleOnAdd = () => {
-    handleAdd(
-      setOpenModal,
-      formValues,
-      setLoading,
-      setCarouselImages,
-      setAutoPlay,
-      tempImage,
-      setUploading,
-      handleUploadErrorMessage,
-      setProcessSuccess,
-    );
-  };
-  const handleOnEdit = () => {
-    handleEdit(
-      setOpenModal,
-      formValues,
-      setLoading,
-      setCarouselImages,
-      setAutoPlay,
-      tempImage,
-      setUploading,
-      handleUploadErrorMessage,
-      setProcessSuccess,
-    );
-  };
-  const handleOnDelete = () => {
-    if (totalCount === 1 || totalCount === 0) {
-      setOpenModal(true);
-      setAutoPlay(false);
-      handleUploadErrorMessage(
-        'At least one image is required. Edit Image instead',
-      );
+    if (totalCount >= 15 && selectedImage.imageOrder >= 16) {
+      setUploading(false);
       setLoading(false);
+      setUploadError('Maximum 15 images allowed');
       return;
     }
-    handleDelete(
-      setOpenModal,
-      formValues,
-      setLoading,
-      setCarouselImages,
-      setAutoPlay,
-      setUploading,
-      handleUploadErrorMessage,
-      setProcessSuccess,
-    );
+    setTimeout(() => {
+      handleAdd(
+        setOpenModal,
+        formValues,
+        setLoading,
+        setAutoPlay,
+        tempImage,
+        setUploading,
+        handleUploadErrorMessage,
+        setProcessSuccess,
+        setCarouselImages,
+      );
+    }, 200);
   };
-
+  const handleOnEdit = () => {
+    if (totalCount === 15 && selectedImage.imageOrder >= 16) {
+      setUploading(false);
+      setLoading(false);
+      setUploadError('Maximum 15 images allowed');
+      return;
+    }
+    setTimeout(() => {
+      handleEdit(
+        setOpenModal,
+        formValues,
+        setLoading,
+        setAutoPlay,
+        tempImage,
+        setUploading,
+        handleUploadErrorMessage,
+        setProcessSuccess,
+        setCarouselImages,
+      );
+    }, 200);
+  };
+  const handleOnDelete = () => {
+    if (totalCount <= 1) {
+      setUploading(false);
+      setLoading(false);
+      handleUploadErrorMessage(
+        'Cannot Delete!!. At least one image is required. Edit Image instead',
+      );
+      return;
+    }
+    setTimeout(() => {
+      handleDelete(
+        setOpenModal,
+        formValues,
+        setLoading,
+        setAutoPlay,
+        setUploading,
+        handleUploadErrorMessage,
+        setProcessSuccess,
+        setCarouselImages,
+      );
+    }, 200);
+  };
   const handleClose = () => {
+    if (loading || uploading) {
+      return;
+    }
+
     if (fileInputRef.current) {
       fileInputRef.current.value = '';
     }
     setAutoPlay(true);
-    setOpenModal(false);
-    handleUploadErrorMessage('');
-    setUploading(false);
     setTempImage(null);
-    setLoading(false);
+    setTimeout(() => {
+      setOpenModal(false);
+    }, 200);
   };
+
   const handleUploadErrorMessage = (message: string) => {
     setUploadError(message);
   };
@@ -173,7 +198,7 @@ export const ImageForm = ({
           <>
             <label
               htmlFor="file-upload"
-              className="mt-1 h-full w-full cursor-pointer rounded-md border border-gray-300 p-2 shadow-sm hover:bg-gray-300">
+              className="mt-1 h-full w-full cursor-pointer rounded-md border border-gray-300 p-2 shadow-sm transition-transform duration-150 ease-in-out hover:bg-gray-300 active:scale-90">
               Upload Image
             </label>
             <input
@@ -224,7 +249,7 @@ export const ImageForm = ({
       <div className="mt-6 flex justify-center space-x-4">
         <button
           onClick={handleClose}
-          className="cursor-pointer rounded-md bg-gray-300 px-4 py-2 text-gray-700 hover:bg-gray-400">
+          className="cursor-pointer rounded-md bg-gray-300 px-4 py-2 text-gray-700 transition-transform duration-150 ease-in-out hover:bg-gray-400 active:scale-90">
           Cancel
         </button>
         <button
@@ -235,7 +260,7 @@ export const ImageForm = ({
                 ? handleOnEdit
                 : handleOnDelete
           }
-          className="cursor-pointer rounded-md bg-blue-600 px-4 py-2 text-white hover:bg-blue-500">
+          className="cursor-pointer rounded-md bg-blue-600 px-4 py-2 text-white transition-transform duration-150 ease-in-out hover:bg-blue-500 active:scale-90">
           {mode === 'ADD' ? 'Add' : mode === 'EDIT' ? 'Update' : 'Delete'}
         </button>
       </div>

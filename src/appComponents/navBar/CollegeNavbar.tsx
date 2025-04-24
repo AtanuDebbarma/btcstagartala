@@ -1,10 +1,14 @@
-import {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {TopBar} from '@/components/navbar/topBar';
 import {LogoSection} from '@/components/navbar/logoSection';
 import {MobileMenu} from '@/components/navbar/mobileMenu';
 import {NavLinks} from '@/components/navbar/navlinks';
 
-const CollegeNavbar = () => {
+const CollegeNavbar = ({
+  setFloatingIconVisible,
+}: {
+  setFloatingIconVisible: React.Dispatch<React.SetStateAction<boolean>>;
+}) => {
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
   const [isSticky, setIsSticky] = useState<boolean>(false);
   const topRef = useRef<HTMLDivElement | null>(null);
@@ -33,8 +37,13 @@ const CollegeNavbar = () => {
           isSticky ? 'fixed top-0 right-0 left-0 shadow-md' : ''
         }`}>
         <button
-          className="text-white focus:outline-none md:hidden"
-          onClick={() => setMenuOpen(true)}>
+          className="text-white transition-transform duration-150 ease-in-out focus:outline-none active:scale-90 md:hidden"
+          onClick={() => {
+            setTimeout(() => {
+              setFloatingIconVisible(false);
+              setMenuOpen(true);
+            }, 200);
+          }}>
           <i className="fa-solid fa-bars text-xl"></i>
         </button>
         <NavLinks />
