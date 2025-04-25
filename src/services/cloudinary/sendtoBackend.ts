@@ -9,7 +9,7 @@ const BASE_URL: string =
  * @param publicId - The ID to send.
  * @returns A boolean respnonse and error message from the backend.
  */
-export const sendDeleteCarouselImageToBackend = async (
+export const sendDeleteImageToBackend = async (
   publicId: string,
   handleUploadErrorMessage: (message: string) => void,
 ): Promise<{
@@ -60,10 +60,11 @@ export const sendDeleteCarouselImageToBackend = async (
  * @returns A JSON response from the backend or an error with an 'asset' key if the request was successful.
  */
 
-export const sendEditCarouselImageToBackend = async (
+export const sendEditImageToBackend = async (
   publicId: string,
   file: File | null,
   handleUploadErrorMessage: (message: string) => void,
+  folderName: string,
 ): Promise<{
   success: boolean;
   asset: any;
@@ -88,6 +89,7 @@ export const sendEditCarouselImageToBackend = async (
     const formData = new FormData();
     formData.append('public_id', publicId);
     formData.append('file', file); // ✅ key name must match `.single('file')`
+    formData.append('folderName', folderName);
 
     const res = await fetch(`${BASE_URL}/api/cloudinary/replace`, {
       method: 'POST',
@@ -116,9 +118,10 @@ export const sendEditCarouselImageToBackend = async (
  * @returns A boolean response and error message from the backend, as well as the added asset.
  */
 
-export const sendAddCarouselImageToBackend = async (
+export const sendAddImageToBackend = async (
   file: File | null,
   handleUploadErrorMessage: (message: string) => void,
+  folderName: string,
 ): Promise<{
   success: boolean;
   asset: any;
@@ -142,6 +145,7 @@ export const sendAddCarouselImageToBackend = async (
     // Prepare FormData
     const formData = new FormData();
     formData.append('file', file); // ✅ key name must match `.single('file')`
+    formData.append('folderName', folderName); // folderName from params.
 
     const res = await fetch(`${BASE_URL}/api/cloudinary/add`, {
       method: 'POST',

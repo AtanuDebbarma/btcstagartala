@@ -65,8 +65,8 @@ export const ImageForm = ({
       return;
     } else {
       setTempImage(file);
+      setUploadError('');
     }
-    setUploadError('');
   };
 
   useEffect(() => {
@@ -85,6 +85,12 @@ export const ImageForm = ({
       setUploading(false);
       setLoading(false);
       setUploadError('Maximum 15 images allowed');
+      return;
+    }
+    if (!tempImage) {
+      setUploading(false);
+      setLoading(false);
+      setUploadError('Please select an image!');
       return;
     }
     setTimeout(() => {
@@ -106,6 +112,12 @@ export const ImageForm = ({
       setUploading(false);
       setLoading(false);
       setUploadError('Maximum 15 images allowed');
+      return;
+    }
+    if (!tempImage) {
+      setUploading(false);
+      setLoading(false);
+      setUploadError('Please select an image!');
       return;
     }
     setTimeout(() => {

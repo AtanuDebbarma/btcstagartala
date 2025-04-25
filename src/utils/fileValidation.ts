@@ -19,3 +19,23 @@ export const validateImageFileType = (file: File): {error: boolean} => {
     return {error: true};
   }
 };
+
+export const validatePDFType = (
+  file: File,
+): {error: boolean; message: string} => {
+  const allowedMimeTypes = ['application/pdf'];
+  const maxSizeInBytes = 2.6 * 1024 * 1024; // 2.5 MB
+
+  if (!allowedMimeTypes.includes(file.type)) {
+    return {error: true, message: 'Only PDF files are allowed.'};
+  }
+
+  if (file.size > maxSizeInBytes) {
+    return {
+      error: true,
+      message: 'File size must be less than or equal to 2.6 MB.',
+    };
+  }
+
+  return {error: false, message: ''};
+};

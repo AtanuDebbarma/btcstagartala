@@ -8,9 +8,9 @@ import {
 import {updateCarouselDimensions} from '@/services/carousel/editDimentions';
 import {Dimensions} from '@/services/carousel/fetchDimentions';
 import {
-  sendAddCarouselImageToBackend,
-  sendDeleteCarouselImageToBackend,
-  sendEditCarouselImageToBackend,
+  sendAddImageToBackend,
+  sendDeleteImageToBackend,
+  sendEditImageToBackend,
 } from '@/services/cloudinary/sendtoBackend';
 import {CarouselImage} from '@/types/homeTypes';
 import React from 'react';
@@ -39,9 +39,10 @@ export const handleAdd = async (
     }
 
     // Upload image to Cloudinary
-    const {success, asset} = await sendAddCarouselImageToBackend(
+    const {success, asset} = await sendAddImageToBackend(
       tempImage,
       handleUploadErrorMessage,
+      'carousel-images',
     );
 
     if (!success || !asset.url) {
@@ -127,10 +128,11 @@ export const handleEdit = async (
       return;
     }
 
-    const {success, asset} = await sendEditCarouselImageToBackend(
+    const {success, asset} = await sendEditImageToBackend(
       selectedImage.image_public_id,
       tempImage,
       handleUploadErrorMessage,
+      'carousel-images',
     );
 
     if (!success || !asset.url) {
@@ -217,7 +219,7 @@ export const handleDelete = async (
     return;
   }
 
-  const {success} = await sendDeleteCarouselImageToBackend(
+  const {success} = await sendDeleteImageToBackend(
     imageToDelete.image_public_id,
     handleUploadErrorMessage,
   );
