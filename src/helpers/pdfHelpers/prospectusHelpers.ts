@@ -1,10 +1,11 @@
-import {
-  getFilebyfileID,
-  sendEditPDFToBackend,
-  updatePDFDoc,
-} from '@/services/cloudinary/sendPDFtoBackend';
+import {sendEditPDFToBackend} from '@/services/cloudinary/sendPDFtoBackend';
 import {ProspectusAndAdmissionFormType} from '@/types/homeTypes';
 import React from 'react';
+import {
+  getPDFFilebyfileID,
+  updatePDFDoc,
+} from '../../services/PDFservices/editPDFfirebase';
+import {Timestamp} from 'firebase/firestore';
 
 export const handleEditProspectus = async (
   setOpenModal: React.Dispatch<React.SetStateAction<boolean>>,
@@ -38,7 +39,10 @@ export const handleEditProspectus = async (
       handleUploadErrorMessage('Please select a file to upload.');
       return;
     }
-    const result = await getFilebyfileID(selectedPDF.id);
+    const result = await getPDFFilebyfileID(
+      selectedPDF.id,
+      'prospectusAndAdmission',
+    );
 
     if (!result) {
       alert('No file found with this id');
@@ -55,6 +59,7 @@ export const handleEditProspectus = async (
       tempFile,
       handleUploadErrorMessage,
       'prospectusAndAdmission',
+      'EDIT',
     );
 
     if (!success || !asset.url) {
@@ -68,25 +73,27 @@ export const handleEditProspectus = async (
       ...selectedPDF,
       url: asset.url,
       public_id: asset.public_id,
+      createdAt: Timestamp.now(),
     };
 
     const firebaseEditSuccess = await updatePDFDoc(result.ref, {
       url: updatedFile.url,
       public_id: updatedFile.public_id,
+      createdAt: updatedFile.createdAt,
     });
 
     if (firebaseEditSuccess) {
+      // ✅ Update Zustand store
+      const updatedList = prospectusAndAdmission.map(item =>
+        item.id === updatedFile.id ? updatedFile : item,
+      );
+      await setProspectusAndAdmission(updatedList);
+
       setLoading(false);
       setUploading(false);
       setProcessSuccess(true);
       handleUploadErrorMessage('');
 
-      // ✅ Update Zustand store
-      const updatedList = prospectusAndAdmission.map(item =>
-        item.id === updatedFile.id ? updatedFile : item,
-      );
-
-      await setProspectusAndAdmission(updatedList);
       console.log('Updated prospectusAndAdmission in Zustand:');
 
       setTimeout(() => {

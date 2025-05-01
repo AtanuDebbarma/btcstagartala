@@ -37,7 +37,7 @@ const CollegeNavbar = ({
           isSticky ? 'fixed top-0 right-0 left-0 shadow-md' : ''
         }`}>
         <button
-          className="text-white transition-transform duration-150 ease-in-out focus:outline-none active:scale-90 md:hidden"
+          className="text-white transition-transform duration-180 ease-in-out focus:outline-none active:scale-95 md:hidden"
           onClick={() => {
             setTimeout(() => {
               setFloatingIconVisible(false);

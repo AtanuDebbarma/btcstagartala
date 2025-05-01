@@ -22,9 +22,7 @@ export const AuthWrapper = ({
   children: ReactNode;
 }): React.JSX.Element => {
   const [loading, setLoading] = useState(true);
-  const {setUser} = appStore(state => ({
-    setUser: state.setUser,
-  }));
+  const setUser = appStore(state => state.setUser);
 
   useEffect(() => {
     const unsubscribe = onIdTokenChanged(auth, async (user: User | null) => {

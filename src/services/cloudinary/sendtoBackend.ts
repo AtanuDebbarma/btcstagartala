@@ -31,7 +31,7 @@ export const sendDeleteImageToBackend = async (
 
     const token = await user.getIdToken();
 
-    const res = await fetch(`${BASE_URL}/api/cloudinary/delete`, {
+    const res = await fetch(`${BASE_URL}/api/cloudinary/deleteFile`, {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${token}`,
@@ -46,8 +46,8 @@ export const sendDeleteImageToBackend = async (
     }
     return {success: data.success};
   } catch (err) {
-    console.error('Failed to delete image:', err);
-    handleUploadErrorMessage('Failed to delete image! Please try again.');
+    console.error('Failed to delete file:', err);
+    handleUploadErrorMessage('Failed to delete file! Please try again.');
     return {success: false};
   }
 };

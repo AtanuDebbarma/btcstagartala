@@ -16,6 +16,8 @@ import {useFetchCarouselImages} from './services/carousel/carouselFetchHook';
 import {useCarouselDimensions} from './services/carousel/fetchDimentions';
 import {PdfIframe} from './appComponents/pdfIframe';
 import {useFetchProspectusAndAdmissionForm} from './services/fetchProspectusAndAdmissionForm';
+import NoticesPage from './pages/NoticesPage';
+import {useFetchNoticeBoard} from './services/noticeBoard/fetchNoticeBoard';
 
 const Routing = () => {
   const [floatingIconVisible, setFloatingIconVisible] = useState<boolean>(true);
@@ -23,6 +25,7 @@ const Routing = () => {
   useCarouselDimensions(); // Custom hook to load dimensions
   useFetchCarouselImages(); // Custom hook to load carousel images
   useFetchProspectusAndAdmissionForm(); //Fetch prospectus and admission form
+  useFetchNoticeBoard(); //Fetch notice board
 
   return (
     <Router>
@@ -59,6 +62,7 @@ const RoutesWrapper = ({
         <Route path={RouteNames.CONTACT} element={<Contact />} />
         <Route path={RouteNames.ADMIN} element={<AdminLoginForm />} />
         <Route path="/pdf-viewer" element={<PdfIframe />} />
+        <Route path={RouteNames.NOTICE_BOARD} element={<NoticesPage />} />
       </Routes>
 
       {/* Conditionally render the footer */}

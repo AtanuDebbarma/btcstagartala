@@ -1,9 +1,31 @@
-import {accreditations, notices} from '@/data/homeData/noticeSectionData';
+import {accreditations} from '@/data/homeData/noticeSectionData';
 import {AccreditationCard, NoticeItem} from './noticeSectionItems';
-import {Accreditation, NoticeType} from '@/types/homeTypes';
+import {Accreditation, NoticeBoardType} from '@/types/homeTypes';
 import {ProspectusButtons} from './prospectusButtons';
+import {useNavigate} from 'react-router-dom';
+import {RouteNames} from '@/constants/routeNames';
+import {appStore} from '@/appStore/appStore';
 
 export const NoticeSection = () => {
+  const navigation = useNavigate();
+
+  const notices = appStore(state => state.notices);
+
+  const handleNoticeTablePress = () => {
+    setTimeout(() => {
+      navigation(RouteNames.NOTICE_BOARD);
+      scrollTo(0, 0);
+    }, 200);
+  };
+
+  // Sort notices by createdAt (recent first)
+  const sortedNotices = [...notices].sort(
+    (a: NoticeBoardType, b: NoticeBoardType) => {
+      if (!a.createdAt || !b.createdAt) return 0; // fallback if createdAt missing
+      return b.createdAt.toMillis() - a.createdAt.toMillis(); // Firestore Timestamp to millis
+    },
+  );
+
   return (
     <div className="mt-12 w-full bg-gray-100 p-4 lg:mt-20">
       <div className="mx-auto max-w-7xl">
@@ -38,15 +60,29 @@ export const NoticeSection = () => {
                   <span className="absolute -bottom-1 left-1/4 mt-2 h-[3px] w-1/2 rounded bg-yellow-400"></span>
                 </h3>
               </div>
-              <div className="p-4">
-                <div className="max-h-96 space-y-4 overflow-y-auto pr-2">
-                  {notices.map((notice: NoticeType) => (
-                    <NoticeItem key={notice.id} notice={notice} />
-                  ))}
+              <div className="px-3 py-4">
+                <div className="max-h-96 overflow-y-auto">
+                  {sortedNotices.length > 0 ? (
+                    sortedNotices
+                      .slice(0, 10)
+                      .map((notice: NoticeBoardType) => (
+                        <div
+                          key={notice.id}
+                          className="h-full w-full border-b-1 bg-gray-200 pt-4 hover:bg-gray-400">
+                          <NoticeItem notice={notice} />
+                        </div>
+                      ))
+                  ) : (
+                    <div className="flex h-full w-full items-center justify-center py-10 text-center text-gray-800">
+                      To Be Announced
+                    </div>
+                  )}
                 </div>
 
                 <div className="mt-4 flex justify-end">
-                  <button className="mx-auto mt-6 flex w-full items-center justify-center bg-gray-200 px-6 py-2 font-semibold text-gray-900 shadow-sm hover:bg-gray-300">
+                  <button
+                    className="mx-auto mt-6 flex w-full cursor-pointer items-center justify-center bg-blue-100 px-6 py-2 font-semibold text-blue-800 shadow-sm transition-transform duration-180 ease-in-out hover:bg-blue-200 active:scale-95"
+                    onClick={handleNoticeTablePress}>
                     View All Notice
                     <svg
                       xmlns="http://www.w3.org/2000/svg"

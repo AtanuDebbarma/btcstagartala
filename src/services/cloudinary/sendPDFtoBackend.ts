@@ -1,27 +1,22 @@
-import {ProspectusAndAdmissionFormType} from '@/types/homeTypes';
-import {auth, db} from '../firebase';
-import {
-  collection,
-  query,
-  where,
-  getDocs,
-  updateDoc,
-  DocumentData,
-  DocumentReference,
-} from 'firebase/firestore';
+import {auth} from '../firebase';
 
 const BASE_URL: string =
   import.meta.env.VITE_API_BACKEND_URL || 'http://localhost:5000';
 
 export const sendEditPDFToBackend = async (
-  publicId: string,
+  publicId: string | undefined,
   file: File | null,
   handleUploadErrorMessage: (message: string) => void,
   folderName: string,
+  mode: 'ADD' | 'EDIT',
 ): Promise<{
   success: boolean;
   asset: any;
 }> => {
+  const resURL =
+    mode === 'EDIT'
+      ? `${BASE_URL}/api/cloudinary/replacePDF`
+      : `${BASE_URL}/api/cloudinary/addPDF`;
   try {
     const user = auth.currentUser;
     const isAdmin = user?.email === import.meta.env.VITE_FIREBASE_ADMIN_EMAIL;
@@ -35,16 +30,28 @@ export const sendEditPDFToBackend = async (
       handleUploadErrorMessage('No file selected');
       return {success: false, asset: null};
     }
+    if (mode === 'EDIT' && !publicId) {
+      console.error('No public_id to edit');
+      handleUploadErrorMessage('No public_id to edit');
+      return {success: false, asset: null};
+    }
+    if (!folderName) {
+      console.error('No folderName');
+      handleUploadErrorMessage('No folderName');
+      return {success: false, asset: null};
+    }
 
     const token = await user.getIdToken();
 
     // Prepare FormData
     const formData = new FormData();
-    formData.append('public_id', publicId);
+    if (mode === 'EDIT' && publicId) {
+      formData.append('public_id', publicId);
+    }
     formData.append('file', file); // ✅ key name must match `.single('file')`
     formData.append('folderName', folderName);
 
-    const res = await fetch(`${BASE_URL}/api/cloudinary/replacePDF`, {
+    const res = await fetch(resURL, {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${token}`, // ✅ No Content-Type; fetch sets it automatically with boundary
@@ -58,44 +65,8 @@ export const sendEditPDFToBackend = async (
     }
     return {success: data.success, asset: data.asset};
   } catch (err) {
-    console.error('Failed to replace PDF:', err);
-    handleUploadErrorMessage('Failed to replace PDF! Please try again.');
+    console.error(`Failed to ${mode} PDF:`, err);
+    handleUploadErrorMessage(`Failed to ${mode} PDF! Please try again.`);
     return {success: false, asset: null};
-  }
-};
-
-const imagesRef = collection(db, 'prospectusAndAdmission');
-
-/**
- * Get Firestore doc ref for the image with a specific fileID
- */
-export const getFilebyfileID = async (
-  fileID: string,
-): Promise<{
-  ref: DocumentReference<DocumentData>;
-  data: ProspectusAndAdmissionFormType;
-} | null> => {
-  const q = query(imagesRef, where('id', '==', fileID));
-  const snapshot = await getDocs(q);
-
-  if (snapshot.empty) return null;
-
-  const doc = snapshot.docs[0];
-  return {ref: doc.ref, data: doc.data() as ProspectusAndAdmissionFormType};
-};
-
-/**
- * Update the document by its DocumentReference
- */
-export const updatePDFDoc = async (
-  ref: DocumentReference<DocumentData>,
-  updatedFields: Partial<ProspectusAndAdmissionFormType>,
-): Promise<boolean> => {
-  try {
-    await updateDoc(ref, updatedFields);
-    return true;
-  } catch (error) {
-    console.error('Failed to update document:', error);
-    return false;
   }
 };

@@ -15,11 +15,9 @@ export type Dimensions = {
 
 export const useCarouselDimensions = () => {
   const isMountedRef = useRef<boolean>(false);
-  const {setDimensions, setDimLoading, setDimError} = appStore(state => ({
-    setDimensions: state.setDimensions,
-    setDimLoading: state.setDimLoading,
-    setDimError: state.setDimError,
-  }));
+  const setDimensions = appStore(state => state.setDimensions);
+  const setDimLoading = appStore(state => state.setDimLoading);
+  const setDimError = appStore(state => state.setDimError);
 
   const fetchDimensions = useCallback(async () => {
     await setDimLoading(true);

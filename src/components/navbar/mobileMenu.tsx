@@ -42,7 +42,7 @@ export const MobileMenu = ({setMenuOpen}: MobileMenuProps) => {
         }}
         className="fixed inset-y-0 left-0 w-3/4 max-w-xs translate-x-0 transform overflow-auto bg-blue-700 p-5 pb-10 text-white transition-transform duration-300 ease-in-out">
         <button
-          className="absolute top-3 right-3 text-xl text-white transition-transform duration-150 ease-in-out active:scale-90"
+          className="absolute top-3 right-3 text-xl text-white transition-transform duration-180 ease-in-out active:scale-95"
           onClick={() =>
             setTimeout(() => {
               setMenuOpen(false);

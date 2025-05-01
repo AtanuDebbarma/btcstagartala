@@ -6,9 +6,9 @@ import {ProspectusAndAdmissionFormType} from '@/types/homeTypes';
 
 export const useFetchProspectusAndAdmissionForm = () => {
   const isMountedRef = useRef<boolean>(false);
-  const {setProspectusAndAdmission} = appStore(state => ({
-    setProspectusAndAdmission: state.setProspectusAndAdmission,
-  }));
+  const setProspectusAndAdmission = appStore(
+    state => state.setProspectusAndAdmission,
+  );
 
   const fetchProspectus = useCallback(async () => {
     try {

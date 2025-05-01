@@ -8,12 +8,16 @@ interface Props {
   setOpenModal: Dispatch<SetStateAction<boolean>>;
   selectedPDF: ProspectusAndAdmissionFormType | null;
   totalCount: number;
+  setOnHoverProspectus: Dispatch<SetStateAction<boolean>>;
+  setOnHoverAdmission: Dispatch<SetStateAction<boolean>>;
 }
 export const ProspectusModal = ({
   openModal,
   setOpenModal,
   selectedPDF,
   totalCount,
+  setOnHoverProspectus,
+  setOnHoverAdmission,
 }: Props) => {
   const modalRef = useRef<HTMLDivElement>(null);
   const [loading, setLoading] = useState<boolean>(false);
@@ -30,22 +34,35 @@ export const ProspectusModal = ({
         !modalRef.current.contains(event.target as Node)
       ) {
         setOpenModal(false);
+        setOnHoverProspectus(false);
+        setOnHoverAdmission(false);
       }
     };
 
     if (openModal) {
       document.addEventListener('mousedown', handleClickOutside);
+      setOnHoverProspectus(false);
+      setOnHoverAdmission(false);
     }
 
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [openModal, loading, uploading, setOpenModal]);
+  }, [
+    openModal,
+    loading,
+    uploading,
+    setOpenModal,
+    setOnHoverProspectus,
+    setOnHoverAdmission,
+  ]);
 
   const handleClose = () => {
     if (loading || uploading) {
       return;
     }
+    setOnHoverProspectus(false);
+    setOnHoverAdmission(false);
     setTimeout(() => {
       setOpenModal(false);
     }, 200);
@@ -95,6 +112,8 @@ export const ProspectusModal = ({
             loading={loading}
             setLoading={setLoading}
             setProcessSuccess={setProcessSuccess}
+            setOnHoverProspectus={setOnHoverProspectus}
+            setOnHoverAdmission={setOnHoverAdmission}
           />
         )}
       </div>

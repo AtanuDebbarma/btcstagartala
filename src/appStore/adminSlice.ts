@@ -14,9 +14,8 @@ export const createAdminSlice: StateCreator<
 > = set => ({
   user: null,
   setUser: (user: User | null) => {
-    set((state: AdminSliceType) => ({
-      ...state,
-      user,
-    }));
+    set((state: AdminSliceType) => {
+      state.user = user; // ✅ mutate directly — immer handles it
+    });
   },
 });

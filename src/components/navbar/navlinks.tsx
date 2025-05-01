@@ -8,7 +8,7 @@ export const NavLinks = () => (
       <Link
         to={path}
         key={name}
-        className="px-3 py-3 transition-transform duration-150 ease-in-out hover:bg-blue-700 active:scale-90">
+        className="px-3 py-3 transition-transform duration-180 ease-in-out hover:bg-blue-700 active:scale-95">
         {name}
       </Link>
     ))}
@@ -31,7 +31,7 @@ export const MobileLinks = ({
       <Link
         key={name}
         to={path}
-        className="border-b border-white py-2 text-lg transition-transform duration-150 ease-in-out active:scale-90">
+        className="border-b border-white py-2 text-lg transition-transform duration-180 ease-in-out active:scale-95">
         {name}
       </Link>
     ))}

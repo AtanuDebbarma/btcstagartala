@@ -1,17 +1,6 @@
 import {Timestamp} from 'firebase/firestore';
 
 /**
- * Represents types for Notice Board
- */
-export type NoticeType = {
-  id: number;
-  name: string;
-  url: string;
-  createdAt: string; // ISO date string
-  content: string;
-};
-
-/**
  * Represents types for Accreditation section
  */
 export type Accreditation = {
@@ -60,11 +49,24 @@ export type CarouselImage = {
   image_public_id: string;
   createdAt: Timestamp | null;
 };
-
+/**
+ * Represents types for Firebase Backend ProspectusAndAdmissionForm.
+ */
 export type ProspectusAndAdmissionFormType = {
   id: string;
   url: string;
-  name: 'Prospectus' | 'Admission_Form';
+  name: 'Prospectus' | 'Admission_Form' | string;
+  public_id: string;
+  createdAt: Timestamp | null;
+};
+
+/**
+ * Represents types for Firebase Backend NoticeBoard table cointent.
+ */
+export type NoticeBoardType = {
+  id: string;
+  name: string;
+  url: string;
   public_id: string;
   createdAt: Timestamp | null;
 };

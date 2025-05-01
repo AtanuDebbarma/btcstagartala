@@ -14,11 +14,13 @@ import {
   AdmissionFormType,
   createAdmissionFormSlice,
 } from './admissionFormSlice';
+import {NoticeBoardSliceType, createNoticeBoardSlice} from './noticeBoardSlice';
 
 export type AppState = AdminSliceType &
   DimentionsSliceType &
   CarouselImagesSliceType &
-  AdmissionFormType;
+  AdmissionFormType &
+  NoticeBoardSliceType;
 
 export const appStore = createWithEqualityFn<AppState>()(
   immer((...store) => ({
@@ -26,6 +28,7 @@ export const appStore = createWithEqualityFn<AppState>()(
     ...createDimentionsSlice(...store),
     ...createCarouselImagesSlice(...store),
     ...createAdmissionFormSlice(...store),
+    ...createNoticeBoardSlice(...store),
   })),
   shallow,
 );

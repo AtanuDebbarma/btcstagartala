@@ -22,7 +22,7 @@ export const resources: CollegeResourcesTypes[] = [
   {
     title: 'Students Uniform',
     image:
-      'https://btcstagartala.org/wp-content/uploads/2024/05/IMG_1636-1-scaled.jpg',
+      'https://btcstagartala.org/wp-content/uploads/2024/05/IMG_7163-1536x1178.jpg',
     alt: 'Students Uniform',
   },
 ];

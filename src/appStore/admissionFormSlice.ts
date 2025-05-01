@@ -19,24 +19,18 @@ export const createAdmissionFormSlice: StateCreator<
     data: ProspectusAndAdmissionFormType[] | [],
   ) => {
     try {
-      if (data) {
-        set((state: AdmissionFormType) => ({
-          ...state,
-          prospectusAndAdmission: data,
-        }));
-        console.log('prospectusAndAdmission fetched successfully');
-      } else {
-        set((state: AdmissionFormType) => ({
-          ...state,
-          prospectusAndAdmission: [],
-        }));
-        console.log('prospectusAndAdmission fetch error!!');
-      }
+      set((state: AdmissionFormType) => {
+        state.prospectusAndAdmission = data.length ? data : [];
+      });
+      console.log(
+        data.length
+          ? 'prospectusAndAdmission fetched successfully'
+          : 'prospectusAndAdmission fetch error!!',
+      );
     } catch (error) {
-      set((state: AdmissionFormType) => ({
-        ...state,
-        prospectusAndAdmission: [],
-      }));
+      set((state: AdmissionFormType) => {
+        state.prospectusAndAdmission = [];
+      });
       console.log('prospectusAndAdmission fetch error!!', error);
     }
   },

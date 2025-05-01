@@ -7,11 +7,9 @@ import {appStore} from '@/appStore/appStore';
 export const useFetchCarouselImages = () => {
   const isMountedRef = useRef<boolean>(false);
 
-  const {setCarouselImages, setLoading, setError} = appStore(state => ({
-    setCarouselImages: state.setCarouselImages,
-    setLoading: state.setLoading,
-    setError: state.setError,
-  })); // app state
+  const setCarouselImages = appStore(state => state.setCarouselImages);
+  const setLoading = appStore(state => state.setLoading);
+  const setError = appStore(state => state.setError);
 
   const fetchCarouselImages = useCallback(async () => {
     await setLoading(true);

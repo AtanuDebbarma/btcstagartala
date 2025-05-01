@@ -12,23 +12,19 @@ import {CarouselImages} from './carouselImage';
 import {CarouselFallback} from './carouselFallback';
 
 export const CustomCarouselMain = () => {
-  const {user} = appStore(state => ({
-    user: state.user,
-  }));
-  const isAdmin = user?.email === import.meta.env.VITE_FIREBASE_ADMIN_EMAIL;
   const [openModal, setOpenModal] = useState<boolean>(false);
   const [autoplay, setAutoPlay] = useState<boolean>(true);
   const [mode, setMode] = useState<CarouselModeType>('');
 
-  const {dimensions, dimLoading, dimError, carouselImages, loading, error} =
-    appStore(state => ({
-      dimensions: state.dimensions,
-      dimLoading: state.dimLoading,
-      dimError: state.dimError,
-      carouselImages: state.carouselImages,
-      loading: state.loading,
-      error: state.error,
-    })); // app state
+  const user = appStore(state => state.user);
+  const dimensions = appStore(state => state.dimensions);
+  const dimLoading = appStore(state => state.dimLoading);
+  const dimError = appStore(state => state.dimError);
+  const carouselImages = appStore(state => state.carouselImages);
+  const loading = appStore(state => state.loading);
+  const error = appStore(state => state.error);
+
+  const isAdmin = user?.email === import.meta.env.VITE_FIREBASE_ADMIN_EMAIL;
 
   const [mouseEnterDimensions, setMouseEnterDimensions] =
     useState<boolean>(false);

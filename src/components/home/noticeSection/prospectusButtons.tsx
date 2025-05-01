@@ -65,7 +65,7 @@ export const ProspectusButtons = () => {
               <NavButton
                 key={item.id || `prospectus-${index}`}
                 text="PROSPECTUS"
-                px="px-18 md:px-17"
+                px="px-21 md:px-17"
                 url={item.url}
               />
             </div>
@@ -123,6 +123,8 @@ export const ProspectusButtons = () => {
           setOpenModal={setOpenModal}
           selectedPDF={selectedPDF}
           totalCount={prospectusAndAdmission.length}
+          setOnHoverProspectus={setOnHoverProspectus}
+          setOnHoverAdmission={setOnHoverAdmission}
         />
       )}
     </div>
