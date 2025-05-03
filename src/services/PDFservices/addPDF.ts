@@ -1,4 +1,3 @@
-import {AlertsType, NoticeBoardType} from '@/types/homeTypes';
 import {addDoc, collection, Timestamp, updateDoc} from 'firebase/firestore';
 import {db} from '../firebase';
 

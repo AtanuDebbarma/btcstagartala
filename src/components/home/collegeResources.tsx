@@ -1,7 +1,16 @@
 import {resources} from '@/data/homeData/collegeReourcesData';
 import {CollegeResourcesTypes} from '@/types/homeTypes';
+import {useNavigate} from 'react-router-dom';
 
 export default function CollegeResources() {
+  const nanvigation = useNavigate();
+
+  const handleNav = (url: string) => {
+    setTimeout(() => {
+      nanvigation(url);
+      scrollTo(0, 0);
+    }, 200);
+  };
   return (
     <div className="container mx-auto mt-20 max-w-7xl px-10 py-8 xl:px-0">
       <div className="flex w-full items-center justify-center">
@@ -16,9 +25,10 @@ export default function CollegeResources() {
           const isFaculty = resource.title === 'Our Faculty';
 
           return (
-            <div
+            <a
+              onClick={() => handleNav(resource.url)}
               key={index}
-              className="transform cursor-pointer overflow-hidden rounded-lg bg-white shadow-lg transition duration-300 hover:-translate-y-1 hover:scale-105">
+              className="transform-transform cursor-pointer overflow-hidden rounded-lg bg-white shadow-lg transition duration-180 ease-in-out hover:-translate-y-1 hover:scale-105 active:scale-95">
               <div className="relative">
                 <img
                   src={resource.image}
@@ -31,7 +41,7 @@ export default function CollegeResources() {
                   </h3>
                 </div>
               </div>
-            </div>
+            </a>
           );
         })}
       </div>

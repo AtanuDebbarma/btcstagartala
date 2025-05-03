@@ -32,6 +32,7 @@ export type CollegeResourcesTypes = {
   title: string;
   image: string;
   alt: string;
+  url: string;
 };
 
 /**
