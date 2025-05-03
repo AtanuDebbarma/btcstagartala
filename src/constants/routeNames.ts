@@ -16,6 +16,7 @@ export const RouteNames = {
   RESULT: '/result',
   ACADEMIC_PERFORMANCE: '/academic-performance',
   NOTICE_BOARD: '/notice-board',
+  ALERTS: '/alerts',
 } as const;
 
 export type RouteNamesType = (typeof RouteNames)[keyof typeof RouteNames];

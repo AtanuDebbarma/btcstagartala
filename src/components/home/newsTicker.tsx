@@ -1,42 +1,144 @@
-const newsData = [
-  {
-    text: 'NSS Special Camp w.e.f 31-01-2025 to 06-02-2025.',
-    isNew: true,
-  },
-  {
-    text: '1st Phase Internship for B.Ed 2nd Semester (2024-26) will start from 17-01-2025 to 29-01-2025.',
-    isNew: true,
-  },
-  {
-    text: 'B.Ed 4th Semester Exam Notification Out.',
-    isNew: true,
-  },
-];
+import {appStore} from '@/appStore/appStore';
+import {RouteNames} from '@/constants/routeNames';
+import useWindowSize from '@/helpers/findWindowSize';
+import {AlertsType} from '@/types/homeTypes';
+
+import {useRef, useEffect, useState} from 'react';
+import {useNavigate} from 'react-router-dom';
 
 export default function NewsTicker() {
-  // Create a duplicate array to ensure seamless looping
-  const duplicatedNews = [...newsData, ...newsData];
+  const alerts = appStore(state => state.alerts);
+  const tickerRef = useRef(null);
+  const [animationDuration, setAnimationDuration] = useState(10);
+
+  // Safety check to ensure alerts is always an array
+  const safeAlerts = Array.isArray(alerts) ? alerts : [];
+
+  const sortedAlerts = [...safeAlerts].sort((a: AlertsType, b: AlertsType) => {
+    if (!a.createdAt || !b.createdAt) return 0;
+    return b.createdAt.toMillis() - a.createdAt.toMillis();
+  });
+
+  const {width} = useWindowSize();
+
+  // Function to adjust animation speed based on screen width
+  useEffect(() => {
+    const adjustSpeed = () => {
+      // Faster animation for smaller screens
+      if (width < 766) {
+        setAnimationDuration(6);
+      } else if (width < 1024) {
+        setAnimationDuration(8);
+      } else {
+        setAnimationDuration(12);
+      }
+    };
+
+    // Set initial speed
+    adjustSpeed();
+
+    // Update speed on resize
+    window.addEventListener('resize', adjustSpeed);
+    return () => window.removeEventListener('resize', adjustSpeed);
+  }, [width]);
+
+  const navigation = useNavigate();
+  const handleNavigation = (url: string) => {
+    setTimeout(() => {
+      navigation(url);
+      scrollTo(0, 0);
+    }, 200);
+  };
 
   return (
     <div className="flex w-full items-center overflow-hidden bg-gray-300">
-      <div className="bg-yellow-500 px-4 py-2 font-bold whitespace-nowrap text-black">
+      <button
+        onClick={() => handleNavigation(RouteNames.ALERTS)}
+        className="cursor-pointer bg-yellow-500 px-4 py-2 font-bold whitespace-nowrap text-black duration-200 ease-in-out active:scale-95 sm:px-8">
         Alerts:
-      </div>
+      </button>
       <div className="relative w-full overflow-hidden whitespace-nowrap">
-        <div className="animate-ticker inline-block">
-          {duplicatedNews.map((item, index) => (
-            <span
-              key={index}
-              className="inline-flex items-center gap-1 px-4 text-sm text-gray-900 md:text-base">
-              {item.isNew && (
-                <span className="animate-blink rounded-sm px-1 font-bold text-red-600">
-                  NEW
+        <div
+          ref={tickerRef}
+          className="whitespace-nowrap"
+          style={{
+            width: '200%',
+            display: 'flex',
+            animation: `ticker ${animationDuration}s linear infinite`,
+          }}>
+          {/* First copy of the news items */}
+          <div className="flex-1 whitespace-nowrap">
+            {sortedAlerts.length > 0 ? (
+              sortedAlerts.map((item, index) => (
+                <span
+                  key={`first-${index}`}
+                  className="inline-flex items-center gap-1 px-4 text-sm text-gray-900 md:text-base">
+                  <span
+                    className="rounded-sm px-1 font-bold text-red-600"
+                    style={{animation: 'blink 1s ease-in-out infinite'}}>
+                    NEW
+                  </span>
+                  <button
+                    onClick={() =>
+                      handleNavigation(
+                        `${RouteNames.ALERTS}/${item.id}/${item.title}`,
+                      )
+                    }
+                    className="cursor-pointer pl-1 hover:text-blue-600 hover:underline">
+                    {item.title}
+                  </button>
+                  {index < sortedAlerts.length - 1 && (
+                    <span className="mx-2">|</span>
+                  )}
                 </span>
-              )}
-              <span className="pl-1.5">{item.text}</span>
-              <span className="mx-2">|</span>
-            </span>
-          ))}
+              ))
+            ) : (
+              <span className="inline-flex items-center gap-1 px-4 text-sm text-gray-900 md:text-base">
+                <span
+                  className="rounded-sm px-1 font-bold text-red-600"
+                  style={{animation: 'blink 1s ease-in-out infinite'}}>
+                  NO NEW ALERTS
+                </span>
+              </span>
+            )}
+          </div>
+
+          {/* Second copy of the news items */}
+          <div className="flex-1 whitespace-nowrap">
+            {sortedAlerts.length > 0 ? (
+              sortedAlerts.map((item, index) => (
+                <span
+                  key={`second-${index}`}
+                  className="inline-flex items-center gap-1 px-4 text-sm text-gray-900 md:text-base">
+                  <span
+                    className="rounded-sm px-1 font-bold text-red-600"
+                    style={{animation: 'blink 1s ease-in-out infinite'}}>
+                    NEW
+                  </span>
+                  <button
+                    onClick={() =>
+                      handleNavigation(
+                        `${RouteNames.ALERTS}/${item.id}/${item.title}`,
+                      )
+                    }
+                    className="cursor-pointer pl-1 hover:text-blue-600 hover:underline">
+                    {item.title}
+                  </button>
+                  {index < sortedAlerts.length - 1 && (
+                    <span className="mx-2">|</span>
+                  )}
+                </span>
+              ))
+            ) : (
+              <span className="inline-flex items-center gap-1 px-4 text-sm text-gray-900 md:text-base">
+                <span
+                  className="rounded-sm px-1 font-bold text-red-600"
+                  style={{animation: 'blink 1s ease-in-out infinite'}}>
+                  NO NEW ALERTS
+                </span>
+              </span>
+            )}
+          </div>
         </div>
       </div>
     </div>

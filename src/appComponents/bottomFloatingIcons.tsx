@@ -14,7 +14,7 @@ export const WhatsAppIcon = () => {
   if (!showButton) return null;
 
   return (
-    <div className="fixed bottom-5 left-6 z-50 flex items-center justify-center">
+    <div className="fixed bottom-5 left-6 z-50 flex items-center justify-center sm:bottom-25 lg:bottom-5">
       {/* Multiple animated rings with different delays */}
       <div
         className="absolute h-15 w-15 animate-ping rounded-full bg-green-500 opacity-50"
@@ -67,7 +67,7 @@ export const UpArrowIcon = () => {
   if (!isVisible) return null;
 
   return (
-    <div className="fixed right-6 bottom-5 z-50 flex items-center justify-center">
+    <div className="fixed right-6 bottom-5 z-50 flex items-center justify-center sm:bottom-25 lg:bottom-5">
       <button
         onClick={scrollToTop}
         className="relative flex h-14 w-14 cursor-pointer items-center justify-center rounded-full bg-blue-500 text-white shadow-lg transition-all duration-150 ease-in-out hover:bg-blue-600 active:scale-90"

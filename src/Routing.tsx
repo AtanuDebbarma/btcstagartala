@@ -18,6 +18,10 @@ import {PdfIframe} from './appComponents/pdfIframe';
 import {useFetchProspectusAndAdmissionForm} from './services/fetchProspectusAndAdmissionForm';
 import NoticesPage from './pages/NoticesPage';
 import {useFetchNoticeBoard} from './services/noticeBoard/fetchNoticeBoard';
+import {useFetchAlerts} from './services/noticeBoard/fetchAlertsHook';
+import AlertsPage from './pages/Alerts/Alerts';
+import AlertDesc from './pages/Alerts/AlertDesc';
+import {ProtectedRoute} from './ProtectedRoute';
 
 const Routing = () => {
   const [floatingIconVisible, setFloatingIconVisible] = useState<boolean>(true);
@@ -26,6 +30,7 @@ const Routing = () => {
   useFetchCarouselImages(); // Custom hook to load carousel images
   useFetchProspectusAndAdmissionForm(); //Fetch prospectus and admission form
   useFetchNoticeBoard(); //Fetch notice board
+  useFetchAlerts(); //Fetch alerts
 
   return (
     <Router>
@@ -60,9 +65,21 @@ const RoutesWrapper = ({
         <Route path={RouteNames.DEFAULT} element={<Home />} />
         <Route path={RouteNames.HOME} element={<Home />} />
         <Route path={RouteNames.CONTACT} element={<Contact />} />
-        <Route path={RouteNames.ADMIN} element={<AdminLoginForm />} />
+        <Route
+          path={RouteNames.ADMIN}
+          element={
+            <ProtectedRoute>
+              <AdminLoginForm />
+            </ProtectedRoute>
+          }
+        />
         <Route path="/pdf-viewer" element={<PdfIframe />} />
         <Route path={RouteNames.NOTICE_BOARD} element={<NoticesPage />} />
+        <Route path={RouteNames.ALERTS} element={<AlertsPage />} />
+        <Route
+          path={`${RouteNames.ALERTS}/:id/:title`}
+          element={<AlertDesc />}
+        />
       </Routes>
 
       {/* Conditionally render the footer */}

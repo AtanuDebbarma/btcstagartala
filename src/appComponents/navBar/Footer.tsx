@@ -1,6 +1,33 @@
+import {appStore} from '@/appStore/appStore';
 import {Assets} from '@/assets/assetData';
+import {RouteNames} from '@/constants/routeNames';
+import {useNavigate} from 'react-router-dom';
 
 function Footer() {
+  const nanvigation = useNavigate();
+
+  const handleNav = (url: string) => {
+    setTimeout(() => {
+      nanvigation(url);
+      scrollTo(0, 0);
+    }, 200);
+  };
+  const {prospectusAndAdmission} = appStore.getState();
+  const admissionFormUrl = prospectusAndAdmission.find(
+    item => item.name === 'Admission_Form',
+  )?.url;
+
+  const usefulLinks = [
+    {label: 'Home', path: RouteNames.HOME},
+    {label: 'Contact Us', path: RouteNames.CONTACT},
+    {label: 'Admission Form', path: `/pdf-viewer?file=${admissionFormUrl}`},
+    {label: 'Notice Board', path: RouteNames.NOTICE_BOARD},
+    {label: 'Gallery', path: '/gallery'},
+    {label: 'Academics', path: RouteNames.ACADEMICS},
+    {label: 'About Us', path: RouteNames.ABOUT},
+    {label: 'Alerts', path: RouteNames.ALERTS},
+  ];
+
   return (
     <footer className="mt-25 bg-[#010e1f] py-8 text-white">
       <div className="container mx-auto mt-3 max-w-7xl px-10 xl:px-0">
@@ -26,17 +53,29 @@ function Footer() {
               </div>
             </div>
 
-            <div className="mt-4">
+            <div className="mt-4 flex flex-col items-center justify-center text-justify sm:items-start sm:justify-start">
               <div className="mb-2">
                 <p className="text-gray-400">Phone number</p>
-                <p className="text-cyan-300 hover:text-blue-300">
-                  (0381)2861210; 9436127328; 9436468794
-                </p>
+                <span className="flex flex-col gap-1 sm:flex-row">
+                  <p className="text-cyan-300 hover:text-blue-300">
+                    (0381)2861210;
+                  </p>
+                  <p className="text-cyan-300 hover:text-blue-300">
+                    9436127328;
+                  </p>
+                  <p className="text-cyan-300 hover:text-blue-300">
+                    9436468794
+                  </p>
+                </span>
               </div>
 
               <div className="mb-2">
-                <p>Anandanagar, Agartala</p>
-                <p>West Tripura, Pin - 799004</p>
+                <span className="flex flex-col gap-1 sm:flex-row">
+                  <p>Anandanagar</p>
+                  <p>Agartala,</p>
+                  <p>West Tripura,</p>
+                  <p>Pin - 799004</p>
+                </span>
               </div>
 
               <div>
@@ -50,44 +89,17 @@ function Footer() {
           </div>
 
           {/* Middle Column - Useful Links */}
-          <div className="flex flex-col items-center text-justify">
+          <div className="flex flex-col items-center justify-center text-justify">
             <div className="space-y-2">
               <h3 className="mb-4 text-lg font-semibold">Useful Links</h3>
-              <a
-                href="#home"
-                className="block text-gray-300 hover:text-blue-300">
-                Home
-              </a>
-              <a
-                href="#contact"
-                className="block text-gray-300 hover:text-blue-300">
-                Contact Us
-              </a>
-              <a
-                href="#admissionForm"
-                className="block text-gray-300 hover:text-blue-300">
-                Admission Form
-              </a>
-              <a
-                href="#notice"
-                className="block text-gray-300 hover:text-blue-300">
-                Notice Board
-              </a>
-              <a
-                href="#gallery"
-                className="block text-gray-300 hover:text-blue-300">
-                Gallery
-              </a>
-              <a
-                href="#academics"
-                className="block text-gray-300 hover:text-blue-300">
-                Academics
-              </a>
-              <a
-                href="#about"
-                className="block text-gray-300 hover:text-blue-300">
-                About Us
-              </a>
+              {usefulLinks.map((link, index) => (
+                <div
+                  key={index}
+                  onClick={() => handleNav(link.path)}
+                  className="transform-transform block cursor-pointer text-gray-300 duration-180 ease-in-out hover:text-blue-300 active:scale-95">
+                  {link.label}
+                </div>
+              ))}
             </div>
           </div>
 
@@ -108,7 +120,7 @@ function Footer() {
         </div>
 
         {/* Social Media Links */}
-        <div className="mt-8 flex justify-center space-x-6">
+        <div className="mt-8 flex items-center justify-center space-x-6 text-justify">
           <a
             href="https://www.facebook.com/people/BTCST/100068331848822/?mibextid=ZbWKwL"
             target="_blank"
@@ -127,32 +139,18 @@ function Footer() {
 
         {/* Copyright Section */}
         <div className="mt-8 flex flex-col items-center justify-between border-t border-gray-700 pt-6 text-sm text-gray-400 md:flex-row">
-          <div>
+          <div className="flex flex-col items-center justify-center gap-2 text-center sm:items-start sm:justify-start sm:text-start">
             <p>© 2025 Bhavan’s Tripura College of Science & Technology</p>
             <p>All Rights Reserved.</p>
           </div>
-          <div className="mt-4 text-right md:mt-0">
-            <p>
-              Created by{' '}
-              <a
-                href="https://www.linkedin.com/in/atanu-debbarma/"
-                className="text-blue-400 hover:text-blue-300">
-                Atanu Debbarma
-              </a>
-            </p>
-
+          <div className="mt-4 flex flex-col items-center justify-center gap-2 text-center md:mt-0">
             <a
+              title="Created by"
               href="https://github.com/AtanuDebbarma"
-              className="text-blue-400 hover:text-blue-300">
-              Github
-            </a>
-            <span className="text-blue-400 hover:text-blue-300">
-              {''} | {''}
-            </span>
-            <a
-              href="https://www.facebook.com/ADRDevil/"
-              className="text-blue-400 hover:text-blue-300">
-              Facebook
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-xl text-white hover:text-blue-600">
+              <i className="fa-brands fa-github"></i>
             </a>
           </div>
         </div>

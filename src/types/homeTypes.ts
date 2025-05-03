@@ -70,3 +70,17 @@ export type NoticeBoardType = {
   public_id: string;
   createdAt: Timestamp | null;
 };
+
+export type AlertsType = {
+  id: string;
+  title: string;
+  content: string;
+  fileName: string;
+  fileURL: string;
+  file_public_id: string;
+  link1Name: string;
+  link1Url: string;
+  link2Name: string;
+  link2Url: string;
+  createdAt: Timestamp | null;
+};

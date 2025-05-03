@@ -78,7 +78,9 @@ export const NoticeModalForm = React.memo(
       }
     }, [tempFile]);
 
-    const isDuplicate = notices.some(n => n.name === formValues.name);
+    const isDuplicate = notices.some(
+      n => n.name.trim() === formValues.name.trim(),
+    );
     const totalNotices = notices.length;
     const maxLength = totalNotices >= 30;
 
@@ -165,7 +167,7 @@ export const NoticeModalForm = React.memo(
       ) {
         setUploading(false);
         setLoading(false);
-        setUploadError('Please enter file name!');
+        setUploadError('File not found!');
         return;
       }
       setTimeout(() => {
@@ -236,7 +238,7 @@ export const NoticeModalForm = React.memo(
             onChange={handleChange}
             placeholder="Enter file name"
             disabled={mode === 'DELETE'}
-            className="mt-1 w-full cursor-pointer rounded-md border border-gray-300 p-2 shadow-sm hover:bg-gray-300 focus:border-blue-500 focus:ring-blue-500"
+            className="mt-1 w-full cursor-auto rounded-md border border-gray-300 p-2 shadow-sm hover:bg-gray-300 focus:border-blue-500 focus:ring-blue-500"
           />
           {mode === 'EDIT' && (
             <div className="align-center mt-2 flex flex-row justify-start gap-2">

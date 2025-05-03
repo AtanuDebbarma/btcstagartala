@@ -1,4 +1,3 @@
-import {ProspectusAndAdmissionFormType} from '@/types/homeTypes';
 import {db} from '@/services/firebase';
 import {
   collection,
@@ -17,7 +16,7 @@ export const getPDFFilebyfileID = async (
   collectionName: string,
 ): Promise<{
   ref: DocumentReference<DocumentData>;
-  data: ProspectusAndAdmissionFormType;
+  data: any;
 } | null> => {
   const fileRef = collection(db, collectionName);
   const q = query(fileRef, where('id', '==', fileID));
@@ -26,7 +25,7 @@ export const getPDFFilebyfileID = async (
   if (snapshot.empty) return null;
 
   const doc = snapshot.docs[0];
-  return {ref: doc.ref, data: doc.data() as ProspectusAndAdmissionFormType};
+  return {ref: doc.ref, data: doc.data() as any};
 };
 
 /**
@@ -34,7 +33,7 @@ export const getPDFFilebyfileID = async (
  */
 export const updatePDFDoc = async (
   ref: DocumentReference<DocumentData>,
-  updatedFields: Partial<ProspectusAndAdmissionFormType>,
+  updatedFields: any,
 ): Promise<boolean> => {
   try {
     await updateDoc(ref, updatedFields);

@@ -1,16 +1,29 @@
+import {RouteNames} from '@/constants/routeNames';
+import {useNavigate} from 'react-router-dom';
+
 export const QuickAccess = () => {
   const links = [
-    {title: 'IQAC', url: '#'},
-    {title: 'Committee & Cells', url: '#'},
+    {title: 'IQAC', url: '/iqac'},
+    {title: 'Committee & Cells', url: '/committee-cells'},
     {title: 'SSR', url: '#'},
-    {title: 'Academic Calendar', url: '#'},
-    {title: 'NAAC', url: '#'},
-    {title: 'Admission', url: '#'},
-    {title: 'Misc Documents', url: '#'},
-    {title: 'Academic Module', url: '#'},
-    {title: 'Help Desk', url: '#'},
-    {title: 'AQAR', url: '#'},
+    {title: 'Academic Calendar', url: '/academic-calendar'},
+    {title: 'NAAC', url: '/naac'},
+    {title: 'Admission', url: RouteNames.ADMISSION_ELIGIBILITY},
+    {title: 'Misc Documents', url: '/misc-documents'},
+    {title: 'Academic Module', url: RouteNames.ACADEMICS},
+    {title: 'Help Desk', url: '/help-desk'},
+    {title: 'AQAR', url: '/aqar'},
+    {title: 'Alerts', url: '/alerts'},
   ];
+  const nanvigation = useNavigate();
+
+  const handleNav = (url: string) => {
+    setTimeout(() => {
+      nanvigation(url);
+      scrollTo(0, 0);
+    }, 200);
+  };
+
   return (
     <div className="mt-5 flex w-full flex-col items-center justify-center">
       <div className="flex w-[70%] flex-col">
@@ -26,12 +39,12 @@ export const QuickAccess = () => {
           <div
             className={`xs:grid-cols-2 mt-6 grid grid-cols-1 gap-2 md:grid-cols-3 lg:grid-cols-4`}>
             {links.map((link, index) => (
-              <a
+              <button
                 key={index}
-                href={link.url}
-                className="rounded-md bg-blue-100 px-4 py-3 text-center text-blue-800 transition-all duration-200 hover:bg-blue-200">
+                onClick={() => handleNav(link.url)}
+                className="transform-transform cursor-pointer rounded-md bg-blue-100 px-4 py-3 text-center text-blue-800 transition-all duration-180 ease-in-out hover:bg-blue-200 active:scale-95">
                 {link.title}
-              </a>
+              </button>
             ))}
           </div>
         </div>

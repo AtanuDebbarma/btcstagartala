@@ -1,11 +1,14 @@
-import {NoticeBoardType} from '@/types/homeTypes';
+import {AlertsType, NoticeBoardType} from '@/types/homeTypes';
 import {addDoc, collection, Timestamp, updateDoc} from 'firebase/firestore';
 import {db} from '../firebase';
 
 export const addPDF = async (
-  newFile: NoticeBoardType,
+  newFile: any,
   collectionName: string,
-): Promise<{firebaseAddSuccess: boolean; newNotice?: NoticeBoardType}> => {
+): Promise<{
+  firebaseAddSuccess: boolean;
+  newNotice?: any;
+}> => {
   try {
     const fileRef = collection(db, collectionName);
 
@@ -27,7 +30,7 @@ export const addPDF = async (
       console.error('Failed to update document with ID field:', err);
       return {firebaseAddSuccess: false};
     }
-    const newNotice: NoticeBoardType = {
+    const newNotice: any = {
       ...fileData,
       id: docRef.id,
       createdAt,
