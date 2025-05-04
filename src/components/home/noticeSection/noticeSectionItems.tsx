@@ -33,11 +33,10 @@ export const NoticeItem = React.memo(({notice}: {notice: NoticeBoardType}) => {
 });
 interface Props {
   text: string;
-  px?: string;
   url: string;
 }
 
-export const NavButton = React.memo(({text, px, url}: Props) => {
+export const NavButton = React.memo(({text, url}: Props) => {
   const navigation = useNavigate();
   const handleClick = () => {
     setTimeout(() => {
@@ -47,11 +46,9 @@ export const NavButton = React.memo(({text, px, url}: Props) => {
   return (
     <button
       onClick={handleClick}
-      className="cursor-pointer transition-transform duration-180 ease-in-out focus:outline-none active:scale-95">
+      className="w-full min-w-[250px] cursor-pointer transition-transform duration-180 ease-in-out focus:outline-none active:scale-95">
       <div
-        className={`bg-[#0a2540] py-4 text-white ${
-          px ?? 'px-15 md:px-12'
-        } rounded-sm text-center shadow-md`}>
+        className={`rounded-sm bg-[#0a2540] px-4 py-4 text-center text-white shadow-md`}>
         <h3 className="relative inline-block text-lg font-semibold tracking-wide text-nowrap uppercase">
           {text}
           <span className="absolute -bottom-1 left-1/4 mt-2 h-[3px] w-1/2 rounded bg-yellow-400"></span>

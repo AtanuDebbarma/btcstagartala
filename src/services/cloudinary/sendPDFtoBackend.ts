@@ -60,8 +60,9 @@ export const sendEditPDFToBackend = async (
     });
 
     const data = await res.json();
-    if (data.message) {
+    if (!data.success && data.message) {
       handleUploadErrorMessage(data.message);
+      return {success: false, asset: null};
     }
     return {success: data.success, asset: data.asset};
   } catch (err) {

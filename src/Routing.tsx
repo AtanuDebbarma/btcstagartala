@@ -22,6 +22,12 @@ import {useFetchAlerts} from './services/noticeBoard/fetchAlertsHook';
 import AlertsPage from './pages/Alerts/Alerts';
 import AlertDesc from './pages/Alerts/AlertDesc';
 import {ProtectedRoute} from './ProtectedRoute';
+import PrincipalMESSAGE from './pages/PrincipalMessage';
+import Faculty from './pages/Faculty/Faculty';
+import {
+  NonTeacthingStaff,
+  PermanentFaculty,
+} from './components/faculty/permanentFaculty';
 
 const Routing = () => {
   const [floatingIconVisible, setFloatingIconVisible] = useState<boolean>(true);
@@ -65,6 +71,23 @@ const RoutesWrapper = ({
         <Route path={RouteNames.DEFAULT} element={<Home />} />
         <Route path={RouteNames.HOME} element={<Home />} />
         <Route path={RouteNames.CONTACT} element={<Contact />} />
+        <Route
+          path={RouteNames.PRINCIPAL_MESSAGE}
+          element={<PrincipalMESSAGE />}
+        />
+        <Route path={RouteNames.FACULTY} element={<Faculty />} />
+        <Route
+          path={`${RouteNames.FACULTY}/permanent-faculty`}
+          element={<PermanentFaculty />}
+        />
+        <Route
+          path={`${RouteNames.FACULTY}/non-teaching-staffs`}
+          element={<NonTeacthingStaff />}
+        />
+        <Route
+          path={`${RouteNames.FACULTY}/guest-faculty`}
+          element={<Faculty />}
+        />
         <Route
           path={RouteNames.ADMIN}
           element={

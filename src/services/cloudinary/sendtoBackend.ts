@@ -41,8 +41,9 @@ export const sendDeleteImageToBackend = async (
     });
 
     const data = await res.json();
-    if (data.message) {
+    if (!data.success && data.message) {
       handleUploadErrorMessage(data.message);
+      return {success: false};
     }
     return {success: data.success};
   } catch (err) {
@@ -100,8 +101,9 @@ export const sendEditImageToBackend = async (
     });
 
     const data = await res.json();
-    if (data.message) {
+    if (!data.success && data.message) {
       handleUploadErrorMessage(data.message);
+      return {success: false, asset: null};
     }
     return {success: data.success, asset: data.asset};
   } catch (err) {
@@ -156,8 +158,9 @@ export const sendAddImageToBackend = async (
     });
 
     const data = await res.json();
-    if (data.message) {
+    if (!data.success && data.message) {
       handleUploadErrorMessage(data.message);
+      return {success: false, asset: null};
     }
     return {success: data.success, asset: data.asset};
   } catch (err) {

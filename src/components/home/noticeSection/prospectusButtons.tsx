@@ -65,7 +65,6 @@ export const ProspectusButtons = () => {
               <NavButton
                 key={item.id || `prospectus-${index}`}
                 text="PROSPECTUS"
-                px="px-21 md:px-17"
                 url={item.url}
               />
             </div>
