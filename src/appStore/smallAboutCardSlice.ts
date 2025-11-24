@@ -16,7 +16,7 @@ export type SmallAboutCardSliceType = {
 };
 
 export const createSmallAboutCardSlice: StateCreator<
-  AppState & any,
+  AppState,
   [['zustand/immer', never]],
   [],
   SmallAboutCardSliceType
@@ -27,11 +27,11 @@ export const createSmallAboutCardSlice: StateCreator<
   principalImage: null,
   setSmallAboutCard: async (data: SmallAboutCardType | null) => {
     try {
-      set((state: AppState) => {
+      set(state => {
         state.smallAboutCard = data;
       });
     } catch (error) {
-      set((state: AppState) => {
+      set(state => {
         state.smallAboutCard = null;
       });
     }

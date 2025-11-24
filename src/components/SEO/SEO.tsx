@@ -11,11 +11,11 @@ interface SEOProps {
 }
 
 const defaultSEO = {
-  title: 'BTCST Agartala | Bhavan\'s Tripura College of Science & Technology',
+  title: "BTCST Agartala | Bhavan's Tripura College of Science & Technology",
   description:
-    'Official website of Bhavan\'s Tripura College of Science & Technology (BTCST), affiliated to Tripura University. Offering quality education in Science & Technology in Agartala, Tripura.',
+    "Official website of Bhavan's Tripura College of Science & Technology (BTCST), affiliated to Tripura University. Offering quality education in Science & Technology in Agartala, Tripura.",
   keywords:
-    'BTCST, Bhavan\'s Tripura College, Science and Technology College Tripura, Tripura University, Agartala College, Engineering College Tripura, Science College Agartala, Bharatiya Vidya Bhavan, North East India College',
+    "BTCST, Bhavan's Tripura College, Science and Technology College Tripura, Tripura University, Agartala College, Engineering College Tripura, Science College Agartala, Bharatiya Vidya Bhavan, North East India College",
   image: 'https://btcstagartala.org/og-image.jpg',
   url: 'https://btcstagartala.org',
   type: 'website',
@@ -112,16 +112,16 @@ const updateCanonicalLink = (url: string): void => {
 // Page-specific SEO configurations
 export const pageSEO = {
   home: {
-    title: 'BTCST Agartala | Bhavan\'s Tripura College of Science & Technology',
+    title: "BTCST Agartala | Bhavan's Tripura College of Science & Technology",
     description:
-      'Official website of Bhavan\'s Tripura College of Science & Technology (BTCST), affiliated to Tripura University. Explore our programs, faculty, and campus life.',
+      "Official website of Bhavan's Tripura College of Science & Technology (BTCST), affiliated to Tripura University. Explore our programs, faculty, and campus life.",
     keywords:
-      'BTCST, Bhavan\'s Tripura College, Science College Tripura, Agartala College, Tripura University',
+      "BTCST, Bhavan's Tripura College, Science College Tripura, Agartala College, Tripura University",
   },
   about: {
     title: 'About Us | BTCST Agartala',
     description:
-      'Learn about Bhavan\'s Tripura College of Science & Technology, established in 2003. Our history, mission, and commitment to quality education in Tripura.',
+      "Learn about Bhavan's Tripura College of Science & Technology, established in 2003. Our history, mission, and commitment to quality education in Tripura.",
     keywords:
       'About BTCST, College History, Bharatiya Vidya Bhavan, Tripura Education',
   },
@@ -163,9 +163,9 @@ export const pageSEO = {
     keywords: 'BTCST Alerts, Urgent Notifications, College Updates',
   },
   principalMessage: {
-    title: 'Principal\'s Message | BTCST Agartala',
+    title: "Principal's Message | BTCST Agartala",
     description:
-      'Message from the Principal of Bhavan\'s Tripura College of Science & Technology. Vision and leadership for academic excellence.',
+      "Message from the Principal of Bhavan's Tripura College of Science & Technology. Vision and leadership for academic excellence.",
     keywords: 'Principal Message, College Leadership, BTCST Vision',
   },
 };

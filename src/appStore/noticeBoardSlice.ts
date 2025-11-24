@@ -1,5 +1,6 @@
 import {StateCreator} from 'zustand';
 import {NoticeBoardType} from '@/types/homeTypes';
+import {AppState} from './appStore';
 
 export type NoticeBoardSliceType = {
   notices: NoticeBoardType[] | [];
@@ -7,7 +8,7 @@ export type NoticeBoardSliceType = {
 };
 
 export const createNoticeBoardSlice: StateCreator<
-  NoticeBoardSliceType & any,
+  AppState,
   [['zustand/immer', never]],
   [],
   NoticeBoardSliceType
@@ -15,7 +16,7 @@ export const createNoticeBoardSlice: StateCreator<
   notices: [],
   setNotices: async (notices: NoticeBoardType[] | []) => {
     try {
-      set((state: NoticeBoardSliceType) => {
+      set(state => {
         state.notices = notices;
       });
     } catch (error) {

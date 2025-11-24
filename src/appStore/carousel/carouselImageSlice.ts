@@ -1,5 +1,7 @@
 import {StateCreator} from 'zustand';
 import {CarouselImage} from '@/types/homeTypes';
+import {AppState} from '../appStore';
+
 export type CarouselImagesSliceType = {
   carouselImages: CarouselImage[] | [];
   setCarouselImages: (carouselImages: CarouselImage[] | []) => Promise<void>;
@@ -10,7 +12,7 @@ export type CarouselImagesSliceType = {
 };
 
 export const createCarouselImagesSlice: StateCreator<
-  CarouselImagesSliceType & any,
+  AppState,
   [['zustand/immer', never]],
   [],
   CarouselImagesSliceType
@@ -21,46 +23,40 @@ export const createCarouselImagesSlice: StateCreator<
 
   setCarouselImages: async (carouselImages: CarouselImage[] | []) => {
     try {
-      set((state: CarouselImagesSliceType) => ({
-        ...state,
-        carouselImages: carouselImages ? carouselImages : [],
-      }));
+      set(state => {
+        state.carouselImages = carouselImages ? carouselImages : [];
+      });
     } catch (error) {
       console.error('Error setting carousel images:', error);
-      set((state: CarouselImagesSliceType) => ({
-        ...state,
-        carouselImages: null,
-      }));
+      set(state => {
+        state.carouselImages = [];
+      });
     }
   },
 
   setLoading: async (loading: boolean) => {
     try {
-      set((state: CarouselImagesSliceType) => ({
-        ...state,
-        loading,
-      }));
+      set(state => {
+        state.loading = loading;
+      });
     } catch (error) {
       console.error('Error setting loading state:', error);
-      set((state: CarouselImagesSliceType) => ({
-        ...state,
-        loading: false,
-      }));
+      set(state => {
+        state.loading = false;
+      });
     }
   },
 
   setError: async (error: string | null) => {
     try {
-      set((state: CarouselImagesSliceType) => ({
-        ...state,
-        error,
-      }));
+      set(state => {
+        state.error = error;
+      });
     } catch (err) {
       console.error('Error setting error state:', err);
-      set((state: CarouselImagesSliceType) => ({
-        ...state,
-        error: null,
-      }));
+      set(state => {
+        state.error = null;
+      });
     }
   },
 });

@@ -30,7 +30,7 @@ export default function CollegeResourcesExample(): React.JSX.Element {
                 href={resource.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block rounded-lg bg-white p-6 shadow-md transition-all duration-200 hover:shadow-xl hover:scale-105">
+                className="block rounded-lg bg-white p-6 shadow-md transition-all duration-200 hover:scale-105 hover:shadow-xl">
                 <div className="flex flex-col items-center text-center">
                   <div className="mb-3 flex h-16 w-16 items-center justify-center rounded-full bg-purple-100">
                     <i className="fa-solid fa-file-pdf text-2xl text-purple-600"></i>

@@ -1,5 +1,6 @@
 import {StateCreator} from 'zustand';
 import {GalleryImageType} from '@/types/galleryTypes';
+import {AppState} from './appStore';
 
 export type GallerySliceType = {
   galleryImages: GalleryImageType[] | [];
@@ -7,7 +8,7 @@ export type GallerySliceType = {
 };
 
 export const createGallerySlice: StateCreator<
-  GallerySliceType,
+  AppState,
   [['zustand/immer', never]],
   [],
   GallerySliceType

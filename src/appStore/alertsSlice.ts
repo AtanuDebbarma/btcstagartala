@@ -1,5 +1,6 @@
 import {StateCreator} from 'zustand';
 import {AlertsType} from '@/types/homeTypes';
+import {AppState} from './appStore';
 
 export type AlertsSliceType = {
   alerts: AlertsType[] | [];
@@ -7,7 +8,7 @@ export type AlertsSliceType = {
 };
 
 export const createAlertsSlice: StateCreator<
-  AlertsSliceType & any,
+  AppState,
   [['zustand/immer', never]],
   [],
   AlertsSliceType
@@ -15,7 +16,7 @@ export const createAlertsSlice: StateCreator<
   alerts: [],
   setAlerts: async (alerts: AlertsType[] | []) => {
     try {
-      set((state: AlertsSliceType) => {
+      set(state => {
         state.alerts = alerts;
       });
     } catch (error) {

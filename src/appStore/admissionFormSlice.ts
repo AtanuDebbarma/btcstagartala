@@ -1,5 +1,6 @@
 import {StateCreator} from 'zustand';
 import {ProspectusAndAdmissionFormType} from '@/types/homeTypes';
+import {AppState} from './appStore';
 
 export type AdmissionFormType = {
   prospectusAndAdmission: ProspectusAndAdmissionFormType[] | [];
@@ -9,7 +10,7 @@ export type AdmissionFormType = {
 };
 
 export const createAdmissionFormSlice: StateCreator<
-  AdmissionFormType & any,
+  AppState,
   [['zustand/immer', never]],
   [],
   AdmissionFormType
@@ -19,11 +20,11 @@ export const createAdmissionFormSlice: StateCreator<
     data: ProspectusAndAdmissionFormType[] | [],
   ) => {
     try {
-      set((state: AdmissionFormType) => {
+      set(state => {
         state.prospectusAndAdmission = data.length ? data : [];
       });
     } catch (error) {
-      set((state: AdmissionFormType) => {
+      set(state => {
         state.prospectusAndAdmission = [];
       });
     }

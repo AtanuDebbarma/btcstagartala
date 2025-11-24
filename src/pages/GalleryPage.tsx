@@ -167,7 +167,9 @@ export default function GalleryPage(): React.JSX.Element {
         </div>
       </header>
 
-      <section className="mx-auto max-w-7xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-16" aria-label="Gallery Images">
+      <section
+        className="mx-auto max-w-7xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-16"
+        aria-label="Gallery Images">
         {/* Add Button for Admin */}
         {isAdmin && (
           <div className="mb-6 flex justify-end">
@@ -189,7 +191,9 @@ export default function GalleryPage(): React.JSX.Element {
 
         {/* Gallery Grid */}
         {!loading && (
-          <div className="mb-8 grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3" role="list">
+          <div
+            className="mb-8 grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3"
+            role="list">
             {currentImages.map(image => (
               <article
                 key={image.id}
@@ -259,11 +263,13 @@ export default function GalleryPage(): React.JSX.Element {
                       className={`text-center text-sm font-medium text-gray-700 sm:text-base ${isAdmin ? 'hover:text-purple-800 hover:underline' : ''}`}>
                       {image.title}
                     </p>
-                    <time
-                      dateTime={image.createdAt.toDate().toISOString()}
-                      className="block pt-2 text-center text-xs text-gray-600">
-                      {convertFirebaseTimestampToDate(image.createdAt)}
-                    </time>
+                    {image.createdAt && (
+                      <time
+                        dateTime={image.createdAt.toDate().toISOString()}
+                        className="block pt-2 text-center text-xs text-gray-600">
+                        {convertFirebaseTimestampToDate(image.createdAt)}
+                      </time>
+                    )}
                   </figcaption>
                 </figure>
               </article>
@@ -273,7 +279,9 @@ export default function GalleryPage(): React.JSX.Element {
 
         {/* Pagination */}
         {totalPages > 1 && (
-          <nav aria-label="Gallery pagination" className="flex items-center justify-center gap-2">
+          <nav
+            aria-label="Gallery pagination"
+            className="flex items-center justify-center gap-2">
             <button
               onClick={() => handlePageChange(currentPage - 1)}
               disabled={currentPage === 1}

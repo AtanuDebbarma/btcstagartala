@@ -1,5 +1,6 @@
 import {StateCreator} from 'zustand';
 import {CollegeResourceType} from '@/types/collegeResourcesTypes';
+import {AppState} from './appStore';
 
 export type CollegeResourcesSliceType = {
   collegeResources: CollegeResourceType[] | [];
@@ -7,7 +8,7 @@ export type CollegeResourcesSliceType = {
 };
 
 export const createCollegeResourcesSlice: StateCreator<
-  CollegeResourcesSliceType & any,
+  AppState,
   [['zustand/immer', never]],
   [],
   CollegeResourcesSliceType
@@ -15,11 +16,11 @@ export const createCollegeResourcesSlice: StateCreator<
   collegeResources: [],
   setCollegeResources: async (data: CollegeResourceType[] | []) => {
     try {
-      set((state: CollegeResourcesSliceType) => {
+      set(state => {
         state.collegeResources = data.length ? data : [];
       });
     } catch (error) {
-      set((state: CollegeResourcesSliceType) => {
+      set(state => {
         state.collegeResources = [];
       });
     }

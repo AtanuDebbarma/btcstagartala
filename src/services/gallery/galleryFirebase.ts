@@ -29,12 +29,12 @@ export const addGalleryImage = async (
       createdAt,
       id: '', // Placeholder, will be updated
     });
-    
+
     // Update the document with its own ID
     await updateDoc(doc(db, 'galleryImages', docRef.id), {
       id: docRef.id,
     });
-    
+
     return true;
   } catch (error) {
     console.error('[Gallery] Failed to add image:', error);
@@ -80,9 +80,7 @@ export const updateGalleryImage = async (
 /**
  * Delete gallery image from Firestore
  */
-export const deleteGalleryImage = async (
-  imageId: string,
-): Promise<boolean> => {
+export const deleteGalleryImage = async (imageId: string): Promise<boolean> => {
   try {
     const imageRef = doc(db, 'galleryImages', imageId);
     await deleteDoc(imageRef);

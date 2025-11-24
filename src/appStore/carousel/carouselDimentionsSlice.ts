@@ -1,5 +1,6 @@
 import {StateCreator} from 'zustand';
 import {Dimensions} from '@/services/carousel/fetchDimentions';
+import {AppState} from '../appStore';
 
 export const defaultDimValues: Dimensions = {
   default: 350,
@@ -20,7 +21,7 @@ export type DimentionsSliceType = {
 };
 
 export const createDimentionsSlice: StateCreator<
-  DimentionsSliceType & any,
+  AppState,
   [['zustand/immer', never]],
   [],
   DimentionsSliceType
@@ -31,45 +32,39 @@ export const createDimentionsSlice: StateCreator<
 
   setDimensions: async (dim: Dimensions | null) => {
     try {
-      set((state: DimentionsSliceType) => ({
-        ...state,
-        dimensions: dim ? dim : defaultDimValues,
-      }));
+      set(state => {
+        state.dimensions = dim ? dim : defaultDimValues;
+      });
     } catch (error) {
       console.error('Error setting dimensions:', error);
-      set((state: DimentionsSliceType) => ({
-        ...state,
-        dimensions: defaultDimValues,
-      }));
+      set(state => {
+        state.dimensions = defaultDimValues;
+      });
     }
   },
 
   setDimLoading: async (loading: boolean) => {
     try {
-      set((state: DimentionsSliceType) => ({
-        ...state,
-        dimLoading: loading,
-      }));
+      set(state => {
+        state.dimLoading = loading;
+      });
     } catch (error) {
-      set((state: DimentionsSliceType) => ({
-        ...state,
-        dimLoading: false,
-      }));
+      set(state => {
+        state.dimLoading = false;
+      });
       console.error('Error setting dimLoading:', error);
     }
   },
 
   setDimError: async (error: boolean) => {
     try {
-      set((state: DimentionsSliceType) => ({
-        ...state,
-        dimError: error,
-      }));
+      set(state => {
+        state.dimError = error;
+      });
     } catch (err) {
-      set((state: DimentionsSliceType) => ({
-        ...state,
-        dimError: false,
-      }));
+      set(state => {
+        state.dimError = false;
+      });
       console.error('Error setting dimError:', err);
     }
   },
