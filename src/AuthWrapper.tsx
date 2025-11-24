@@ -3,17 +3,15 @@ import React from 'react';
 import {ReactNode, useEffect, useState} from 'react';
 import {ClipLoader} from 'react-spinners';
 import {appStore} from './appStore/appStore';
-import {getIdToken, onIdTokenChanged, User} from 'firebase/auth';
-
-const BASE_URL: string =
-  import.meta.env.VITE_API_BACKEND_URL || 'http://localhost:5000';
+import {onIdTokenChanged, User} from 'firebase/auth';
 
 /**
  * AuthWrapper is a higher-order component that wraps its children with authentication logic.
  *
- * It listens for changes in the authentication state using `onIdTokenChanged` and fetches
- * a protected resource to verify the user's authentication status. If the user is authenticated,
- * it updates the global state with the user information; otherwise, it sets the user to null.
+ * It listens for changes in the authentication state using `onIdTokenChanged` and updates
+ * the global state with the user information. Admin status is checked on the frontend by
+ * verifying the user's email against the admin whitelist. Backend validation occurs on
+ * every admin action for security.
  *
  * While the authentication state is being determined, a loading spinner is displayed.
  * Once the authentication check is complete, it renders its children.
@@ -33,25 +31,15 @@ export const AuthWrapper = ({
   useEffect(() => {
     const unsubscribe = onIdTokenChanged(auth, async (user: User | null) => {
       if (user) {
-        try {
-          const token = await getIdToken(user);
+        // Check if user is admin (frontend check for UI only)
+        const adminEmails = [
+          import.meta.env.VITE_FIREBASE_ADMIN_EMAIL1,
+          import.meta.env.VITE_FIREBASE_ADMIN_EMAIL2,
+        ];
 
-          const response = await fetch(`${BASE_URL}/api/protected`, {
-            method: 'GET',
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          });
-
-          const data = await response.json();
-
-          if (response.ok && data.success) {
-            setUser(user);
-          } else {
-            setUser(null);
-          }
-        } catch (err) {
-          console.error('Backend verification failed:', err);
+        if (adminEmails.includes(user.email || '')) {
+          setUser(user);
+        } else {
           setUser(null);
         }
       } else {
