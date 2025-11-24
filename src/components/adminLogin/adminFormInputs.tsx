@@ -28,13 +28,16 @@ export const AdminFormInputs = ({
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
   //Admin Email
-  const allowedAdminEmail: string = import.meta.env.VITE_FIREBASE_ADMIN_EMAIL;
+  const allowedAdminEmails: string[] = [
+    import.meta.env.VITE_FIREBASE_ADMIN_EMAIL1,
+    import.meta.env.VITE_FIREBASE_ADMIN_EMAIL2,
+  ];
   const navigate = useNavigate();
 
   const handleSubmit = (e: MouseEvent<HTMLButtonElement>) => {
     handleAdminLoginSubmit(
       e,
-      allowedAdminEmail,
+      allowedAdminEmails,
       setError,
       formData,
       setLoading,
@@ -46,7 +49,7 @@ export const AdminFormInputs = ({
   const handleGoogleLogin = (e: MouseEvent<HTMLButtonElement>) => {
     handleAdminGoogleLogin(
       e,
-      allowedAdminEmail,
+      allowedAdminEmails,
       setError,
       setLoading,
       setSuccess,
@@ -56,7 +59,7 @@ export const AdminFormInputs = ({
   const handleForgotPassword = async (e: MouseEvent<HTMLButtonElement>) => {
     handleAdminForgotPassword(
       e,
-      allowedAdminEmail,
+      allowedAdminEmails,
       formData,
       setError,
       setLoading,
@@ -80,7 +83,7 @@ export const AdminFormInputs = ({
             value={formData.email}
             onChange={e => handleChange(e, setFormData, setError)}
             placeholder="Email"
-            className={`w-full rounded bg-white p-4 text-black focus:ring-2 ${error.error ? 'border-red-500' : 'focus:ring-blue-700'} focus:outline-none`}
+            className={`w-full rounded bg-white p-4 text-black focus:ring-2 ${error.error ? 'border-red-500' : 'focus:ring-[#900090]'} focus:outline-none`}
           />
         </div>
 
@@ -95,7 +98,7 @@ export const AdminFormInputs = ({
             onChange={e => handleChange(e, setFormData, setError)}
             placeholder="Password"
             className={`w-full rounded bg-white p-4 pr-12 text-black focus:ring-2 ${
-              error.password ? 'border-red-500' : 'focus:ring-blue-700'
+              error.password ? 'border-red-500' : 'focus:ring-[#900090]'
             } focus:outline-none`}
           />
           <button
@@ -112,13 +115,13 @@ export const AdminFormInputs = ({
           <button
             onClick={handleForgotPassword}
             type="button"
-            className="cursor-pointer text-gray-600 hover:text-blue-700">
+            className="cursor-pointer text-gray-600 hover:text-purple-800">
             Forgot Password
           </button>
           <button
             type="button"
             onClick={handleGoogleLogin}
-            className="cursor-pointer text-[#0a2540] hover:text-blue-700">
+            className="cursor-pointer text-[#0a2540] hover:text-purple-800">
             <i className="fa-brands fa-google"></i>
             <span>{''} Google Login</span>
           </button>
@@ -127,7 +130,7 @@ export const AdminFormInputs = ({
           disabled={loading}
           type="button"
           onClick={handleSubmit}
-          className="w-full cursor-pointer rounded bg-[#0a2540] p-4 font-medium text-white transition-colors duration-200 hover:bg-[#0a2540]/80">
+          className="w-full cursor-pointer rounded bg-[#3f003f] p-4 font-medium text-white transition-colors duration-200 hover:bg-[#3f003f]/80">
           {loading ? (
             <ClipLoader size={20} color="#1a3bdf" loading={loading} />
           ) : (

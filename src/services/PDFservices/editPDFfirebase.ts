@@ -29,17 +29,28 @@ export const getPDFFilebyfileID = async (
 };
 
 /**
- * Update the document by its DocumentReference
+ * Update the document by its DocumentReference with retry logic
  */
 export const updatePDFDoc = async (
   ref: DocumentReference<DocumentData>,
   updatedFields: any,
+  retries = 3,
 ): Promise<boolean> => {
-  try {
-    await updateDoc(ref, updatedFields);
-    return true;
-  } catch (error) {
-    console.error('Failed to update document:', error);
-    return false;
+  for (let attempt = 1; attempt <= retries; attempt++) {
+    try {
+      await updateDoc(ref, updatedFields);
+      return true;
+    } catch (error: any) {
+      // If it's the last attempt, log error and return false
+      if (attempt === retries) {
+        console.error('Failed to update Firestore document:', error.message);
+        return false;
+      }
+
+      // Wait before retrying (exponential backoff)
+      const delay = Math.min(1000 * Math.pow(2, attempt - 1), 5000);
+      await new Promise(resolve => setTimeout(resolve, delay));
+    }
   }
+  return false;
 };

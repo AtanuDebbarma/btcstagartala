@@ -3,17 +3,18 @@ import {useNavigate} from 'react-router-dom';
 
 export const QuickAccess = () => {
   const links = [
-    {title: 'IQAC', url: '/iqac'},
-    {title: 'Committee & Cells', url: '/committee-cells'},
-    {title: 'SSR', url: '#'},
-    {title: 'Academic Calendar', url: '/academic-calendar'},
-    {title: 'NAAC', url: '/naac'},
+    {title: 'IQAC', url: RouteNames.IQAC},
+    {title: 'Committee & Cells', url: RouteNames.COMMITTEE_CELLS},
+    {title: 'SSR', url: RouteNames.SSR},
+    {title: 'Academic Calendar', url: RouteNames.ACADEMIC_CALENDAR},
+    {title: 'NAAC', url: RouteNames.NAAC},
     {title: 'Admission', url: RouteNames.ADMISSION_ELIGIBILITY},
-    {title: 'Misc Documents', url: '/misc-documents'},
+    {title: 'Misc Documents', url: RouteNames.MISC_DOCUMENTS},
     {title: 'Academic Module', url: RouteNames.ACADEMICS},
-    {title: 'Help Desk', url: '/help-desk'},
-    {title: 'AQAR', url: '/aqar'},
-    {title: 'Alerts', url: '/alerts'},
+    {title: 'Help Desk', url: RouteNames.HELP_DESK},
+    {title: 'AQAR', url: RouteNames.AQAR},
+    {title: 'Alerts', url: RouteNames.ALERTS},
+    {title: 'Gallery', url: RouteNames.GALLERY},
   ];
   const nanvigation = useNavigate();
 
@@ -25,7 +26,7 @@ export const QuickAccess = () => {
   };
 
   return (
-    <div className="mt-5 flex w-full flex-col items-center justify-center">
+    <section className="mt-5 flex w-full flex-col items-center justify-center">
       <div className="flex w-[70%] flex-col">
         <div className="mb-2 flex items-center justify-between">
           <h2 className="text-2xl font-bold text-gray-800">Quick Access</h2>
@@ -42,13 +43,13 @@ export const QuickAccess = () => {
               <button
                 key={index}
                 onClick={() => handleNav(link.url)}
-                className="transform-transform cursor-pointer rounded-md bg-blue-100 px-4 py-3 text-center text-blue-800 transition-all duration-180 ease-in-out hover:bg-blue-200 active:scale-95">
+                className="transform-transform cursor-pointer rounded-md bg-purple-200 px-4 py-3 text-center text-purple-800 transition-all duration-180 ease-in-out hover:bg-purple-300 active:scale-95">
                 {link.title}
               </button>
             ))}
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 };

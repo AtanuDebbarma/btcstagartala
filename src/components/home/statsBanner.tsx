@@ -5,14 +5,14 @@ import CountUp from 'react-countup';
 
 export const StatsBanner = () => {
   return (
-    <div className="mt-20 w-full bg-blue-600 px-4 py-6">
+    <article className="mt-20 w-full bg-[#900090] px-4 py-6">
       <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4">
         {stats.map((stat: StatsBannerTypes, index) => {
           const {number, suffix} = parseCount(stat.count);
 
           return (
             <div key={index} className="flex items-center space-x-3">
-              <div className="flex-shrink-0">
+              <div className="shrink-0">
                 <i className={`${stat.iconClass} text-4xl text-amber-50`} />
               </div>
               <div className="text-amber-50">
@@ -31,6 +31,6 @@ export const StatsBanner = () => {
           );
         })}
       </div>
-    </div>
+    </article>
   );
 };

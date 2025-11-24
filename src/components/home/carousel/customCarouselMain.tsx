@@ -24,7 +24,11 @@ export const CustomCarouselMain = () => {
   const loading = appStore(state => state.loading);
   const error = appStore(state => state.error);
 
-  const isAdmin = user?.email === import.meta.env.VITE_FIREBASE_ADMIN_EMAIL;
+  const allowedAdminEmails: string[] = [
+    import.meta.env.VITE_FIREBASE_ADMIN_EMAIL1,
+    import.meta.env.VITE_FIREBASE_ADMIN_EMAIL2,
+  ];
+  const isAdmin = allowedAdminEmails.includes(user?.email || '');
 
   const [mouseEnterDimensions, setMouseEnterDimensions] =
     useState<boolean>(false);
@@ -60,7 +64,7 @@ export const CustomCarouselMain = () => {
   };
 
   return (
-    <div className="relative w-full">
+    <section className="relative w-full">
       {loading || dimLoading ? (
         <div className="flex h-64 items-center justify-center">
           <ClipLoader size={50} color={'#0029af'} loading={loading} />
@@ -125,6 +129,6 @@ export const CustomCarouselMain = () => {
           setAutoPlay={setAutoPlay}
         />
       )}
-    </div>
+    </section>
   );
 };

@@ -6,7 +6,13 @@ import {Link, useNavigate} from 'react-router-dom';
 
 export const TopBar = () => {
   const user = appStore(state => state.user);
-  const isAdmin = user?.email === import.meta.env.VITE_FIREBASE_ADMIN_EMAIL;
+
+  const allowedAdminEmails: string[] = [
+    import.meta.env.VITE_FIREBASE_ADMIN_EMAIL1,
+    import.meta.env.VITE_FIREBASE_ADMIN_EMAIL2,
+  ];
+  const isAdmin = allowedAdminEmails.includes(user?.email || '');
+
   const navigate = useNavigate();
 
   const [showLogoutModal, setShowLogoutModal] = useState<boolean>(false);
@@ -45,7 +51,7 @@ export const TopBar = () => {
   }, [showLogoutModal]);
 
   return (
-    <div className="bg-gray-900 px-4 py-2 text-white">
+    <div className="bg-[#360036] px-4 py-2 text-white">
       <div className="flex flex-wrap items-center justify-center sm:justify-between">
         <div>
           <p className="text-lg font-bold">
@@ -113,7 +119,7 @@ export const TopBar = () => {
                 Cancel
               </button>
               <button
-                className="cursor-pointer rounded bg-blue-700 px-4 py-2 text-sm text-white transition-transform duration-180 ease-in-out hover:bg-blue-600 active:scale-95"
+                className="cursor-pointer rounded bg-[#900090] px-4 py-2 text-sm text-white transition-transform duration-180 ease-in-out hover:bg-blue-600 active:scale-95"
                 onClick={() =>
                   setTimeout(() => {
                     handleLogout();

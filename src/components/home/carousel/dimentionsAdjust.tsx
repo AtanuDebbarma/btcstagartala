@@ -134,7 +134,7 @@ export const DimentionsAdjustForm = React.memo(
             name="objectFit"
             value={objectFit}
             onChange={handleChange}
-            className="mt-1 w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+            className="mt-1 w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-purple-500 focus:ring-purple-500">
             <option value="cover">cover</option>
             <option value="contain">contain</option>
             <option value="none">none</option>
@@ -151,7 +151,7 @@ export const DimentionsAdjustForm = React.memo(
           </button>
           <button
             onClick={handleUpdate}
-            className="rounded-md bg-blue-600 px-4 py-2 text-white hover:bg-blue-700">
+            className="rounded-md bg-[#900090] px-4 py-2 text-white hover:bg-blue-700">
             Update
           </button>
         </div>

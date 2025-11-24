@@ -20,7 +20,6 @@ export const useFetchAlerts = () => {
 
         if (isMountedRef.current) {
           await setAlerts(data);
-          console.log('Alerts fetched successfully');
         }
       } else {
         if (isMountedRef.current) {

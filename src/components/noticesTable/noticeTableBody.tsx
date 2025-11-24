@@ -24,7 +24,11 @@ export const NoticeTableBody = React.memo(
     const user = appStore(state => state.user);
     const notices = appStore(state => state.notices);
 
-    const isAdmin = user?.email === import.meta.env.VITE_FIREBASE_ADMIN_EMAIL;
+    const allowedAdminEmails: string[] = [
+      import.meta.env.VITE_FIREBASE_ADMIN_EMAIL1,
+      import.meta.env.VITE_FIREBASE_ADMIN_EMAIL2,
+    ];
+    const isAdmin = allowedAdminEmails.includes(user?.email || '');
 
     // Sort notices by createdAt (recent first)
     const sortedNotices = [...notices].sort(

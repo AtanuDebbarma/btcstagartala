@@ -166,7 +166,6 @@ export const handleNoticeEdit = async (
       setLoading(false);
       setProcessSuccess(true);
       handleUploadErrorMessage('');
-      console.log('Notices updated successfully');
       setTimeout(() => {
         setOpenModal(false);
       }, 2000);
@@ -239,7 +238,6 @@ export const handleNoticeEditNameOnly = async (
       setLoading(false);
       setProcessSuccess(true);
       handleUploadErrorMessage('');
-      console.log('Notices updated successfully');
       setTimeout(() => {
         setOpenModal(false);
       }, 2000);

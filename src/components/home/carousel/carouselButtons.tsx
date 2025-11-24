@@ -59,7 +59,7 @@ export const CarouselCounter = React.memo(
     const renderCounter = () => {
       return (
         <div className="absolute top-5 left-10 z-50 rounded bg-white/80 shadow-md">
-          <p className="px-2 py-2 text-sm font-bold text-blue-600">
+          <p className="px-2 py-2 text-sm font-bold text-[#900090]">
             {image.imageOrder + '/' + totalLength}
           </p>
         </div>

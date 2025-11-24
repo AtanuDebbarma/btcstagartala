@@ -27,7 +27,7 @@ export const NoticeSection = () => {
   );
 
   return (
-    <div className="mt-12 w-full bg-gray-100 p-4 lg:mt-20">
+    <section className="mt-12 w-full bg-gray-100 p-4 lg:mt-20">
       <div className="mx-auto max-w-7xl">
         <div className="flex flex-col gap-10 md:gap-18 lg:flex-row lg:gap-15">
           {/* Left Column: NavButtons + Accreditations */}
@@ -54,7 +54,7 @@ export const NoticeSection = () => {
           {/* Right Column: Notice Board */}
           <div className="flex w-full md:mr-[10%] md:ml-[10%] md:w-[80%] lg:mr-0 lg:ml-0">
             <div className="h-fit w-full rounded-lg border-2 border-[#0a2540] bg-white shadow-md">
-              <div className="rounded-t-sm bg-[#0a2540] px-8 py-4 text-center text-white shadow-md">
+              <div className="rounded-t-sm bg-[#3f003f] px-8 py-4 text-center text-white shadow-md">
                 <h3 className="relative inline-block text-lg font-semibold tracking-wide uppercase">
                   Notice Board
                   <span className="absolute -bottom-1 left-1/4 mt-2 h-[3px] w-1/2 rounded bg-yellow-400"></span>
@@ -68,7 +68,7 @@ export const NoticeSection = () => {
                       .map((notice: NoticeBoardType) => (
                         <div
                           key={notice.id}
-                          className="h-full w-full border-b-1 bg-gray-200 pt-4 hover:bg-gray-400">
+                          className="h-full w-full border-b bg-gray-200 pt-4 hover:bg-gray-400">
                           <NoticeItem notice={notice} />
                         </div>
                       ))
@@ -81,7 +81,7 @@ export const NoticeSection = () => {
 
                 <div className="mt-4 flex justify-end">
                   <button
-                    className="mx-auto mt-6 flex w-full cursor-pointer items-center justify-center bg-blue-100 px-6 py-2 font-semibold text-blue-800 shadow-sm transition-transform duration-180 ease-in-out hover:bg-blue-200 active:scale-95"
+                    className="mx-auto mt-6 flex w-full cursor-pointer items-center justify-center bg-purple-200 px-6 py-2 font-semibold text-purple-800 shadow-sm transition-transform duration-180 ease-in-out hover:bg-purple-300 active:scale-95"
                     onClick={handleNoticeTablePress}>
                     View All Notice
                     <svg
@@ -104,6 +104,6 @@ export const NoticeSection = () => {
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 };

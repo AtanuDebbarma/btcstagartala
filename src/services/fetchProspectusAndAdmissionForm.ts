@@ -26,7 +26,6 @@ export const useFetchProspectusAndAdmissionForm = () => {
 
         if (isMountedRef.current) {
           await setProspectusAndAdmission(data);
-          console.log('ProspectusAndAdmission fetched successfully');
         }
       } else {
         if (isMountedRef.current) {

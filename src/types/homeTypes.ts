@@ -85,3 +85,20 @@ export type AlertsType = {
   link2Url: string;
   createdAt: Timestamp | null;
 };
+
+/**
+ * Represents types for Firebase Backend SmallAboutCard.
+ */
+export type SmallAboutCardType = {
+  id: string;
+  text: string;
+  bold_footer?: string; // Optional for principal_text
+};
+
+/**
+ * Represents types for Firebase Backend SmallAboutCard Image.
+ */
+export type SmallAboutCardimageType = {
+  id: string;
+  url: string;
+};

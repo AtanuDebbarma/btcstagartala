@@ -22,15 +22,15 @@ export const AlertNameOrLink = React.memo(({isAdmin, title, id}: PROPS) => {
   const RenderNameOrLink = () => {
     if (!isAdmin) {
       return (
-        <td className="px-2 py-3 text-start font-medium break-words sm:px-4">
+        <td className="wrap-break-words px-2 py-3 text-start font-medium sm:px-4">
           {title}
         </td>
       );
     } else {
       return (
-        <td className="px-2 py-3 font-medium text-blue-600 sm:px-4">
+        <td className="px-2 py-3 font-medium text-[#900090] sm:px-4">
           <button
-            className="cursor-pointer text-start break-words underline transition-transform duration-180 ease-in-out hover:text-blue-800 active:scale-95"
+            className="wrap-break-words cursor-pointer text-start underline transition-transform duration-180 ease-in-out hover:text-purple-800 active:scale-95"
             onClick={handleClick}>
             {title}
           </button>
@@ -39,5 +39,5 @@ export const AlertNameOrLink = React.memo(({isAdmin, title, id}: PROPS) => {
     }
   };
 
-  return <RenderNameOrLink />;
+  return <>{RenderNameOrLink()}</>;
 });

@@ -23,7 +23,6 @@ export const updateCarouselDimensions = async (
     const docRef = doc(db, 'carouselDimentions', targetDoc.id);
 
     await updateDoc(docRef, updatedValues);
-    console.log('Carousel dimensions updated successfully.');
     return true;
   } catch (error) {
     console.error('Failed to update carousel dimensions:', error);

@@ -38,14 +38,12 @@ export const useCarouselDimensions = () => {
             minWidth_1024: data.minWidth_1024 ?? 480,
             objectFit: data.objectFit ?? 'cover',
           });
-          console.log('Carousel dimensions fetched successfully');
           await setDimError(false);
         }
       } else {
         if (isMountedRef.current) {
           await setDimError(false);
           await setDimensions(defaultDimValues);
-          console.log('Carousel dimensions failed');
           await setDimLoading(false);
         }
       }

@@ -51,7 +51,7 @@ export default function NewsTicker() {
   };
 
   return (
-    <div className="flex w-full items-center overflow-hidden bg-gray-300">
+    <aside className="flex w-full items-center overflow-hidden bg-gray-300">
       <button
         onClick={() => handleNavigation(RouteNames.ALERTS)}
         className="cursor-pointer bg-yellow-500 px-4 py-2 font-bold whitespace-nowrap text-black duration-200 ease-in-out active:scale-95 sm:px-8">
@@ -141,6 +141,6 @@ export default function NewsTicker() {
           </div>
         </div>
       </div>
-    </div>
+    </aside>
   );
 }

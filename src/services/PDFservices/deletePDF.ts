@@ -29,7 +29,6 @@ export const deleteDocument = async (
     // Step 2: Delete the target document
     try {
       await deleteDoc(targetDoc.ref);
-      console.log('Document deleted successfully.');
       return {firebaseSuccess: true};
     } catch (error) {
       console.error('Error deleting document:', error);

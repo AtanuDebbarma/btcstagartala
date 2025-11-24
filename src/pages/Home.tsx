@@ -8,15 +8,38 @@ import {QuickAccess} from '@/components/home/quickAccess';
 
 const Home = () => {
   return (
-    <div className="flex w-full flex-col">
-      <CustomCarouselMain />
-      <NewsTicker />
-      <QuickAccess />
-      <NoticeSection />
-      <SmallAboutCard />
-      <StatsBanner />
-      <CollegeResources />
-    </div>
+    <main className="flex w-full flex-col">
+      <section aria-label="Image Carousel">
+        <h2 className="sr-only">Featured Images</h2>
+        <CustomCarouselMain />
+      </section>
+
+      <section aria-label="News Ticker">
+        <h2 className="sr-only">Latest News</h2>
+        <NewsTicker />
+      </section>
+
+      <section aria-label="Quick Access">
+        <h2 className="sr-only">Quick Access Links</h2>
+        <QuickAccess />
+      </section>
+
+      <section aria-label="Notice Board">
+        <NoticeSection />
+      </section>
+
+      <section aria-label="About College">
+        <SmallAboutCard />
+      </section>
+
+      <section aria-label="College Statistics">
+        <StatsBanner />
+      </section>
+
+      <section aria-label="College Resources">
+        <CollegeResources />
+      </section>
+    </main>
   );
 };
 

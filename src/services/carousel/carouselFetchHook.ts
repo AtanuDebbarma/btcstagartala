@@ -26,7 +26,6 @@ export const useFetchCarouselImages = () => {
         if (isMountedRef.current) {
           await setLoading(false);
           await setCarouselImages(images);
-          console.log('Carousel images fetched successfully');
           await setError(null);
         }
       } else if (isMountedRef.current) {

@@ -61,9 +61,22 @@ export const AlertModalForm = React.memo(
     const fileInputRef = useRef<HTMLInputElement | null>(null);
     const [nameonly, setNameOnly] = useState<boolean>(false);
     const [contentOnly, setContentOnly] = useState<boolean>(false);
-    const [fileOne, setFileOne] = useState<boolean>(false);
-    const [linkOne, setLinkOne] = useState<boolean>(false);
-    const [linkTwo, setLinkTwo] = useState<boolean>(false);
+
+    // Initialize state based on mode and selectedAlert props
+    const [fileOne, setFileOne] = useState<boolean>(
+      mode === 'EDIT' &&
+        !!(
+          selectedAlert.fileURL &&
+          selectedAlert.fileName &&
+          selectedAlert.file_public_id
+        ),
+    );
+    const [linkOne, setLinkOne] = useState<boolean>(
+      mode === 'EDIT' && !!(selectedAlert.link1Url && selectedAlert.link1Name),
+    );
+    const [linkTwo, setLinkTwo] = useState<boolean>(
+      mode === 'EDIT' && !!(selectedAlert.link2Url && selectedAlert.link2Name),
+    );
 
     const isValidOne = isValidWebsiteUrl(formValues.link1Url.trim());
     const isValidTwo = isValidWebsiteUrl(formValues.link2Url.trim());
@@ -102,23 +115,7 @@ export const AlertModalForm = React.memo(
       }
     }, [tempFile]);
 
-    useEffect(() => {
-      if (mode === 'EDIT') {
-        if (
-          selectedAlert.fileURL &&
-          selectedAlert.fileName &&
-          selectedAlert.file_public_id
-        ) {
-          setFileOne(true);
-        }
-        if (selectedAlert.link1Url && selectedAlert.link1Name) {
-          setLinkOne(true);
-        }
-        if (selectedAlert.link2Url && selectedAlert.link2Name) {
-          setLinkTwo(true);
-        }
-      }
-    }, [mode, selectedAlert]);
+    // Removed useEffect - state is now initialized based on props
 
     const isDuplicate = alerts.some(
       n => n.title.trim() === formValues.title.trim(),

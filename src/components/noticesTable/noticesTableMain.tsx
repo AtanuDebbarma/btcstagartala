@@ -11,7 +11,11 @@ export const NoticesTableMain = () => {
   const user = appStore(state => state.user);
   const notices = appStore(state => state.notices);
 
-  const isAdmin = user?.email === import.meta.env.VITE_FIREBASE_ADMIN_EMAIL;
+  const allowedAdminEmails: string[] = [
+    import.meta.env.VITE_FIREBASE_ADMIN_EMAIL1,
+    import.meta.env.VITE_FIREBASE_ADMIN_EMAIL2,
+  ];
+  const isAdmin = allowedAdminEmails.includes(user?.email || '');
 
   const [openModal, setOpenModal] = useState<boolean>(false);
   const [mode, setMode] = useState<CarouselModeType>('');

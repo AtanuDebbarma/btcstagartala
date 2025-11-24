@@ -22,6 +22,14 @@ export const handleEditProspectus = async (
 ) => {
   setLoading(true);
   setProcessSuccess(false);
+  setUploading(true);
+
+  // Add timeout to prevent infinite loading
+  const timeoutId = setTimeout(() => {
+    setLoading(false);
+    setUploading(false);
+    handleUploadErrorMessage('Upload timeout. Please try again.');
+  }, 30000); // 30 second timeout
 
   try {
     if (!prospectusAndAdmission.length || !selectedPDF) {
@@ -63,6 +71,7 @@ export const handleEditProspectus = async (
     );
 
     if (!success || !asset.url) {
+      console.error('Backend upload failed:', {success, asset});
       setLoading(false);
       setUploading(false);
       setProcessSuccess(false);
@@ -83,6 +92,8 @@ export const handleEditProspectus = async (
     });
 
     if (firebaseEditSuccess) {
+      clearTimeout(timeoutId); // Clear timeout on success
+
       // ✅ Update Zustand store
       const updatedList = prospectusAndAdmission.map(item =>
         item.id === updatedFile.id ? updatedFile : item,
@@ -94,27 +105,27 @@ export const handleEditProspectus = async (
       setProcessSuccess(true);
       handleUploadErrorMessage('');
 
-      console.log('Updated prospectusAndAdmission in Zustand:');
-
       setTimeout(() => {
         setOpenModal(false);
       }, 2000);
     } else {
+      clearTimeout(timeoutId); // Clear timeout on failure
       setProcessSuccess(false);
       setLoading(false);
       setUploading(false);
       handleUploadErrorMessage(
-        'Failed to add PDF! Please check values and try again.',
+        'Failed to update Firestore! Please check connection and try again.',
       );
       return;
     }
   } catch (err) {
+    clearTimeout(timeoutId); // Clear timeout on error
     console.error('Failed to update PDF:', err);
     alert('Failed to update PDF! Please check values and try again.');
     setLoading(false);
     setUploading(false);
     setProcessSuccess(false);
-    handleUploadErrorMessage('');
+    handleUploadErrorMessage('Network error. Please try again.');
     setOpenModal(false);
   }
 };

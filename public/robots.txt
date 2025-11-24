@@ -1,0 +1,14 @@
+# robots.txt for BTCST Agartala
+
+User-agent: *
+Allow: /
+
+# Disallow admin routes
+Disallow: /admin
+Disallow: /pdf-viewer
+
+# Sitemap
+Sitemap: https://btcstagartala.org/sitemap.xml
+
+# Crawl-delay
+Crawl-delay: 1

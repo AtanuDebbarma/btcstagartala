@@ -70,7 +70,7 @@ export const UpArrowIcon = () => {
     <div className="fixed right-6 bottom-5 z-50 flex items-center justify-center sm:bottom-25 lg:bottom-5">
       <button
         onClick={scrollToTop}
-        className="relative flex h-14 w-14 cursor-pointer items-center justify-center rounded-full bg-blue-500 text-white shadow-lg transition-all duration-150 ease-in-out hover:bg-blue-600 active:scale-90"
+        className="relative flex h-14 w-14 cursor-pointer items-center justify-center rounded-full bg-[#900090] text-white shadow-lg transition-all duration-150 ease-in-out hover:bg-blue-600 active:scale-90"
         aria-label="Chat on WhatsApp">
         <div className="relative flex h-7 w-7 items-center justify-center">
           <i className="fa-solid fa-arrow-up absolute text-lg font-medium text-white"></i>

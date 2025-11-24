@@ -37,7 +37,7 @@ export const handleChange = (
  * If the login is successful, sets the `success` state to `true`.
  *
  * @param e - The mouse event triggered by the login form submission.
- * @param allowedAdminEmail - The allowed admin email address.
+ * @param allowedAdminEmails - The allowed admin email addresses.
  * @param setError - Function to update the error state.
  * @param loading - The loading state.
  * @param formData - The form data state.
@@ -48,7 +48,7 @@ export const handleChange = (
  */
 export const handleAdminLoginSubmit = async (
   e: MouseEvent<HTMLButtonElement>,
-  allowedAdminEmail: string,
+  allowedAdminEmails: string[],
   setError: Dispatch<SetStateAction<{error: string; password?: boolean}>>,
   formData: {email: string; password: string},
   setLoading: Dispatch<SetStateAction<boolean>>,
@@ -56,6 +56,7 @@ export const handleAdminLoginSubmit = async (
   navigate: NavigateFunction,
 ) => {
   e.preventDefault();
+
   if (!formData.email) {
     setError({error: '❌ Email cannot be empty!'});
     return;
@@ -65,7 +66,8 @@ export const handleAdminLoginSubmit = async (
     return;
   }
 
-  if (formData.email !== allowedAdminEmail) {
+  // MULTIPLE ADMIN CHECK
+  if (!allowedAdminEmails.includes(formData.email)) {
     setError({error: '❌ Not a registered admin!'});
     return;
   }
@@ -77,13 +79,15 @@ export const handleAdminLoginSubmit = async (
       formData.email,
       formData.password,
     );
+
     if (!userCredential) {
-      alert('❌ Error logging in!');
       setError({error: '❌ Error logging in!'});
       return;
     }
+
     setLoading(false);
     setSuccess(true);
+
     setTimeout(() => {
       setSuccess(false);
       navigate(RouteNames.HOME);
@@ -101,7 +105,7 @@ export const handleAdminLoginSubmit = async (
  * Handles a Google login event.
  *
  * @param e - The event that triggered this function.
- * @param allowedAdminEmail - The email of the admin that is allowed to login.
+ * @param allowedAdminEmails - The email of the admin that is allowed to login.
  * @param setError - A function to set the error state.
  * @param setLoading - A function to set the loading state.
  * @param setSuccess - A function to set the success state.
@@ -109,7 +113,7 @@ export const handleAdminLoginSubmit = async (
  */
 export const handleAdminGoogleLogin = async (
   e: MouseEvent<HTMLButtonElement>,
-  allowedAdminEmail: string,
+  allowedAdminEmails: string[],
   setError: Dispatch<SetStateAction<{error: string; password?: boolean}>>,
   setLoading: Dispatch<SetStateAction<boolean>>,
   setSuccess: Dispatch<SetStateAction<boolean>>,
@@ -118,21 +122,26 @@ export const handleAdminGoogleLogin = async (
   e.preventDefault();
   const provider = new GoogleAuthProvider();
   setLoading(true);
+
   try {
     const result = await signInWithPopup(auth, provider);
+
     if (!result) {
       setError({error: '❌ Error fetching data!'});
       return;
     }
-    const user = result.user;
 
-    if (!user.email || user.email !== allowedAdminEmail) {
+    const userEmail = result.user.email;
+
+    if (!userEmail || !allowedAdminEmails.includes(userEmail)) {
       setError({error: '❌ Not a registered admin!'});
       alert('❌ Not a registered admin!');
       return;
     }
+
     setLoading(false);
     setSuccess(true);
+
     setTimeout(() => {
       setSuccess(false);
       navigate(RouteNames.HOME);
@@ -140,8 +149,7 @@ export const handleAdminGoogleLogin = async (
     }, 3000);
   } catch (error: any) {
     setLoading(false);
-    console.error('❌ Google login failed:', error.message);
-    alert('Google login failed: ' + error.message);
+    alert('❌ Google login failed: ' + error.message);
   }
 };
 
@@ -152,14 +160,14 @@ export const handleAdminGoogleLogin = async (
  * Updates the loading and error states accordingly and displays alerts based on the outcome.
  *
  * @param e - The mouse event triggered by the forgot password action.
- * @param allowedAdminEmail - The allowed admin email address.
+ * @param allowedAdminEmails - The allowed admin email address.
  * @param formData - The form data state containing the email and password.
  * @param setError - Function to update the error state.
  * @param setLoading - Function to update the loading state.
  */
 export const handleAdminForgotPassword = async (
   e: MouseEvent<HTMLButtonElement>,
-  allowedAdminEmail: string,
+  allowedAdminEmails: string[],
   formData: {email: string; password: string},
   setError: Dispatch<SetStateAction<{error: string; password?: boolean}>>,
   setLoading: Dispatch<SetStateAction<boolean>>,
@@ -170,8 +178,8 @@ export const handleAdminForgotPassword = async (
     return;
   }
 
-  if (formData.email !== allowedAdminEmail) {
-    alert('❌ Not a registered admin!');
+  // MULTIPLE ADMIN CHECK
+  if (!allowedAdminEmails.includes(formData.email)) {
     setError({error: '❌ Not a registered admin!'});
     return;
   }

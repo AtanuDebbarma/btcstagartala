@@ -19,15 +19,36 @@ import {useFetchProspectusAndAdmissionForm} from './services/fetchProspectusAndA
 import NoticesPage from './pages/NoticesPage';
 import {useFetchNoticeBoard} from './services/noticeBoard/fetchNoticeBoard';
 import {useFetchAlerts} from './services/noticeBoard/fetchAlertsHook';
+import {useFetchSmallAboutCard} from './services/textServices/fetchSmallAboutCard';
 import AlertsPage from './pages/Alerts/Alerts';
 import AlertDesc from './pages/Alerts/AlertDesc';
 import {ProtectedRoute} from './ProtectedRoute';
 import PrincipalMESSAGE from './pages/PrincipalMessage';
 import Faculty from './pages/Faculty/Faculty';
 import {
+  GuestFaculty,
   NonTeacthingStaff,
   PermanentFaculty,
 } from './components/faculty/permanentFaculty';
+import AboutPage from './pages/About';
+import AcademicsPage from './pages/AcademicsPage';
+import GalleryPage from './pages/GalleryPage';
+import {useFetchCollegeResources} from './services/collegeResources/fetchCollegeResources';
+
+// Placeholder component for routes without content yet
+const PlaceholderPage = ({title}: {title: string}) => {
+  return (
+    <div className="flex min-h-screen flex-col items-center justify-center bg-gray-50 px-4">
+      <div className="text-center">
+        <h1 className="mb-4 text-4xl font-bold text-gray-800">{title}</h1>
+        <p className="mb-8 text-lg text-gray-600">
+          This page is under construction.
+        </p>
+        <p className="text-gray-500">Content will be added soon.</p>
+      </div>
+    </div>
+  );
+};
 
 const Routing = () => {
   const [floatingIconVisible, setFloatingIconVisible] = useState<boolean>(true);
@@ -37,6 +58,8 @@ const Routing = () => {
   useFetchProspectusAndAdmissionForm(); //Fetch prospectus and admission form
   useFetchNoticeBoard(); //Fetch notice board
   useFetchAlerts(); //Fetch alerts
+  useFetchSmallAboutCard(); //Fetch small about card
+  useFetchCollegeResources(); //Fetch college resources
 
   return (
     <Router>
@@ -66,45 +89,116 @@ const RoutesWrapper = ({
       {!isPdfViewer && (
         <CollegeNavbar setFloatingIconVisible={setFloatingIconVisible} />
       )}
+      <main>
+        <Routes>
+          <Route path={RouteNames.DEFAULT} element={<Home />} />
+          <Route path={RouteNames.HOME} element={<Home />} />
+          <Route path={RouteNames.ABOUT} element={<AboutPage />} />
+          <Route path={RouteNames.CONTACT} element={<Contact />} />
+          <Route path={RouteNames.ACADEMICS} element={<AcademicsPage />} />
+          <Route path={RouteNames.GALLERY} element={<GalleryPage />} />
+          <Route
+            path={RouteNames.PRINCIPAL_MESSAGE}
+            element={<PrincipalMESSAGE />}
+          />
+          <Route path={RouteNames.FACULTY} element={<Faculty />} />
+          <Route
+            path={`${RouteNames.FACULTY}/permanent-faculty`}
+            element={<PermanentFaculty />}
+          />
+          <Route
+            path={`${RouteNames.FACULTY}/non-teaching-staffs`}
+            element={<NonTeacthingStaff />}
+          />
+          <Route
+            path={`${RouteNames.FACULTY}/guest-faculty`}
+            element={<GuestFaculty />}
+          />
+          <Route
+            path={RouteNames.ADMIN}
+            element={
+              <ProtectedRoute>
+                <AdminLoginForm />
+              </ProtectedRoute>
+            }
+          />
+          <Route path="/pdf-viewer" element={<PdfIframe />} />
+          <Route path={RouteNames.NOTICE_BOARD} element={<NoticesPage />} />
+          <Route path={RouteNames.ALERTS} element={<AlertsPage />} />
+          <Route
+            path={`${RouteNames.ALERTS}/:id/:title`}
+            element={<AlertDesc />}
+          />
 
-      <Routes>
-        <Route path={RouteNames.DEFAULT} element={<Home />} />
-        <Route path={RouteNames.HOME} element={<Home />} />
-        <Route path={RouteNames.CONTACT} element={<Contact />} />
-        <Route
-          path={RouteNames.PRINCIPAL_MESSAGE}
-          element={<PrincipalMESSAGE />}
-        />
-        <Route path={RouteNames.FACULTY} element={<Faculty />} />
-        <Route
-          path={`${RouteNames.FACULTY}/permanent-faculty`}
-          element={<PermanentFaculty />}
-        />
-        <Route
-          path={`${RouteNames.FACULTY}/non-teaching-staffs`}
-          element={<NonTeacthingStaff />}
-        />
-        <Route
-          path={`${RouteNames.FACULTY}/guest-faculty`}
-          element={<Faculty />}
-        />
-        <Route
-          path={RouteNames.ADMIN}
-          element={
-            <ProtectedRoute>
-              <AdminLoginForm />
-            </ProtectedRoute>
-          }
-        />
-        <Route path="/pdf-viewer" element={<PdfIframe />} />
-        <Route path={RouteNames.NOTICE_BOARD} element={<NoticesPage />} />
-        <Route path={RouteNames.ALERTS} element={<AlertsPage />} />
-        <Route
-          path={`${RouteNames.ALERTS}/:id/:title`}
-          element={<AlertDesc />}
-        />
-      </Routes>
+          {/* Navbar Placeholder Routes */}
+          <Route
+            path={RouteNames.ACTIVITIES}
+            element={<PlaceholderPage title="Activities" />}
+          />
+          <Route
+            path={RouteNames.RULES_REGULATIONS}
+            element={<PlaceholderPage title="Rules & Regulations" />}
+          />
+          <Route
+            path={RouteNames.FEE_STRUCTURE}
+            element={<PlaceholderPage title="Fee Structure" />}
+          />
+          <Route
+            path={RouteNames.ADMISSION_ELIGIBILITY}
+            element={<PlaceholderPage title="Admission Eligibility" />}
+          />
+          <Route
+            path={RouteNames.FUTURE_PROGRAMMES}
+            element={<PlaceholderPage title="Future Programmes" />}
+          />
+          <Route
+            path={RouteNames.STUDENT_UNIFORM}
+            element={<PlaceholderPage title="Student Uniform" />}
+          />
+          <Route
+            path={RouteNames.RESULT}
+            element={<PlaceholderPage title="Result" />}
+          />
+          <Route
+            path={RouteNames.ACADEMIC_PERFORMANCE}
+            element={<PlaceholderPage title="Academic Performance" />}
+          />
 
+          {/* Quick Access Placeholder Routes */}
+          <Route
+            path={RouteNames.IQAC}
+            element={<PlaceholderPage title="IQAC" />}
+          />
+          <Route
+            path={RouteNames.COMMITTEE_CELLS}
+            element={<PlaceholderPage title="Committee & Cells" />}
+          />
+          <Route
+            path={RouteNames.SSR}
+            element={<PlaceholderPage title="SSR" />}
+          />
+          <Route
+            path={RouteNames.ACADEMIC_CALENDAR}
+            element={<PlaceholderPage title="Academic Calendar" />}
+          />
+          <Route
+            path={RouteNames.NAAC}
+            element={<PlaceholderPage title="NAAC" />}
+          />
+          <Route
+            path={RouteNames.MISC_DOCUMENTS}
+            element={<PlaceholderPage title="Misc Documents" />}
+          />
+          <Route
+            path={RouteNames.HELP_DESK}
+            element={<PlaceholderPage title="Help Desk" />}
+          />
+          <Route
+            path={RouteNames.AQAR}
+            element={<PlaceholderPage title="AQAR" />}
+          />
+        </Routes>
+      </main>
       {/* Conditionally render the footer */}
       {!isPdfViewer && <Footer />}
 

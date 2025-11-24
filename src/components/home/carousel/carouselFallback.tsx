@@ -43,9 +43,9 @@ export const CarouselFallback = React.memo(
             onMouseEnter={() => setMouseEnterDimensions(true)}
             onMouseLeave={() => setMouseEnterDimensions(false)}
             onClick={() => handleModal('', 'DIM', 0, '', '', null)}
-            className="absolute top-5 right-10 z-50 cursor-pointer rounded bg-white/80 shadow-md transition-all duration-200 hover:bg-white hover:text-blue-800 focus:outline-none active:scale-90 active:bg-white/90"
+            className="absolute top-5 right-10 z-50 cursor-pointer rounded bg-white/80 pr-2.5 shadow-md transition-all duration-200 hover:bg-white hover:text-purple-800 focus:outline-none active:scale-90 active:bg-white/90"
             title="Adjust dimensions">
-            <i className="fa-solid fa-expand text-md px-2 py-2 font-bold text-blue-600" />
+            <i className="fa-solid fa-expand text-md px-2 py-2 font-bold text-[#900090]" />
           </button>
         )}
         {isAdmin && carouselImages && carouselImages.length === 0 && (

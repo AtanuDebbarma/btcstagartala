@@ -68,10 +68,10 @@ export const EditProspectusForm = ({
   const handleOnEdit = () => {
     setOnHoverProspectus(false);
     setOnHoverAdmission(false);
-    if (totalCount > 2) {
+    if (totalCount > 5) {
       setUploading(false);
       setLoading(false);
-      setUploadError('Maximum Limit');
+      setUploadError('Maximum 5 documents allowed');
       setOnHoverProspectus(false);
       setOnHoverAdmission(false);
       return;
@@ -165,7 +165,7 @@ export const EditProspectusForm = ({
         </button>
         <button
           onClick={handleOnEdit}
-          className="cursor-pointer rounded-md bg-blue-600 px-4 py-2 text-white transition-transform duration-180 ease-in-out hover:bg-blue-500 active:scale-95">
+          className="cursor-pointer rounded-md bg-[#900090] px-4 py-2 text-white transition-transform duration-180 ease-in-out hover:bg-purple-800 active:scale-95">
           Update
         </button>
       </div>

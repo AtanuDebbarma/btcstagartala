@@ -47,12 +47,12 @@ export const NoticeButtons = React.memo(({notice, setDownloading}: PROPS) => {
         <div className="flex justify-center gap-2">
           <button
             onClick={handleClick}
-            className="cursor-pointer rounded bg-blue-500 p-2 text-white transition-transform duration-180 ease-in-out active:scale-95">
+            className="cursor-pointer rounded bg-[#900090] p-2 text-white transition-transform duration-180 ease-in-out active:scale-95">
             <i className="fa-solid fa-eye"></i>
           </button>
           <button
             onClick={handleDownloadClick}
-            className="cursor-pointer rounded border border-blue-500 p-2 text-blue-500 transition-transform duration-180 ease-in-out active:scale-95">
+            className="cursor-pointer rounded border border-[#900090] p-2 text-[#900090] transition-transform duration-180 ease-in-out active:scale-95">
             <i className="fa-solid fa-download"></i>
           </button>
         </div>

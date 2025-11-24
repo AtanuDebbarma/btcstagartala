@@ -26,17 +26,20 @@ const CollegeNavbar = ({
   }, []);
 
   return (
-    <div className="flex w-full flex-col font-sans">
+    <header className="flex w-full flex-col font-sans">
       <div ref={topRef}>
         <TopBar />
         <LogoSection />
       </div>
 
       <nav
-        className={`z-50 flex items-start justify-start bg-blue-600 px-4 py-1 text-white transition-all duration-300 md:items-center md:justify-center ${
+        aria-label="Main navigation"
+        className={`z-50 flex items-start justify-start bg-[#900090] px-4 py-1 text-white transition-all duration-300 md:items-center md:justify-center ${
           isSticky ? 'fixed top-0 right-0 left-0 shadow-md' : ''
         }`}>
         <button
+          aria-label="Open navigation menu"
+          aria-expanded={menuOpen}
           className="text-white transition-transform duration-180 ease-in-out focus:outline-none active:scale-95 md:hidden"
           onClick={() => {
             setTimeout(() => {
@@ -44,16 +47,16 @@ const CollegeNavbar = ({
               setMenuOpen(true);
             }, 200);
           }}>
-          <i className="fa-solid fa-bars text-xl"></i>
+          <i className="fa-solid fa-bars text-xl" aria-hidden="true"></i>
         </button>
         <NavLinks />
       </nav>
 
       {/* Push content down when nav is sticky */}
-      {isSticky && <div className="h-[60px] md:h-[48px]" />}
+      {isSticky && <div className="h-[60px] md:h-12" />}
 
       {menuOpen && <MobileMenu setMenuOpen={setMenuOpen} />}
-    </div>
+    </header>
   );
 };
 

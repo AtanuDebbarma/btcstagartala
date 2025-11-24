@@ -10,7 +10,13 @@ export const ProspectusButtons = () => {
   const prospectusAndAdmission: ProspectusAndAdmissionFormType[] | [] =
     appStore(state => state.prospectusAndAdmission);
   const user = appStore(state => state.user);
-  const isAdmin = user?.email === import.meta.env.VITE_FIREBASE_ADMIN_EMAIL;
+
+  const allowedAdminEmails: string[] = [
+    import.meta.env.VITE_FIREBASE_ADMIN_EMAIL1,
+    import.meta.env.VITE_FIREBASE_ADMIN_EMAIL2,
+  ];
+  const isAdmin = allowedAdminEmails.includes(user?.email || '');
+
   const [openModal, setOpenModal] = useState<boolean>(false);
   const [onHoverProspectus, setOnHoverProspectus] = useState<boolean>(false);
   const [onHoverAdmission, setOnHoverAdmission] = useState<boolean>(false);
@@ -115,7 +121,7 @@ export const ProspectusButtons = () => {
 
   return (
     <div className="flex flex-col gap-5 md:flex-row md:gap-20 lg:gap-18 xl:gap-40">
-      <RenderProspectus />
+      {RenderProspectus()}
       {openModal && isAdmin && (
         <ProspectusModal
           openModal={openModal}

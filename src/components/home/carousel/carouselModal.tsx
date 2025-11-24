@@ -53,7 +53,8 @@ export const CarouselModal = React.memo(
       return () => {
         document.removeEventListener('mousedown', handleClickOutside);
       };
-    }, [openModal, loading, uploading, setOpenModal, setAutoPlay]);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [openModal, loading, uploading]); // setOpenModal and setAutoPlay are stable
 
     const handleClose = () => {
       if (loading || uploading) {

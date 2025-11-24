@@ -6,6 +6,7 @@ export const RouteNames = {
   ACADEMICS: '/academics',
   ACTIVITIES: '/activities',
   CONTACT: '/contact',
+  GALLERY: '/gallery',
   PRINCIPAL_MESSAGE: '/principal-message',
   RULES_REGULATIONS: '/rules-regulations',
   FEE_STRUCTURE: '/fee-structure',
@@ -17,6 +18,15 @@ export const RouteNames = {
   ACADEMIC_PERFORMANCE: '/academic-performance',
   NOTICE_BOARD: '/notice-board',
   ALERTS: '/alerts',
+  // Quick Access Routes
+  IQAC: '/iqac',
+  COMMITTEE_CELLS: '/committee-cells',
+  SSR: '/ssr',
+  ACADEMIC_CALENDAR: '/academic-calendar',
+  NAAC: '/naac',
+  MISC_DOCUMENTS: '/misc-documents',
+  HELP_DESK: '/help-desk',
+  AQAR: '/aqar',
 } as const;
 
 export type RouteNamesType = (typeof RouteNames)[keyof typeof RouteNames];

@@ -20,7 +20,6 @@ export const useFetchNoticeBoard = () => {
 
         if (isMountedRef.current) {
           await setNotices(data);
-          console.log('NoticeBoard fetched successfully');
         }
       } else {
         if (isMountedRef.current) {

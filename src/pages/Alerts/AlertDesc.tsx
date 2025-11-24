@@ -1,23 +1,30 @@
 import {appStore} from '@/appStore/appStore';
-import {AlertsType} from '@/types/homeTypes';
 import {convertFirebaseTimestampToDate} from '@/utils/dateTransform';
-import React, {useEffect, useState} from 'react';
-import {useParams, Link, useNavigate} from 'react-router-dom';
+import React from 'react';
+import {useParams, useNavigate} from 'react-router-dom';
+import {RouteNames} from '@/constants/routeNames';
 
 const AlertDesc: React.FC = () => {
   const {id} = useParams<{id: string; title: string}>();
   const alerts = appStore(state => state.alerts);
-  const [alertData, setAlertData] = useState<AlertsType | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
   const navigation = useNavigate();
 
-  useEffect(() => {
+  const handleBackToAlerts = () => {
+    setTimeout(() => {
+      navigation(RouteNames.ALERTS);
+      scrollTo(0, 0);
+    }, 200);
+  };
+
+  // Derive alertData directly from alerts instead of using state
+  const alertData = React.useMemo(() => {
     if (id && alerts) {
-      const foundAlert = alerts.find(alert => alert.id === id);
-      setAlertData(foundAlert || null);
+      return alerts.find(alert => alert.id === id) || null;
     }
-    setLoading(false);
+    return null;
   }, [id, alerts]);
+
+  const loading = !alerts; // Loading if alerts haven't been fetched yet
 
   if (loading) {
     return (
@@ -31,9 +38,11 @@ const AlertDesc: React.FC = () => {
     return (
       <div className="flex min-h-screen flex-col items-center justify-center">
         <h1 className="text-2xl font-bold text-red-600">Alert not found</h1>
-        <Link to="/alerts" className="mt-4 text-blue-600 hover:underline">
+        <button
+          onClick={handleBackToAlerts}
+          className="mt-4 cursor-pointer text-blue-600 hover:underline">
           Back to Alerts
-        </Link>
+        </button>
       </div>
     );
   }
@@ -189,9 +198,9 @@ const AlertDesc: React.FC = () => {
 
       {/* Back Button */}
       <div className="mt-8">
-        <Link
-          to="/alerts"
-          className="inline-flex items-center rounded-md bg-blue-600 px-4 py-2 text-white transition-colors hover:bg-blue-700">
+        <button
+          onClick={handleBackToAlerts}
+          className="inline-flex cursor-pointer items-center rounded-md bg-blue-600 px-4 py-2 text-white transition-colors hover:bg-blue-700">
           <svg
             className="mr-2 h-5 w-5"
             fill="none"
@@ -205,7 +214,7 @@ const AlertDesc: React.FC = () => {
               d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
           </svg>
           Back to Alerts
-        </Link>
+        </button>
       </div>
     </div>
   );

@@ -18,7 +18,7 @@ export const LoadingModal = ({
             <ClipLoader
               className="mt-5"
               size={30}
-              color="#1a3bdf"
+              color="#630063"
               loading={loading}
             />
           </div>

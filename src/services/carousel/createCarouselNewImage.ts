@@ -35,9 +35,6 @@ export const addCarouselImage = async (
     );
 
     const snapshot = await getDocs(q);
-    if (snapshot.empty) {
-      console.log('No existing images — first image being added');
-    }
 
     const batch = writeBatch(db);
 

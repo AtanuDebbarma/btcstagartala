@@ -1,5 +1,6 @@
 import {AlertsType, CarouselModeType} from '@/types/homeTypes';
 import {Timestamp} from 'firebase/firestore';
+import {createButtonConfig} from '../shared/genericButtonConfig';
 
 export const getAlertBtnsConfig = (
   alert: AlertsType,
@@ -17,55 +18,37 @@ export const getAlertBtnsConfig = (
     link2Url: string,
     createdAt: Timestamp | null,
   ) => void,
-) => [
-  {
-    title: 'EDIT' as const,
-    iconClass: 'fa-solid fa-pen' as const,
-    iconColor: 'text-blue-600',
-    hoverColor: 'hover:text-blue-800',
-    onClick: () =>
-      handleModal(
-        'EDIT',
-        alert.id,
-        alert.title,
-        alert.content,
-        alert.fileName,
-        alert.fileURL,
-        alert.file_public_id,
-        alert.link1Name,
-        alert.link1Url,
-        alert.link2Name,
-        alert.link2Url,
-        alert.createdAt,
-      ),
-  },
-  {
-    title: 'DELETE' as const,
-    iconClass: 'fa-solid fa-trash' as const,
-    iconColor: 'text-red-600',
-    hoverColor: 'hover:text-red-800',
-    onClick: () =>
-      handleModal(
-        'DELETE',
-        alert.id,
-        alert.title,
-        alert.content,
-        alert.fileName,
-        alert.fileURL,
-        alert.file_public_id,
-        alert.link1Name,
-        alert.link1Url,
-        alert.link2Name,
-        alert.link2Url,
-        alert.createdAt,
-      ),
-  },
-  {
-    title: 'ADD' as const,
-    iconClass: 'fa-solid fa-plus' as const,
-    iconColor: 'text-green-600',
-    hoverColor: 'hover:text-green-800',
-    onClick: () =>
-      handleModal('ADD', '', '', '', '', '', '', '', '', '', '', null),
-  },
-];
+) =>
+  createButtonConfig(
+    alert,
+    handleModal,
+    item => [
+      'EDIT',
+      item.id,
+      item.title,
+      item.content,
+      item.fileName,
+      item.fileURL,
+      item.file_public_id,
+      item.link1Name,
+      item.link1Url,
+      item.link2Name,
+      item.link2Url,
+      item.createdAt,
+    ],
+    item => [
+      'DELETE',
+      item.id,
+      item.title,
+      item.content,
+      item.fileName,
+      item.fileURL,
+      item.file_public_id,
+      item.link1Name,
+      item.link1Url,
+      item.link2Name,
+      item.link2Url,
+      item.createdAt,
+    ],
+    () => ['ADD', '', '', '', '', '', '', '', '', '', '', null],
+  );

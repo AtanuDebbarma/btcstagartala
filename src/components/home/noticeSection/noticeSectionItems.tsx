@@ -19,7 +19,7 @@ export const NoticeItem = React.memo(({notice}: {notice: NoticeBoardType}) => {
       className="group mb-4 grid h-full w-full cursor-pointer grid-cols-1 gap-2 border-gray-200 px-4 pb-4 transition-transform duration-180 ease-in-out last:border-0 active:scale-95 sm:grid-cols-12">
       {/* Notice Name (takes 8/12 cols on sm+) */}
       <div className="sm:col-span-8">
-        <p className="break-words text-gray-800 transition-colors duration-180 ease-in-out group-hover:text-blue-800 group-hover:underline">
+        <p className="wrap-break-words text-gray-800 transition-colors duration-180 ease-in-out group-hover:text-blue-800 group-hover:underline">
           {notice.name}
         </p>
       </div>
@@ -48,7 +48,7 @@ export const NavButton = React.memo(({text, url}: Props) => {
       onClick={handleClick}
       className="w-full min-w-[250px] cursor-pointer transition-transform duration-180 ease-in-out focus:outline-none active:scale-95">
       <div
-        className={`rounded-sm bg-[#0a2540] px-4 py-4 text-center text-white shadow-md`}>
+        className={`rounded-sm bg-[#3f003f] px-4 py-4 text-center text-white shadow-md`}>
         <h3 className="relative inline-block text-lg font-semibold tracking-wide text-nowrap uppercase">
           {text}
           <span className="absolute -bottom-1 left-1/4 mt-2 h-[3px] w-1/2 rounded bg-yellow-400"></span>
@@ -70,7 +70,7 @@ export const AccreditationCard = React.memo(
   }) => {
     if (isMoreButton) {
       return (
-        <div className="flex min-h-[30px] flex-row items-center justify-center rounded-md bg-blue-500 p-3 text-white shadow md:min-h-[150px]">
+        <div className="flex min-h-[30px] flex-row items-center justify-center rounded-md bg-[#900090] p-3 text-white shadow md:min-h-[150px]">
           <p className="mb-1 text-sm font-semibold">More Accreditations</p>
           <svg
             xmlns="http://www.w3.org/2000/svg"

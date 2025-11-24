@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  
+  <!-- Homepage -->
+  <url>
+    <loc>https://btcstagartala.org/</loc>
+    <lastmod>2024-11-24</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <!-- About Page -->
+  <url>
+    <loc>https://btcstagartala.org/about</loc>
+    <lastmod>2024-11-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  
+  <!-- Academics Page -->
+  <url>
+    <loc>https://btcstagartala.org/academics</loc>
+    <lastmod>2024-11-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  
+  <!-- Faculty Page -->
+  <url>
+    <loc>https://btcstagartala.org/faculty</loc>
+    <lastmod>2024-11-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- Faculty - Permanent -->
+  <url>
+    <loc>https://btcstagartala.org/faculty/permanent-faculty</loc>
+    <lastmod>2024-11-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <!-- Faculty - Guest -->
+  <url>
+    <loc>https://btcstagartala.org/faculty/guest-faculty</loc>
+    <lastmod>2024-11-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <!-- Faculty - Non-Teaching -->
+  <url>
+    <loc>https://btcstagartala.org/faculty/non-teaching-staffs</loc>
+    <lastmod>2024-11-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <!-- Gallery Page -->
+  <url>
+    <loc>https://btcstagartala.org/gallery</loc>
+    <lastmod>2024-11-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- Contact Page -->
+  <url>
+    <loc>https://btcstagartala.org/contact</loc>
+    <lastmod>2024-11-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- Notice Board -->
+  <url>
+    <loc>https://btcstagartala.org/notice-board</loc>
+    <lastmod>2024-11-24</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+  
+  <!-- Alerts -->
+  <url>
+    <loc>https://btcstagartala.org/alerts</loc>
+    <lastmod>2024-11-24</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+  
+  <!-- Principal's Message -->
+  <url>
+    <loc>https://btcstagartala.org/principal-message</loc>
+    <lastmod>2024-11-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- Activities -->
+  <url>
+    <loc>https://btcstagartala.org/activities</loc>
+    <lastmod>2024-11-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <!-- Student Uniform -->
+  <url>
+    <loc>https://btcstagartala.org/student-uniform</loc>
+    <lastmod>2024-11-24</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <!-- Rules & Regulations -->
+  <url>
+    <loc>https://btcstagartala.org/rules-regulations</loc>
+    <lastmod>2024-11-24</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <!-- Fee Structure -->
+  <url>
+    <loc>https://btcstagartala.org/fee-structure</loc>
+    <lastmod>2024-11-24</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- Admission Eligibility -->
+  <url>
+    <loc>https://btcstagartala.org/admission-eligibility</loc>
+    <lastmod>2024-11-24</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- IQAC -->
+  <url>
+    <loc>https://btcstagartala.org/iqac</loc>
+    <lastmod>2024-11-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <!-- NAAC -->
+  <url>
+    <loc>https://btcstagartala.org/naac</loc>
+    <lastmod>2024-11-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+</urlset>
