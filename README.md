@@ -436,7 +436,7 @@ See [LICENSE](LICENSE) file for details.
 
 ## 👥 Team
 
-Developed and maintained by the BTCST Web Development Team.
+Developed and maintained by Author. Administrated by [Bhavan's Tripura College of Science & Technology](https://btcstagartala.org).
 
 ---
 
