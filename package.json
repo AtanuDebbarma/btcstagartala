@@ -3,6 +3,15 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "author": {
+    "name": "Atanu Debbarma",
+    "url": "https://github.com/AtanuDebbarma"
+  },
+  "license": "PROPRIETARY",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AtanuDebbarma/btcstagartala"
+  },
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",

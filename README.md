@@ -30,6 +30,7 @@ Official website for **Bhavan's Tripura College of Science & Technology**, affil
 ## ✨ Features
 
 ### **Public Features**
+
 - 🏠 **Dynamic Homepage** with carousel, news ticker, and quick access
 - 📢 **Notice Board** with real-time updates
 - 🚨 **Alerts System** with detailed descriptions
@@ -42,6 +43,7 @@ Official website for **Bhavan's Tripura College of Science & Technology**, affil
 - 📱 **Fully Responsive** design
 
 ### **Admin Features** (Authentication Required)
+
 - 🔐 **Firebase Authentication** with email/password
 - 🖼️ **Carousel Management** (Add/Edit/Delete images)
 - 📋 **Notice Board Management** (Add/Edit/Delete PDFs)
@@ -56,6 +58,7 @@ Official website for **Bhavan's Tripura College of Science & Technology**, affil
 ## 🛠️ Tech Stack
 
 ### **Frontend**
+
 - **React 19.2.0** - UI library
 - **TypeScript 5.9.3** - Type safety
 - **Vite 7.2.4** - Build tool & dev server
@@ -65,6 +68,7 @@ Official website for **Bhavan's Tripura College of Science & Technology**, affil
 - **Firebase 12.6.0** - Authentication & Firestore database
 
 ### **Additional Libraries**
+
 - **React Multi Carousel** - Image carousels
 - **React CountUp** - Animated counters
 - **React Spinners** - Loading indicators
@@ -72,6 +76,7 @@ Official website for **Bhavan's Tripura College of Science & Technology**, affil
 - **UUID** - Unique ID generation
 
 ### **Development Tools**
+
 - **ESLint** - Code linting
 - **Prettier** - Code formatting
 - **TypeScript ESLint** - TypeScript linting
@@ -250,15 +255,15 @@ Admins must log in with authorized email addresses (configured in `.env.local`).
 
 ### **Admin Capabilities**
 
-| Feature | Add | Edit | Delete |
-|---------|-----|------|--------|
-| Carousel Images | ✅ | ✅ | ✅ |
-| Notice Board | ✅ | ✅ | ✅ |
-| Alerts | ✅ | ✅ | ✅ |
-| Gallery Images | ✅ | ✅ | ✅ |
-| College Resources | ❌ | ✅ | ❌ |
-| About Card Text | ❌ | ✅ | ❌ |
-| About Card Image | ❌ | ✅ | ❌ |
+| Feature           | Add | Edit | Delete |
+| ----------------- | --- | ---- | ------ |
+| Carousel Images   | ✅  | ✅   | ✅     |
+| Notice Board      | ✅  | ✅   | ✅     |
+| Alerts            | ✅  | ✅   | ✅     |
+| Gallery Images    | ✅  | ✅   | ✅     |
+| College Resources | ❌  | ✅   | ❌     |
+| About Card Text   | ❌  | ✅   | ❌     |
+| About Card Image  | ❌  | ✅   | ❌     |
 
 ### **Admin UI Features**
 
@@ -276,6 +281,7 @@ Admins must log in with authorized email addresses (configured in `.env.local`).
 ### **Netlify Deployment**
 
 1. Build the project:
+
    ```bash
    npm run build
    ```
@@ -292,6 +298,7 @@ Admins must log in with authorized email addresses (configured in `.env.local`).
 ### **Other Platforms**
 
 The app can be deployed to:
+
 - **Vercel**
 - **Firebase Hosting**
 - **AWS Amplify**
@@ -301,13 +308,13 @@ The app can be deployed to:
 
 ## 📜 Scripts
 
-| Command | Description |
-|---------|-------------|
-| `npm run dev` | Start development server |
-| `npm run build` | Build for production |
-| `npm run preview` | Preview production build |
-| `npm run lint` | Run ESLint |
-| `npm run format` | Format code with Prettier |
+| Command           | Description               |
+| ----------------- | ------------------------- |
+| `npm run dev`     | Start development server  |
+| `npm run build`   | Build for production      |
+| `npm run preview` | Preview production build  |
+| `npm run lint`    | Run ESLint                |
+| `npm run format`  | Format code with Prettier |
 
 ---
 
@@ -346,17 +353,20 @@ The app can be deployed to:
 ## 🔧 Configuration Files
 
 ### **Tailwind Config** (`tailwind.config.ts`)
+
 - Custom colors
 - Custom fonts
 - Responsive breakpoints
 - Plugin configurations
 
 ### **TypeScript Config** (`tsconfig.json`)
+
 - Path aliases (`@/`)
 - Strict mode enabled
 - React JSX support
 
 ### **Vite Config** (`vite.config.ts`)
+
 - React SWC plugin
 - Path resolution
 - Build optimizations
@@ -410,6 +420,18 @@ The app can be deployed to:
 
 This project is proprietary and confidential. All rights reserved by Bhavan's Tripura College of Science & Technology.
 
+**Copyright © 2025 Bhavan's Tripura College of Science & Technology. All Rights Reserved.**
+
+See [LICENSE](LICENSE) file for details.
+
+---
+
+## 👨‍💻 Author
+
+**Atanu Debbarma**
+
+- GitHub: [@AtanuDebbarma](https://github.com/AtanuDebbarma)
+
 ---
 
 ## 👥 Team
@@ -421,6 +443,7 @@ Developed and maintained by the BTCST Web Development Team.
 ## 📞 Support
 
 For issues or questions:
+
 - **Email**: contact@btcstagartala.org
 - **Website**: [btcstagartala.org](https://btcstagartala.org)
 
