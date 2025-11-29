@@ -3,7 +3,6 @@ import {appStore} from '@/appStore/appStore';
 import {GalleryImageType} from '@/types/galleryTypes';
 import {GalleryModal} from '@/components/gallery/galleryModal';
 import {AdminInteractionBtns} from '@/appComponents/adminInteractionBtns';
-import {convertFirebaseTimestampToDate} from '@/utils/dateTransform';
 import {
   fetchPage,
   fetchPageWithCursor,
@@ -267,13 +266,6 @@ export default function GalleryPage(): React.JSX.Element {
                         className={`text-center text-sm font-medium text-gray-700 sm:text-base ${isAdmin ? 'hover:text-purple-800 hover:underline' : ''}`}>
                         {image.title}
                       </p>
-                      {image.createdAt && (
-                        <time
-                          dateTime={image.createdAt.toDate().toISOString()}
-                          className="block pt-2 text-center text-xs text-gray-600">
-                          {convertFirebaseTimestampToDate(image.createdAt)}
-                        </time>
-                      )}
                     </figcaption>
                   </figure>
                 </article>

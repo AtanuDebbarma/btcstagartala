@@ -23,9 +23,6 @@ export const AddGalleryForm = ({
   const [uploadError, setUploadError] = useState<string>('');
   const [url, setUrl] = useState<string>('');
   const [title, setTitle] = useState<string>('');
-  const [date, setDate] = useState<string>(
-    new Date().toISOString().split('T')[0],
-  );
 
   const handleOnAdd = () => {
     if (totalCount >= 200) {
@@ -48,19 +45,12 @@ export const AddGalleryForm = ({
       setUploadError('Please enter an image title!');
       return;
     }
-    if (!date) {
-      setUploading(false);
-      setLoading(false);
-      setUploadError('Please select a date!');
-      return;
-    }
     setTimeout(() => {
       handleAddGalleryImage(
         setOpenModal,
         setLoading,
         url,
         title,
-        date,
         setUploading,
         handleUploadErrorMessage,
         setProcessSuccess,
@@ -75,7 +65,6 @@ export const AddGalleryForm = ({
     }
     setUrl('');
     setTitle('');
-    setDate(new Date().toISOString().split('T')[0]);
     setTimeout(() => {
       setOpenModal(false);
     }, 200);
@@ -108,17 +97,6 @@ export const AddGalleryForm = ({
           value={url}
           onChange={e => setUrl(e.target.value)}
           placeholder="Enter image URL"
-          disabled={uploading}
-          className="mt-1 w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-        />
-
-        <label className="mt-2 block text-sm font-medium text-gray-700">
-          Date
-        </label>
-        <input
-          type="date"
-          value={date}
-          onChange={e => setDate(e.target.value)}
           disabled={uploading}
           className="mt-1 w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:ring-blue-500"
         />

@@ -24,13 +24,6 @@ export const EditGalleryForm = ({
   const [uploadError, setUploadError] = useState<string>('');
   const [url, setUrl] = useState<string>(selectedImage?.url || '');
   const [title, setTitle] = useState<string>(selectedImage?.title || '');
-  const [date, setDate] = useState<string>(() => {
-    if (selectedImage?.createdAt) {
-      const timestamp = selectedImage.createdAt.toDate();
-      return timestamp.toISOString().split('T')[0];
-    }
-    return new Date().toISOString().split('T')[0];
-  });
 
   const handleOnEdit = () => {
     if (!url.trim()) {
@@ -45,12 +38,6 @@ export const EditGalleryForm = ({
       setUploadError('Please enter an image title!');
       return;
     }
-    if (!date) {
-      setUploading(false);
-      setLoading(false);
-      setUploadError('Please select a date!');
-      return;
-    }
     setTimeout(() => {
       handleEditGalleryImage(
         setOpenModal,
@@ -58,7 +45,6 @@ export const EditGalleryForm = ({
         setLoading,
         url,
         title,
-        date,
         setUploading,
         handleUploadErrorMessage,
         setProcessSuccess,
@@ -102,17 +88,6 @@ export const EditGalleryForm = ({
           value={url}
           onChange={e => setUrl(e.target.value)}
           placeholder="Enter image URL"
-          disabled={uploading}
-          className="mt-1 w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-        />
-
-        <label className="mt-2 block text-sm font-medium text-gray-700">
-          Date
-        </label>
-        <input
-          type="date"
-          value={date}
-          onChange={e => setDate(e.target.value)}
           disabled={uploading}
           className="mt-1 w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:ring-blue-500"
         />

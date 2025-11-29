@@ -18,7 +18,6 @@ export const handleAddGalleryImage = async (
   setLoading: React.Dispatch<React.SetStateAction<boolean>>,
   url: string,
   title: string,
-  date: string,
   setUploading: React.Dispatch<React.SetStateAction<boolean>>,
   handleUploadErrorMessage: (message: string) => void,
   setProcessSuccess: React.Dispatch<React.SetStateAction<boolean>>,
@@ -52,9 +51,8 @@ export const handleAddGalleryImage = async (
       return;
     }
 
-    // Convert date string to Firebase Timestamp (at midnight UTC)
-    const dateObj = new Date(date);
-    const timestamp = Timestamp.fromDate(dateObj);
+    // Use current timestamp
+    const timestamp = Timestamp.now();
 
     // Add to Firestore
     const firebaseSuccess = await addGalleryImage(
@@ -97,7 +95,6 @@ export const handleEditGalleryImage = async (
   setLoading: React.Dispatch<React.SetStateAction<boolean>>,
   url: string,
   title: string,
-  date: string,
   setUploading: React.Dispatch<React.SetStateAction<boolean>>,
   handleUploadErrorMessage: (message: string) => void,
   setProcessSuccess: React.Dispatch<React.SetStateAction<boolean>>,
@@ -137,15 +134,10 @@ export const handleEditGalleryImage = async (
       return;
     }
 
-    // Convert date string to Firebase Timestamp (at midnight UTC)
-    const dateObj = new Date(date);
-    const timestamp = Timestamp.fromDate(dateObj);
-
-    // Update Firestore with new date
+    // Keep the original createdAt timestamp when editing
     const firebaseSuccess = await updateGalleryImage(result.ref, {
       url: url.trim(),
       title: title.trim(),
-      createdAt: timestamp,
     });
 
     if (firebaseSuccess) {

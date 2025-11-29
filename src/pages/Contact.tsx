@@ -19,7 +19,7 @@ export default function Contact(): React.JSX.Element {
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    // TODO: Add form submission logic here
+    // Add form submission logic here
   };
 
   return (
