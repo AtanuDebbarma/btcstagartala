@@ -53,12 +53,15 @@ export const handleAddGalleryImage = async (
 
     // Use current timestamp
     const timestamp = Timestamp.now();
+    // Use negative timestamp for descending order (newest first by default)
+    const order = -timestamp.toMillis();
 
     // Add to Firestore
     const firebaseSuccess = await addGalleryImage(
       url.trim(),
       title.trim(),
       timestamp,
+      order,
     );
 
     if (firebaseSuccess) {

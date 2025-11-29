@@ -5,4 +5,5 @@ export type GalleryImageType = {
   url: string;
   title: string;
   createdAt: Timestamp;
+  order: number;
 };

@@ -20,6 +20,7 @@ export const addGalleryImage = async (
   url: string,
   title: string,
   createdAt: Timestamp,
+  order: number,
 ): Promise<boolean> => {
   try {
     const galleryRef = collection(db, 'galleryImages');
@@ -27,6 +28,7 @@ export const addGalleryImage = async (
       url,
       title,
       createdAt,
+      order,
       id: '', // Placeholder, will be updated
     });
 
@@ -87,6 +89,25 @@ export const deleteGalleryImage = async (imageId: string): Promise<boolean> => {
     return true;
   } catch (error) {
     console.error('[Gallery] Failed to delete image:', error);
+    return false;
+  }
+};
+
+/**
+ * Update order for multiple gallery images
+ */
+export const updateGalleryImagesOrder = async (
+  updates: {id: string; order: number}[],
+): Promise<boolean> => {
+  try {
+    const updatePromises = updates.map(({id, order}) => {
+      const imageRef = doc(db, 'galleryImages', id);
+      return updateDoc(imageRef, {order});
+    });
+    await Promise.all(updatePromises);
+    return true;
+  } catch (error) {
+    console.error('[Gallery] Failed to update order:', error);
     return false;
   }
 };

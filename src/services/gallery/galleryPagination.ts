@@ -39,7 +39,7 @@ export const fetchFirstPage = async (): Promise<{
     const galleryRef = collection(db, 'galleryImages');
     const q = query(
       galleryRef,
-      orderBy('createdAt', 'desc'),
+      orderBy('order', 'asc'),
       limit(IMAGES_PER_PAGE),
     );
 
@@ -71,7 +71,7 @@ export const fetchNextPage = async (
     const galleryRef = collection(db, 'galleryImages');
     const q = query(
       galleryRef,
-      orderBy('createdAt', 'desc'),
+      orderBy('order', 'asc'),
       startAfter(lastDoc),
       limit(IMAGES_PER_PAGE),
     );
@@ -137,7 +137,7 @@ const fetchPageOffset = async (
 
     const q = query(
       galleryRef,
-      orderBy('createdAt', 'desc'),
+      orderBy('order', 'asc'),
       limit(skip + IMAGES_PER_PAGE),
     );
 

@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {appStore} from '@/appStore/appStore';
 import {GalleryImageType} from '@/types/galleryTypes';
 import {GalleryModal} from '@/components/gallery/galleryModal';
+import {ReorderGalleryModal} from '@/components/gallery/reorderGalleryModal';
 import {AdminInteractionBtns} from '@/appComponents/adminInteractionBtns';
 import {
   fetchPage,
@@ -19,6 +20,7 @@ export default function GalleryPage(): React.JSX.Element {
     useState<GalleryImageType | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [openModal, setOpenModal] = useState<boolean>(false);
+  const [openReorderModal, setOpenReorderModal] = useState<boolean>(false);
   const [modalMode, setModalMode] = useState<'ADD' | 'EDIT' | 'DELETE'>('ADD');
   const [hoveredImageId, setHoveredImageId] = useState<string | null>(null);
   const [currentImages, setCurrentImages] = useState<GalleryImageType[]>([]);
@@ -138,6 +140,22 @@ export default function GalleryPage(): React.JSX.Element {
     }, 200);
   };
 
+  const handleEditOrder = () => {
+    setOpenReorderModal(true);
+  };
+
+  const handleReorderSuccess = () => {
+    // Refetch current page after reordering
+    const refetch = async () => {
+      const {images, lastDoc} = await fetchPage(currentPage);
+      setCurrentImages(images);
+      if (lastDoc) {
+        setPageCursors(prev => new Map(prev).set(currentPage, lastDoc));
+      }
+    };
+    refetch();
+  };
+
   const handleEditImage = (image: GalleryImageType) => {
     setModalMode('EDIT');
     setSelectedImageData(image);
@@ -173,9 +191,16 @@ export default function GalleryPage(): React.JSX.Element {
         <section
           className="mx-auto max-w-7xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-16"
           aria-label="Gallery Images">
-          {/* Add Button for Admin */}
+          {/* Admin Buttons */}
           {isAdmin && (
-            <div className="mb-6 flex justify-end">
+            <div className="mb-6 flex justify-end gap-3">
+              <button
+                onClick={handleEditOrder}
+                disabled={currentImages.length === 0}
+                className="flex items-center gap-2 rounded-md bg-blue-600 px-4 py-2 text-white transition-transform duration-180 ease-in-out hover:bg-blue-700 active:scale-95 disabled:cursor-not-allowed disabled:opacity-50">
+                <i className="fa-solid fa-arrows-up-down"></i>
+                Edit Order
+              </button>
               <button
                 onClick={handleAddImage}
                 className="flex items-center gap-2 rounded-md bg-green-600 px-4 py-2 text-white transition-transform duration-180 ease-in-out hover:bg-purple-800 active:scale-95">
@@ -393,6 +418,16 @@ export default function GalleryPage(): React.JSX.Element {
             selectedImage={selectedImageData}
             mode={modalMode}
             totalCount={totalCount}
+          />
+        )}
+
+        {/* Reorder Modal */}
+        {openReorderModal && isAdmin && (
+          <ReorderGalleryModal
+            openModal={openReorderModal}
+            setOpenModal={setOpenReorderModal}
+            images={currentImages}
+            onSuccess={handleReorderSuccess}
           />
         )}
       </main>
