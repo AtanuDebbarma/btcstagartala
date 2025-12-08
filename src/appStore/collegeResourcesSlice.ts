@@ -23,6 +23,7 @@ export const createCollegeResourcesSlice: StateCreator<
       set(state => {
         state.collegeResources = [];
       });
+      console.log('Error setting collegeResources:', error);
     }
   },
 });

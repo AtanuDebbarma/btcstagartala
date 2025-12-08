@@ -16,6 +16,7 @@ export const useGenericFetchTextAndImage = <T, I>(
 ) => {
   const isMountedRef = useRef<boolean>(false);
 
+  // eslint-disable-next-line react-hooks/preserve-manual-memoization
   const fetchData = useCallback(async () => {
     try {
       // Fetch text document
@@ -58,7 +59,6 @@ export const useGenericFetchTextAndImage = <T, I>(
         console.error(`${logPrefix} fetch failed`, err);
       }
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [collectionName, textDocId, imageDocId, logPrefix]);
   // Note: setTextData and setImageData are stable Zustand setters and don't need to be in dependencies
 

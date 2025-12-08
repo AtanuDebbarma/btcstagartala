@@ -72,7 +72,6 @@ export default function GalleryPage(): React.JSX.Element {
       setLoading(false);
     };
     loadPage();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPage]);
   // Note: pageCursors is intentionally excluded to prevent infinite loops - it's updated inside this effect
 
@@ -98,7 +97,6 @@ export default function GalleryPage(): React.JSX.Element {
       };
       refetch();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [openModal]); // Only refetch when modal state changes
 
   // Handle body overflow when modal is open/closed

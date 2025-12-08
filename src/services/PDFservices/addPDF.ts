@@ -13,6 +13,7 @@ export const addPDF = async (
 
     const createdAt = Timestamp.now();
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const {id: _, ...fileData} = newFile; // remove id, Firebase will generate it
 
     // Add document to Firestore

@@ -48,7 +48,6 @@ export const ProspectusModal = ({
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [openModal, loading, uploading]); // setState functions are stable
 
   const handleClose = () => {

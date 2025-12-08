@@ -42,7 +42,6 @@ export const EditFacultyModal = ({
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [openModal, loading]); // setOpenModal is stable
 
   const handleClose = () => {

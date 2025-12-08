@@ -34,6 +34,7 @@ export const createSmallAboutCardSlice: StateCreator<
       set(state => {
         state.smallAboutCard = null;
       });
+      console.log('Error setting smallAboutCard:', error);
     }
   },
   setSmallAboutCardImage: async (data: SmallAboutCardimageType | null) => {
@@ -45,6 +46,7 @@ export const createSmallAboutCardSlice: StateCreator<
       set((state: AppState) => {
         state.smallAboutCardImage = null;
       });
+      console.log('Error setting smallAboutCardImage:', error);
     }
   },
   setPrincipalText: async (data: SmallAboutCardType | null) => {
@@ -56,6 +58,7 @@ export const createSmallAboutCardSlice: StateCreator<
       set((state: AppState) => {
         state.principalText = null;
       });
+      console.log('Error setting principalText:', error);
     }
   },
   setPrincipalImage: async (data: SmallAboutCardimageType | null) => {
@@ -67,6 +70,7 @@ export const createSmallAboutCardSlice: StateCreator<
       set((state: AppState) => {
         state.principalImage = null;
       });
+      console.log('Error setting principalImage:', error);
     }
   },
 });

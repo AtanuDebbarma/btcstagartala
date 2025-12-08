@@ -27,6 +27,7 @@ export const createAdmissionFormSlice: StateCreator<
       set(state => {
         state.prospectusAndAdmission = [];
       });
+      console.log('Error setting prospectusAndAdmission:', error);
     }
   },
 });

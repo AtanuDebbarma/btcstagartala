@@ -49,6 +49,7 @@ export const addCarouselImage = async (
     await batch.commit();
 
     const createdAt = Timestamp.now();
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const {id: _, ...imageData} = newImage;
 
     const docRef = await addDoc(imagesRef, {

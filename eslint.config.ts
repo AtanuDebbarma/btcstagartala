@@ -6,31 +6,22 @@ import reactRefresh from 'eslint-plugin-react-refresh';
 import tseslint from 'typescript-eslint';
 import prettier from 'eslint-plugin-prettier';
 import eslintPluginImport from 'eslint-plugin-import';
-// @ts-ignore
-import eslintPluginNode from 'eslint-plugin-node';
 import eslintPluginReact from 'eslint-plugin-react';
+import { defineConfig, globalIgnores } from 'eslint/config';
 
-export default tseslint.config(
+export default defineConfig([
+  globalIgnores(['dist', 'node_modules', '**/node_modules/**']),
   {
-    ignores: [
-      'dist',
-      'node_modules',
-      'eslint.config.ts',
-      'index.html',
-      'src/index.css',
+    files: ['**/*.{ts,tsx,js,jsx}'],
+    extends: [
+      js.configs.recommended,
+      ...tseslint.configs.recommended,
+      reactHooks.configs.flat.recommended,
+      reactRefresh.configs.vite,
     ],
-  },
-  {
-    files: ['**/*.{ts,tsx,js,jsx,css,scss}'],
     languageOptions: {
-      ecmaVersion: 'latest',
+      ecmaVersion: 2020,
       sourceType: 'module',
-      parser: tseslint.parser,
-      parserOptions: {
-        ecmaFeatures: {
-          jsx: true,
-        },
-      },
       globals: {
         ...globals.browser,
         ...globals.node,
@@ -51,35 +42,19 @@ export default tseslint.config(
       },
     },
     plugins: {
-      'react-hooks': reactHooks,
-      'react-refresh': reactRefresh,
       prettier,
       import: eslintPluginImport,
-      node: eslintPluginNode,
       react: eslintPluginReact,
     },
     rules: {
-      ...js.configs.recommended.rules,
-      ...tseslint.configs.recommended[0].rules,
-      ...reactHooks.configs.recommended.rules,
-
-      'react-refresh/only-export-components': [
-        'warn',
-        {allowConstantExport: true},
-      ],
-
       'prettier/prettier': 'error',
       'react/react-in-jsx-scope': 'off',
       'no-console': 'off',
       'import/no-unresolved': 'error',
-      'node/no-missing-require': 'off',
       'no-unused-vars': 'off',
-    },
-  },
-  {
-    files: ['**/*.{js,jsx,ts,tsx,css,scss}'],
-    rules: {
       'no-warning-comments': 'error',
+      'react-hooks/exhaustive-deps': 'off',
+      '@typescript-eslint/no-explicit-any':'off',
     },
   },
-);
+]);

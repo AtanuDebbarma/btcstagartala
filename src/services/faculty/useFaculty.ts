@@ -52,7 +52,6 @@ export const useFaculty = (type?: FacultyType): UseFacultyReturn => {
 
   useEffect(() => {
     fetchFaculty();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [type]);
 
   return {faculty, loading, error, refetch: fetchFaculty};

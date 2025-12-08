@@ -42,7 +42,6 @@ export const EditPrincipalTextModal = ({
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [openModal, loading]); // setState functions are stable
 
   const handleClose = () => {

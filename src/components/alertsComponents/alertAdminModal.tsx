@@ -40,7 +40,6 @@ export const AlertsAdminModal = React.memo(
       return () => {
         document.removeEventListener('mousedown', handleClickOutside);
       };
-      // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [openModal, loading, uploading]); // setOpenModal is stable, no need to include
 
     const handleClose = () => {
