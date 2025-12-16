@@ -125,7 +125,7 @@ export default function CollegeResources() {
                   alt={resource.alt}
                   loading="lazy"
                   decoding="async"
-                  className={`w-full object-cover ${isFaculty ? 'h-48 object-scale-down' : 'h-48'}`}
+                  className={`w-full object-cover ${isFaculty ? 'h-48 object-cover' : 'h-48'}`}
                 />
                 <div className="absolute inset-0 flex items-end justify-center bg-black/20">
                   <h3 className="p-4 text-xl font-bold text-amber-50">

@@ -3,14 +3,9 @@ import {Accreditation} from '@/types/homeTypes';
 
 export const accreditations: Accreditation[] = [
   {
-    id: 1,
-    name: 'University Grants Commission',
-    logo: Assets.link.ugc,
-  },
-  {
     id: 2,
-    name: 'National Assessment and Accreditation Council',
-    logo: Assets.link.naac,
+    name: 'All India Council for Technical Education',
+    logo: Assets.link.aicte,
   },
   {
     id: 3,

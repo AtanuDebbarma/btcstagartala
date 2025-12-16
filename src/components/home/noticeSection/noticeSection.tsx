@@ -57,7 +57,7 @@ export const NoticeSection = () => {
               <div className="rounded-t-sm bg-[#3f003f] px-8 py-4 text-center text-white shadow-md">
                 <h3 className="relative inline-block text-lg font-semibold tracking-wide uppercase">
                   Notice Board
-                  <span className="absolute -bottom-1 left-1/4 mt-2 h-[3px] w-1/2 rounded bg-yellow-400"></span>
+                  <span className="absolute -bottom-1 left-1/4 mt-2 h-0.75 w-1/2 rounded bg-yellow-400"></span>
                 </h3>
               </div>
               <div className="px-3 py-4">

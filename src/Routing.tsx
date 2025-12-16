@@ -182,8 +182,8 @@ const RoutesWrapper = ({
             element={<PlaceholderPage title="Academic Calendar" />}
           />
           <Route
-            path={RouteNames.NAAC}
-            element={<PlaceholderPage title="NAAC" />}
+            path={RouteNames.AICTE}
+            element={<PlaceholderPage title="AICTE" />}
           />
           <Route
             path={RouteNames.MISC_DOCUMENTS}

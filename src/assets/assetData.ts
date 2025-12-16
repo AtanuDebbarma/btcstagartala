@@ -1,17 +1,16 @@
-import topEmblemUrl from './logo-emblem.jpg';
+import topEmblemUrl from './logo-emblem.png';
 import GovTripura from './GovTripura.jpg';
-import UGC from './UGC.jpg';
 import TripuraUniv from './TripuraUniv.jpg';
-import NAAC from './NAAC.jpg';
-import logo from './logo.jpg';
+import AICTE from './AICTE_LOGO.jpg';
+import logo from './logo.jpeg';
 
 export type LinkType = {
   logo: string;
   topEmblem: string;
   govTripura: string;
-  ugc: string;
+  // ugc: string;
   tripuraUniv: string;
-  naac: string;
+  aicte: string;
   aboutShortImg: string;
 };
 
@@ -20,9 +19,9 @@ export const Assets: {link: LinkType} = {
     logo: logo,
     topEmblem: topEmblemUrl,
     govTripura: GovTripura,
-    ugc: UGC,
+    // ugc: UGC,
     tripuraUniv: TripuraUniv,
-    naac: NAAC,
+    aicte: AICTE,
     aboutShortImg:
       'https://btcstagartala.org/wp-content/uploads/2024/04/Screenshot-2024-04-19-at-10.12.35%E2%80%AFAM.png',
   },

@@ -53,7 +53,7 @@ const CollegeNavbar = ({
       </nav>
 
       {/* Push content down when nav is sticky */}
-      {isSticky && <div className="h-[60px] md:h-12" />}
+      {isSticky && <div className="h-15 md:h-12" />}
 
       {menuOpen && <MobileMenu setMenuOpen={setMenuOpen} />}
     </header>

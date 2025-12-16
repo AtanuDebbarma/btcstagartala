@@ -14,12 +14,8 @@ export const LogoSection = () => (
           <h1 className="text-lg font-bold text-blue-600 md:text-2xl">
             Bhavan’s Tripura College of Science & Technology
           </h1>
-          <p className="text-sm">Recognized by AICTE and UGC</p>
+          <p className="text-sm">Recognized by AICTE</p>
           <p className="text-sm">Affiliated with Tripura University</p>
-          <p className="text-sm">
-            Accredited by NAAC with{' '}
-            <span className="font-bold text-red-500">'B++' Grade</span>
-          </p>
         </div>
       </div>
 

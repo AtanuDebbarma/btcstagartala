@@ -23,7 +23,7 @@ export const RouteNames = {
   COMMITTEE_CELLS: '/committee-cells',
   SSR: '/ssr',
   ACADEMIC_CALENDAR: '/academic-calendar',
-  NAAC: '/naac',
+  AICTE: '/aicte',
   MISC_DOCUMENTS: '/misc-documents',
   HELP_DESK: '/help-desk',
   AQAR: '/aqar',

@@ -7,7 +7,7 @@ export const QuickAccess = () => {
     {title: 'Committee & Cells', url: RouteNames.COMMITTEE_CELLS},
     {title: 'SSR', url: RouteNames.SSR},
     {title: 'Academic Calendar', url: RouteNames.ACADEMIC_CALENDAR},
-    {title: 'NAAC', url: RouteNames.NAAC},
+    {title: 'AICTE', url: RouteNames.AICTE},
     {title: 'Admission', url: RouteNames.ADMISSION_ELIGIBILITY},
     {title: 'Misc Documents', url: RouteNames.MISC_DOCUMENTS},
     {title: 'Academic Module', url: RouteNames.ACADEMICS},
