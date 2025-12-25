@@ -1,6 +1,6 @@
 import {sendEditPDFToBackend} from '@/services/cloudinary/sendPDFtoBackend';
-import {ProspectusAndAdmissionFormType} from '@/types/homeTypes';
-import React from 'react';
+import type {ProspectusAndAdmissionFormType} from '@/types/homeTypes';
+import type React from 'react';
 import {
   getPDFFilebyfileID,
   updatePDFDoc,

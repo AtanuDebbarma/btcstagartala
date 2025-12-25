@@ -18,7 +18,9 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth(app);
 
+import {logger} from '../utils/logger';
+
 // Set persistence
-setPersistence(auth, browserLocalPersistence).catch(console.error);
+setPersistence(auth, browserLocalPersistence).catch(logger.error);
 
 export {auth, db};

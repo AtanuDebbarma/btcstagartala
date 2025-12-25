@@ -12,7 +12,7 @@ export const AlertNameOrLink = React.memo(({isAdmin, title, id}: PROPS) => {
 
   const handleClick = () => {
     setTimeout(() => {
-      navigation(`/alerts/${id}/${title}`);
+      void navigation(`/alerts/${id}/${title}`);
       scrollTo(0, 0);
     }, 200);
   };

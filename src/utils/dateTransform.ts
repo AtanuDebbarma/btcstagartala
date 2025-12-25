@@ -1,4 +1,4 @@
-import {Timestamp} from 'firebase/firestore';
+import type {Timestamp} from 'firebase/firestore';
 
 export function convertFirebaseTimestampToDate(date: Timestamp | null): string {
   if (!date) return '';

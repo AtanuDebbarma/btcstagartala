@@ -1,4 +1,5 @@
-import {useRef, useEffect, Dispatch, SetStateAction} from 'react';
+import type {Dispatch, SetStateAction} from 'react';
+import {useRef, useEffect} from 'react';
 import {MobileLinks} from './navlinks';
 
 type MobileMenuProps = {

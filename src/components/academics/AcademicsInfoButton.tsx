@@ -1,7 +1,7 @@
 import {AdminInteractionBtns} from '@/appComponents/adminInteractionBtns';
 import {appStore} from '@/appStore/appStore';
-import {ProspectusAndAdmissionFormType} from '@/types/homeTypes';
-import {Timestamp} from 'firebase/firestore';
+import type {ProspectusAndAdmissionFormType} from '@/types/homeTypes';
+import type {Timestamp} from 'firebase/firestore';
 import {useState} from 'react';
 import {ProspectusModal} from '../home/noticeSection/prospectusModal';
 import {useNavigate} from 'react-router-dom';
@@ -38,7 +38,7 @@ export const AcademicsInfoButton = () => {
 
   const handleClick = (url: string) => {
     setTimeout(() => {
-      navigation(`/pdf-viewer?file=${url}`);
+      void navigation(`/pdf-viewer?file=${url}`);
       scrollTo(0, 0);
     }, 200);
   };
@@ -79,11 +79,11 @@ export const AcademicsInfoButton = () => {
         )}
         <button
           onClick={() => handleClick(academicsInfo.url)}
-          className="mb-10 w-[20%] min-w-[300px] cursor-pointer transition-transform duration-180 ease-in-out focus:outline-none active:scale-95">
+          className="mb-10 w-[20%] min-w-75 cursor-pointer transition-transform duration-180 ease-in-out focus:outline-none active:scale-95">
           <div className="rounded-sm bg-[#900090] px-4 py-4.5 text-center text-white shadow-md">
             <h3 className="relative inline-block text-lg font-semibold tracking-wide uppercase">
               More Academics Info
-              <span className="absolute -bottom-1 left-1/4 mt-2 h-[3px] w-1/2 rounded bg-yellow-400"></span>
+              <span className="absolute -bottom-1 left-1/4 mt-2 h-0.75 w-1/2 rounded bg-yellow-400"></span>
             </h3>
           </div>
         </button>

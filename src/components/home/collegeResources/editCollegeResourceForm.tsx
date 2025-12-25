@@ -1,6 +1,6 @@
 import {appStore} from '@/appStore/appStore';
 import {handleEditCollegeResourceUrl} from '@/helpers/collegeResourcesHelpers/collegeResourcesHelpers';
-import {CollegeResourceType} from '@/types/collegeResourcesTypes';
+import type {CollegeResourceType} from '@/types/collegeResourcesTypes';
 import React, {useState} from 'react';
 
 type PropTypes = {
@@ -51,7 +51,7 @@ export const EditCollegeResourceForm = ({
     }
 
     setTimeout(() => {
-      handleEditCollegeResourceUrl(
+      void handleEditCollegeResourceUrl(
         setOpenModal,
         selectedResource,
         newImageUrl,
@@ -105,7 +105,7 @@ export const EditCollegeResourceForm = ({
           <img
             src={newImageUrl}
             alt="Preview"
-            className="mt-2 h-auto max-h-[200px] w-full rounded-md object-cover"
+            className="mt-2 h-auto max-h-50 w-full rounded-md object-cover"
             onError={e => {
               (e.target as HTMLImageElement).style.display = 'none';
               setErrorMessage('Invalid image URL or image failed to load');

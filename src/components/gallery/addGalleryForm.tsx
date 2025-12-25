@@ -46,7 +46,7 @@ export const AddGalleryForm = ({
       return;
     }
     setTimeout(() => {
-      handleAddGalleryImage(
+      void handleAddGalleryImage(
         setOpenModal,
         setLoading,
         url,

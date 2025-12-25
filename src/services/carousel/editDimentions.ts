@@ -1,6 +1,7 @@
 import {getDocs, collection, updateDoc, doc} from 'firebase/firestore';
 import {db} from '../firebase';
-import {Dimensions} from './fetchDimentions';
+import type {Dimensions} from './fetchDimentions';
+import {logger} from '../../utils/logger';
 
 /**
  * Updates the existing carousel dimensions document in Firestore.
@@ -15,7 +16,7 @@ export const updateCarouselDimensions = async (
     const querySnapshot = await getDocs(collection(db, 'carouselDimentions'));
 
     if (querySnapshot.empty) {
-      console.warn('No document found in carouselDimentions collection.');
+      logger.warn('No document found in carouselDimentions collection.');
       return false;
     }
 
@@ -25,7 +26,7 @@ export const updateCarouselDimensions = async (
     await updateDoc(docRef, updatedValues);
     return true;
   } catch (error) {
-    console.error('Failed to update carousel dimensions:', error);
+    logger.error('Failed to update carousel dimensions:', error);
     return false;
   }
 };

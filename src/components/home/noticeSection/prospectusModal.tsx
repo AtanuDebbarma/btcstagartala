@@ -1,6 +1,7 @@
-import {ProspectusAndAdmissionFormType} from '@/types/homeTypes';
-import {Dispatch, SetStateAction, useEffect, useRef, useState} from 'react';
-import {ClipLoader} from 'react-spinners';
+import type {ProspectusAndAdmissionFormType} from '@/types/homeTypes';
+import type {Dispatch, SetStateAction} from 'react';
+import {useEffect, useRef, useState} from 'react';
+import {ClipLoader} from '@/components/Spinner';
 import {EditProspectusForm} from './editProspectusForm';
 
 interface Props {
@@ -48,6 +49,7 @@ export const ProspectusModal = ({
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [openModal, loading, uploading]); // setState functions are stable
 
   const handleClose = () => {

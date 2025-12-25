@@ -1,5 +1,5 @@
 import {Assets} from '@/assets/assetData';
-import {Accreditation} from '@/types/homeTypes';
+import type {Accreditation} from '@/types/homeTypes';
 
 export const accreditations: Accreditation[] = [
   {

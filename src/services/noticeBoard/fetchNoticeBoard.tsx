@@ -2,7 +2,8 @@ import {useEffect, useCallback, useRef} from 'react';
 import {collection, getDocs} from 'firebase/firestore';
 import {db} from '../firebase';
 import {appStore} from '@/appStore/appStore';
-import {NoticeBoardType} from '@/types/homeTypes';
+import type {NoticeBoardType} from '@/types/homeTypes';
+import {logger} from '../../utils/logger';
 
 export const useFetchNoticeBoard = () => {
   const isMountedRef = useRef<boolean>(false);
@@ -24,20 +25,20 @@ export const useFetchNoticeBoard = () => {
       } else {
         if (isMountedRef.current) {
           await setNotices([]);
-          console.error('NoticeBoard fetch failed');
+          logger.error('NoticeBoard fetch failed');
         }
       }
     } catch (err) {
       if (isMountedRef.current) {
         await setNotices([]);
-        console.error('NoticeBoard fetch failed', err);
+        logger.error('NoticeBoard fetch failed', err);
       }
     }
   }, [setNotices]);
 
   useEffect(() => {
     isMountedRef.current = true;
-    fetchNotices();
+    void fetchNotices();
     return () => {
       isMountedRef.current = false;
     };

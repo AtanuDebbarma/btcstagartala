@@ -4,9 +4,9 @@ import {
   getGalleryImageById,
   updateGalleryImage,
 } from '@/services/gallery/galleryFirebase';
-import {GalleryImageType} from '@/types/galleryTypes';
+import type {GalleryImageType} from '@/types/galleryTypes';
 import {Timestamp} from 'firebase/firestore';
-import React from 'react';
+import type React from 'react';
 
 const MAX_GALLERY_IMAGES = 200;
 

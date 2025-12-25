@@ -1,4 +1,4 @@
-import {ChangeEvent, Dispatch, SetStateAction, MouseEvent} from 'react';
+import type {ChangeEvent, Dispatch, SetStateAction, MouseEvent} from 'react';
 import {
   signInWithEmailAndPassword,
   GoogleAuthProvider,
@@ -6,7 +6,7 @@ import {
   sendPasswordResetEmail,
 } from 'firebase/auth';
 import {auth} from '@/services/firebase';
-import {NavigateFunction} from 'react-router-dom';
+import type {NavigateFunction} from 'react-router-dom';
 import {RouteNames} from '@/constants/routeNames';
 
 /**
@@ -90,7 +90,7 @@ export const handleAdminLoginSubmit = async (
 
     setTimeout(() => {
       setSuccess(false);
-      navigate(RouteNames.HOME);
+      void navigate(RouteNames.HOME);
       window.scrollTo(0, 0);
     }, 3000);
   } catch (error: any) {
@@ -144,7 +144,7 @@ export const handleAdminGoogleLogin = async (
 
     setTimeout(() => {
       setSuccess(false);
-      navigate(RouteNames.HOME);
+      void navigate(RouteNames.HOME);
       window.scrollTo(0, 0);
     }, 3000);
   } catch (error: any) {

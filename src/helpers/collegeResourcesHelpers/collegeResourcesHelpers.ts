@@ -1,5 +1,5 @@
-import {CollegeResourceType} from '@/types/collegeResourcesTypes';
-import React from 'react';
+import type {CollegeResourceType} from '@/types/collegeResourcesTypes';
+import type React from 'react';
 import {
   getCollegeResourceByID,
   updateCollegeResource,

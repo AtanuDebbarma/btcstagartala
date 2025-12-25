@@ -3,7 +3,7 @@ import {
   handleDelete,
   handleEdit,
 } from '@/helpers/carouselHelpers/carouselUpdateHelpers';
-import {CarouselImage, CarouselModeType} from '@/types/homeTypes';
+import type {CarouselImage, CarouselModeType} from '@/types/homeTypes';
 import {validateImageFileType} from '@/utils/fileValidation';
 import React, {useEffect, useRef, useState} from 'react';
 
@@ -96,7 +96,7 @@ export const ImageForm = React.memo(
         return;
       }
       setTimeout(() => {
-        handleAdd(
+        void handleAdd(
           setOpenModal,
           formValues,
           setLoading,
@@ -123,7 +123,7 @@ export const ImageForm = React.memo(
         return;
       }
       setTimeout(() => {
-        handleEdit(
+        void handleEdit(
           setOpenModal,
           formValues,
           setLoading,
@@ -146,7 +146,7 @@ export const ImageForm = React.memo(
         return;
       }
       setTimeout(() => {
-        handleDelete(
+        void handleDelete(
           setOpenModal,
           formValues,
           setLoading,

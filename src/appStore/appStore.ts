@@ -1,30 +1,23 @@
-import {createWithEqualityFn} from 'zustand/traditional';
+import {create} from 'zustand';
 import {immer} from 'zustand/middleware/immer';
-import {shallow} from 'zustand/shallow';
-import {AdminSliceType, createAdminSlice} from './adminSlice';
-import {
-  DimentionsSliceType,
-  createDimentionsSlice,
-} from './carousel/carouselDimentionsSlice';
-import {
-  CarouselImagesSliceType,
-  createCarouselImagesSlice,
-} from './carousel/carouselImageSlice';
-import {
-  AdmissionFormType,
-  createAdmissionFormSlice,
-} from './admissionFormSlice';
-import {NoticeBoardSliceType, createNoticeBoardSlice} from './noticeBoardSlice';
-import {AlertsSliceType, createAlertsSlice} from './alertsSlice';
-import {
-  SmallAboutCardSliceType,
-  createSmallAboutCardSlice,
-} from './smallAboutCardSlice';
-import {GallerySliceType, createGallerySlice} from './gallerySlice';
-import {
-  CollegeResourcesSliceType,
-  createCollegeResourcesSlice,
-} from './collegeResourcesSlice';
+import type {AdminSliceType} from './adminSlice';
+import {createAdminSlice} from './adminSlice';
+import type {DimentionsSliceType} from './carousel/carouselDimentionsSlice';
+import {createDimentionsSlice} from './carousel/carouselDimentionsSlice';
+import type {CarouselImagesSliceType} from './carousel/carouselImageSlice';
+import {createCarouselImagesSlice} from './carousel/carouselImageSlice';
+import type {AdmissionFormType} from './admissionFormSlice';
+import {createAdmissionFormSlice} from './admissionFormSlice';
+import type {NoticeBoardSliceType} from './noticeBoardSlice';
+import {createNoticeBoardSlice} from './noticeBoardSlice';
+import type {AlertsSliceType} from './alertsSlice';
+import {createAlertsSlice} from './alertsSlice';
+import type {SmallAboutCardSliceType} from './smallAboutCardSlice';
+import {createSmallAboutCardSlice} from './smallAboutCardSlice';
+import type {GallerySliceType} from './gallerySlice';
+import {createGallerySlice} from './gallerySlice';
+import type {CollegeResourcesSliceType} from './collegeResourcesSlice';
+import {createCollegeResourcesSlice} from './collegeResourcesSlice';
 
 export type AppState = AdminSliceType &
   DimentionsSliceType &
@@ -36,7 +29,7 @@ export type AppState = AdminSliceType &
   GallerySliceType &
   CollegeResourcesSliceType;
 
-export const appStore = createWithEqualityFn<AppState>()(
+export const appStore = create<AppState>()(
   immer((...store) => ({
     ...createAdminSlice(...store),
     ...createDimentionsSlice(...store),
@@ -48,5 +41,4 @@ export const appStore = createWithEqualityFn<AppState>()(
     ...createGallerySlice(...store),
     ...createCollegeResourcesSlice(...store),
   })),
-  shallow,
 );

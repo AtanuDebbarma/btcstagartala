@@ -1,11 +1,11 @@
 import {useState} from 'react';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
-import {ClipLoader} from 'react-spinners';
+import {ClipLoader} from '@/components/Spinner';
 import {appStore} from '@/appStore/appStore';
 import {CarouselModal} from './carouselModal';
-import {CarouselImage, CarouselModeType} from '@/types/homeTypes';
-import {Timestamp} from 'firebase/firestore';
+import type {CarouselImage, CarouselModeType} from '@/types/homeTypes';
+import type {Timestamp} from 'firebase/firestore';
 import {responsive} from '@/data/homeData/carouselData';
 import {CustomLeftArrow, CustomRightArrow} from './carouselButtons';
 import {CarouselImages} from './carouselImage';

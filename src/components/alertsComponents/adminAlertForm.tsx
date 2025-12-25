@@ -1,5 +1,5 @@
 import {appStore} from '@/appStore/appStore';
-import {AlertsType, CarouselModeType} from '@/types/homeTypes';
+import type {AlertsType, CarouselModeType} from '@/types/homeTypes';
 import {isValidWebsiteUrl, validatePDFType} from '@/utils/fileValidation';
 import React, {useEffect, useRef, useState} from 'react';
 import {
@@ -168,7 +168,7 @@ export const AlertModalForm = React.memo(
         return;
       }
       setTimeout(() => {
-        handleAlertAdd(
+        void handleAlertAdd(
           setOpenModal,
           formValues,
           setLoading,
@@ -224,7 +224,7 @@ export const AlertModalForm = React.memo(
         return;
       }
       setTimeout(() => {
-        handleAlertEdit(
+        void handleAlertEdit(
           setOpenModal,
           formValues,
           setLoading,
@@ -246,7 +246,7 @@ export const AlertModalForm = React.memo(
         return;
       }
       setTimeout(() => {
-        handleAlertDelete(
+        void handleAlertDelete(
           setOpenModal,
           formValues,
           setLoading,
@@ -289,7 +289,7 @@ export const AlertModalForm = React.memo(
       }
 
       setTimeout(() => {
-        handleAlertEditNameOnly(
+        void handleAlertEditNameOnly(
           setOpenModal,
           formValues,
           setLoading,
@@ -316,7 +316,7 @@ export const AlertModalForm = React.memo(
       }
 
       setTimeout(() => {
-        handleAlertEditContentOnly(
+        void handleAlertEditContentOnly(
           setOpenModal,
           formValues,
           setLoading,

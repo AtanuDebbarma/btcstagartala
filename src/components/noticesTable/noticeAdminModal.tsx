@@ -1,8 +1,9 @@
 import {appStore} from '@/appStore/appStore';
-import {CarouselModeType, NoticeBoardType} from '@/types/homeTypes';
-import React, {Dispatch, SetStateAction} from 'react';
+import type {CarouselModeType, NoticeBoardType} from '@/types/homeTypes';
+import type {Dispatch, SetStateAction} from 'react';
+import React from 'react';
 import {useEffect, useRef, useState} from 'react';
-import {ClipLoader} from 'react-spinners';
+import {ClipLoader} from '@/components/Spinner';
 import {NoticeModalForm} from './noticeModalForm';
 
 interface Props {
@@ -40,6 +41,7 @@ export const NoticeAdminModal = React.memo(
       return () => {
         document.removeEventListener('mousedown', handleClickOutside);
       };
+      // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [openModal, loading, uploading]); // setOpenModal is stable, no need to include
 
     const handleClose = () => {

@@ -1,12 +1,12 @@
 import {appStore} from '@/appStore/appStore';
-import {CarouselModeType, NoticeBoardType} from '@/types/homeTypes';
+import type {CarouselModeType, NoticeBoardType} from '@/types/homeTypes';
 import {convertFirebaseTimestampToDate} from '@/utils/dateTransform';
 import {NoticeButtons} from './noticeButtons';
-import {Dispatch, SetStateAction} from 'react';
+import type {Dispatch, SetStateAction} from 'react';
 import {NoticeAdminButtons} from './noticeAdminButtons';
 import React from 'react';
 import {NoticeNameOrLink} from './noticeNameOrLink';
-import {Timestamp} from 'firebase/firestore';
+import type {Timestamp} from 'firebase/firestore';
 
 interface PROPS {
   setDownloading: Dispatch<SetStateAction<boolean>>;

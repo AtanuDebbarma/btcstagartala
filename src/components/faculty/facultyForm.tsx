@@ -1,4 +1,4 @@
-import {FacultyDocument} from '@/types/otherTypes';
+import type {FacultyDocument} from '@/types/otherTypes';
 import React, {useState} from 'react';
 
 type FacultyFormProps = {

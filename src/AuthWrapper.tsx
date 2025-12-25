@@ -1,9 +1,8 @@
 import {auth} from '@/services/firebase';
 import React from 'react';
-import {ReactNode, useEffect, useState} from 'react';
-import {ClipLoader} from 'react-spinners';
+import {type ReactNode, useEffect} from 'react';
 import {appStore} from './appStore/appStore';
-import {onIdTokenChanged, User} from 'firebase/auth';
+import {onIdTokenChanged, type User} from 'firebase/auth';
 
 /**
  * AuthWrapper is a higher-order component that wraps its children with authentication logic.
@@ -13,11 +12,11 @@ import {onIdTokenChanged, User} from 'firebase/auth';
  * verifying the user's email against the admin whitelist. Backend validation occurs on
  * every admin action for security.
  *
- * While the authentication state is being determined, a loading spinner is displayed.
- * Once the authentication check is complete, it renders its children.
+ * This component renders immediately without blocking the UI, allowing for fast page loads.
+ * Authentication checking happens asynchronously in the background.
  *
- * @param {ReactNode} children - The components to render after authentication is verified.
- * @returns {React.JSX.Element} A loading spinner or the wrapped children components.
+ * @param {ReactNode} children - The components to render immediately.
+ * @returns {React.JSX.Element} The wrapped children components without blocking.
  */
 
 export const AuthWrapper = ({
@@ -25,10 +24,34 @@ export const AuthWrapper = ({
 }: {
   children: ReactNode;
 }): React.JSX.Element => {
-  const [loading, setLoading] = useState(true);
   const setUser = appStore(state => state.setUser);
+  const setAuthInitialized = appStore(state => state.setAuthInitialized);
 
+  // Initialize auth state asynchronously in background (non-blocking)
   useEffect(() => {
+    // Check if there's already a current user (for existing sessions)
+    const checkCurrentUser = async () => {
+      const currentUser = auth.currentUser;
+      if (currentUser) {
+        const adminEmails = [
+          import.meta.env.VITE_FIREBASE_ADMIN_EMAIL1,
+          import.meta.env.VITE_FIREBASE_ADMIN_EMAIL2,
+        ];
+
+        if (adminEmails.includes(currentUser.email || '')) {
+          setUser(currentUser);
+        } else {
+          setUser(null);
+        }
+      } else {
+        setUser(null);
+      }
+    };
+
+    // Check immediately for existing user
+    void checkCurrentUser();
+
+    // Set up listener for auth state changes
     const unsubscribe = onIdTokenChanged(auth, async (user: User | null) => {
       if (user) {
         // Check if user is admin (frontend check for UI only)
@@ -45,18 +68,12 @@ export const AuthWrapper = ({
       } else {
         setUser(null);
       }
-      setLoading(false);
     });
 
     return () => unsubscribe();
-  }, [setUser]);
+  }, [setUser, setAuthInitialized]);
 
-  if (loading)
-    return (
-      <div className="flex h-[screen] w-[screen] flex-col items-center justify-center">
-        <ClipLoader size={30} color="#1a3bdf" />
-      </div>
-    );
-
-  return <>{children}</>;
+  // Render immediately without waiting for auth check
+  // eslint-disable-next-line react/jsx-no-useless-fragment
+  return <React.Fragment>{children}</React.Fragment>;
 };

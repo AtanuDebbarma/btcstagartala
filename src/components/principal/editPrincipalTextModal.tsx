@@ -1,6 +1,7 @@
-import {SmallAboutCardType} from '@/types/homeTypes';
-import {Dispatch, SetStateAction, useEffect, useRef, useState} from 'react';
-import {ClipLoader} from 'react-spinners';
+import type {SmallAboutCardType} from '@/types/homeTypes';
+import type {Dispatch, SetStateAction} from 'react';
+import {useEffect, useRef, useState} from 'react';
+import {ClipLoader} from '@/components/Spinner';
 import {EditPrincipalTextForm} from './editPrincipalTextForm';
 
 interface Props {
@@ -42,6 +43,7 @@ export const EditPrincipalTextModal = ({
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [openModal, loading]); // setState functions are stable
 
   const handleClose = () => {

@@ -1,6 +1,7 @@
-import {SmallAboutCardType} from '@/types/homeTypes';
-import {Dispatch, SetStateAction, useEffect, useRef, useState} from 'react';
-import {ClipLoader} from 'react-spinners';
+import type {SmallAboutCardType} from '@/types/homeTypes';
+import type {Dispatch, SetStateAction} from 'react';
+import {useEffect, useRef, useState} from 'react';
+import {ClipLoader} from '@/components/Spinner';
 import {EditSmallAboutCardForm} from './editSmallAboutCardForm';
 
 interface Props {

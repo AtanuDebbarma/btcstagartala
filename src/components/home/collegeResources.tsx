@@ -1,11 +1,11 @@
 import {appStore} from '@/appStore/appStore';
 import {resources} from '@/data/homeData/collegeReourcesData';
-import {CollegeResourcesTypes} from '@/types/homeTypes';
+import type {CollegeResourcesTypes} from '@/types/homeTypes';
 import {useNavigate} from 'react-router-dom';
 import {useMemo, useState} from 'react';
 import {AdminInteractionBtns} from '@/appComponents/adminInteractionBtns';
 import {EditCollegeResourceModal} from './collegeResources/editCollegeResourceModal';
-import {CollegeResourceType} from '@/types/collegeResourcesTypes';
+import type {CollegeResourceType} from '@/types/collegeResourcesTypes';
 
 // Mapping between Firestore names and local data titles
 const FIRESTORE_TO_TITLE_MAP: Record<string, string> = {
@@ -60,7 +60,7 @@ export default function CollegeResources() {
 
   const handleNav = (url: string) => {
     setTimeout(() => {
-      nanvigation(url);
+      void nanvigation(url);
       scrollTo(0, 0);
     }, 200);
   };
@@ -125,7 +125,7 @@ export default function CollegeResources() {
                   alt={resource.alt}
                   loading="lazy"
                   decoding="async"
-                  className={`w-full object-cover ${isFaculty ? 'h-48 object-cover' : 'h-48'}`}
+                  className={`w-full ${isFaculty ? 'h-48 object-cover' : 'h-48'}`}
                 />
                 <div className="absolute inset-0 flex items-end justify-center bg-black/20">
                   <h3 className="p-4 text-xl font-bold text-amber-50">

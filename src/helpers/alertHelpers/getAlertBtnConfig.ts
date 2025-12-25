@@ -1,5 +1,5 @@
-import {AlertsType, CarouselModeType} from '@/types/homeTypes';
-import {Timestamp} from 'firebase/firestore';
+import type {AlertsType, CarouselModeType} from '@/types/homeTypes';
+import type {Timestamp} from 'firebase/firestore';
 import {createButtonConfig} from '../shared/genericButtonConfig';
 
 export const getAlertBtnsConfig = (

@@ -1,9 +1,9 @@
 import {useState} from 'react';
 import {NoticeTableBody} from './noticeTableBody';
-import {ClipLoader} from 'react-spinners';
+import {ClipLoader} from '@/components/Spinner';
 import {appStore} from '@/appStore/appStore';
-import {CarouselModeType, NoticeBoardType} from '@/types/homeTypes';
-import {Timestamp} from 'firebase/firestore';
+import type {CarouselModeType, NoticeBoardType} from '@/types/homeTypes';
+import type {Timestamp} from 'firebase/firestore';
 import {NoticeAdminModal} from './noticeAdminModal';
 
 export const NoticesTableMain = () => {

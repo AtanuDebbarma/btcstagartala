@@ -1,8 +1,8 @@
 import {AdminInteractionBtns} from '@/appComponents/adminInteractionBtns';
 import {appStore} from '@/appStore/appStore';
-import {ProspectusAndAdmissionFormType} from '@/types/homeTypes';
+import type {ProspectusAndAdmissionFormType} from '@/types/homeTypes';
 import {NavButton} from './noticeSectionItems';
-import {Timestamp} from 'firebase/firestore';
+import type {Timestamp} from 'firebase/firestore';
 import {useState} from 'react';
 import {ProspectusModal} from './prospectusModal';
 

@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Dimensions} from '@/services/carousel/fetchDimentions';
+import type {Dimensions} from '@/services/carousel/fetchDimentions';
 import {handleDimUpdate} from '@/helpers/carouselHelpers/carouselUpdateHelpers';
 
 type PropTypes = {
@@ -74,7 +74,7 @@ export const DimentionsAdjustForm = React.memo(
     };
 
     const handleUpdate = () => {
-      handleDimUpdate(
+      void handleDimUpdate(
         setOpenModal,
         formValues,
         setLoading,

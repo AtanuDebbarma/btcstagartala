@@ -1,6 +1,6 @@
-import {StateCreator} from 'zustand';
-import {CarouselImage} from '@/types/homeTypes';
-import {AppState} from '../appStore';
+import type {StateCreator} from 'zustand';
+import type {CarouselImage} from '@/types/homeTypes';
+import type {AppState} from '../appStore';
 
 export type CarouselImagesSliceType = {
   carouselImages: CarouselImage[] | [];

@@ -1,6 +1,6 @@
-import {StateCreator} from 'zustand';
-import {Dimensions} from '@/services/carousel/fetchDimentions';
-import {AppState} from '../appStore';
+import type {StateCreator} from 'zustand';
+import type {Dimensions} from '@/services/carousel/fetchDimentions';
+import type {AppState} from '../appStore';
 
 export const defaultDimValues: Dimensions = {
   default: 350,

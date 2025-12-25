@@ -1,4 +1,9 @@
 import {db} from '@/services/firebase';
+import type {
+  DocumentData,
+  DocumentReference,
+  Timestamp,
+} from 'firebase/firestore';
 import {
   collection,
   addDoc,
@@ -8,10 +13,8 @@ import {
   where,
   getDocs,
   updateDoc,
-  DocumentData,
-  DocumentReference,
-  Timestamp,
 } from 'firebase/firestore';
+import {logger} from '../../utils/logger';
 
 /**
  * Add new gallery image to Firestore
@@ -39,7 +42,7 @@ export const addGalleryImage = async (
 
     return true;
   } catch (error) {
-    console.error('[Gallery] Failed to add image:', error);
+    logger.error('[Gallery] Failed to add image:', error);
     return false;
   }
 };
@@ -74,7 +77,7 @@ export const updateGalleryImage = async (
     await updateDoc(ref, updatedFields);
     return true;
   } catch (error) {
-    console.error('[Gallery] Failed to update image:', error);
+    logger.error('[Gallery] Failed to update image:', error);
     return false;
   }
 };
@@ -88,7 +91,7 @@ export const deleteGalleryImage = async (imageId: string): Promise<boolean> => {
     await deleteDoc(imageRef);
     return true;
   } catch (error) {
-    console.error('[Gallery] Failed to delete image:', error);
+    logger.error('[Gallery] Failed to delete image:', error);
     return false;
   }
 };
@@ -107,7 +110,7 @@ export const updateGalleryImagesOrder = async (
     await Promise.all(updatePromises);
     return true;
   } catch (error) {
-    console.error('[Gallery] Failed to update order:', error);
+    logger.error('[Gallery] Failed to update order:', error);
     return false;
   }
 };

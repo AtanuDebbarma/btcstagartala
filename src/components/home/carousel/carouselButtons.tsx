@@ -1,7 +1,7 @@
 import {AdminInteractionBtns} from '@/appComponents/adminInteractionBtns';
 import {getCarouselBtnsConfig} from '@/helpers/carouselHelpers/getCarouselBtnsConfig';
-import {CarouselImage, CarouselModeType} from '@/types/homeTypes';
-import {Timestamp} from 'firebase/firestore';
+import type {CarouselImage, CarouselModeType} from '@/types/homeTypes';
+import type {Timestamp} from 'firebase/firestore';
 import React from 'react';
 
 export const CustomLeftArrow = ({onClick}: {onClick?: () => void}) => (

@@ -1,7 +1,7 @@
 import {appStore} from '@/appStore/appStore';
 import {RouteNames} from '@/constants/routeNames';
 import useWindowSize from '@/helpers/findWindowSize';
-import {AlertsType} from '@/types/homeTypes';
+import type {AlertsType} from '@/types/homeTypes';
 
 import {useRef, useEffect, useState} from 'react';
 import {useNavigate} from 'react-router-dom';
@@ -45,7 +45,7 @@ export default function NewsTicker() {
   const navigation = useNavigate();
   const handleNavigation = (url: string) => {
     setTimeout(() => {
-      navigation(url);
+      void navigation(url);
       scrollTo(0, 0);
     }, 200);
   };

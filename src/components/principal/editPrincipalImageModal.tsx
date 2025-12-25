@@ -1,6 +1,7 @@
-import {SmallAboutCardimageType} from '@/types/homeTypes';
-import {Dispatch, SetStateAction, useEffect, useRef, useState} from 'react';
-import {ClipLoader} from 'react-spinners';
+import type {SmallAboutCardimageType} from '@/types/homeTypes';
+import type {Dispatch, SetStateAction} from 'react';
+import {useEffect, useRef, useState} from 'react';
+import {ClipLoader} from '@/components/Spinner';
 import {EditPrincipalImageForm} from './editPrincipalImageForm';
 
 interface Props {
@@ -42,6 +43,7 @@ export const EditPrincipalImageModal = ({
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [openModal, loading]); // setState functions are stable
 
   const handleClose = () => {

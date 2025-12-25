@@ -1,5 +1,5 @@
 import {links} from '@/data/navBarData/topNavBarData';
-import {Dispatch, SetStateAction} from 'react';
+import type {Dispatch, SetStateAction} from 'react';
 import {useNavigate} from 'react-router-dom';
 
 export const NavLinks = () => {
@@ -7,7 +7,7 @@ export const NavLinks = () => {
 
   const handleNav = (path: string) => {
     setTimeout(() => {
-      navigate(path);
+      void navigate(path);
       scrollTo(0, 0);
     }, 200);
   };
@@ -35,7 +35,7 @@ export const MobileLinks = ({
 
   const handleNav = (path: string) => {
     setTimeout(() => {
-      navigate(path);
+      void navigate(path);
       scrollTo(0, 0);
       setMenuOpen(false);
     }, 200);

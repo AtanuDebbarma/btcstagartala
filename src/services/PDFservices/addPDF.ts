@@ -1,5 +1,6 @@
 import {addDoc, collection, Timestamp, updateDoc} from 'firebase/firestore';
 import {db} from '../firebase';
+import {logger} from '../../utils/logger';
 
 export const addPDF = async (
   newFile: any,
@@ -27,7 +28,7 @@ export const addPDF = async (
         id: docRef.id,
       });
     } catch (err) {
-      console.error('Failed to update document with ID field:', err);
+      logger.error('Failed to update document with ID field:', err);
       return {firebaseAddSuccess: false};
     }
     const newNotice: any = {
@@ -38,7 +39,7 @@ export const addPDF = async (
 
     return {firebaseAddSuccess: true, newNotice};
   } catch (error) {
-    console.error('Failed to add File:', error);
+    logger.error('Failed to add File:', error);
     return {firebaseAddSuccess: false};
   }
 };

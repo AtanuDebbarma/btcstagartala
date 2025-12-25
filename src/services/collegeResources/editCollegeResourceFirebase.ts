@@ -1,11 +1,7 @@
 import {db} from '../firebase';
-import {
-  doc,
-  getDoc,
-  updateDoc,
-  DocumentData,
-  DocumentReference,
-} from 'firebase/firestore';
+import type {DocumentData, DocumentReference} from 'firebase/firestore';
+import {doc, getDoc, updateDoc} from 'firebase/firestore';
+import {logger} from '../../utils/logger';
 
 /**
  * Get college resource document by ID
@@ -25,7 +21,7 @@ export const getCollegeResourceByID = async (
     }
     return null;
   } catch (error) {
-    console.error('[CollegeResources] Failed to get document:', error);
+    logger.error('[CollegeResources] Failed to get document:', error);
     return null;
   }
 };
@@ -41,7 +37,7 @@ export const updateCollegeResource = async (
     await updateDoc(ref, updatedFields);
     return true;
   } catch (error) {
-    console.error('[CollegeResources] Failed to update document:', error);
+    logger.error('[CollegeResources] Failed to update document:', error);
     return false;
   }
 };

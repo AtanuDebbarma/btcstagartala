@@ -1,6 +1,6 @@
 import {appStore} from '@/appStore/appStore';
 import {handleEditImageUrl} from '@/helpers/textUpdateHelpers/genericTextHelpers';
-import {SmallAboutCardimageType} from '@/types/homeTypes';
+import type {SmallAboutCardimageType} from '@/types/homeTypes';
 import React, {useState} from 'react';
 
 type PropTypes = {
@@ -50,7 +50,7 @@ export const EditPrincipalImageForm = ({
     }
 
     setTimeout(() => {
-      handleEditImageUrl(
+      void handleEditImageUrl(
         setOpenModal,
         'principal_image',
         'smallAboutCard',
@@ -105,7 +105,7 @@ export const EditPrincipalImageForm = ({
           <img
             src={newImageUrl}
             alt="Preview"
-            className="mt-2 h-auto max-h-[200px] w-full rounded-md object-cover"
+            className="mt-2 h-auto max-h-50 w-full rounded-md object-cover"
             onError={e => {
               (e.target as HTMLImageElement).style.display = 'none';
               setErrorMessage('Invalid image URL or image failed to load');

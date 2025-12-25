@@ -1,5 +1,5 @@
 import {handleEditGalleryImage} from '@/helpers/galleryHelpers/galleryHelpers';
-import {GalleryImageType} from '@/types/galleryTypes';
+import type {GalleryImageType} from '@/types/galleryTypes';
 import React, {useState} from 'react';
 
 type PropTypes = {
@@ -39,7 +39,7 @@ export const EditGalleryForm = ({
       return;
     }
     setTimeout(() => {
-      handleEditGalleryImage(
+      void handleEditGalleryImage(
         setOpenModal,
         selectedImage,
         setLoading,

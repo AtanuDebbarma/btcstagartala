@@ -1,5 +1,5 @@
 import {handleDeleteGalleryImage} from '@/helpers/galleryHelpers/galleryHelpers';
-import {GalleryImageType} from '@/types/galleryTypes';
+import type {GalleryImageType} from '@/types/galleryTypes';
 import React, {useState} from 'react';
 
 type PropTypes = {
@@ -25,7 +25,7 @@ export const DeleteGalleryForm = ({
 
   const handleOnDelete = () => {
     setTimeout(() => {
-      handleDeleteGalleryImage(
+      void handleDeleteGalleryImage(
         setOpenModal,
         selectedImage,
         setLoading,

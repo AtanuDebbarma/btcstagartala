@@ -2,7 +2,8 @@ import {useEffect, useCallback, useRef} from 'react';
 import {collection, getDocs} from 'firebase/firestore';
 import {db} from './firebase';
 import {appStore} from '@/appStore/appStore';
-import {ProspectusAndAdmissionFormType} from '@/types/homeTypes';
+import type {ProspectusAndAdmissionFormType} from '@/types/homeTypes';
+import {logger} from '../utils/logger';
 
 export const useFetchProspectusAndAdmissionForm = () => {
   const isMountedRef = useRef<boolean>(false);
@@ -30,20 +31,20 @@ export const useFetchProspectusAndAdmissionForm = () => {
       } else {
         if (isMountedRef.current) {
           await setProspectusAndAdmission([]);
-          console.error('ProspectusAndAdmission fetch failed');
+          logger.error('ProspectusAndAdmission fetch failed');
         }
       }
     } catch (err) {
       if (isMountedRef.current) {
         await setProspectusAndAdmission([]);
-        console.error('ProspectusAndAdmission fetch failed', err);
+        logger.error('ProspectusAndAdmission fetch failed', err);
       }
     }
   }, [setProspectusAndAdmission]);
 
   useEffect(() => {
     isMountedRef.current = true;
-    fetchProspectus();
+    void fetchProspectus();
     return () => {
       isMountedRef.current = false;
     };

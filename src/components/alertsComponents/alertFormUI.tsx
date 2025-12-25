@@ -1,5 +1,5 @@
 // FormInput.tsx
-import {CarouselModeType} from '@/types/homeTypes';
+import type {CarouselModeType} from '@/types/homeTypes';
 import React from 'react';
 
 type FormInputProps = {

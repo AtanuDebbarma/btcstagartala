@@ -1,5 +1,6 @@
 import {collection, query, where, getDocs, deleteDoc} from 'firebase/firestore';
 import {db} from '../firebase';
+import {logger} from '../../utils/logger';
 
 /**
  * Deletes a document from the Firestore.
@@ -31,12 +32,12 @@ export const deleteDocument = async (
       await deleteDoc(targetDoc.ref);
       return {firebaseSuccess: true};
     } catch (error) {
-      console.error('Error deleting document:', error);
+      logger.error('Error deleting document:', error);
       handleUploadErrorMessage('Failed to delete file. Please try again.');
       return {firebaseSuccess: false};
     }
   } catch (error) {
-    console.error('Error deleting document:', error);
+    logger.error('Error deleting document:', error);
     handleUploadErrorMessage('Failed to delete file. Please try again.');
     return {firebaseSuccess: false};
   }

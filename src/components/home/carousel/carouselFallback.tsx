@@ -1,10 +1,10 @@
 import {AdminInteractionBtns} from '@/appComponents/adminInteractionBtns';
 import {appStore} from '@/appStore/appStore';
-import backupCarousel from '@/assets/backup-carousel.jpg';
-import {CarouselModeType} from '@/types/homeTypes';
-import {Timestamp} from 'firebase/firestore';
+import {Assets} from '@/assets/assetData';
+import type {CarouselModeType} from '@/types/homeTypes';
+import type {Timestamp} from 'firebase/firestore';
 import React from 'react';
-import {Dispatch, SetStateAction} from 'react';
+import type {Dispatch, SetStateAction} from 'react';
 
 // Define valid objectFit values
 type ObjectFit = 'cover' | 'contain' | 'fill' | 'none' | 'scale-down';
@@ -60,9 +60,9 @@ export const CarouselFallback = React.memo(
           </div>
         )}
         {carouselImages && carouselImages.length === 0 && (
-          <div className="flex h-[400px] w-full items-center justify-center">
+          <div className="flex h-100 w-full items-center justify-center">
             <img
-              src={backupCarousel}
+              src={Assets.link.backupCollege}
               alt="Carousel image"
               style={{objectFit: !dimError ? objectFitValue : 'cover'}}
               className="h-full w-full shadow-md"

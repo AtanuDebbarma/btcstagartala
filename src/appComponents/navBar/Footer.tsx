@@ -13,7 +13,7 @@ function Footer() {
 
   const handleNav = (url: string) => {
     setTimeout(() => {
-      nanvigation(url);
+      void nanvigation(url);
       scrollTo(0, 0);
     }, 200);
   };

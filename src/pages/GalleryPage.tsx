@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {appStore} from '@/appStore/appStore';
-import {GalleryImageType} from '@/types/galleryTypes';
+import type {GalleryImageType} from '@/types/galleryTypes';
 import {GalleryModal} from '@/components/gallery/galleryModal';
 import {ReorderGalleryModal} from '@/components/gallery/reorderGalleryModal';
 import {AdminInteractionBtns} from '@/appComponents/adminInteractionBtns';
@@ -9,7 +9,7 @@ import {
   fetchPageWithCursor,
   getGalleryImagesCount,
 } from '@/services/gallery/galleryPagination';
-import {QueryDocumentSnapshot, DocumentData} from 'firebase/firestore';
+import type {QueryDocumentSnapshot, DocumentData} from 'firebase/firestore';
 import {SEO} from '@/components/SEO/SEO';
 import {pageSEO} from '@/components/SEO/seoConstants';
 
@@ -45,7 +45,7 @@ export default function GalleryPage(): React.JSX.Element {
       const count = await getGalleryImagesCount();
       setTotalCount(count);
     };
-    fetchCount();
+    void fetchCount();
   }, []);
 
   // Fetch images for current page with cursor optimization
@@ -71,7 +71,8 @@ export default function GalleryPage(): React.JSX.Element {
 
       setLoading(false);
     };
-    loadPage();
+    void loadPage();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPage]);
   // Note: pageCursors is intentionally excluded to prevent infinite loops - it's updated inside this effect
 
@@ -95,8 +96,9 @@ export default function GalleryPage(): React.JSX.Element {
           setPageCursors(prev => new Map(prev).set(currentPage, lastDoc));
         }
       };
-      refetch();
+      void refetch();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [openModal]); // Only refetch when modal state changes
 
   // Handle body overflow when modal is open/closed
@@ -151,7 +153,7 @@ export default function GalleryPage(): React.JSX.Element {
         setPageCursors(prev => new Map(prev).set(currentPage, lastDoc));
       }
     };
-    refetch();
+    void refetch();
   };
 
   const handleEditImage = (image: GalleryImageType) => {

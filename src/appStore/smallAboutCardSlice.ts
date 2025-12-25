@@ -1,6 +1,9 @@
-import {StateCreator} from 'zustand';
-import {SmallAboutCardimageType, SmallAboutCardType} from '@/types/homeTypes';
-import {AppState} from './appStore';
+import type {StateCreator} from 'zustand';
+import type {
+  SmallAboutCardimageType,
+  SmallAboutCardType,
+} from '@/types/homeTypes';
+import type {AppState} from './appStore';
 
 export type SmallAboutCardSliceType = {
   smallAboutCard: SmallAboutCardType | null;

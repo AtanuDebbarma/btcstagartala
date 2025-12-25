@@ -1,5 +1,5 @@
 import {stats} from '@/data/homeData/statsbannerData';
-import {StatsBannerTypes} from '@/types/homeTypes';
+import type {StatsBannerTypes} from '@/types/homeTypes';
 import {parseCount} from '@/utils/Home/statsBannerUtils';
 import CountUp from 'react-countup';
 

@@ -1,6 +1,6 @@
-import {StateCreator} from 'zustand';
-import {CollegeResourceType} from '@/types/collegeResourcesTypes';
-import {AppState} from './appStore';
+import type {StateCreator} from 'zustand';
+import type {CollegeResourceType} from '@/types/collegeResourcesTypes';
+import type {AppState} from './appStore';
 
 export type CollegeResourcesSliceType = {
   collegeResources: CollegeResourceType[] | [];

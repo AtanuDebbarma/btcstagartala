@@ -1,4 +1,4 @@
-import {NoticeBoardType} from '@/types/homeTypes';
+import type {NoticeBoardType} from '@/types/homeTypes';
 import {convertFirebaseTimestampToDate} from '@/utils/dateTransform';
 import React from 'react';
 import {useNavigate} from 'react-router-dom';
@@ -9,7 +9,7 @@ export const NoticeItem = React.memo(({notice}: {notice: NoticeBoardType}) => {
 
   const handleClick = () => {
     setTimeout(() => {
-      navigation(`/pdf-viewer?file=${notice.url}`);
+      void navigation(`/pdf-viewer?file=${notice.url}`);
     }, 200);
   };
 
@@ -40,18 +40,18 @@ export const NavButton = React.memo(({text, url}: Props) => {
   const navigation = useNavigate();
   const handleClick = () => {
     setTimeout(() => {
-      navigation(`/pdf-viewer?file=${url}`);
+      void navigation(`/pdf-viewer?file=${url}`);
     }, 200);
   };
   return (
     <button
       onClick={handleClick}
-      className="w-full min-w-[250px] cursor-pointer transition-transform duration-180 ease-in-out focus:outline-none active:scale-95">
+      className="w-full min-w-62.5 cursor-pointer transition-transform duration-180 ease-in-out focus:outline-none active:scale-95">
       <div
         className={`rounded-sm bg-[#3f003f] px-4 py-4 text-center text-white shadow-md`}>
         <h3 className="relative inline-block text-lg font-semibold tracking-wide text-nowrap uppercase">
           {text}
-          <span className="absolute -bottom-1 left-1/4 mt-2 h-[3px] w-1/2 rounded bg-yellow-400"></span>
+          <span className="absolute -bottom-1 left-1/4 mt-2 h-0.75 w-1/2 rounded bg-yellow-400"></span>
         </h3>
       </div>
     </button>
@@ -70,7 +70,7 @@ export const AccreditationCard = React.memo(
   }) => {
     if (isMoreButton) {
       return (
-        <div className="flex min-h-[30px] flex-row items-center justify-center rounded-md bg-[#900090] p-3 text-white shadow md:min-h-[150px]">
+        <div className="flex min-h-7.5 flex-row items-center justify-center rounded-md bg-[#900090] p-3 text-white shadow md:min-h-37.5">
           <p className="mb-1 text-sm font-semibold">More Accreditations</p>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -90,11 +90,11 @@ export const AccreditationCard = React.memo(
     }
 
     return (
-      <div className="flex min-h-[150px] flex-col items-center justify-center rounded-md bg-white p-3 text-center shadow">
+      <div className="flex min-h-37.5 flex-col items-center justify-center rounded-md bg-white p-3 text-center shadow">
         <img
           src={logo}
           alt={name}
-          className="mb-2 h-[65px] w-auto object-contain"
+          className="mb-2 h-16.25 w-auto object-contain"
         />
         <p className="text-center text-sm text-gray-800">{name}</p>
       </div>

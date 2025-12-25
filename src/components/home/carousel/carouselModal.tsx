@@ -1,7 +1,8 @@
-import {CarouselImage, CarouselModeType} from '@/types/homeTypes';
-import {Dispatch, SetStateAction, useEffect, useRef, useState} from 'react';
+import type {CarouselImage, CarouselModeType} from '@/types/homeTypes';
+import type {Dispatch, SetStateAction} from 'react';
+import {useEffect, useRef, useState} from 'react';
 import {ImageForm} from './imageForm';
-import {ClipLoader} from 'react-spinners';
+import {ClipLoader} from '@/components/Spinner';
 import {DimentionsAdjustForm} from './dimentionsAdjust';
 import {appStore} from '@/appStore/appStore';
 import React from 'react';
@@ -53,6 +54,7 @@ export const CarouselModal = React.memo(
       return () => {
         document.removeEventListener('mousedown', handleClickOutside);
       };
+      // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [openModal, loading, uploading]); // setOpenModal and setAutoPlay are stable
 
     const handleClose = () => {

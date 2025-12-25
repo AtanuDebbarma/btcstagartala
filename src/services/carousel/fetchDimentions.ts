@@ -3,6 +3,7 @@ import {collection, getDocs} from 'firebase/firestore';
 import {db} from '../firebase';
 import {appStore} from '@/appStore/appStore';
 import {defaultDimValues} from '@/appStore/carousel/carouselDimentionsSlice';
+import {logger} from '../../utils/logger';
 
 export type Dimensions = {
   default: number;
@@ -49,7 +50,7 @@ export const useCarouselDimensions = () => {
       }
     } catch (err) {
       if (isMountedRef.current) {
-        console.error('Error fetching carousel dimensions:', err);
+        logger.error('Error fetching carousel dimensions:', err);
         await setDimLoading(false);
         await setDimError(true);
         await setDimensions(defaultDimValues);
@@ -59,7 +60,7 @@ export const useCarouselDimensions = () => {
 
   useEffect(() => {
     isMountedRef.current = true;
-    fetchDimensions();
+    void fetchDimensions();
     return () => {
       isMountedRef.current = false;
     };

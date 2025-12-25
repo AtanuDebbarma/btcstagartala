@@ -1,6 +1,6 @@
 import {appStore} from '@/appStore/appStore';
 import {handleEditProspectus} from '@/helpers/pdfHelpers/prospectusHelpers';
-import {ProspectusAndAdmissionFormType} from '@/types/homeTypes';
+import type {ProspectusAndAdmissionFormType} from '@/types/homeTypes';
 import {validatePDFType} from '@/utils/fileValidation';
 import React, {useEffect, useRef, useState} from 'react';
 
@@ -85,7 +85,7 @@ export const EditProspectusForm = ({
       return;
     }
     setTimeout(() => {
-      handleEditProspectus(
+      void handleEditProspectus(
         setOpenModal,
         selectedPDF,
         setLoading,
@@ -127,22 +127,20 @@ export const EditProspectusForm = ({
         <label className="mt-1 w-full cursor-pointer rounded-md border border-gray-300 p-2 shadow-sm hover:bg-gray-300 focus:border-blue-500 focus:ring-blue-500">
           {formValues}
         </label>
-        <>
-          <label
-            htmlFor="file-upload"
-            className="mt-1 h-full w-full cursor-pointer rounded-md border border-gray-300 p-2 shadow-sm transition-transform duration-180 ease-in-out hover:bg-gray-300 active:scale-95">
-            Upload File
-          </label>
-          <input
-            id="file-upload"
-            type="file"
-            accept="application/pdf"
-            disabled={uploading}
-            onChange={handleFileChange}
-            className="hidden"
-            ref={fileInputRef}
-          />
-        </>
+        <label
+          htmlFor="file-upload"
+          className="mt-1 h-full w-full cursor-pointer rounded-md border border-gray-300 p-2 shadow-sm transition-transform duration-180 ease-in-out hover:bg-gray-300 active:scale-95">
+          Upload File
+        </label>
+        <input
+          id="file-upload"
+          type="file"
+          accept="application/pdf"
+          disabled={uploading}
+          onChange={handleFileChange}
+          className="hidden"
+          ref={fileInputRef}
+        />
         {uploading && (
           <p className="mt-1 text-sm text-blue-600">Uploading...</p>
         )}

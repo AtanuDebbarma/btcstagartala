@@ -7,7 +7,7 @@ import {
   writeBatch,
 } from 'firebase/firestore';
 import {db} from '../firebase';
-import {CarouselImage} from '@/types/homeTypes';
+import type {CarouselImage} from '@/types/homeTypes';
 
 const imagesRef = collection(db, 'carouselImages');
 

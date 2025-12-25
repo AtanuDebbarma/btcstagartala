@@ -1,13 +1,7 @@
 import {db} from '@/services/firebase';
-import {
-  collection,
-  query,
-  where,
-  getDocs,
-  updateDoc,
-  DocumentData,
-  DocumentReference,
-} from 'firebase/firestore';
+import type {DocumentData, DocumentReference} from 'firebase/firestore';
+import {collection, query, where, getDocs, updateDoc} from 'firebase/firestore';
+import {logger} from '../../utils/logger';
 /**
  * Get Firestore doc ref for the image with a specific fileID
  */
@@ -43,7 +37,7 @@ export const updatePDFDoc = async (
     } catch (error: any) {
       // If it's the last attempt, log error and return false
       if (attempt === retries) {
-        console.error('Failed to update Firestore document:', error.message);
+        logger.error('Failed to update Firestore document:', error.message);
         return false;
       }
 

@@ -1,5 +1,5 @@
-import {CarouselImage, CarouselModeType} from '@/types/homeTypes';
-import {Timestamp} from 'firebase/firestore';
+import type {CarouselImage, CarouselModeType} from '@/types/homeTypes';
+import type {Timestamp} from 'firebase/firestore';
 import {createButtonConfig} from '../shared/genericButtonConfig';
 
 export const getCarouselBtnsConfig = (

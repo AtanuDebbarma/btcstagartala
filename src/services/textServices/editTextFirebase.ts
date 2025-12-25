@@ -1,5 +1,7 @@
 import {db} from '@/services/firebase';
-import {doc, getDoc, updateDoc, DocumentReference} from 'firebase/firestore';
+import type {DocumentReference} from 'firebase/firestore';
+import {doc, getDoc, updateDoc} from 'firebase/firestore';
+import {logger} from '../../utils/logger';
 
 /**
  * Generic function to get Firestore doc ref by document ID
@@ -30,7 +32,7 @@ export const updateTextDoc = async (
     await updateDoc(ref, updatedFields);
     return true;
   } catch (error) {
-    console.error('Failed to update document:', error);
+    logger.error('Failed to update document:', error);
     return false;
   }
 };

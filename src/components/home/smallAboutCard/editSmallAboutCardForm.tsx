@@ -1,6 +1,6 @@
 import {appStore} from '@/appStore/appStore';
 import {handleEditText} from '@/helpers/textUpdateHelpers/genericTextHelpers';
-import {SmallAboutCardType} from '@/types/homeTypes';
+import type {SmallAboutCardType} from '@/types/homeTypes';
 import React, {useState} from 'react';
 
 type PropTypes = {
@@ -48,7 +48,7 @@ export const EditSmallAboutCardForm = ({
     }
 
     setTimeout(() => {
-      handleEditText(
+      void handleEditText(
         setOpenModal,
         'gy7JOSioCyirk8KNeSmX',
         'smallAboutCard',

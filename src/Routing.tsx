@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import {useState, Suspense, lazy} from 'react';
 import {
   Route,
   BrowserRouter as Router,
@@ -9,31 +9,56 @@ import {WhatsAppIcon, UpArrowIcon} from './appComponents/bottomFloatingIcons';
 import CollegeNavbar from './appComponents/navBar/CollegeNavbar';
 import Footer from './appComponents/navBar/Footer';
 import {RouteNames} from './constants/routeNames';
-import AdminLoginForm from './pages/AdminLoginForm';
-import Contact from './pages/Contact';
-import Home from './pages/Home';
+import Home from './pages/Home'; // Keep Home for immediate loading
 import {useFetchCarouselImages} from './services/carousel/carouselFetchHook';
 import {useCarouselDimensions} from './services/carousel/fetchDimentions';
-import {PdfIframe} from './appComponents/pdfIframe';
 import {useFetchProspectusAndAdmissionForm} from './services/fetchProspectusAndAdmissionForm';
-import NoticesPage from './pages/NoticesPage';
 import {useFetchNoticeBoard} from './services/noticeBoard/fetchNoticeBoard';
 import {useFetchAlerts} from './services/noticeBoard/fetchAlertsHook';
 import {useFetchSmallAboutCard} from './services/textServices/fetchSmallAboutCard';
-import AlertsPage from './pages/Alerts/Alerts';
-import AlertDesc from './pages/Alerts/AlertDesc';
-import {ProtectedRoute} from './ProtectedRoute';
-import PrincipalMESSAGE from './pages/PrincipalMessage';
-import Faculty from './pages/Faculty/Faculty';
-import {
-  GuestFaculty,
-  NonTeacthingStaff,
-  PermanentFaculty,
-} from './components/faculty/permanentFaculty';
-import AboutPage from './pages/About';
-import AcademicsPage from './pages/AcademicsPage';
-import GalleryPage from './pages/GalleryPage';
 import {useFetchCollegeResources} from './services/collegeResources/fetchCollegeResources';
+
+// Lazy load all pages except Home
+const AboutPage = lazy(() => import('./pages/About'));
+const Contact = lazy(() => import('./pages/Contact'));
+const AcademicsPage = lazy(() => import('./pages/AcademicsPage'));
+const GalleryPage = lazy(() => import('./pages/GalleryPage'));
+const AdminLoginForm = lazy(() => import('./pages/AdminLoginForm'));
+const PdfIframe = lazy(() =>
+  import('./appComponents/pdfIframe').then(module => ({
+    default: module.PdfIframe,
+  })),
+);
+const NoticesPage = lazy(() => import('./pages/NoticesPage'));
+const AlertsPage = lazy(() => import('./pages/Alerts/Alerts'));
+const AlertDesc = lazy(() => import('./pages/Alerts/AlertDesc'));
+const ProtectedRoute = lazy(() =>
+  import('./ProtectedRoute').then(module => ({default: module.ProtectedRoute})),
+);
+const PrincipalMESSAGE = lazy(() => import('./pages/PrincipalMessage'));
+const Faculty = lazy(() => import('./pages/Faculty/Faculty'));
+const PermanentFaculty = lazy(() =>
+  import('./components/faculty/permanentFaculty').then(module => ({
+    default: module.PermanentFaculty,
+  })),
+);
+const NonTeacthingStaff = lazy(() =>
+  import('./components/faculty/permanentFaculty').then(module => ({
+    default: module.NonTeacthingStaff,
+  })),
+);
+const GuestFaculty = lazy(() =>
+  import('./components/faculty/permanentFaculty').then(module => ({
+    default: module.GuestFaculty,
+  })),
+);
+
+// Loading fallback component
+const PageLoader = () => (
+  <div className="flex min-h-screen items-center justify-center">
+    <div className="h-8 w-8 animate-spin rounded-full border-4 border-[#900090] border-t-transparent"></div>
+  </div>
+);
 
 // Placeholder component for routes without content yet
 const PlaceholderPage = ({title}: {title: string}) => {
@@ -93,41 +118,119 @@ const RoutesWrapper = ({
         <Routes>
           <Route path={RouteNames.DEFAULT} element={<Home />} />
           <Route path={RouteNames.HOME} element={<Home />} />
-          <Route path={RouteNames.ABOUT} element={<AboutPage />} />
-          <Route path={RouteNames.CONTACT} element={<Contact />} />
-          <Route path={RouteNames.ACADEMICS} element={<AcademicsPage />} />
-          <Route path={RouteNames.GALLERY} element={<GalleryPage />} />
+          <Route
+            path={RouteNames.ABOUT}
+            element={
+              <Suspense fallback={<PageLoader />}>
+                <AboutPage />
+              </Suspense>
+            }
+          />
+          <Route
+            path={RouteNames.CONTACT}
+            element={
+              <Suspense fallback={<PageLoader />}>
+                <Contact />
+              </Suspense>
+            }
+          />
+          <Route
+            path={RouteNames.ACADEMICS}
+            element={
+              <Suspense fallback={<PageLoader />}>
+                <AcademicsPage />
+              </Suspense>
+            }
+          />
+          <Route
+            path={RouteNames.GALLERY}
+            element={
+              <Suspense fallback={<PageLoader />}>
+                <GalleryPage />
+              </Suspense>
+            }
+          />
           <Route
             path={RouteNames.PRINCIPAL_MESSAGE}
-            element={<PrincipalMESSAGE />}
+            element={
+              <Suspense fallback={<PageLoader />}>
+                <PrincipalMESSAGE />
+              </Suspense>
+            }
           />
-          <Route path={RouteNames.FACULTY} element={<Faculty />} />
+          <Route
+            path={RouteNames.FACULTY}
+            element={
+              <Suspense fallback={<PageLoader />}>
+                <Faculty />
+              </Suspense>
+            }
+          />
           <Route
             path={`${RouteNames.FACULTY}/permanent-faculty`}
-            element={<PermanentFaculty />}
+            element={
+              <Suspense fallback={<PageLoader />}>
+                <PermanentFaculty />
+              </Suspense>
+            }
           />
           <Route
             path={`${RouteNames.FACULTY}/non-teaching-staffs`}
-            element={<NonTeacthingStaff />}
+            element={
+              <Suspense fallback={<PageLoader />}>
+                <NonTeacthingStaff />
+              </Suspense>
+            }
           />
           <Route
             path={`${RouteNames.FACULTY}/guest-faculty`}
-            element={<GuestFaculty />}
+            element={
+              <Suspense fallback={<PageLoader />}>
+                <GuestFaculty />
+              </Suspense>
+            }
           />
           <Route
             path={RouteNames.ADMIN}
             element={
-              <ProtectedRoute>
-                <AdminLoginForm />
-              </ProtectedRoute>
+              <Suspense fallback={<PageLoader />}>
+                <ProtectedRoute>
+                  <AdminLoginForm />
+                </ProtectedRoute>
+              </Suspense>
             }
           />
-          <Route path="/pdf-viewer" element={<PdfIframe />} />
-          <Route path={RouteNames.NOTICE_BOARD} element={<NoticesPage />} />
-          <Route path={RouteNames.ALERTS} element={<AlertsPage />} />
+          <Route
+            path="/pdf-viewer"
+            element={
+              <Suspense fallback={<PageLoader />}>
+                <PdfIframe />
+              </Suspense>
+            }
+          />
+          <Route
+            path={RouteNames.NOTICE_BOARD}
+            element={
+              <Suspense fallback={<PageLoader />}>
+                <NoticesPage />
+              </Suspense>
+            }
+          />
+          <Route
+            path={RouteNames.ALERTS}
+            element={
+              <Suspense fallback={<PageLoader />}>
+                <AlertsPage />
+              </Suspense>
+            }
+          />
           <Route
             path={`${RouteNames.ALERTS}/:id/:title`}
-            element={<AlertDesc />}
+            element={
+              <Suspense fallback={<PageLoader />}>
+                <AlertDesc />
+              </Suspense>
+            }
           />
 
           {/* Navbar Placeholder Routes */}

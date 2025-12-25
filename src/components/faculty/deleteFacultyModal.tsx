@@ -1,5 +1,6 @@
-import {Dispatch, SetStateAction, useEffect, useRef, useState} from 'react';
-import {ClipLoader} from 'react-spinners';
+import type {Dispatch, SetStateAction} from 'react';
+import {useEffect, useRef, useState} from 'react';
+import {ClipLoader} from '@/components/Spinner';
 import {deleteFacultyMember} from '@/services/backend/facultyCRUD';
 
 interface Props {
@@ -42,6 +43,7 @@ export const DeleteFacultyModal = ({
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [openModal, loading]); // setOpenModal is stable
 
   const handleClose = () => {

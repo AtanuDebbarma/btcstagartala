@@ -1,4 +1,4 @@
-import {GalleryImageType} from '@/types/galleryTypes';
+import type {GalleryImageType} from '@/types/galleryTypes';
 import React, {useState} from 'react';
 import {AddGalleryForm} from './addGalleryForm';
 import {EditGalleryForm} from './editGalleryForm';

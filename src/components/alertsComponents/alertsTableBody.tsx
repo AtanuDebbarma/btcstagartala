@@ -1,9 +1,9 @@
 import {appStore} from '@/appStore/appStore';
-import {AlertsType, CarouselModeType} from '@/types/homeTypes';
+import type {AlertsType, CarouselModeType} from '@/types/homeTypes';
 import {convertFirebaseTimestampToDate} from '@/utils/dateTransform';
 
 import React from 'react';
-import {Timestamp} from 'firebase/firestore';
+import type {Timestamp} from 'firebase/firestore';
 import {AlertNameOrLink} from './alertNameOrLink';
 import {AlertButtons} from './alertButtons';
 import {AlertAdminButtons} from './alertAdminButons';

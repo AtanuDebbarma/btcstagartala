@@ -1,4 +1,5 @@
-import {RouteNames, RouteNamesType} from '@/constants/routeNames';
+import type {RouteNamesType} from '@/constants/routeNames';
+import {RouteNames} from '@/constants/routeNames';
 
 export type NavLinkType = {
   name: string;

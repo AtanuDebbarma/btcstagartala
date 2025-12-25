@@ -12,7 +12,7 @@ export const NoticeNameOrLink = React.memo(({isAdmin, name, url}: PROPS) => {
 
   const handleClick = (url: string) => {
     setTimeout(() => {
-      navigation(`/pdf-viewer?file=${url}`);
+      void navigation(`/pdf-viewer?file=${url}`);
     }, 200);
   };
   // const {width} = useWindowSize();

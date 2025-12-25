@@ -1,4 +1,5 @@
 import {db} from '../firebase';
+import type {QueryDocumentSnapshot, DocumentData} from 'firebase/firestore';
 import {
   collection,
   query,
@@ -6,11 +7,10 @@ import {
   limit,
   startAfter,
   getDocs,
-  QueryDocumentSnapshot,
-  DocumentData,
   getCountFromServer,
 } from 'firebase/firestore';
-import {GalleryImageType} from '@/types/galleryTypes';
+import type {GalleryImageType} from '@/types/galleryTypes';
+import {logger} from '../../utils/logger';
 
 const IMAGES_PER_PAGE = 15;
 
@@ -23,7 +23,7 @@ export const getGalleryImagesCount = async (): Promise<number> => {
     const snapshot = await getCountFromServer(galleryRef);
     return snapshot.data().count;
   } catch (error) {
-    console.error('[Gallery] Failed to get count:', error);
+    logger.error('[Gallery] Failed to get count:', error);
     return 0;
   }
 };
@@ -53,7 +53,7 @@ export const fetchFirstPage = async (): Promise<{
 
     return {images, lastDoc};
   } catch (error) {
-    console.error('[Gallery] Failed to fetch first page:', error);
+    logger.error('[Gallery] Failed to fetch first page:', error);
     return {images: [], lastDoc: null};
   }
 };
@@ -86,7 +86,7 @@ export const fetchNextPage = async (
 
     return {images, lastDoc: newLastDoc};
   } catch (error) {
-    console.error('[Gallery] Failed to fetch next page:', error);
+    logger.error('[Gallery] Failed to fetch next page:', error);
     return {images: [], lastDoc: null};
   }
 };
@@ -116,7 +116,7 @@ export const fetchPageWithCursor = async (
     // Fallback: No cursor available, use offset method (less efficient)
     return fetchPageOffset(pageNumber);
   } catch (error) {
-    console.error('[Gallery] Failed to fetch page:', error);
+    logger.error('[Gallery] Failed to fetch page:', error);
     return {images: [], lastDoc: null};
   }
 };
@@ -155,7 +155,7 @@ const fetchPageOffset = async (
 
     return {images, lastDoc};
   } catch (error) {
-    console.error('[Gallery] Failed to fetch page with offset:', error);
+    logger.error('[Gallery] Failed to fetch page with offset:', error);
     return {images: [], lastDoc: null};
   }
 };

@@ -1,4 +1,4 @@
-import design from '@/assets/noticeBoardBanner.png';
+import {Assets} from '@/assets/assetData';
 import {AlertsTableMain} from '@/components/alertsComponents/alertsTableMain';
 
 const AlertsPage = () => {
@@ -15,7 +15,7 @@ const AlertsPage = () => {
         </div>
         <img
           className="h-full w-full object-cover"
-          src={design}
+          src={Assets.link.noticeBoardBanner}
           alt="notice-image"
         />
       </div>

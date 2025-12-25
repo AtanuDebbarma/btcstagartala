@@ -1,6 +1,6 @@
-import {StateCreator} from 'zustand';
-import {ProspectusAndAdmissionFormType} from '@/types/homeTypes';
-import {AppState} from './appStore';
+import type {StateCreator} from 'zustand';
+import type {ProspectusAndAdmissionFormType} from '@/types/homeTypes';
+import type {AppState} from './appStore';
 
 export type AdmissionFormType = {
   prospectusAndAdmission: ProspectusAndAdmissionFormType[] | [];

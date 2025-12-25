@@ -5,7 +5,7 @@ import {
   handleNoticeEdit,
   handleNoticeEditNameOnly,
 } from '@/helpers/noticeTableHelpers.tsx/noticeTableUpdateHelpers';
-import {CarouselModeType, NoticeBoardType} from '@/types/homeTypes';
+import type {CarouselModeType, NoticeBoardType} from '@/types/homeTypes';
 import {validatePDFType} from '@/utils/fileValidation';
 import React, {useEffect, useRef, useState} from 'react';
 
@@ -112,7 +112,7 @@ export const NoticeModalForm = React.memo(
         return;
       }
       setTimeout(() => {
-        handleNoticeAdd(
+        void handleNoticeAdd(
           setOpenModal,
           formValues,
           setLoading,
@@ -145,7 +145,7 @@ export const NoticeModalForm = React.memo(
         return;
       }
       setTimeout(() => {
-        handleNoticeEdit(
+        void handleNoticeEdit(
           setOpenModal,
           formValues,
           setLoading,
@@ -171,7 +171,7 @@ export const NoticeModalForm = React.memo(
         return;
       }
       setTimeout(() => {
-        handleNoticeDelete(
+        void handleNoticeDelete(
           setOpenModal,
           formValues,
           setLoading,
@@ -214,7 +214,7 @@ export const NoticeModalForm = React.memo(
       }
 
       setTimeout(() => {
-        handleNoticeEditNameOnly(
+        void handleNoticeEditNameOnly(
           setOpenModal,
           formValues,
           setLoading,

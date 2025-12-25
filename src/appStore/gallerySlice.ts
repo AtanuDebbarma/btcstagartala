@@ -1,6 +1,6 @@
-import {StateCreator} from 'zustand';
-import {GalleryImageType} from '@/types/galleryTypes';
-import {AppState} from './appStore';
+import type {StateCreator} from 'zustand';
+import type {GalleryImageType} from '@/types/galleryTypes';
+import type {AppState} from './appStore';
 
 export type GallerySliceType = {
   galleryImages: GalleryImageType[] | [];

@@ -4,7 +4,7 @@ import {useState} from 'react';
 import {EditPrincipalTextModal} from '@/components/principal/editPrincipalTextModal';
 import {EditPrincipalImageModal} from '@/components/principal/editPrincipalImageModal';
 import {useFetchPrincipalData} from '@/services/textServices/fetchPrincipalData';
-import Principal_Fallback from '../assets/Principal_Fallback.png';
+import {Assets} from '../assets/assetData';
 
 const PrincipalMESSAGE = () => {
   useFetchPrincipalData(); // Fetch principal data only when this page is mounted
@@ -93,9 +93,9 @@ const PrincipalMESSAGE = () => {
                   </div>
                 )}
                 <img
-                  src={displayImage || Principal_Fallback}
+                  src={displayImage || Assets.link.Principal_Fallback}
                   alt="Principal Image"
-                  className="h-auto max-h-[350px] w-full rounded-md object-contain"
+                  className="h-auto max-h-87.5 w-full rounded-md object-contain"
                 />
               </div>
             </div>

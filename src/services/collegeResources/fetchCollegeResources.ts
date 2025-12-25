@@ -2,7 +2,8 @@ import {useEffect, useCallback, useRef} from 'react';
 import {collection, getDocs} from 'firebase/firestore';
 import {db} from '../firebase';
 import {appStore} from '@/appStore/appStore';
-import {CollegeResourceType} from '@/types/collegeResourcesTypes';
+import type {CollegeResourceType} from '@/types/collegeResourcesTypes';
+import {logger} from '../../utils/logger';
 
 /**
  * Hook to fetch all college resources (4 documents)
@@ -28,20 +29,20 @@ export const useFetchCollegeResources = () => {
       } else {
         if (isMountedRef.current) {
           await setCollegeResources([]);
-          console.error('CollegeResources fetch failed - no documents found');
+          logger.error('CollegeResources fetch failed - no documents found');
         }
       }
     } catch (err) {
       if (isMountedRef.current) {
         await setCollegeResources([]);
-        console.error('CollegeResources fetch failed', err);
+        logger.error('CollegeResources fetch failed', err);
       }
     }
   }, [setCollegeResources]);
 
   useEffect(() => {
     isMountedRef.current = true;
-    fetchResources();
+    void fetchResources();
     return () => {
       isMountedRef.current = false;
     };

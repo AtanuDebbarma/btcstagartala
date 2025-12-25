@@ -4,7 +4,7 @@ import {
   useNonTeachingStaff,
   useGuestFaculty,
 } from '@/services/faculty/useFaculty';
-import {FacultyWithId, FacultyType} from '@/types/otherTypes';
+import type {FacultyWithId, FacultyType} from '@/types/otherTypes';
 import {appStore} from '@/appStore/appStore';
 import {AdminInteractionBtns} from '@/appComponents/adminInteractionBtns';
 import {useState} from 'react';
@@ -45,7 +45,7 @@ export const FacultyCard = ({
   return (
     <>
       <div
-        className={`relative w-full max-w-[250px] overflow-hidden rounded-md bg-white shadow-md`}
+        className={`relative w-full max-w-62.5 overflow-hidden rounded-md bg-white shadow-md`}
         onMouseEnter={() => setOnHover(true)}
         onMouseLeave={() => setOnHover(false)}>
         {isAdmin && onHover && (
@@ -157,8 +157,8 @@ export function FacultyProfile() {
   };
 
   const handleRefresh = () => {
-    refetchPrincipal();
-    refetchProfessors();
+    void refetchPrincipal();
+    void refetchProfessors();
   };
 
   if (principalLoading || professorsLoading) {

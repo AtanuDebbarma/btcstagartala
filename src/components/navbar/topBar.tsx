@@ -22,7 +22,7 @@ export const TopBar = () => {
     try {
       await auth.signOut();
       setShowLogoutModal(false);
-      navigate(RouteNames.HOME);
+      void navigate(RouteNames.HOME);
       window.scrollTo(0, 0);
     } catch (error) {
       console.error('Logout failed:', error);
@@ -122,7 +122,7 @@ export const TopBar = () => {
                 className="cursor-pointer rounded bg-[#900090] px-4 py-2 text-sm text-white transition-transform duration-180 ease-in-out hover:bg-blue-600 active:scale-95"
                 onClick={() =>
                   setTimeout(() => {
-                    handleLogout();
+                    void handleLogout();
                   }, 200)
                 }>
                 OK

@@ -1,8 +1,9 @@
 import {useEffect, useRef, useCallback} from 'react';
 import {collection, getDocs, orderBy, query} from 'firebase/firestore';
 import {db} from '../firebase';
-import {CarouselImage} from '@/types/homeTypes';
+import type {CarouselImage} from '@/types/homeTypes';
 import {appStore} from '@/appStore/appStore';
+import {logger} from '../../utils/logger';
 
 export const useFetchCarouselImages = () => {
   const isMountedRef = useRef<boolean>(false);
@@ -32,11 +33,11 @@ export const useFetchCarouselImages = () => {
         await setError(null);
         await setLoading(false);
         await setCarouselImages([]);
-        console.error('Error fetching carousel images:');
+        logger.error('Error fetching carousel images:');
       }
     } catch (err: any) {
       if (isMountedRef.current) {
-        console.error('Error fetching carousel images:', err);
+        logger.error('Error fetching carousel images:', err);
         await setError('Failed to load carousel images.');
         await setCarouselImages([]);
         await setLoading(false);
@@ -46,7 +47,7 @@ export const useFetchCarouselImages = () => {
 
   useEffect(() => {
     isMountedRef.current = true;
-    fetchCarouselImages();
+    void fetchCarouselImages();
     return () => {
       isMountedRef.current = false;
     };

@@ -1,8 +1,8 @@
-import {Dimensions} from '@/services/carousel/fetchDimentions';
-import {CarouselImage, CarouselModeType} from '@/types/homeTypes';
-import backupCarousel from '@/assets/backup-carousel.jpg';
+import type {Dimensions} from '@/services/carousel/fetchDimentions';
+import type {CarouselImage, CarouselModeType} from '@/types/homeTypes';
+import {Assets} from '@/assets/assetData';
 import {CarouselCounter, CarouselEditButtons} from './carouselButtons';
-import {Timestamp} from 'firebase/firestore';
+import type {Timestamp} from 'firebase/firestore';
 import styled from '@emotion/styled';
 import React from 'react';
 // Define valid objectFit values
@@ -78,7 +78,7 @@ export const CarouselImages = React.memo(
           className="h-full w-full shadow-md"
           onError={e => {
             e.currentTarget.onerror = null; // prevent infinite loop
-            e.currentTarget.src = backupCarousel;
+            e.currentTarget.src = Assets.link.backupCollege;
           }}
         />
       </CarouselContainer>

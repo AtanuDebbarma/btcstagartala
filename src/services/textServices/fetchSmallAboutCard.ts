@@ -1,5 +1,8 @@
 import {appStore} from '@/appStore/appStore';
-import {SmallAboutCardType, SmallAboutCardimageType} from '@/types/homeTypes';
+import type {
+  SmallAboutCardType,
+  SmallAboutCardimageType,
+} from '@/types/homeTypes';
 import {useGenericFetchTextAndImage} from '../shared/genericFetchHook';
 
 // Fixed document IDs

@@ -1,5 +1,5 @@
 import {RouteNames} from '@/constants/routeNames';
-import {CollegeResourcesTypes} from '@/types/homeTypes';
+import type {CollegeResourcesTypes} from '@/types/homeTypes';
 
 export const resources: CollegeResourcesTypes[] = [
   {

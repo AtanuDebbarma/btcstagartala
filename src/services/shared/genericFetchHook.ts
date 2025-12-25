@@ -1,6 +1,7 @@
 import {useEffect, useCallback, useRef} from 'react';
 import {doc, getDoc} from 'firebase/firestore';
 import {db} from '../firebase';
+import {logger} from '../../utils/logger';
 
 /**
  * Generic hook for fetching text and image documents from Firestore
@@ -16,7 +17,6 @@ export const useGenericFetchTextAndImage = <T, I>(
 ) => {
   const isMountedRef = useRef<boolean>(false);
 
-  // eslint-disable-next-line react-hooks/preserve-manual-memoization
   const fetchData = useCallback(async () => {
     try {
       // Fetch text document
@@ -32,7 +32,7 @@ export const useGenericFetchTextAndImage = <T, I>(
       } else {
         if (isMountedRef.current) {
           await setTextData(null);
-          console.error(`${logPrefix} text document not found`);
+          logger.error(`${logPrefix} text document not found`);
         }
       }
 
@@ -49,22 +49,23 @@ export const useGenericFetchTextAndImage = <T, I>(
       } else {
         if (isMountedRef.current) {
           await setImageData(null);
-          console.error(`${logPrefix} image document not found`);
+          logger.error(`${logPrefix} image document not found`);
         }
       }
     } catch (err) {
       if (isMountedRef.current) {
         await setTextData(null);
         await setImageData(null);
-        console.error(`${logPrefix} fetch failed`, err);
+        logger.error(`${logPrefix} fetch failed`, err);
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [collectionName, textDocId, imageDocId, logPrefix]);
   // Note: setTextData and setImageData are stable Zustand setters and don't need to be in dependencies
 
   useEffect(() => {
     isMountedRef.current = true;
-    fetchData();
+    void fetchData();
     return () => {
       isMountedRef.current = false;
     };

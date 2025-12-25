@@ -1,6 +1,6 @@
 import {accreditations} from '@/data/homeData/noticeSectionData';
 import {AccreditationCard, NoticeItem} from './noticeSectionItems';
-import {Accreditation, NoticeBoardType} from '@/types/homeTypes';
+import type {Accreditation, NoticeBoardType} from '@/types/homeTypes';
 import {ProspectusButtons} from './prospectusButtons';
 import {useNavigate} from 'react-router-dom';
 import {RouteNames} from '@/constants/routeNames';
@@ -13,7 +13,7 @@ export const NoticeSection = () => {
 
   const handleNoticeTablePress = () => {
     setTimeout(() => {
-      navigation(RouteNames.NOTICE_BOARD);
+      void navigation(RouteNames.NOTICE_BOARD);
       scrollTo(0, 0);
     }, 200);
   };

@@ -11,7 +11,7 @@ const AlertDesc: React.FC = () => {
 
   const handleBackToAlerts = () => {
     setTimeout(() => {
-      navigation(RouteNames.ALERTS);
+      void navigation(RouteNames.ALERTS);
       scrollTo(0, 0);
     }, 200);
   };
@@ -49,7 +49,7 @@ const AlertDesc: React.FC = () => {
 
   const handleNavClick = (url: string) => {
     setTimeout(() => {
-      navigation(`/pdf-viewer?file=${url}`);
+      void navigation(`/pdf-viewer?file=${url}`);
     }, 200);
   };
   return (

@@ -1,17 +1,22 @@
-import topEmblemUrl from './logo-emblem.png';
-import GovTripura from './GovTripura.jpg';
-import TripuraUniv from './TripuraUniv.jpg';
-import AICTE from './AICTE_LOGO.jpg';
-import logo from './logo.jpeg';
+import topEmblemUrl from './logo-emblem.webp';
+import GovTripura from './GovTripura.webp';
+import TripuraUniv from './TripuraUniv.webp';
+import AICTE from './AICTE_LOGO.webp';
+import logo from './logo.webp';
+import backupCarousel from './backup-carousel.webp';
+import noticeBoardBanner from './noticeBoardBanner.webp';
+import Principal_Fallback from './Principal_Fallback.webp';
 
 export type LinkType = {
   logo: string;
   topEmblem: string;
   govTripura: string;
-  // ugc: string;
   tripuraUniv: string;
   aicte: string;
   aboutShortImg: string;
+  backupCollege: string;
+  noticeBoardBanner: string;
+  Principal_Fallback: string;
 };
 
 export const Assets: {link: LinkType} = {
@@ -19,11 +24,13 @@ export const Assets: {link: LinkType} = {
     logo: logo,
     topEmblem: topEmblemUrl,
     govTripura: GovTripura,
-    // ugc: UGC,
     tripuraUniv: TripuraUniv,
     aicte: AICTE,
     aboutShortImg:
       'https://btcstagartala.org/wp-content/uploads/2024/04/Screenshot-2024-04-19-at-10.12.35%E2%80%AFAM.png',
+    backupCollege: backupCarousel,
+    noticeBoardBanner: noticeBoardBanner,
+    Principal_Fallback: Principal_Fallback,
   },
 };
 

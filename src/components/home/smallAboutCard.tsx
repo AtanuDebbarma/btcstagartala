@@ -4,7 +4,7 @@ import {AdminInteractionBtns} from '@/appComponents/adminInteractionBtns';
 import {useState} from 'react';
 import {EditSmallAboutCardModal} from './smallAboutCard/editSmallAboutCardModal';
 import {EditSmallAboutCardImageModal} from './smallAboutCard/editSmallAboutCardImageModal';
-import backupAboutCard from '../../assets/backupAboutCard.png';
+import {LazyImage} from '@/components/LazyImage';
 import {useNavigate} from 'react-router-dom';
 import {RouteNames} from '@/constants/routeNames';
 
@@ -65,7 +65,7 @@ BVB functionaries.
 
   const handleNav = (url: string) => {
     setTimeout(() => {
-      navigation(url);
+      void navigation(url);
       scrollTo(0, 0);
     }, 200);
   };
@@ -132,14 +132,15 @@ BVB functionaries.
                     />
                   </div>
                 )}
-                <img
+                <LazyImage
                   src={
                     smallAboutCardImage?.url ||
                     Assets.link.aboutShortImg ||
-                    backupAboutCard
+                    Assets.link.backupCollege
                   }
                   alt="College Image"
-                  className="h-auto max-h-[350px] w-full rounded-md object-cover"
+                  className="h-auto max-h-87.5 w-full rounded-md object-cover"
+                  fallbackSrc={Assets.link.backupCollege}
                 />
               </div>
               <span className="mt-4 flex cursor-default items-center text-sm font-medium text-gray-700 sm:text-base">

@@ -1,4 +1,4 @@
-import {Timestamp} from 'firebase/firestore';
+import type {Timestamp} from 'firebase/firestore';
 
 /**
  * Represents types for Accreditation section

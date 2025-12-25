@@ -1,4 +1,3 @@
-import React from 'react';
 import {SEO} from '@/components/SEO/SEO';
 import {pageSEO} from '@/components/SEO/seoConstants';
 

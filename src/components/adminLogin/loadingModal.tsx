@@ -1,4 +1,4 @@
-import {ClipLoader} from 'react-spinners';
+import {ClipLoader} from '@/components/Spinner';
 
 export const LoadingModal = ({
   loading,
@@ -30,7 +30,7 @@ export const LoadingModal = ({
             <p className="mt-5 text-4xl">✅</p>
           </div>
         ) : (
-          <></>
+          <div></div>
         )}
       </div>
     </div>

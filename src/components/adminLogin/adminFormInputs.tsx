@@ -5,8 +5,9 @@ import {
   handleChange,
 } from '@/helpers/adminLoginHelpers/adminLoginHelpers';
 import {useNavigate} from 'react-router-dom';
-import {ClipLoader} from 'react-spinners';
-import {Dispatch, MouseEvent, SetStateAction, useState} from 'react';
+import {ClipLoader} from '@/components/Spinner';
+import type {Dispatch, MouseEvent, SetStateAction} from 'react';
+import {useState} from 'react';
 
 interface AdminFormInputsProps {
   loading: boolean;
@@ -35,7 +36,7 @@ export const AdminFormInputs = ({
   const navigate = useNavigate();
 
   const handleSubmit = (e: MouseEvent<HTMLButtonElement>) => {
-    handleAdminLoginSubmit(
+    void handleAdminLoginSubmit(
       e,
       allowedAdminEmails,
       setError,
@@ -47,7 +48,7 @@ export const AdminFormInputs = ({
   };
 
   const handleGoogleLogin = (e: MouseEvent<HTMLButtonElement>) => {
-    handleAdminGoogleLogin(
+    void handleAdminGoogleLogin(
       e,
       allowedAdminEmails,
       setError,
@@ -57,7 +58,7 @@ export const AdminFormInputs = ({
     );
   };
   const handleForgotPassword = async (e: MouseEvent<HTMLButtonElement>) => {
-    handleAdminForgotPassword(
+    void handleAdminForgotPassword(
       e,
       allowedAdminEmails,
       formData,

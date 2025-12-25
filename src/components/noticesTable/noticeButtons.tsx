@@ -1,6 +1,6 @@
-import {NoticeBoardType} from '@/types/homeTypes';
+import type {NoticeBoardType} from '@/types/homeTypes';
 import React from 'react';
-import {Dispatch, SetStateAction} from 'react';
+import type {Dispatch, SetStateAction} from 'react';
 import {useNavigate} from 'react-router-dom';
 
 interface PROPS {
@@ -13,7 +13,7 @@ export const NoticeButtons = React.memo(({notice, setDownloading}: PROPS) => {
 
   const handleClick = () => {
     setTimeout(() => {
-      navigation(`/pdf-viewer?file=${notice.url}`);
+      void navigation(`/pdf-viewer?file=${notice.url}`);
     }, 200);
   };
 
@@ -42,21 +42,19 @@ export const NoticeButtons = React.memo(({notice, setDownloading}: PROPS) => {
     }
   };
   return (
-    <>
-      <td className="px-4 py-1 sm:px-8 sm:py-3">
-        <div className="flex justify-center gap-2">
-          <button
-            onClick={handleClick}
-            className="cursor-pointer rounded bg-[#900090] p-2 text-white transition-transform duration-180 ease-in-out active:scale-95">
-            <i className="fa-solid fa-eye"></i>
-          </button>
-          <button
-            onClick={handleDownloadClick}
-            className="cursor-pointer rounded border border-[#900090] p-2 text-[#900090] transition-transform duration-180 ease-in-out active:scale-95">
-            <i className="fa-solid fa-download"></i>
-          </button>
-        </div>
-      </td>
-    </>
+    <td className="px-4 py-1 sm:px-8 sm:py-3">
+      <div className="flex justify-center gap-2">
+        <button
+          onClick={handleClick}
+          className="cursor-pointer rounded bg-[#900090] p-2 text-white transition-transform duration-180 ease-in-out active:scale-95">
+          <i className="fa-solid fa-eye"></i>
+        </button>
+        <button
+          onClick={handleDownloadClick}
+          className="cursor-pointer rounded border border-[#900090] p-2 text-[#900090] transition-transform duration-180 ease-in-out active:scale-95">
+          <i className="fa-solid fa-download"></i>
+        </button>
+      </div>
+    </td>
   );
 });

@@ -1,14 +1,8 @@
-import {
-  collection,
-  query,
-  where,
-  getDocs,
-  updateDoc,
-  DocumentData,
-  DocumentReference,
-} from 'firebase/firestore';
-import {CarouselImage} from '@/types/homeTypes';
+import type {DocumentData, DocumentReference} from 'firebase/firestore';
+import {collection, query, where, getDocs, updateDoc} from 'firebase/firestore';
+import type {CarouselImage} from '@/types/homeTypes';
 import {db} from '../firebase';
+import {logger} from '../../utils/logger';
 
 const imagesRef = collection(db, 'carouselImages');
 
@@ -41,7 +35,7 @@ export const updateImageDoc = async (
     await updateDoc(ref, updatedFields);
     return true;
   } catch (error) {
-    console.error('Failed to update document:', error);
+    logger.error('Failed to update document:', error);
     return false;
   }
 };

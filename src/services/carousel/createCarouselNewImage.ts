@@ -10,8 +10,9 @@ import {
   writeBatch,
 } from 'firebase/firestore';
 import {db} from '../firebase';
-import {CarouselImage} from '@/types/homeTypes';
+import type {CarouselImage} from '@/types/homeTypes';
 import {appStore} from '@/appStore/appStore';
+import {logger} from '../../utils/logger';
 
 /**
  * Adds a new image to the carousel and shifts all subsequent image orders by +1.
@@ -60,7 +61,7 @@ export const addCarouselImage = async (
     await updateDoc(docRef, {
       id: docRef.id,
     }).catch(err => {
-      console.warn('Failed to update document with ID field:', err);
+      logger.warn('Failed to update document with ID field:', err);
     });
 
     // Update Zustand store
@@ -85,7 +86,7 @@ export const addCarouselImage = async (
 
     return {success: true};
   } catch (error) {
-    console.error('Failed to add image:', error);
+    logger.error('Failed to add image:', error);
     return {success: false};
   }
 };

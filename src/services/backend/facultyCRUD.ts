@@ -1,5 +1,5 @@
 import {auth} from '../firebase';
-import {FacultyDocument} from '@/types/otherTypes';
+import type {FacultyDocument} from '@/types/otherTypes';
 
 const BASE_URL: string =
   import.meta.env.VITE_API_BACKEND_URL || 'http://localhost:5000';

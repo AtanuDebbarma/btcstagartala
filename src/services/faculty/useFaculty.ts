@@ -2,7 +2,12 @@
 import {useState, useEffect} from 'react';
 import {collection, query, where, getDocs} from 'firebase/firestore';
 import {db} from '@/services/firebase';
-import {FacultyWithId, UseFacultyReturn, FacultyType} from '@/types/otherTypes';
+import type {
+  FacultyWithId,
+  UseFacultyReturn,
+  FacultyType,
+} from '@/types/otherTypes';
+import {logger} from '../../utils/logger';
 
 export const useFaculty = (type?: FacultyType): UseFacultyReturn => {
   const [faculty, setFaculty] = useState<FacultyWithId[]>([]);
@@ -44,14 +49,15 @@ export const useFaculty = (type?: FacultyType): UseFacultyReturn => {
       setFaculty(facultyData);
     } catch (err) {
       setError(err as Error);
-      console.error('Error fetching faculty:', err);
+      logger.error('Error fetching faculty:', err);
     } finally {
       setLoading(false);
     }
   };
 
   useEffect(() => {
-    fetchFaculty();
+    void fetchFaculty();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [type]);
 
   return {faculty, loading, error, refetch: fetchFaculty};

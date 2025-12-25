@@ -1,4 +1,5 @@
 import {auth} from '../firebase';
+import {logger} from '../../utils/logger';
 
 const BASE_URL: string =
   import.meta.env.VITE_API_BACKEND_URL || 'http://localhost:5000';
@@ -18,7 +19,7 @@ const validateAuth = (
   const isAdmin = allowedAdminEmails.includes(user?.email || '');
 
   if (!user || !isAdmin) {
-    console.error('User not authenticated');
+    logger.error('User not authenticated');
     handleUploadErrorMessage('User not authenticated');
     return {isValid: false, user: null};
   }
@@ -38,7 +39,7 @@ export const genericDeleteFile = async (
     if (!isValid) return {success: false};
 
     if (!publicId) {
-      console.error('No publicId selected');
+      logger.error('No publicId selected');
       handleUploadErrorMessage('No publicId selected');
       return {success: false};
     }
@@ -71,7 +72,7 @@ export const genericDeleteFile = async (
     } catch (fetchErr: any) {
       clearTimeout(timeoutId);
       if (fetchErr.name === 'AbortError') {
-        console.error('Request timeout after 90 seconds');
+        logger.error('Request timeout after 90 seconds');
         handleUploadErrorMessage(
           'Request timeout. Server may be starting up, please try again.',
         );
@@ -80,7 +81,7 @@ export const genericDeleteFile = async (
       throw fetchErr;
     }
   } catch (err) {
-    console.error('Failed to delete file:', err);
+    logger.error('Failed to delete file:', err);
     handleUploadErrorMessage('Failed to delete file! Please try again.');
     return {success: false};
   }
@@ -100,7 +101,7 @@ export const genericAddFile = async (
     if (!isValid) return {success: false, asset: null};
 
     if (!file) {
-      console.error('No file selected');
+      logger.error('No file selected');
       handleUploadErrorMessage('No file selected');
       return {success: false, asset: null};
     }
@@ -136,7 +137,7 @@ export const genericAddFile = async (
     } catch (fetchErr: any) {
       clearTimeout(timeoutId);
       if (fetchErr.name === 'AbortError') {
-        console.error('Upload timeout after 120 seconds');
+        logger.error('Upload timeout after 120 seconds');
         handleUploadErrorMessage(
           'Upload timeout. Server may be starting up, please try again.',
         );
@@ -145,7 +146,7 @@ export const genericAddFile = async (
       throw fetchErr;
     }
   } catch (err) {
-    console.error('Failed to add file:', err);
+    logger.error('Failed to add file:', err);
     handleUploadErrorMessage('Failed to add file');
     return {success: false, asset: null};
   }
@@ -204,7 +205,7 @@ export const genericReplaceFile = async (
 
       if (!res.ok) {
         const errorText = await res.text();
-        console.error('Server error:', res.status, errorText);
+        logger.error('Server error:', res.status, errorText);
         handleUploadErrorMessage(`Server error: ${res.status}`);
         return {success: false, asset: null};
       }
@@ -219,7 +220,7 @@ export const genericReplaceFile = async (
     } catch (fetchErr: any) {
       clearTimeout(timeoutId);
       if (fetchErr.name === 'AbortError') {
-        console.error('Upload timeout after 120 seconds');
+        logger.error('Upload timeout after 120 seconds');
         handleUploadErrorMessage(
           'Upload timeout. Server may be starting up, please try again.',
         );
@@ -228,7 +229,7 @@ export const genericReplaceFile = async (
       throw fetchErr;
     }
   } catch (err: any) {
-    console.error('Failed to replace file:', err.message);
+    logger.error('Failed to replace file:', err.message);
     handleUploadErrorMessage('Failed to replace file! Please try again.');
     return {success: false, asset: null};
   }

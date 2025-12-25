@@ -21,7 +21,7 @@ const Faculty = (): React.JSX.Element => {
   ];
   const handleClick = (url: string) => {
     setTimeout(() => {
-      navigation(`${RouteNames.FACULTY}/${url}`);
+      void navigation(`${RouteNames.FACULTY}/${url}`);
       scrollTo(0, 0);
     }, 200);
   };
@@ -32,11 +32,11 @@ const Faculty = (): React.JSX.Element => {
           <button
             key={index}
             onClick={() => handleClick(button.url)}
-            className="w-full min-w-[300px] cursor-pointer transition-transform duration-180 ease-in-out focus:outline-none active:scale-95">
+            className="w-full min-w-75 cursor-pointer transition-transform duration-180 ease-in-out focus:outline-none active:scale-95">
             <div className="rounded-sm bg-[#360036] px-4 py-4.5 text-center text-white shadow-md">
               <h3 className="relative inline-block text-lg font-semibold tracking-wide uppercase">
                 {button.name}
-                <span className="absolute -bottom-1 left-1/4 mt-2 h-[3px] w-1/2 rounded bg-yellow-400"></span>
+                <span className="absolute -bottom-1 left-1/4 mt-2 h-0.75 w-1/2 rounded bg-yellow-400"></span>
               </h3>
             </div>
           </button>

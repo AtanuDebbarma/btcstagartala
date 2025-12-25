@@ -1,7 +1,7 @@
 import {useState} from 'react';
 import {appStore} from '@/appStore/appStore';
-import {AlertsType, CarouselModeType} from '@/types/homeTypes';
-import {Timestamp} from 'firebase/firestore';
+import type {AlertsType, CarouselModeType} from '@/types/homeTypes';
+import type {Timestamp} from 'firebase/firestore';
 import {AlertsTableBody} from './alertsTableBody';
 import {AlertsAdminModal} from './alertAdminModal';
 

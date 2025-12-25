@@ -1,6 +1,6 @@
-import {StateCreator} from 'zustand';
-import {NoticeBoardType} from '@/types/homeTypes';
-import {AppState} from './appStore';
+import type {StateCreator} from 'zustand';
+import type {NoticeBoardType} from '@/types/homeTypes';
+import type {AppState} from './appStore';
 
 export type NoticeBoardSliceType = {
   notices: NoticeBoardType[] | [];

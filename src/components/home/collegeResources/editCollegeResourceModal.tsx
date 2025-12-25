@@ -1,6 +1,7 @@
-import {CollegeResourceType} from '@/types/collegeResourcesTypes';
-import {Dispatch, SetStateAction, useEffect, useRef, useState} from 'react';
-import {ClipLoader} from 'react-spinners';
+import type {CollegeResourceType} from '@/types/collegeResourcesTypes';
+import type {Dispatch, SetStateAction} from 'react';
+import {useEffect, useRef, useState} from 'react';
+import {ClipLoader} from '@/components/Spinner';
 import {EditCollegeResourceForm} from './editCollegeResourceForm';
 
 interface Props {

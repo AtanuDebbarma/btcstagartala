@@ -6,14 +6,14 @@ import {
   updateImageDoc,
 } from '@/services/carousel/editCarouselImage';
 import {updateCarouselDimensions} from '@/services/carousel/editDimentions';
-import {Dimensions} from '@/services/carousel/fetchDimentions';
+import type {Dimensions} from '@/services/carousel/fetchDimentions';
 import {
   sendAddImageToBackend,
   sendDeleteImageToBackend,
   sendEditImageToBackend,
 } from '@/services/cloudinary/sendtoBackend';
-import {CarouselImage} from '@/types/homeTypes';
-import React from 'react';
+import type {CarouselImage} from '@/types/homeTypes';
+import type React from 'react';
 
 export const handleAdd = async (
   setOpenModal: React.Dispatch<React.SetStateAction<boolean>>,

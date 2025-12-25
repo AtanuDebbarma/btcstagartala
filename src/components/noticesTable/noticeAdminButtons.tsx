@@ -1,7 +1,7 @@
 import {AdminInteractionBtns} from '@/appComponents/adminInteractionBtns';
 import {getNoticeBtnsConfig} from '@/helpers/noticeTableHelpers.tsx/getNoticeBtnsConfig';
-import {CarouselModeType, NoticeBoardType} from '@/types/homeTypes';
-import {Timestamp} from 'firebase/firestore';
+import type {CarouselModeType, NoticeBoardType} from '@/types/homeTypes';
+import type {Timestamp} from 'firebase/firestore';
 import React from 'react';
 
 interface PROPS {

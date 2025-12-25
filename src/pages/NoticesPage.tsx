@@ -1,5 +1,5 @@
 import {NoticesTableMain} from '@/components/noticesTable/noticesTableMain';
-import design from '@/assets/noticeBoardBanner.png';
+import {Assets} from '@/assets/assetData';
 
 const NoticesPage = () => {
   return (
@@ -15,7 +15,7 @@ const NoticesPage = () => {
         </div>
         <img
           className="h-full w-full object-cover"
-          src={design}
+          src={Assets.link.noticeBoardBanner}
           alt="notice-image"
         />
       </div>

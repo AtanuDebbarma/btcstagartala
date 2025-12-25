@@ -1,5 +1,8 @@
-import {SmallAboutCardType, SmallAboutCardimageType} from '@/types/homeTypes';
-import React from 'react';
+import type {
+  SmallAboutCardType,
+  SmallAboutCardimageType,
+} from '@/types/homeTypes';
+import type React from 'react';
 import {
   getTextDocByID,
   updateTextDoc,

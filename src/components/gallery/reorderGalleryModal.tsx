@@ -1,4 +1,4 @@
-import {GalleryImageType} from '@/types/galleryTypes';
+import type {GalleryImageType} from '@/types/galleryTypes';
 import React, {useState, useRef} from 'react';
 import {updateGalleryImagesOrder} from '@/services/gallery/galleryFirebase';
 

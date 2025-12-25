@@ -1,4 +1,4 @@
-import {StatsBannerTypes} from '@/types/homeTypes';
+import type {StatsBannerTypes} from '@/types/homeTypes';
 
 export const stats: StatsBannerTypes[] = [
   {

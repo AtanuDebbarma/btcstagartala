@@ -1,5 +1,5 @@
-import {CarouselModeType, NoticeBoardType} from '@/types/homeTypes';
-import {Timestamp} from 'firebase/firestore';
+import type {CarouselModeType, NoticeBoardType} from '@/types/homeTypes';
+import type {Timestamp} from 'firebase/firestore';
 import {createButtonConfig} from '../shared/genericButtonConfig';
 
 export const getNoticeBtnsConfig = (

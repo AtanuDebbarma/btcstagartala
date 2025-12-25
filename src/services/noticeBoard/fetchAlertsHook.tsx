@@ -2,7 +2,8 @@ import {useEffect, useCallback, useRef} from 'react';
 import {collection, getDocs} from 'firebase/firestore';
 import {db} from '../firebase';
 import {appStore} from '@/appStore/appStore';
-import {AlertsType} from '@/types/homeTypes';
+import type {AlertsType} from '@/types/homeTypes';
+import {logger} from '../../utils/logger';
 
 export const useFetchAlerts = () => {
   const isMountedRef = useRef<boolean>(false);
@@ -24,20 +25,20 @@ export const useFetchAlerts = () => {
       } else {
         if (isMountedRef.current) {
           await setAlerts([]);
-          console.error('Alerts fetch failed');
+          logger.error('Alerts fetch failed');
         }
       }
     } catch (err) {
       if (isMountedRef.current) {
         await setAlerts([]);
-        console.error('Alerts fetch failed', err);
+        logger.error('Alerts fetch failed', err);
       }
     }
   }, [setAlerts]);
 
   useEffect(() => {
     isMountedRef.current = true;
-    fetchAlerts();
+    void fetchAlerts();
     return () => {
       isMountedRef.current = false;
     };

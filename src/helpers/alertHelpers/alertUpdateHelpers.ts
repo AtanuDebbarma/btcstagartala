@@ -6,8 +6,8 @@ import {
   getPDFFilebyfileID,
   updatePDFDoc,
 } from '@/services/PDFservices/editPDFfirebase';
-import {AlertsType} from '@/types/homeTypes';
-import {Dispatch, SetStateAction} from 'react';
+import type {AlertsType} from '@/types/homeTypes';
+import type {Dispatch, SetStateAction} from 'react';
 
 export const handleAlertAdd = async (
   setOpenModal: Dispatch<SetStateAction<boolean>>,
