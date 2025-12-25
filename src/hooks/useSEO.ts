@@ -17,7 +17,7 @@ const defaultSEO: SEOData = {
     "Official website of Bhavan's Tripura College of Science & Technology (BTCST), affiliated to Tripura University. Offering quality education in Science & Technology in Agartala, Tripura.",
   keywords:
     "BTCST, Bhavan's Tripura College, Science and Technology College Tripura, Tripura University, Agartala College, Engineering College Tripura, Science College Agartala, Bharatiya Vidya Bhavan, North East India College",
-  ogImage: 'https://www.btcstagartala.org/og-image.jpg',
+  ogImage: 'https://btcstagartala.org/logo.webp',
 };
 
 const seoPages: Record<string, SEOData> = {
@@ -28,7 +28,7 @@ const seoPages: Record<string, SEOData> = {
       "Welcome to Bhavan's Tripura College of Science & Technology (BTCST), Agartala. Affiliated to Tripura University, offering undergraduate and postgraduate programs in Science & Technology.",
     keywords:
       "BTCST home, Bhavan's Tripura College admission, Science Technology College Agartala, Tripura University affiliated college, Engineering courses Tripura, Science courses Agartala",
-    canonicalUrl: 'https://www.btcstagartala.org/',
+    canonicalUrl: 'https://btcstagartala.org/',
   },
   '/home': {
     title:
@@ -37,7 +37,7 @@ const seoPages: Record<string, SEOData> = {
       "Welcome to Bhavan's Tripura College of Science & Technology (BTCST), Agartala. Affiliated to Tripura University, offering undergraduate and postgraduate programs in Science & Technology.",
     keywords:
       "BTCST home, Bhavan's Tripura College admission, Science Technology College Agartala, Tripura University affiliated college, Engineering courses Tripura, Science courses Agartala",
-    canonicalUrl: 'https://www.btcstagartala.org/',
+    canonicalUrl: 'https://btcstagartala.org/',
   },
   '/about': {
     title:
@@ -46,7 +46,7 @@ const seoPages: Record<string, SEOData> = {
       "Learn about Bhavan's Tripura College of Science & Technology (BTCST), established under Bharatiya Vidya Bhavan. Our history, vision, mission, and commitment to quality education in Tripura.",
     keywords:
       "BTCST about, Bhavan's Tripura College history, Bharatiya Vidya Bhavan Tripura, college vision mission, BTCST establishment, Science Technology education Tripura",
-    canonicalUrl: 'https://www.btcstagartala.org/about',
+    canonicalUrl: 'https://btcstagartala.org/about',
   },
   '/admissions': {
     title:
@@ -55,7 +55,7 @@ const seoPages: Record<string, SEOData> = {
       "Apply for admission to Bhavan's Tripura College of Science & Technology (BTCST). Undergraduate and postgraduate programs in Science, Technology, and Engineering. Online application available.",
     keywords:
       "BTCST admission 2025, Bhavan's Tripura College application, Science Technology admission Tripura, Engineering admission Agartala, college admission form, Tripura University admission",
-    canonicalUrl: 'https://www.btcstagartala.org/admissions',
+    canonicalUrl: 'https://btcstagartala.org/admissions',
   },
   '/courses': {
     title:
@@ -64,7 +64,7 @@ const seoPages: Record<string, SEOData> = {
       "Explore undergraduate and postgraduate courses at Bhavan's Tripura College of Science & Technology. Programs in Computer Science, Electronics, Physics, Chemistry, Mathematics, and more.",
     keywords:
       "BTCST courses, Bhavan's Tripura College programs, Science courses Tripura, Technology courses Agartala, Engineering programs, Computer Science Tripura, Electronics courses",
-    canonicalUrl: 'https://www.btcstagartala.org/courses',
+    canonicalUrl: 'https://btcstagartala.org/courses',
   },
   '/faculty': {
     title:
@@ -73,7 +73,7 @@ const seoPages: Record<string, SEOData> = {
       "Meet the experienced faculty and staff at Bhavan's Tripura College of Science & Technology. Qualified educators and researchers committed to academic excellence.",
     keywords:
       "BTCST faculty, Bhavan's Tripura College teachers, Science faculty Tripura, Technology professors Agartala, college staff, academic team BTCST",
-    canonicalUrl: 'https://www.btcstagartala.org/faculty',
+    canonicalUrl: 'https://btcstagartala.org/faculty',
   },
   '/gallery': {
     title: 'Photo Gallery | BTCST Agartala - Campus Life & Events',
@@ -81,7 +81,7 @@ const seoPages: Record<string, SEOData> = {
       "Explore the photo gallery of Bhavan's Tripura College of Science & Technology. Campus infrastructure, student activities, events, and college life at BTCST Agartala.",
     keywords:
       "BTCST gallery, Bhavan's Tripura College photos, campus images Agartala, college events Tripura, student activities BTCST, infrastructure photos",
-    canonicalUrl: 'https://www.btcstagartala.org/gallery',
+    canonicalUrl: 'https://btcstagartala.org/gallery',
   },
   '/contact': {
     title: 'Contact Us | BTCST Agartala - Address, Phone & Email',
@@ -89,7 +89,7 @@ const seoPages: Record<string, SEOData> = {
       "Contact Bhavan's Tripura College of Science & Technology (BTCST), Agartala. Get admission information, address, phone numbers, and email. Located in Anandanagar, Agartala.",
     keywords:
       "BTCST contact, Bhavan's Tripura College address, college phone number Agartala, BTCST email, Anandanagar college, contact information Tripura",
-    canonicalUrl: 'https://www.btcstagartala.org/contact',
+    canonicalUrl: 'https://btcstagartala.org/contact',
   },
   '/notice-board': {
     title: 'Notice Board | BTCST Agartala - Latest Announcements & Updates',
@@ -97,7 +97,7 @@ const seoPages: Record<string, SEOData> = {
       "Stay updated with the latest notices and announcements from Bhavan's Tripura College of Science & Technology. Important dates, exam schedules, and college updates.",
     keywords:
       "BTCST notices, Bhavan's Tripura College announcements, college updates Agartala, exam notices Tripura, important dates BTCST, student notices",
-    canonicalUrl: 'https://www.btcstagartala.org/notice-board',
+    canonicalUrl: 'https://btcstagartala.org/notice-board',
   },
 };
 
@@ -130,7 +130,7 @@ export const useSEO = (customSEO?: Partial<SEOData>) => {
     );
     updateMetaTag(
       'og:url',
-      finalSEO.canonicalUrl || `https://www.btcstagartala.org${currentPath}`,
+      finalSEO.canonicalUrl || `https://btcstagartala.org${currentPath}`,
       'property',
     );
     updateMetaTag('og:type', 'website', 'property');
@@ -161,7 +161,7 @@ export const useSEO = (customSEO?: Partial<SEOData>) => {
 
     // Canonical URL
     updateCanonicalLink(
-      finalSEO.canonicalUrl || `https://www.btcstagartala.org${currentPath}`,
+      finalSEO.canonicalUrl || `https://btcstagartala.org${currentPath}`,
     );
 
     // JSON-LD Structured Data
@@ -217,11 +217,11 @@ const updateStructuredData = (seo: SEOData, currentPath: string) => {
     structuredData = {
       '@context': 'https://schema.org',
       '@type': 'EducationalOrganization',
-      '@id': 'https://www.btcstagartala.org/#organization',
+      '@id': 'https://btcstagartala.org/#organization',
       name: "Bhavan's Tripura College of Science & Technology",
       alternateName: 'BTCST Agartala',
-      url: 'https://www.btcstagartala.org',
-      logo: 'https://www.btcstagartala.org/logo.jpg',
+      url: 'https://btcstagartala.org',
+      logo: 'https://btcstagartala.org/logo.webp',
       description: seo.description,
       address: {
         '@type': 'PostalAddress',
@@ -266,11 +266,11 @@ const updateStructuredData = (seo: SEOData, currentPath: string) => {
       '@type': 'WebPage',
       name: seo.title,
       description: seo.description,
-      url: `https://www.btcstagartala.org${currentPath}`,
+      url: `https://btcstagartala.org${currentPath}`,
       isPartOf: {
         '@type': 'WebSite',
         name: 'BTCST Agartala',
-        url: 'https://www.btcstagartala.org/',
+        url: 'https://btcstagartala.org/',
       },
       about: {
         '@type': 'EducationalOrganization',
