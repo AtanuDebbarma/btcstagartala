@@ -43,8 +43,12 @@ export const useFaculty = (type?: FacultyType): UseFacultyReturn => {
           type: data.type,
           createdAt: data.createdAt,
           updatedAt: data.updatedAt,
+          order: data.order ?? 999, // Default to 999 if order doesn't exist
         } as FacultyWithId);
       });
+
+      // Sort by order field
+      facultyData.sort((a, b) => a.order - b.order);
 
       setFaculty(facultyData);
     } catch (err) {

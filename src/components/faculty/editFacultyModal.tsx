@@ -60,9 +60,15 @@ export const EditFacultyModal = ({
     setLoading(true);
     setErrorMessage('');
 
+    // Preserve the order field when updating
+    const dataWithOrder = {
+      ...updatedData,
+      order: facultyData.order, // Preserve existing order
+    };
+
     const {success, message} = await updateFacultyMember(
       facultyData.id,
-      updatedData,
+      dataWithOrder,
       setErrorMessage,
     );
 

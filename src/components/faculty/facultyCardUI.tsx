@@ -11,6 +11,7 @@ import {useState} from 'react';
 import {EditFacultyModal} from './editFacultyModal';
 import {DeleteFacultyModal} from './deleteFacultyModal';
 import {AddFacultyModal} from './addFacultyModal';
+import {ReorderFacultyModal} from './reorderFacultyModal';
 
 export const FacultyCard = ({
   profile,
@@ -148,12 +149,17 @@ export function FacultyProfile() {
 
   const [openAddModal, setOpenAddModal] = useState<boolean>(false);
   const [addType, setAddType] = useState<FacultyType>('professor');
+  const [openReorderModal, setOpenReorderModal] = useState<boolean>(false);
 
   const handleAddProfessor = () => {
     setAddType('professor');
     setTimeout(() => {
       setOpenAddModal(true);
     }, 200);
+  };
+
+  const handleEditOrder = () => {
+    setOpenReorderModal(true);
   };
 
   const handleRefresh = () => {
@@ -193,12 +199,21 @@ export function FacultyProfile() {
             <p className="text-gray-600">Our Assistant Professor</p>
           </div>
           {isAdmin && (
-            <button
-              onClick={handleAddProfessor}
-              className="cursor-pointer rounded-md bg-green-600 px-4 py-2 text-white transition-transform duration-180 ease-in-out hover:bg-green-500 active:scale-95">
-              <i className="fa-solid fa-plus mr-2"></i>
-              Add Professor
-            </button>
+            <div className="flex gap-3">
+              <button
+                onClick={handleEditOrder}
+                disabled={professorsData.length === 0}
+                className="cursor-pointer rounded-md bg-blue-600 px-4 py-2 text-white transition-transform duration-180 ease-in-out hover:bg-blue-700 active:scale-95 disabled:cursor-not-allowed disabled:opacity-50">
+                <i className="fa-solid fa-arrows-up-down mr-2"></i>
+                Edit Order
+              </button>
+              <button
+                onClick={handleAddProfessor}
+                className="cursor-pointer rounded-md bg-green-600 px-4 py-2 text-white transition-transform duration-180 ease-in-out hover:bg-green-500 active:scale-95">
+                <i className="fa-solid fa-plus mr-2"></i>
+                Add Professor
+              </button>
+            </div>
           )}
         </div>
         <div className="grid grid-cols-1 gap-20 md:grid-cols-2 lg:grid-cols-3">
@@ -219,6 +234,15 @@ export function FacultyProfile() {
           facultyType={addType}
         />
       )}
+      {openReorderModal && isAdmin && (
+        <ReorderFacultyModal
+          openModal={openReorderModal}
+          setOpenModal={setOpenReorderModal}
+          faculty={professorsData}
+          onSuccess={handleRefresh}
+          title="Professors"
+        />
+      )}
     </div>
   );
 }
@@ -234,11 +258,16 @@ export const RestProfile = () => {
   const isAdmin = allowedAdminEmails.includes(user?.email || '');
 
   const [openAddModal, setOpenAddModal] = useState<boolean>(false);
+  const [openReorderModal, setOpenReorderModal] = useState<boolean>(false);
 
   const handleAddStaff = () => {
     setTimeout(() => {
       setOpenAddModal(true);
     }, 200);
+  };
+
+  const handleEditOrder = () => {
+    setOpenReorderModal(true);
   };
 
   if (loading) {
@@ -259,12 +288,21 @@ export const RestProfile = () => {
             <p className="text-gray-600">Our Staff</p>
           </div>
           {isAdmin && (
-            <button
-              onClick={handleAddStaff}
-              className="cursor-pointer rounded-md bg-green-600 px-4 py-2 text-white transition-transform duration-180 ease-in-out hover:bg-green-500 active:scale-95">
-              <i className="fa-solid fa-plus mr-2"></i>
-              Add Staff
-            </button>
+            <div className="flex gap-3">
+              <button
+                onClick={handleEditOrder}
+                disabled={nonTeachingData.length === 0}
+                className="cursor-pointer rounded-md bg-blue-600 px-4 py-2 text-white transition-transform duration-180 ease-in-out hover:bg-blue-700 active:scale-95 disabled:cursor-not-allowed disabled:opacity-50">
+                <i className="fa-solid fa-arrows-up-down mr-2"></i>
+                Edit Order
+              </button>
+              <button
+                onClick={handleAddStaff}
+                className="cursor-pointer rounded-md bg-green-600 px-4 py-2 text-white transition-transform duration-180 ease-in-out hover:bg-green-500 active:scale-95">
+                <i className="fa-solid fa-plus mr-2"></i>
+                Add Staff
+              </button>
+            </div>
           )}
         </div>
         <div className="grid grid-cols-1 gap-20 md:grid-cols-2 lg:grid-cols-3">
@@ -279,6 +317,15 @@ export const RestProfile = () => {
           setOpenModal={setOpenAddModal}
           onSuccess={refetch}
           facultyType="non-teaching"
+        />
+      )}
+      {openReorderModal && isAdmin && (
+        <ReorderFacultyModal
+          openModal={openReorderModal}
+          setOpenModal={setOpenReorderModal}
+          faculty={nonTeachingData}
+          onSuccess={refetch}
+          title="Non-Teaching Staffs"
         />
       )}
     </div>
@@ -296,11 +343,16 @@ export const GuestFacultyProfile = () => {
   const isAdmin = allowedAdminEmails.includes(user?.email || '');
 
   const [openAddModal, setOpenAddModal] = useState<boolean>(false);
+  const [openReorderModal, setOpenReorderModal] = useState<boolean>(false);
 
   const handleAddGuest = () => {
     setTimeout(() => {
       setOpenAddModal(true);
     }, 200);
+  };
+
+  const handleEditOrder = () => {
+    setOpenReorderModal(true);
   };
 
   if (loading) {
@@ -321,12 +373,21 @@ export const GuestFacultyProfile = () => {
             <p className="text-gray-600">Our Guest Faculty</p>
           </div>
           {isAdmin && (
-            <button
-              onClick={handleAddGuest}
-              className="cursor-pointer rounded-md bg-green-600 px-4 py-2 text-white transition-transform duration-180 ease-in-out hover:bg-green-500 active:scale-95">
-              <i className="fa-solid fa-plus mr-2"></i>
-              Add Guest Faculty
-            </button>
+            <div className="flex gap-3">
+              <button
+                onClick={handleEditOrder}
+                disabled={guestData.length === 0}
+                className="cursor-pointer rounded-md bg-blue-600 px-4 py-2 text-white transition-transform duration-180 ease-in-out hover:bg-blue-700 active:scale-95 disabled:cursor-not-allowed disabled:opacity-50">
+                <i className="fa-solid fa-arrows-up-down mr-2"></i>
+                Edit Order
+              </button>
+              <button
+                onClick={handleAddGuest}
+                className="cursor-pointer rounded-md bg-green-600 px-4 py-2 text-white transition-transform duration-180 ease-in-out hover:bg-green-500 active:scale-95">
+                <i className="fa-solid fa-plus mr-2"></i>
+                Add Guest Faculty
+              </button>
+            </div>
           )}
         </div>
         <div className="grid grid-cols-1 gap-20 md:grid-cols-2 lg:grid-cols-3">
@@ -341,6 +402,15 @@ export const GuestFacultyProfile = () => {
           setOpenModal={setOpenAddModal}
           onSuccess={refetch}
           facultyType="guest"
+        />
+      )}
+      {openReorderModal && isAdmin && (
+        <ReorderFacultyModal
+          openModal={openReorderModal}
+          setOpenModal={setOpenReorderModal}
+          faculty={guestData}
+          onSuccess={refetch}
+          title="Guest Faculty"
         />
       )}
     </div>

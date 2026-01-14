@@ -29,6 +29,7 @@ export interface FacultyWithId extends FacultyCardDataType {
   type: FacultyType;
   createdAt: Date;
   updatedAt: Date;
+  order: number;
 }
 
 /**
@@ -37,6 +38,7 @@ export interface FacultyWithId extends FacultyCardDataType {
 export interface FacultyDocument extends FacultyCardDataType {
   id: string;
   type: FacultyType;
+  order?: number;
 }
 
 /**
