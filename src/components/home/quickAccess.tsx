@@ -5,14 +5,17 @@ export const QuickAccess = () => {
   const links = [
     {title: 'IQAC', url: RouteNames.IQAC},
     {title: 'Committee & Cells', url: RouteNames.COMMITTEE_CELLS},
-    {title: 'SSR', url: RouteNames.SSR},
+    {
+      title: 'Directorate of Higher Education of Tripura',
+      url: RouteNames.DHE,
+    },
     {title: 'Academic Calendar', url: RouteNames.ACADEMIC_CALENDAR},
     {title: 'AICTE', url: RouteNames.AICTE},
     {title: 'Admission', url: RouteNames.ADMISSION_ELIGIBILITY},
     {title: 'Misc Documents', url: RouteNames.MISC_DOCUMENTS},
     {title: 'Academic Module', url: RouteNames.ACADEMICS},
     {title: 'Help Desk', url: RouteNames.HELP_DESK},
-    {title: 'AQAR', url: RouteNames.AQAR},
+    {title: 'AISHE', url: RouteNames.AISHE},
     {title: 'Alerts', url: RouteNames.ALERTS},
     {title: 'Gallery', url: RouteNames.GALLERY},
   ];

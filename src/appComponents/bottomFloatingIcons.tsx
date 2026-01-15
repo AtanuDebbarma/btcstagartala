@@ -22,7 +22,7 @@ export const WhatsAppIcon = () => {
 
       {/* WhatsApp button */}
       <a
-        href="https://wa.me/919999999999" // replace with your number
+        href="https://wa.me/919863109286" // replace with your number
         target="_blank"
         rel="noopener noreferrer"
         className="relative flex h-14 w-14 items-center justify-center rounded-full bg-green-500 text-white shadow-lg transition-all duration-150 ease-in-out hover:bg-green-600 active:scale-90"

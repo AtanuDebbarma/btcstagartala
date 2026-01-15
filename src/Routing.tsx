@@ -52,6 +52,7 @@ const GuestFaculty = lazy(() =>
     default: module.GuestFaculty,
   })),
 );
+const AICTEPage = lazy(() => import('./pages/AICTEPage'));
 
 // Loading fallback component
 const PageLoader = () => (
@@ -277,8 +278,8 @@ const RoutesWrapper = ({
             element={<PlaceholderPage title="Committee & Cells" />}
           />
           <Route
-            path={RouteNames.SSR}
-            element={<PlaceholderPage title="SSR" />}
+            path={RouteNames.DHE}
+            element={<PlaceholderPage title="DHE" />}
           />
           <Route
             path={RouteNames.ACADEMIC_CALENDAR}
@@ -286,7 +287,11 @@ const RoutesWrapper = ({
           />
           <Route
             path={RouteNames.AICTE}
-            element={<PlaceholderPage title="AICTE" />}
+            element={
+              <Suspense fallback={<PageLoader />}>
+                <AICTEPage />
+              </Suspense>
+            }
           />
           <Route
             path={RouteNames.MISC_DOCUMENTS}
@@ -297,8 +302,8 @@ const RoutesWrapper = ({
             element={<PlaceholderPage title="Help Desk" />}
           />
           <Route
-            path={RouteNames.AQAR}
-            element={<PlaceholderPage title="AQAR" />}
+            path={RouteNames.AISHE}
+            element={<PlaceholderPage title="AISHE" />}
           />
         </Routes>
       </main>

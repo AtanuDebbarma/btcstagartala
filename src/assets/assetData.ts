@@ -27,7 +27,7 @@ export const Assets: {link: LinkType} = {
     tripuraUniv: TripuraUniv,
     aicte: AICTE,
     aboutShortImg:
-      'https://btcstagartala.org/wp-content/uploads/2024/04/Screenshot-2024-04-19-at-10.12.35%E2%80%AFAM.png',
+      'https://www.btcstagartala.org/wp-content/uploads/2024/04/Screenshot-2024-04-19-at-10.12.35%E2%80%AFAM.png',
     backupCollege: backupCarousel,
     noticeBoardBanner: noticeBoardBanner,
     Principal_Fallback: Principal_Fallback,

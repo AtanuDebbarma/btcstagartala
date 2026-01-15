@@ -50,7 +50,7 @@ const PrincipalMESSAGE = () => {
   const displayFooter = principalText?.bold_footer || fallbackFooter;
   const displayImage =
     principalImage?.url ||
-    'https://btcstagartala.org/wp-content/uploads/2024/05/WhatsApp_Image_2024-05-16_at_6.55.25_PM-removebg-preview.png';
+    'https://www.btcstagartala.org/wp-content/uploads/2024/05/WhatsApp_Image_2024-05-16_at_6.55.25_PM-removebg-preview.png';
 
   const handleTextModal = () => {
     setTimeout(() => {

@@ -16,8 +16,8 @@ const defaultSEO = {
     "Official website of Bhavan's Tripura College of Science & Technology (BTCST), affiliated to Tripura University. Offering quality education in Science & Technology in Agartala, Tripura.",
   keywords:
     "BTCST, Bhavan's Tripura College, Science and Technology College Tripura, Tripura University, Agartala College, Engineering College Tripura, Science College Agartala, Bharatiya Vidya Bhavan, North East India College",
-  image: 'https://btcstagartala.org/logo.webp',
-  url: 'https://btcstagartala.org',
+  image: 'https://www.btcstagartala.org/logo.webp',
+  url: 'https://www.btcstagartala.org',
   type: 'website',
 };
 

@@ -19,7 +19,26 @@ export default function Contact(): React.JSX.Element {
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    // Add form submission logic here
+
+    // Construct mailto link with form data
+    const recipient = 'btcst15@gmail.com';
+    const subject = encodeURIComponent(formData.subject);
+    const body = encodeURIComponent(
+      `Name: ${formData.fullName}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`,
+    );
+
+    // Open user's default email client
+    window.location.href = `mailto:${recipient}?subject=${subject}&body=${body}`;
+
+    // Optional: Reset form after opening email client
+    setTimeout(() => {
+      setFormData({
+        fullName: '',
+        email: '',
+        subject: '',
+        message: '',
+      });
+    }, 500);
   };
 
   return (

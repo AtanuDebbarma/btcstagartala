@@ -18,6 +18,8 @@ import type {GallerySliceType} from './gallerySlice';
 import {createGallerySlice} from './gallerySlice';
 import type {CollegeResourcesSliceType} from './collegeResourcesSlice';
 import {createCollegeResourcesSlice} from './collegeResourcesSlice';
+import type {AICTESlice} from './aicteSlice';
+import {createAICTESlice} from './aicteSlice';
 
 export type AppState = AdminSliceType &
   DimentionsSliceType &
@@ -27,7 +29,8 @@ export type AppState = AdminSliceType &
   AlertsSliceType &
   SmallAboutCardSliceType &
   GallerySliceType &
-  CollegeResourcesSliceType;
+  CollegeResourcesSliceType &
+  AICTESlice;
 
 export const appStore = create<AppState>()(
   immer((...store) => ({
@@ -40,5 +43,6 @@ export const appStore = create<AppState>()(
     ...createSmallAboutCardSlice(...store),
     ...createGallerySlice(...store),
     ...createCollegeResourcesSlice(...store),
+    ...createAICTESlice(...store),
   })),
 );

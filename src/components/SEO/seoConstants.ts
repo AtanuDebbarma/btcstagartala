@@ -57,4 +57,11 @@ export const pageSEO = {
       "Message from the Principal of Bhavan's Tripura College of Science & Technology. Vision and leadership for academic excellence.",
     keywords: 'Principal Message, College Leadership, BTCST Vision',
   },
+  aicte: {
+    title: 'AICTE Recognition | BTCST Agartala',
+    description:
+      "Bhavan's Tripura College of Science & Technology is recognized by AICTE. View all AICTE related documents and approvals.",
+    keywords:
+      'AICTE, AICTE recognition, BTCST AICTE, college approval, technical education, AICTE documents',
+  },
 };

@@ -21,12 +21,12 @@ export const RouteNames = {
   // Quick Access Routes
   IQAC: '/iqac',
   COMMITTEE_CELLS: '/committee-cells',
-  SSR: '/ssr',
+  DHE: '/dhe',
   ACADEMIC_CALENDAR: '/academic-calendar',
   AICTE: '/aicte',
   MISC_DOCUMENTS: '/misc-documents',
   HELP_DESK: '/help-desk',
-  AQAR: '/aqar',
+  AISHE: '/aishe',
 } as const;
 
 export type RouteNamesType = (typeof RouteNames)[keyof typeof RouteNames];

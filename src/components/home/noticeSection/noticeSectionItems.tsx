@@ -60,14 +60,28 @@ export const NavButton = React.memo(({text, url}: Props) => {
 
 export const AccreditationCard = React.memo(
   ({
+    id,
     name,
     logo,
     isMoreButton,
   }: {
+    id?: number;
     name: string;
     logo: string;
     isMoreButton?: boolean;
   }) => {
+    const navigation = useNavigate();
+
+    const handleClick = () => {
+      // Navigate to AICTE page if id is 2
+      if (id === 2) {
+        setTimeout(() => {
+          void navigation('/aicte');
+          scrollTo(0, 0);
+        }, 200);
+      }
+    };
+
     if (isMoreButton) {
       return (
         <div className="flex min-h-7.5 flex-row items-center justify-center rounded-md bg-[#900090] p-3 text-white shadow md:min-h-37.5">
@@ -90,7 +104,13 @@ export const AccreditationCard = React.memo(
     }
 
     return (
-      <div className="flex min-h-37.5 flex-col items-center justify-center rounded-md bg-white p-3 text-center shadow">
+      <div
+        onClick={handleClick}
+        className={`flex min-h-37.5 flex-col items-center justify-center rounded-md bg-white p-3 text-center shadow transition-transform duration-150 ease-in-out ${
+          id === 2
+            ? 'cursor-pointer hover:shadow-lg active:scale-95'
+            : 'cursor-default'
+        }`}>
         <img
           src={logo}
           alt={name}
