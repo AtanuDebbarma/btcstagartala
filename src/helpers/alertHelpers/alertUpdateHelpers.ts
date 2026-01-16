@@ -89,12 +89,13 @@ export const handleAlertAdd = async (
     }
   } catch (err) {
     console.error('Error adding Alerts:', err);
-    alert('Failed to add Alert! Please check values and try again.');
     setProcessSuccess(false);
-    handleUploadErrorMessage('');
+    handleUploadErrorMessage(
+      'Unexpected error occurred! Please try again or contact support.',
+    );
     setUploading(false);
     setLoading(false);
-    setOpenModal(false);
+    // Don't close modal - let admin see the error and try again
   }
 };
 
@@ -117,12 +118,10 @@ export const handleAlertEdit = async (
     // Get existing document from Firebase
     const result = await getPDFFilebyfileID(formValues.id, 'alerts');
     if (!result) {
-      alert('No file found with this id');
       setLoading(false);
       setUploading(false);
       setProcessSuccess(false);
       handleUploadErrorMessage('No file found with this id');
-      setOpenModal(false);
       return;
     }
 
@@ -197,12 +196,13 @@ export const handleAlertEdit = async (
     }
   } catch (err) {
     console.error('Error editing Alert:', err);
-    alert('Failed to Edit Alert! Please check values and try again.');
     setProcessSuccess(false);
-    handleUploadErrorMessage('');
+    handleUploadErrorMessage(
+      'Unexpected error occurred! Please try again or contact support.',
+    );
     setUploading(false);
     setLoading(false);
-    setOpenModal(false);
+    // Don't close modal - let admin see the error and try again
   }
 };
 
@@ -228,12 +228,10 @@ export const handleAlertEditNameOnly = async (
     // Get existing document from Firebase
     const result = await getPDFFilebyfileID(formValues.id, 'alerts');
     if (!result) {
-      alert('No file found with this id');
       setLoading(false);
       setUploading(false);
       setProcessSuccess(false);
       handleUploadErrorMessage('No file found with this id');
-      setOpenModal(false);
       return;
     }
 
@@ -274,12 +272,13 @@ export const handleAlertEditNameOnly = async (
     }
   } catch (err) {
     console.error('Error editing Alert:', err);
-    alert('Failed to Edit Alert! Please check values and try again.');
     setProcessSuccess(false);
-    handleUploadErrorMessage('');
+    handleUploadErrorMessage(
+      'Unexpected error occurred! Please try again or contact support.',
+    );
     setUploading(false);
     setLoading(false);
-    setOpenModal(false);
+    // Don't close modal - let admin see the error and try again
   }
 };
 
@@ -305,12 +304,10 @@ export const handleAlertEditContentOnly = async (
     // Get existing document from Firebase
     const result = await getPDFFilebyfileID(formValues.id, 'alerts');
     if (!result) {
-      alert('No file found with this id');
       setLoading(false);
       setUploading(false);
       setProcessSuccess(false);
       handleUploadErrorMessage('No file found with this id');
-      setOpenModal(false);
       return;
     }
 
@@ -351,12 +348,13 @@ export const handleAlertEditContentOnly = async (
     }
   } catch (err) {
     console.error('Error editing Alert:', err);
-    alert('Failed to Edit Alert! Please check values and try again.');
     setProcessSuccess(false);
-    handleUploadErrorMessage('');
+    handleUploadErrorMessage(
+      'Unexpected error occurred! Please try again or contact support.',
+    );
     setUploading(false);
     setLoading(false);
-    setOpenModal(false);
+    // Don't close modal - let admin see the error and try again
   }
 };
 
@@ -423,11 +421,12 @@ export const handleAlertDelete = async (
     }
   } catch (err) {
     console.error('Failed to delete file:', err);
-    alert('Failed to delete file! Try again.');
     setLoading(false);
     setUploading(false);
     setProcessSuccess(false);
-    handleUploadErrorMessage('');
-    setOpenModal(false);
+    handleUploadErrorMessage(
+      'Unexpected error occurred! Please try again or contact support.',
+    );
+    // Don't close modal - let admin see the error and try again
   }
 };

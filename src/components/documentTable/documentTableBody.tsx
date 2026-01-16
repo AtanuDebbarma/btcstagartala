@@ -23,7 +23,8 @@ type CollectionType =
   | 'misc-documents'
   | 'help-desk'
   | 'aishe'
-  | 'committee-cells';
+  | 'committee-cells'
+  | 'results';
 
 interface Props {
   collectionType: CollectionType;

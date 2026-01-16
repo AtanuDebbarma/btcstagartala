@@ -33,7 +33,6 @@ export const handleEditProspectus = async (
 
   try {
     if (!prospectusAndAdmission.length || !selectedPDF) {
-      alert('No Files found!');
       setLoading(false);
       setUploading(false);
       setProcessSuccess(false);
@@ -53,12 +52,10 @@ export const handleEditProspectus = async (
     );
 
     if (!result) {
-      alert('No file found with this id');
       setLoading(false);
       setUploading(false);
       setProcessSuccess(false);
       handleUploadErrorMessage('No file found with this id');
-      setOpenModal(false);
       return;
     }
 
@@ -121,11 +118,12 @@ export const handleEditProspectus = async (
   } catch (err) {
     clearTimeout(timeoutId); // Clear timeout on error
     console.error('Failed to update PDF:', err);
-    alert('Failed to update PDF! Please check values and try again.');
     setLoading(false);
     setUploading(false);
     setProcessSuccess(false);
-    handleUploadErrorMessage('Network error. Please try again.');
-    setOpenModal(false);
+    handleUploadErrorMessage(
+      'Unexpected error occurred! Please try again or contact support.',
+    );
+    // Don't close modal - let admin see the error and try again
   }
 };

@@ -18,7 +18,7 @@ export const QuickAccess = () => {
       url: RouteNames.FEE_STRUCTURE,
     },
     {title: 'Facilities', url: RouteNames.FACILITIES},
-    {title: 'Help Desk', url: RouteNames.HELP_DESK},
+    {title: 'Help Desk', url: RouteNames.CONTACT},
     {title: 'Alerts', url: RouteNames.ALERTS},
     {title: 'Gallery', url: RouteNames.GALLERY},
     // {title: 'IQAC', url: RouteNames.IQAC},

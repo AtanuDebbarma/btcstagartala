@@ -63,16 +63,33 @@ function Footer() {
               <div className="mb-2">
                 <p className="text-gray-400">Phone number</p>
                 <span className="flex flex-col gap-1 sm:flex-row">
-                  <p className="text-cyan-300 hover:text-blue-300">
+                  <a
+                    href="tel:+913812861210"
+                    className="text-cyan-300 transition-colors hover:text-blue-300">
                     (0381)2861210;
-                  </p>
-                  <p className="text-cyan-300 hover:text-blue-300">
+                  </a>
+                  <a
+                    href="tel:+919436127328"
+                    className="text-cyan-300 transition-colors hover:text-blue-300">
                     9436127328;
-                  </p>
-                  <p className="text-cyan-300 hover:text-blue-300">
+                  </a>
+                  <a
+                    href="tel:+919436468794"
+                    className="text-cyan-300 transition-colors hover:text-blue-300">
                     9436468794
-                  </p>
+                  </a>
                 </span>
+              </div>
+
+              <div className="mb-2">
+                <p className="text-gray-400">WhatsApp</p>
+                <a
+                  href="https://wa.me/919863109286"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-cyan-300 transition-colors hover:text-blue-300">
+                  +91 9863109286
+                </a>
               </div>
 
               <div className="mb-2">
@@ -86,8 +103,8 @@ function Footer() {
 
               <div>
                 <a
-                  href="mailto:bhavanbedc_trip@rediffmail.com"
-                  className="text-cyan-300 hover:text-blue-300">
+                  href="mailto:btcst15@gmail.com"
+                  className="text-cyan-300 transition-colors hover:text-blue-300">
                   btcst15@gmail.com
                 </a>
               </div>

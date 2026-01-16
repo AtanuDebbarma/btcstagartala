@@ -21,17 +21,18 @@ export const useFetchAlerts = () => {
 
         if (isMountedRef.current) {
           await setAlerts(data);
+          logger.info('[ALERTS] Fetched alerts:', data.length);
         }
       } else {
         if (isMountedRef.current) {
           await setAlerts([]);
-          logger.error('Alerts fetch failed');
+          logger.info('[ALERTS] No alerts found - collection is empty');
         }
       }
     } catch (err) {
       if (isMountedRef.current) {
         await setAlerts([]);
-        logger.error('Alerts fetch failed', err);
+        logger.error('[ALERTS] Error fetching alerts:', err);
       }
     }
   }, [setAlerts]);

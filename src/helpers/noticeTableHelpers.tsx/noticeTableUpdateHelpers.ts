@@ -80,12 +80,13 @@ export const handleNoticeAdd = async (
     }
   } catch (err) {
     console.error('Error adding PDF file:', err);
-    alert('Failed to add PDF! Please check values and try again.');
     setProcessSuccess(false);
-    handleUploadErrorMessage('');
+    handleUploadErrorMessage(
+      'Unexpected error occurred! Please try again or contact support.',
+    );
     setUploading(false);
     setLoading(false);
-    setOpenModal(false);
+    // Don't close modal - let admin see the error and try again
   }
 };
 
@@ -120,12 +121,10 @@ export const handleNoticeEdit = async (
     const result = await getPDFFilebyfileID(formValues.id, 'notice-board');
 
     if (!result) {
-      alert('No file found with this id');
       setLoading(false);
       setUploading(false);
       setProcessSuccess(false);
       handleUploadErrorMessage('No file found with this id');
-      setOpenModal(false);
       return;
     }
     // Upload file to Cloudinary
@@ -180,12 +179,13 @@ export const handleNoticeEdit = async (
     }
   } catch (err) {
     console.error('Error adding PDF file:', err);
-    alert('Failed to Edit PDF! Please check values and try again.');
     setProcessSuccess(false);
-    handleUploadErrorMessage('');
+    handleUploadErrorMessage(
+      'Unexpected error occurred! Please try again or contact support.',
+    );
     setUploading(false);
     setLoading(false);
-    setOpenModal(false);
+    // Don't close modal - let admin see the error and try again
   }
 };
 
@@ -216,11 +216,9 @@ export const handleNoticeEditNameOnly = async (
     const result = await getPDFFilebyfileID(formValues.id, 'notice-board');
 
     if (!result) {
-      alert('No document found with this id');
       setLoading(false);
       setProcessSuccess(false);
       handleUploadErrorMessage('No document found with this id');
-      setOpenModal(false);
       return;
     }
 
@@ -251,11 +249,12 @@ export const handleNoticeEditNameOnly = async (
     }
   } catch (err) {
     console.error('Error adding PDF file:', err);
-    alert('Failed to Edit PDF! Please check values and try again.');
     setProcessSuccess(false);
-    handleUploadErrorMessage('');
+    handleUploadErrorMessage(
+      'Unexpected error occurred! Please try again or contact support.',
+    );
     setLoading(false);
-    setOpenModal(false);
+    // Don't close modal - let admin see the error and try again
   }
 };
 
@@ -322,11 +321,12 @@ export const handleNoticeDelete = async (
     }
   } catch (err) {
     console.error('Failed to delete file:', err);
-    alert('Failed to delete file! Try again.');
     setLoading(false);
     setUploading(false);
     setProcessSuccess(false);
-    handleUploadErrorMessage('');
-    setOpenModal(false);
+    handleUploadErrorMessage(
+      'Unexpected error occurred! Please try again or contact support.',
+    );
+    // Don't close modal - let admin see the error and try again
   }
 };

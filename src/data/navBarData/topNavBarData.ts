@@ -16,6 +16,8 @@ export const links: NavLinkType[] = [
   {name: 'Rules & Regulations', path: RouteNames.RULES_REGULATIONS},
   {name: 'Fee Structure', path: RouteNames.FEE_STRUCTURE},
   {name: 'Faculty', path: RouteNames.FACULTY},
+  {name: 'Misc Docs', path: RouteNames.MISC_DOCUMENTS},
+  {name: 'Notice', path: RouteNames.NOTICE_BOARD},
   {name: 'Facilities', path: RouteNames.FACILITIES},
   {name: 'Student Uniform', path: RouteNames.STUDENT_UNIFORM},
   {name: 'Result', path: RouteNames.RESULT},

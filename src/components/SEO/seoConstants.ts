@@ -99,4 +99,25 @@ export const pageSEO = {
     keywords:
       'BTCST uniform, student dress code, college uniform Tripura, formal uniform, student attire, dress code policy, uniform specifications, college dress code',
   },
+  committeeCells: {
+    title: 'Committee & Cells | BTCST Agartala',
+    description:
+      'View College Governing Body, Monitoring Committee, Executive Committee, Agartala Kendra Committee, and other committees at BTCST. Complete organizational structure and committee members.',
+    keywords:
+      'BTCST committees, college governing body, monitoring committee, executive committee, Agartala Kendra committee, college administration, organizational structure, committee members, college cells',
+  },
+  miscDocuments: {
+    title: 'Miscellaneous Documents | BTCST Agartala',
+    description:
+      "Access miscellaneous documents and important files from Bhavan's Tripura College of Science & Technology. Download various college documents and resources.",
+    keywords:
+      'BTCST documents, miscellaneous documents, college files, important documents, college resources, downloadable documents, BTCST files',
+  },
+  result: {
+    title: 'Results | BTCST Agartala',
+    description:
+      "View and download examination results from Bhavan's Tripura College of Science & Technology. Access semester results, exam results, and academic performance.",
+    keywords:
+      'BTCST results, exam results, semester results, college results, academic results, examination results, student results, result download',
+  },
 };

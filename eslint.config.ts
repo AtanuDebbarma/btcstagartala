@@ -81,11 +81,11 @@ export default defineConfig([
       '@typescript-eslint/no-deprecated': 'warn',
       '@typescript-eslint/no-explicit-any': 'off',
 
-      // Tailwind (better-tailwindcss)
+      // Tailwind (better-tailwindcss) - v4.0.1 new rule names
       'better-tailwindcss/no-duplicate-classes': 'error',
       'better-tailwindcss/no-conflicting-classes': 'error',
-      'better-tailwindcss/no-unregistered-classes': 'off',
-      'better-tailwindcss/sort-classes': 'warn',
+      'better-tailwindcss/no-unknown-classes': 'off',
+      'better-tailwindcss/enforce-consistent-class-order': 'warn',
     },
   },
   // Configuration for config files (without type checking)

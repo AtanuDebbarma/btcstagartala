@@ -29,7 +29,6 @@ export const handleEditText = async (
 
   try {
     if (!currentData) {
-      alert('No data found!');
       setLoading(false);
       setProcessSuccess(false);
       handleErrorMessage('No data found!');
@@ -46,11 +45,9 @@ export const handleEditText = async (
     const result = await getTextDocByID(collectionName, docId);
 
     if (!result) {
-      alert('No document found');
       setLoading(false);
       setProcessSuccess(false);
       handleErrorMessage('No document found');
-      setOpenModal(false);
       return;
     }
 
@@ -101,11 +98,12 @@ export const handleEditText = async (
     }
   } catch (err) {
     console.error('Failed to update text:', err);
-    alert('Failed to update text! Please try again.');
     setLoading(false);
     setProcessSuccess(false);
-    handleErrorMessage('');
-    setOpenModal(false);
+    handleErrorMessage(
+      'Unexpected error occurred! Please try again or contact support.',
+    );
+    // Don't close modal - let admin see the error and try again
   }
 };
 
@@ -128,7 +126,6 @@ export const handleEditImageUrl = async (
 
   try {
     if (!currentData) {
-      alert('No image data found!');
       setLoading(false);
       setProcessSuccess(false);
       handleErrorMessage('No image data found!');
@@ -145,11 +142,9 @@ export const handleEditImageUrl = async (
     const result = await getTextDocByID(collectionName, docId);
 
     if (!result) {
-      alert('No document found');
       setLoading(false);
       setProcessSuccess(false);
       handleErrorMessage('No document found');
-      setOpenModal(false);
       return;
     }
 
@@ -195,10 +190,11 @@ export const handleEditImageUrl = async (
     }
   } catch (err) {
     console.error('Failed to update image URL:', err);
-    alert('Failed to update image URL! Please try again.');
     setLoading(false);
     setProcessSuccess(false);
-    handleErrorMessage('');
-    setOpenModal(false);
+    handleErrorMessage(
+      'Unexpected error occurred! Please try again or contact support.',
+    );
+    // Don't close modal - let admin see the error and try again
   }
 };

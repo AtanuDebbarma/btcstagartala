@@ -24,7 +24,6 @@ export const handleEditCollegeResourceUrl = async (
 
   try {
     if (!selectedResource) {
-      alert('No resource data found!');
       setLoading(false);
       setProcessSuccess(false);
       handleErrorMessage('No resource data found!');
@@ -41,11 +40,9 @@ export const handleEditCollegeResourceUrl = async (
     const result = await getCollegeResourceByID(selectedResource.id);
 
     if (!result) {
-      alert('No document found');
       setLoading(false);
       setProcessSuccess(false);
       handleErrorMessage('No document found');
-      setOpenModal(false);
       return;
     }
 
@@ -93,10 +90,11 @@ export const handleEditCollegeResourceUrl = async (
     }
   } catch (err) {
     console.error('Failed to update image URL:', err);
-    alert('Failed to update image URL! Please try again.');
     setLoading(false);
     setProcessSuccess(false);
-    handleErrorMessage('');
-    setOpenModal(false);
+    handleErrorMessage(
+      'Unexpected error occurred! Please try again or contact support.',
+    );
+    // Don't close modal - let admin see the error and try again
   }
 };

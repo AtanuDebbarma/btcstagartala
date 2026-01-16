@@ -13,7 +13,16 @@ type DocumentType = {
   public_id?: string; // For notice board (Cloudinary)
 };
 
-type CollectionType = 'aicte' | 'iqac' | 'misc-documents';
+type CollectionType =
+  | 'aicte'
+  | 'iqac'
+  | 'misc-documents'
+  | 'results'
+  | 'dhe'
+  | 'academic-calendar'
+  | 'help-desk'
+  | 'aishe'
+  | 'committee-cells';
 
 type Props = {
   collectionType: CollectionType;
@@ -24,12 +33,18 @@ export const DocumentTableMain = ({collectionType, pageTitle}: Props) => {
   const [downloading, setDownloading] = useState(false);
   const user = appStore(state => state.user);
   const aicteDocuments = appStore(state => state.aicteDocuments);
+  const miscDocuments = appStore(state => state.miscDocuments);
+  const results = appStore(state => state.results);
 
   // Get documents from store based on collection type
   const getDocuments = (): DocumentType[] => {
     switch (collectionType) {
       case 'aicte':
         return aicteDocuments;
+      case 'misc-documents':
+        return miscDocuments;
+      case 'results':
+        return results;
       default:
         return [];
     }

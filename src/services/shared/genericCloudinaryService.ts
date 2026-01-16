@@ -63,6 +63,16 @@ export const genericDeleteFile = async (
 
       clearTimeout(timeoutId);
 
+      // Handle HTTP error responses before parsing JSON
+      if (!res.ok) {
+        const errorText = await res.text();
+        logger.error('Server error:', res.status, errorText);
+        handleUploadErrorMessage(
+          `Delete failed: ${res.status} ${res.statusText}`,
+        );
+        return {success: false};
+      }
+
       const data = await res.json();
       if (!data.success && data.message) {
         handleUploadErrorMessage(data.message);
@@ -78,11 +88,18 @@ export const genericDeleteFile = async (
         );
         return {success: false};
       }
-      throw fetchErr;
+      // Handle JSON parsing errors or network errors
+      logger.error('Delete request failed:', fetchErr);
+      handleUploadErrorMessage(
+        'Network error or invalid server response. Please try again.',
+      );
+      return {success: false};
     }
   } catch (err) {
     logger.error('Failed to delete file:', err);
-    handleUploadErrorMessage('Failed to delete file! Please try again.');
+    handleUploadErrorMessage(
+      'Unexpected error occurred! Please try again or contact support.',
+    );
     return {success: false};
   }
 };
@@ -128,6 +145,23 @@ export const genericAddFile = async (
 
       clearTimeout(timeoutId);
 
+      // Handle HTTP error responses before parsing JSON
+      if (!res.ok) {
+        if (res.status === 413) {
+          logger.error('File too large (413)');
+          handleUploadErrorMessage(
+            'File too large! Maximum file size is 10MB.',
+          );
+          return {success: false, asset: null};
+        }
+        const errorText = await res.text();
+        logger.error('Server error:', res.status, errorText);
+        handleUploadErrorMessage(
+          `Upload failed: ${res.status} ${res.statusText}`,
+        );
+        return {success: false, asset: null};
+      }
+
       const data = await res.json();
       if (!data.success && data.message) {
         handleUploadErrorMessage(data.message);
@@ -143,11 +177,18 @@ export const genericAddFile = async (
         );
         return {success: false, asset: null};
       }
-      throw fetchErr;
+      // Handle JSON parsing errors or network errors
+      logger.error('Upload request failed:', fetchErr);
+      handleUploadErrorMessage(
+        'Network error or invalid server response. Please try again.',
+      );
+      return {success: false, asset: null};
     }
   } catch (err) {
     logger.error('Failed to add file:', err);
-    handleUploadErrorMessage('Failed to add file');
+    handleUploadErrorMessage(
+      'Unexpected error occurred! Please try again or contact support.',
+    );
     return {success: false, asset: null};
   }
 };
@@ -203,10 +244,20 @@ export const genericReplaceFile = async (
 
       clearTimeout(timeoutId);
 
+      // Handle HTTP error responses before parsing JSON
       if (!res.ok) {
+        if (res.status === 413) {
+          logger.error('File too large (413)');
+          handleUploadErrorMessage(
+            'File too large! Maximum file size is 10MB.',
+          );
+          return {success: false, asset: null};
+        }
         const errorText = await res.text();
         logger.error('Server error:', res.status, errorText);
-        handleUploadErrorMessage(`Server error: ${res.status}`);
+        handleUploadErrorMessage(
+          `Upload failed: ${res.status} ${res.statusText}`,
+        );
         return {success: false, asset: null};
       }
 
@@ -226,11 +277,18 @@ export const genericReplaceFile = async (
         );
         return {success: false, asset: null};
       }
-      throw fetchErr;
+      // Handle JSON parsing errors or network errors
+      logger.error('Upload request failed:', fetchErr);
+      handleUploadErrorMessage(
+        'Network error or invalid server response. Please try again.',
+      );
+      return {success: false, asset: null};
     }
   } catch (err: any) {
     logger.error('Failed to replace file:', err.message);
-    handleUploadErrorMessage('Failed to replace file! Please try again.');
+    handleUploadErrorMessage(
+      'Unexpected error occurred! Please try again or contact support.',
+    );
     return {success: false, asset: null};
   }
 };

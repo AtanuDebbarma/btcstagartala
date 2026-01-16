@@ -59,6 +59,18 @@ export const ImageForm = React.memo(
       const file = e.target.files?.[0];
       if (!file) return;
 
+      // Check file size BEFORE anything else (10MB = 10 * 1024 * 1024 bytes)
+      const maxSizeInBytes = 10 * 1024 * 1024; // 10MB
+      if (file.size > maxSizeInBytes) {
+        setUploadError(
+          `File too large! Maximum file size is 10MB. Your file is ${(file.size / (1024 * 1024)).toFixed(2)}MB.`,
+        );
+        if (fileInputRef.current) {
+          fileInputRef.current.value = ''; // Reset file input
+        }
+        return;
+      }
+
       const {error} = validateImageFileType(file);
       if (error) {
         setUploadError(

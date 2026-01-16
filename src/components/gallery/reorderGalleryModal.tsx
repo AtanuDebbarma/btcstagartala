@@ -19,6 +19,7 @@ export const ReorderGalleryModal = ({
     useState<GalleryImageType[]>(images);
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [error, setError] = useState<string>('');
   const [draggedIndex, setDraggedIndex] = useState<number | null>(null);
   const dragItem = useRef<number | null>(null);
   const dragOverItem = useRef<number | null>(null);
@@ -48,6 +49,7 @@ export const ReorderGalleryModal = ({
   const handleSave = async () => {
     setLoading(true);
     setSuccess(false);
+    setError('');
 
     // Calculate new order values based on position
     const updates = orderedImages.map((image, index) => ({
@@ -66,7 +68,7 @@ export const ReorderGalleryModal = ({
       }, 1500);
     } else {
       setLoading(false);
-      alert('Failed to update order. Please try again.');
+      setError('Failed to update order. Please try again.');
     }
   };
 
@@ -96,6 +98,7 @@ export const ReorderGalleryModal = ({
             Order updated successfully! ✓
           </div>
         )}
+        {error && <div className="mb-4 text-center text-red-600">{error}</div>}
 
         <div className="mb-6 max-h-[60vh] overflow-y-auto">
           <div className="grid grid-cols-3 gap-4 sm:grid-cols-4 md:grid-cols-5">

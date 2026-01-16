@@ -19,7 +19,8 @@ type CollectionType =
   | 'misc-documents'
   | 'help-desk'
   | 'aishe'
-  | 'committee-cells';
+  | 'committee-cells'
+  | 'results';
 
 interface Props {
   collectionType: CollectionType;
@@ -120,6 +121,7 @@ export const DocumentAdminModal = React.memo(
                         | 'help-desk'
                         | 'aishe'
                         | 'committee-cells'
+                        | 'results'
                     }
                     mode={mode}
                     setOpenModal={setOpenModal}

@@ -58,6 +58,9 @@ const FeeStructurePage = lazy(() => import('./pages/FeeStructurePage'));
 const ActivitiesPage = lazy(() => import('./pages/ActivitiesPage'));
 const RulesRegulationsPage = lazy(() => import('./pages/RulesRegulationsPage'));
 const StudentUniformPage = lazy(() => import('./pages/StudentUniformPage'));
+const CommitteeCellsPage = lazy(() => import('./pages/CommitteeCellsPage'));
+const MiscDocumentsPage = lazy(() => import('./pages/MiscDocumentsPage'));
+const ResultPage = lazy(() => import('./pages/ResultPage'));
 
 // Loading fallback component
 const PageLoader = () => (
@@ -282,7 +285,11 @@ const RoutesWrapper = ({
           />
           <Route
             path={RouteNames.RESULT}
-            element={<PlaceholderPage title="Result" />}
+            element={
+              <Suspense fallback={<PageLoader />}>
+                <ResultPage />
+              </Suspense>
+            }
           />
           <Route
             path={RouteNames.ACADEMIC_PERFORMANCE}
@@ -296,7 +303,11 @@ const RoutesWrapper = ({
           /> */}
           <Route
             path={RouteNames.COMMITTEE_CELLS}
-            element={<PlaceholderPage title="Committee & Cells" />}
+            element={
+              <Suspense fallback={<PageLoader />}>
+                <CommitteeCellsPage />
+              </Suspense>
+            }
           />
           <Route
             path={RouteNames.DHE}
@@ -316,11 +327,19 @@ const RoutesWrapper = ({
           />
           <Route
             path={RouteNames.MISC_DOCUMENTS}
-            element={<PlaceholderPage title="Misc Documents" />}
+            element={
+              <Suspense fallback={<PageLoader />}>
+                <MiscDocumentsPage />
+              </Suspense>
+            }
           />
           <Route
             path={RouteNames.HELP_DESK}
-            element={<PlaceholderPage title="Help Desk" />}
+            element={
+              <Suspense fallback={<PageLoader />}>
+                <Contact />
+              </Suspense>
+            }
           />
           <Route
             path={RouteNames.AISHE}

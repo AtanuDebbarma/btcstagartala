@@ -83,13 +83,14 @@ export const handleAdd = async (
     }
   } catch (err) {
     console.error('Error adding image:', err);
-    alert('Failed to add image! Please check values and try again.');
     setProcessSuccess(false);
-    handleUploadErrorMessage('');
+    handleUploadErrorMessage(
+      'Unexpected error occurred! Please try again or contact support.',
+    );
     setUploading(false);
     setLoading(false);
-    setOpenModal(false);
-    setAutoPlay(true);
+    setAutoPlay(false);
+    // Don't close modal - let admin see the error and try again
   }
 };
 export const handleEdit = async (
@@ -112,7 +113,6 @@ export const handleEdit = async (
   try {
     const result = await getImageDocByOrder(selectedImage.imageOrder);
     if (!result) {
-      alert('No image found with this imageOrder');
       setLoading(false);
       setUploading(false);
       setProcessSuccess(false);
@@ -185,13 +185,14 @@ export const handleEdit = async (
     }
   } catch (err) {
     console.error('Failed to update image:', err);
-    alert('Failed to update image! Please check values and try again.');
     setLoading(false);
     setUploading(false);
     setProcessSuccess(false);
-    handleUploadErrorMessage('');
-    setOpenModal(false);
-    setAutoPlay(true);
+    handleUploadErrorMessage(
+      'Unexpected error occurred! Please try again or contact support.',
+    );
+    setAutoPlay(false);
+    // Don't close modal - let admin see the error and try again
   }
 };
 
@@ -262,13 +263,14 @@ export const handleDelete = async (
     }, 2000);
   } catch (err) {
     console.error('Failed to delete image:', err);
-    alert('Failed to delete image! Try again.');
     setLoading(false);
     setUploading(false);
     setProcessSuccess(false);
-    handleUploadErrorMessage('');
-    setOpenModal(false);
-    setAutoPlay(true);
+    handleUploadErrorMessage(
+      'Unexpected error occurred! Please try again or contact support.',
+    );
+    setAutoPlay(false);
+    // Don't close modal - let admin see the error and try again
   }
 };
 
@@ -295,11 +297,11 @@ export const handleDimUpdate = async (
       }, 2000);
     }
   } catch (err) {
-    console.error('Error adding image:', err);
-    alert('Failed to add image! Please check values and try again.');
+    console.error('Error updating dimensions:', err);
     setLoading(false);
     setProcessSuccess(false);
-    setAutoPlay(true);
-    setOpenModal(false);
+    setAutoPlay(false);
+    // Don't close modal - let admin see the error and try again
+    alert('Failed to update dimensions! Please check values and try again.');
   }
 };

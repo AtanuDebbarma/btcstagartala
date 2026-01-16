@@ -15,7 +15,8 @@ type CollectionType =
   | 'misc-documents'
   | 'help-desk'
   | 'aishe'
-  | 'committee-cells';
+  | 'committee-cells'
+  | 'results';
 
 type DocumentType = {
   id: string;
@@ -65,6 +66,10 @@ export const DocumentModalForm = React.memo(
       switch (collectionType) {
         case 'aicte':
           return state.aicteDocuments as DocumentType[];
+        case 'misc-documents':
+          return state.miscDocuments as DocumentType[];
+        case 'results':
+          return state.results as DocumentType[];
         // Add other collection types as they are implemented
         default:
           return [];
@@ -76,6 +81,12 @@ export const DocumentModalForm = React.memo(
       switch (collectionType) {
         case 'aicte':
           await state.setAICTEDocuments(documents as AICTEDocumentType[]);
+          break;
+        case 'misc-documents':
+          await state.setMiscDocuments(documents);
+          break;
+        case 'results':
+          await state.setResults(documents);
           break;
         // Add other collection types as they are implemented
       }
