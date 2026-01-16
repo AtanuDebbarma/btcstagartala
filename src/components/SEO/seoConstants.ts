@@ -64,4 +64,39 @@ export const pageSEO = {
     keywords:
       'AICTE, AICTE recognition, BTCST AICTE, college approval, technical education, AICTE documents',
   },
+  facilities: {
+    title: 'Facilities | BTCST Agartala',
+    description:
+      'Explore state-of-the-art facilities at BTCST including modern laboratories, library, classrooms, auditorium, and more. Quality infrastructure for holistic education.',
+    keywords:
+      'BTCST facilities, college infrastructure, laboratories, library, computer lab, physics lab, electronics lab, biochemistry lab, microbiology lab',
+  },
+  feeStructure: {
+    title: 'Fee Structure & Eligibility | BTCST Agartala',
+    description:
+      'Detailed fee structure and eligibility criteria for all courses at BTCST. View admission fees, tuition fees, and course-wise eligibility requirements for B.Sc., BBA, BIT, BMLT programs.',
+    keywords:
+      'BTCST fees, college fees Tripura, admission fees, tuition fees, course fees, eligibility criteria, B.Sc fees, BBA fees, BIT fees, BMLT fees, computer science fees, electronics fees',
+  },
+  activities: {
+    title: 'Activities | BTCST Agartala',
+    description:
+      'Explore student activities at BTCST including sports, cultural events, environmental programs, educational excursions, career guidance, and parent-teacher interactions. Holistic student development.',
+    keywords:
+      'BTCST activities, college sports, cultural activities, student events, career guidance, educational excursions, environmental activities, parent teacher interaction, student development',
+  },
+  rulesRegulations: {
+    title: 'Rules & Regulations | BTCST Agartala',
+    description:
+      'Student rules and regulations at BTCST. Code of conduct, attendance requirements, discipline policies, and campus guidelines for students. Important rules for academic and campus life.',
+    keywords:
+      'BTCST rules, college regulations, student code of conduct, attendance policy, discipline rules, campus guidelines, student rules Tripura, college policies',
+  },
+  studentUniform: {
+    title: "Student's Uniforms | BTCST Agartala",
+    description:
+      'Official dress code and uniform details for BTCST students. Complete uniform specifications including shirt, trouser, blazer, tie, socks, and shoes. Same uniform for girls and boys.',
+    keywords:
+      'BTCST uniform, student dress code, college uniform Tripura, formal uniform, student attire, dress code policy, uniform specifications, college dress code',
+  },
 };

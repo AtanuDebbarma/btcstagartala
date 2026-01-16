@@ -53,6 +53,11 @@ const GuestFaculty = lazy(() =>
   })),
 );
 const AICTEPage = lazy(() => import('./pages/AICTEPage'));
+const FacilitiesPage = lazy(() => import('./pages/FacilitiesPage'));
+const FeeStructurePage = lazy(() => import('./pages/FeeStructurePage'));
+const ActivitiesPage = lazy(() => import('./pages/ActivitiesPage'));
+const RulesRegulationsPage = lazy(() => import('./pages/RulesRegulationsPage'));
+const StudentUniformPage = lazy(() => import('./pages/StudentUniformPage'));
 
 // Loading fallback component
 const PageLoader = () => (
@@ -140,6 +145,14 @@ const RoutesWrapper = ({
             element={
               <Suspense fallback={<PageLoader />}>
                 <AcademicsPage />
+              </Suspense>
+            }
+          />
+          <Route
+            path={RouteNames.FACILITIES}
+            element={
+              <Suspense fallback={<PageLoader />}>
+                <FacilitiesPage />
               </Suspense>
             }
           />
@@ -237,27 +250,35 @@ const RoutesWrapper = ({
           {/* Navbar Placeholder Routes */}
           <Route
             path={RouteNames.ACTIVITIES}
-            element={<PlaceholderPage title="Activities" />}
+            element={
+              <Suspense fallback={<PageLoader />}>
+                <ActivitiesPage />
+              </Suspense>
+            }
           />
           <Route
             path={RouteNames.RULES_REGULATIONS}
-            element={<PlaceholderPage title="Rules & Regulations" />}
+            element={
+              <Suspense fallback={<PageLoader />}>
+                <RulesRegulationsPage />
+              </Suspense>
+            }
           />
           <Route
             path={RouteNames.FEE_STRUCTURE}
-            element={<PlaceholderPage title="Fee Structure" />}
-          />
-          <Route
-            path={RouteNames.ADMISSION_ELIGIBILITY}
-            element={<PlaceholderPage title="Admission Eligibility" />}
-          />
-          <Route
-            path={RouteNames.FUTURE_PROGRAMMES}
-            element={<PlaceholderPage title="Future Programmes" />}
+            element={
+              <Suspense fallback={<PageLoader />}>
+                <FeeStructurePage />
+              </Suspense>
+            }
           />
           <Route
             path={RouteNames.STUDENT_UNIFORM}
-            element={<PlaceholderPage title="Student Uniform" />}
+            element={
+              <Suspense fallback={<PageLoader />}>
+                <StudentUniformPage />
+              </Suspense>
+            }
           />
           <Route
             path={RouteNames.RESULT}
@@ -269,10 +290,10 @@ const RoutesWrapper = ({
           />
 
           {/* Quick Access Placeholder Routes */}
-          <Route
+          {/* <Route
             path={RouteNames.IQAC}
             element={<PlaceholderPage title="IQAC" />}
-          />
+          /> */}
           <Route
             path={RouteNames.COMMITTEE_CELLS}
             element={<PlaceholderPage title="Committee & Cells" />}

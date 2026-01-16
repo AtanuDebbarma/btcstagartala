@@ -3,21 +3,25 @@ import {useNavigate} from 'react-router-dom';
 
 export const QuickAccess = () => {
   const links = [
-    {title: 'IQAC', url: RouteNames.IQAC},
+    {title: 'AICTE', url: RouteNames.AICTE},
     {title: 'Committee & Cells', url: RouteNames.COMMITTEE_CELLS},
     {
       title: 'Directorate of Higher Education of Tripura',
       url: RouteNames.DHE,
     },
     {title: 'Academic Calendar', url: RouteNames.ACADEMIC_CALENDAR},
-    {title: 'AICTE', url: RouteNames.AICTE},
-    {title: 'Admission', url: RouteNames.ADMISSION_ELIGIBILITY},
+    {title: 'AISHE', url: RouteNames.AISHE},
     {title: 'Misc Documents', url: RouteNames.MISC_DOCUMENTS},
     {title: 'Academic Module', url: RouteNames.ACADEMICS},
+    {
+      title: 'Admission Eligibility & Fee Structure',
+      url: RouteNames.FEE_STRUCTURE,
+    },
+    {title: 'Facilities', url: RouteNames.FACILITIES},
     {title: 'Help Desk', url: RouteNames.HELP_DESK},
-    {title: 'AISHE', url: RouteNames.AISHE},
     {title: 'Alerts', url: RouteNames.ALERTS},
     {title: 'Gallery', url: RouteNames.GALLERY},
+    // {title: 'IQAC', url: RouteNames.IQAC},
   ];
   const nanvigation = useNavigate();
 

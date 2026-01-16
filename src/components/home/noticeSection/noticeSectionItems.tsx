@@ -80,6 +80,14 @@ export const AccreditationCard = React.memo(
           scrollTo(0, 0);
         }, 200);
       }
+      // Navigate to PDF viewer for Tripura University if id is 4
+      if (id === 4) {
+        setTimeout(() => {
+          void navigation(
+            '/pdf-viewer?file=https://old.btcstagartala.org/wp-content/uploads/2024/05/PermanentAffiliation.pdf',
+          );
+        }, 200);
+      }
     };
 
     if (isMoreButton) {
@@ -107,7 +115,7 @@ export const AccreditationCard = React.memo(
       <div
         onClick={handleClick}
         className={`flex min-h-37.5 flex-col items-center justify-center rounded-md bg-white p-3 text-center shadow transition-transform duration-150 ease-in-out ${
-          id === 2
+          id === 2 || id === 4
             ? 'cursor-pointer hover:shadow-lg active:scale-95'
             : 'cursor-default'
         }`}>

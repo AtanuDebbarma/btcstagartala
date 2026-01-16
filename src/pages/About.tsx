@@ -1,5 +1,6 @@
 import {SEO} from '@/components/SEO/SEO';
 import {pageSEO} from '@/components/SEO/seoConstants';
+import {Assets} from '@/assets/assetData';
 
 export default function AboutPage(): React.JSX.Element {
   return (
@@ -7,45 +8,69 @@ export default function AboutPage(): React.JSX.Element {
       <SEO {...pageSEO.about} />
       <div className="min-h-screen bg-gray-50">
         {/* Hero Section */}
-        <div className="bg-linear-to-r from-[#3f003f] via-[#630063] to-[#900090] px-4 py-12 text-white sm:py-16 md:py-20">
-          <div className="mx-auto max-w-7xl">
-            <h1 className="mb-4 text-3xl font-bold sm:text-4xl md:text-5xl lg:text-6xl">
+        <div className="relative h-50 w-full">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center">
+            <h1 className="text-lg font-extrabold text-nowrap text-white drop-shadow-lg sm:text-4xl md:text-5xl">
               About Us
             </h1>
-            <p className="max-w-3xl text-base sm:text-lg md:text-xl">
+            <p className="mt-4 text-base font-bold text-nowrap text-gray-200 drop-shadow-lg sm:mt-7 sm:text-xl md:text-2xl">
               Bhavan's Tripura College of Science & Technology
             </p>
           </div>
+          <img
+            className="h-full w-full object-cover"
+            src={Assets.link.noticeBoardBanner}
+            alt="About Us"
+            loading="lazy"
+          />
         </div>
 
         <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-16">
           {/* Introduction Section */}
           <section className="mb-12 sm:mb-16 lg:mb-20">
             <div className="rounded-lg bg-white p-6 shadow-md sm:p-8 lg:p-10">
-              <h2 className="mb-4 text-2xl font-bold text-gray-800 sm:mb-6 sm:text-3xl lg:text-4xl">
+              <h2 className="mb-6 text-2xl font-bold text-gray-800 sm:mb-8 sm:text-3xl lg:text-4xl">
                 Welcome to BTCST
               </h2>
-              <div className="space-y-4 text-base leading-relaxed text-gray-700 sm:text-lg">
-                <p>
-                  Bhavan's Tripura College of Science & Technology (BTCST) is a
-                  premier institution affiliated to Tripura University (A
-                  Central University), located at Anandanagar, Agartala, West
-                  Tripura - 799004.
-                </p>
-                <p>
-                  Established with a vision to provide quality education in
-                  science and technology, BTCST has been a beacon of academic
-                  excellence in the North East region of India. Our institution
-                  is committed to nurturing young minds and preparing them for
-                  the challenges of the modern world.
-                </p>
-                <p>
-                  We take pride in our state-of-the-art infrastructure,
-                  experienced faculty, and student-centric approach to
-                  education. Our curriculum is designed to blend theoretical
-                  knowledge with practical applications, ensuring our students
-                  are industry-ready upon graduation.
-                </p>
+              <div className="flex flex-col gap-6 lg:flex-row lg:gap-8">
+                {/* Image Section */}
+                <div className="lg:w-2/5">
+                  <img
+                    src="https://old.btcstagartala.org/wp-content/uploads/2024/05/COLLEGE-FRONT1-1024x768.jpg"
+                    alt="BTCST College Front View"
+                    loading="lazy"
+                    className="h-64 w-full rounded-lg object-cover shadow-md lg:h-full"
+                  />
+                </div>
+                {/* Content Section */}
+                <div className="flex-1 space-y-4 text-base leading-relaxed text-gray-700 sm:text-lg">
+                  <p>
+                    Bhavan's Tripura College of Science & Technology (BTCST) is
+                    a premier institution affiliated to Tripura University (A
+                    Central University), located at Anandanagar, Agartala, West
+                    Tripura - 799004.
+                  </p>
+                  <p>
+                    The College is situated nearly 10 km. to the South-East of
+                    the capital city, Agartala having regular bus and auto
+                    services from the city. Besides, we have our own
+                    arrangements of bus for transport of the students and staff
+                    of the college. At present the College has got several class
+                    rooms with glass black board, spacious and well furnished
+                    lecture halls, well equipped laboratories and library. One
+                    big hall named (Multi Purpose Hall) serves the purpose of
+                    auditorium. The second phase of construction in the college
+                    is in progress and is scheduled to be completed soon. This
+                    includes a new Administrative block, Class rooms,
+                    Laboratories, Library, Conference Hall, Canteen etc.
+                  </p>
+                  <p>
+                    It is hoped that the college will serve the entire
+                    North-East Region in near future with regard to the study of
+                    Information Technology and many other non conventional
+                    modern subjects—the need of the day.
+                  </p>
+                </div>
               </div>
             </div>
           </section>
@@ -146,96 +171,43 @@ export default function AboutPage(): React.JSX.Element {
                   Bharatiya Vidya Bhavan is one of India's premier educational
                   and cultural institutions. Founded in 1938 by Dr. K.M. Munshi,
                   it has been at the forefront of promoting Indian culture and
-                  values through education.
+                  values through education. Kulapati Dr. Kanhaiyalal Maneklal
+                  Munshi [popularly known as Dr. K M Munshi] founded Bharatiya
+                  Vidya Bhavan in 1938 having hearty Blessings from Mahatma
+                  Gandhi and active support and co-operation from All-India
+                  leaders like Dr. Rajendra Prasad, Shri C. Rajagopalachari, Dr.
+                  S. Radhakrishnan, Pandit Jawaharlal Nehru and many others.
                 </p>
                 <p>
-                  With its headquarters in Mumbai, Bharatiya Vidya Bhavan
-                  operates over 360 institutions across India and abroad,
-                  including schools, colleges, and cultural centers. The
-                  organization is committed to the synthesis of tradition and
-                  modernity in education.
+                  Bharatiya Vidya Bhavan was established around the time when
+                  freedom of the country was not in doubt- the question was when
+                  and how soon. With freedom round the corner, people were
+                  concerned about the New India that would emerge soon. Munshiji
+                  not only dreamt of a Resurgent India but also felt the need to
+                  work to achieve this. This resulted in the founding of
+                  Bharatiya Vidya Bhavan.
                 </p>
                 <p>
-                  BTCST, as a part of this prestigious institution, carries
-                  forward the legacy of excellence and value-based education
-                  that Bharatiya Vidya Bhavan represents.
+                  Bhavan has its root firmly embedded in the Indian soil. It is
+                  spreading its branches to reach out to encompass the best of
+                  the Modern World in the fields of Science, Technology,
+                  Economics and Management. Bhavan is a unique establishment
+                  where Sanskrit classes are run side by side an Engineering
+                  College - Gita classes function along with Institute of
+                  Management. Traditional teachings of Fine Arts as well as
+                  teaching of Modern Science, Arts and Commerce are found in
+                  Bhavan’s Schools and Colleges.
                 </p>
-              </div>
-            </div>
-          </section>
-
-          {/* Courses Offered Section */}
-          <section className="mb-12 sm:mb-16 lg:mb-20">
-            <div className="rounded-lg bg-white p-6 shadow-md sm:p-8 lg:p-10">
-              <h2 className="mb-6 text-2xl font-bold text-gray-800 sm:mb-8 sm:text-3xl lg:text-4xl">
-                Courses Offered
-              </h2>
-              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
-                {[
-                  {
-                    name: 'B.Sc. Honours in Computer Science',
-                    duration: '3 Years (1+1+1)',
-                    intake: '30',
-                  },
-                  {
-                    name: 'BBA (Bachelor of Business Administration)',
-                    duration: '3 Years (6 Sem.)',
-                    intake: '40',
-                  },
-                  {
-                    name: 'BIT (Bachelor of Information Technology)',
-                    duration: '3 Years (6 Sem.)',
-                    intake: '40',
-                  },
-                  {
-                    name: 'BMLT (B.Sc. in Medical Laboratory Technology)',
-                    duration: '3 Years (6 Sem.)',
-                    intake: '30',
-                  },
-                  {
-                    name: 'B.Sc. in Physics (Major/Honours/Research)',
-                    duration: '3/4 Years (6/8 Sem.)',
-                    intake: '20',
-                  },
-                  {
-                    name: 'B.Sc. in Mathematics (Major/Honours/Research)',
-                    duration: '3/4 Years (6/8 Sem.)',
-                    intake: '20',
-                  },
-                  {
-                    name: 'B.A. in English (Major/Honours/Research)',
-                    duration: '3/4 Years (6/8 Sem.)',
-                    intake: '30',
-                  },
-                  {
-                    name: 'B.Sc. Honours in Electronics',
-                    duration: '3 Years (1+1+1)',
-                    intake: '30',
-                  },
-                  {
-                    name: 'B.Sc. Pass with Computer Science, Electronics, Mathematics and Physics',
-                    duration: '3 Years (1+1+1)',
-                    intake: '30',
-                  },
-                ].map((course, index) => (
-                  <div
-                    key={index}
-                    className="rounded-r-lg border-l-4 border-[#900090] bg-blue-50 p-4 transition-shadow duration-300 hover:shadow-md sm:p-5">
-                    <h4 className="mb-2 text-base font-semibold text-gray-800 sm:mb-3 sm:text-lg">
-                      {course.name}
-                    </h4>
-                    <div className="space-y-1 text-sm sm:space-y-2 sm:text-base">
-                      <p className="text-gray-600">
-                        <span className="font-medium">Duration:</span>{' '}
-                        {course.duration}
-                      </p>
-                      <p className="text-gray-600">
-                        <span className="font-medium">Intake:</span>{' '}
-                        {course.intake}
-                      </p>
-                    </div>
-                  </div>
-                ))}
+                <p>
+                  Bharatiya Vidya Bhavan has 119 branches in India and 9
+                  overseas branches in countries like Australia, Canada, Kuwait,
+                  Mexico, Portugal, Singapore, South Africa, UK and USA. Number
+                  of constituent Institutions run by Bharatiya Vidya Bhavan is
+                  373 with over 2 lac student’s enrolled covering over 11,000
+                  employees. Bharatiya Vidya Bhavan has reached out to the World
+                  through its value-based publications numbering over 1800 under
+                  the banner Bhavan’s Book University.
+                </p>
               </div>
             </div>
           </section>

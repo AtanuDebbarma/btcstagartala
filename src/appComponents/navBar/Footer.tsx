@@ -49,6 +49,7 @@ function Footer() {
                 <h2 className="text-xl font-bold">
                   Bhavan’s Tripura College of Science & Technology
                 </h2>
+                <p className="text-sm text-gray-300">Recognized by AICTE</p>
                 <p className="text-sm text-gray-300">
                   Affiliated to Tripura University (A Central University)
                 </p>

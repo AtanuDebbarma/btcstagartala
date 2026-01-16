@@ -65,18 +65,29 @@ const PrincipalMESSAGE = () => {
   };
 
   return (
-    <div className="mt-20">
-      <div className="flex w-full items-center justify-center">
-        <h2 className="relative mb-6 inline-block text-2xl font-bold tracking-wide">
-          Principal's Message
-          <span className="absolute right-0 -bottom-1 h-1 w-1/2 rounded bg-yellow-400"></span>
-        </h2>
+    <div className="min-h-screen bg-gray-50">
+      {/* Hero Section - Same style as About/Academics/Facilities */}
+      <div className="relative h-50 w-full">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center">
+          <h1 className="text-lg font-extrabold text-nowrap text-white drop-shadow-lg sm:text-4xl md:text-5xl">
+            Principal's Message
+          </h1>
+          <p className="mt-4 text-base font-bold text-nowrap text-gray-200 drop-shadow-lg sm:mt-7 sm:text-xl md:text-2xl">
+            Bhavan's Tripura College of Science & Technology
+          </p>
+        </div>
+        <img
+          className="h-full w-full object-cover"
+          src={Assets.link.noticeBoardBanner}
+          alt="Principal's Message"
+          loading="lazy"
+        />
       </div>
       <div className="mx-auto mt-3 max-w-7xl px-10 xl:px-0">
         <div className="w-full overflow-hidden rounded-lg bg-gray-200 shadow-lg">
           <div className="flex flex-col gap-10 px-5 py-10 lg:flex-row lg:gap-0">
             {/* Left Image Section */}
-            <div className="flex flex-col justify-between px-6 md:mr-20 md:ml-20 md:w-[80%] md:px-2 lg:mr-auto lg:ml-auto lg:justify-center lg:px-5">
+            <div className="flex flex-col px-6 md:mr-20 md:ml-20 md:w-[80%] md:px-2 lg:mr-auto lg:ml-auto lg:px-5">
               <div
                 className="relative"
                 onMouseEnter={() => setOnHoverImage(true)}
@@ -95,12 +106,12 @@ const PrincipalMESSAGE = () => {
                 <img
                   src={displayImage || Assets.link.Principal_Fallback}
                   alt="Principal Image"
-                  className="h-auto max-h-87.5 w-full rounded-md object-contain"
+                  className="h-110 max-h-110 w-full rounded-md object-contain"
                 />
               </div>
             </div>
             {/* Right Content Section */}
-            <div className="flex flex-col justify-between px-6 md:mr-20 md:ml-20 md:w-[80%] md:px-2 lg:mr-auto lg:ml-auto lg:px-5">
+            <div className="flex flex-col px-6 md:mr-20 md:ml-20 md:w-[80%] md:px-2 lg:mr-auto lg:ml-auto lg:px-5">
               <div
                 className="relative"
                 onMouseEnter={() => setOnHoverText(true)}
@@ -116,9 +127,19 @@ const PrincipalMESSAGE = () => {
                     />
                   </div>
                 )}
-                <p className="text-justify text-sm leading-relaxed text-gray-700 sm:text-base">
-                  {displayText}
-                </p>
+                <div className="space-y-4">
+                  {displayText.split('\n').map((paragraph, index) => {
+                    // Skip empty paragraphs
+                    if (paragraph.trim() === '') return null;
+                    return (
+                      <p
+                        key={index}
+                        className="text-justify text-sm leading-relaxed text-gray-700 sm:text-base">
+                        {paragraph}
+                      </p>
+                    );
+                  })}
+                </div>
                 <p className="text-md mt-4 mb-4 font-medium text-gray-800">
                   "{displayFooter}"
                 </p>

@@ -13,7 +13,7 @@
   <!-- About Page -->
   <url>
     <loc>https://www.btcstagartala.org/about</loc>
-    <lastmod>2026-01-15</lastmod>
+    <lastmod>2026-01-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -21,7 +21,7 @@
   <!-- Academics Page -->
   <url>
     <loc>https://www.btcstagartala.org/academics</loc>
-    <lastmod>2026-01-15</lastmod>
+    <lastmod>2026-01-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -56,6 +56,14 @@
     <lastmod>2026-01-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+  </url>
+  
+  <!-- Facilities Page -->
+  <url>
+    <loc>https://www.btcstagartala.org/facilities</loc>
+    <lastmod>2026-01-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
   
   <!-- Gallery Page -->
@@ -101,15 +109,15 @@
   <!-- Activities -->
   <url>
     <loc>https://www.btcstagartala.org/activities</loc>
-    <lastmod>2026-01-15</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
+    <lastmod>2026-01-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
   
   <!-- Student Uniform -->
   <url>
     <loc>https://www.btcstagartala.org/student-uniform</loc>
-    <lastmod>2026-01-15</lastmod>
+    <lastmod>2026-01-16</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -117,7 +125,7 @@
   <!-- Rules & Regulations -->
   <url>
     <loc>https://www.btcstagartala.org/rules-regulations</loc>
-    <lastmod>2026-01-15</lastmod>
+    <lastmod>2026-01-16</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -125,17 +133,9 @@
   <!-- Fee Structure -->
   <url>
     <loc>https://www.btcstagartala.org/fee-structure</loc>
-    <lastmod>2026-01-15</lastmod>
+    <lastmod>2026-01-16</lastmod>
     <changefreq>yearly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  
-  <!-- Admission Eligibility -->
-  <url>
-    <loc>https://www.btcstagartala.org/admission-eligibility</loc>
-    <lastmod>2026-01-15</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
   </url>
   
   <!-- IQAC -->
