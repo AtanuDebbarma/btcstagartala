@@ -66,6 +66,9 @@ const DHEPage = lazy(() => import('./pages/DHEPage'));
 const ProspectusRedirectPage = lazy(
   () => import('./pages/ProspectusRedirectPage'),
 );
+const PermanentAffiliationRedirectPage = lazy(
+  () => import('./pages/PermanentAffiliationRedirectPage'),
+);
 
 // Loading fallback component
 const PageLoader = () => (
@@ -363,6 +366,14 @@ const RoutesWrapper = ({
             element={
               <Suspense fallback={<PageLoader />}>
                 <ProspectusRedirectPage />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/permanent-affiliation"
+            element={
+              <Suspense fallback={<PageLoader />}>
+                <PermanentAffiliationRedirectPage />
               </Suspense>
             }
           />

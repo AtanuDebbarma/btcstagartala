@@ -1,6 +1,8 @@
 import {useEffect} from 'react';
 import {useNavigate} from 'react-router-dom';
 import {appStore} from '@/appStore/appStore';
+import {SEO} from '@/components/SEO/SEO';
+import {pageSEO} from '@/components/SEO/seoConstants';
 
 const ProspectusRedirectPage = () => {
   const navigate = useNavigate();
@@ -29,12 +31,15 @@ const ProspectusRedirectPage = () => {
   }, [navigate, prospectusAndAdmission]);
 
   return (
-    <div className="flex min-h-screen items-center justify-center">
-      <div className="text-center">
-        <div className="mx-auto mb-4 h-12 w-12 animate-spin rounded-full border-b-2 border-purple-600"></div>
-        <p className="text-gray-600">Loading Prospectus...</p>
+    <>
+      <SEO {...pageSEO.prospectus} />
+      <div className="flex min-h-screen items-center justify-center">
+        <div className="text-center">
+          <div className="mx-auto mb-4 h-12 w-12 animate-spin rounded-full border-b-2 border-purple-600"></div>
+          <p className="text-gray-600">Loading Prospectus...</p>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

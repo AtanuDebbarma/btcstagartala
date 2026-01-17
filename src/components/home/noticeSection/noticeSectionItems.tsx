@@ -1,7 +1,10 @@
-import type {NoticeBoardType} from '@/types/homeTypes';
+import type {NoticeBoardType, PermanentAffiliationType} from '@/types/homeTypes';
 import {convertFirebaseTimestampToDate} from '@/utils/dateTransform';
-import React from 'react';
+import React, {useState} from 'react';
 import {useNavigate} from 'react-router-dom';
+import {appStore} from '@/appStore/appStore';
+import {AdminInteractionBtns} from '@/appComponents/adminInteractionBtns';
+import EditPermanentAffiliationModal from './editPermanentAffiliationModal';
 
 export const NoticeItem = React.memo(({notice}: {notice: NoticeBoardType}) => {
   const timeStamptoDate = convertFirebaseTimestampToDate(notice.createdAt);
@@ -71,8 +74,27 @@ export const AccreditationCard = React.memo(
     isMoreButton?: boolean;
   }) => {
     const navigation = useNavigate();
+    const permanentAffiliation = appStore(state => state.permanentAffiliation);
+    const setPermanentAffiliation = appStore(
+      state => state.setPermanentAffiliation,
+    );
+    const user = appStore(state => state.user);
+    const [onHoverAffiliation, setOnHoverAffiliation] =
+      useState<boolean>(false);
+    const [showEditModal, setShowEditModal] = useState<boolean>(false);
 
-    const handleClick = () => {
+    const allowedAdminEmails: string[] = [
+      import.meta.env.VITE_FIREBASE_ADMIN_EMAIL1,
+      import.meta.env.VITE_FIREBASE_ADMIN_EMAIL2,
+    ];
+    const isAdmin = allowedAdminEmails.includes(user?.email || '');
+
+    const handleClick = (e: React.MouseEvent) => {
+      // Don't navigate if clicking on edit button
+      if ((e.target as HTMLElement).closest('.edit-button')) {
+        return;
+      }
+
       // Navigate to AICTE page if id is 2
       if (id === 2) {
         setTimeout(() => {
@@ -80,14 +102,51 @@ export const AccreditationCard = React.memo(
           scrollTo(0, 0);
         }, 200);
       }
-      // Navigate to PDF viewer for Tripura University if id is 4
+      // Navigate to permanent affiliation - use dynamic URL if available
       if (id === 4) {
         setTimeout(() => {
-          void navigation(
-            '/pdf-viewer?file=https://old.btcstagartala.org/wp-content/uploads/2024/05/PermanentAffiliation.pdf',
-          );
+          if (permanentAffiliation?.url) {
+            // Use dynamic URL from Firebase
+            void navigation(
+              `/pdf-viewer?file=${encodeURIComponent(permanentAffiliation.url)}`,
+            );
+          } else {
+            // Fallback to redirect route (which will handle the old URL)
+            void navigation('/permanent-affiliation');
+          }
         }, 200);
       }
+    };
+
+    const handleEditClick = (e: React.MouseEvent) => {
+      e.stopPropagation();
+      setShowEditModal(true);
+    };
+
+    const handleEditSuccess = async () => {
+      // Refresh the permanent affiliation data after successful update
+      try {
+        const {collection, getDocs} = await import('firebase/firestore');
+        const {db} = await import('@/services/firebase');
+
+        const querySnapshot = await getDocs(
+          collection(db, 'prospectusAndAdmission'),
+        );
+
+        if (!querySnapshot.empty) {
+          const permanentAffiliationDoc = querySnapshot.docs
+            .map(doc => ({
+              id: doc.id,
+              ...doc.data(),
+            } as PermanentAffiliationType))
+            .find(item => item.name === 'Permanent_Affiliation');
+
+          await setPermanentAffiliation(permanentAffiliationDoc || null);
+        }
+      } catch (error) {
+        console.error('Error refreshing permanent affiliation data:', error);
+      }
+      setShowEditModal(false);
     };
 
     if (isMoreButton) {
@@ -112,20 +171,51 @@ export const AccreditationCard = React.memo(
     }
 
     return (
-      <div
-        onClick={handleClick}
-        className={`flex min-h-37.5 flex-col items-center justify-center rounded-md bg-white p-3 text-center shadow transition-transform duration-150 ease-in-out ${
-          id === 2 || id === 4
-            ? 'cursor-pointer hover:shadow-lg active:scale-95'
-            : 'cursor-default'
-        }`}>
-        <img
-          src={logo}
-          alt={name}
-          className="mb-2 h-16.25 w-auto object-contain"
-        />
-        <p className="text-center text-sm text-gray-800">{name}</p>
-      </div>
+      <>
+        <div
+          onClick={handleClick}
+          onMouseEnter={() => id === 4 && setOnHoverAffiliation(true)}
+          onMouseLeave={() => id === 4 && setOnHoverAffiliation(false)}
+          className={`relative flex min-h-37.5 flex-col items-center justify-center rounded-md bg-white p-3 text-center shadow transition-transform duration-150 ease-in-out ${
+            id === 2 || id === 4
+              ? 'cursor-pointer hover:shadow-lg active:scale-95'
+              : 'cursor-default'
+          }`}>
+          {/* Admin Edit Button for Permanent Affiliation (id=4) */}
+          {id === 4 &&
+            isAdmin &&
+            onHoverAffiliation &&
+            permanentAffiliation && (
+              <div className="edit-button absolute top-0 right-0.5 z-50 flex -translate-x-1/2 -translate-y-1/2 items-center rounded-full bg-white px-4 py-2 shadow-md">
+                <AdminInteractionBtns
+                  handleModal={handleEditClick}
+                  iconClass="fa-solid fa-pen"
+                  title="EDIT"
+                  iconColor="text-blue-600"
+                  hoverColor="hover:text-blue-800"
+                />
+              </div>
+            )}
+
+          <img
+            src={logo}
+            alt={name}
+            className="mb-2 h-16.25 w-auto object-contain"
+            loading="lazy"
+          />
+          <p className="text-center text-sm text-gray-800">{name}</p>
+        </div>
+
+        {/* Edit Modal */}
+        {id === 4 && (
+          <EditPermanentAffiliationModal
+            isOpen={showEditModal}
+            onClose={() => setShowEditModal(false)}
+            document={permanentAffiliation}
+            onSuccess={handleEditSuccess}
+          />
+        )}
+      </>
     );
   },
 );

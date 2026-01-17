@@ -62,6 +62,16 @@ export type ProspectusAndAdmissionFormType = {
 };
 
 /**
+ * Represents types for Firebase Backend ProspectusAndAdmissionForm.
+ */
+export type PermanentAffiliationType = {
+  id: string;
+  url: string;
+  name: 'Permanent_Affiliation';
+  createdAt: Timestamp | null;
+};
+
+/**
  * Represents types for Firebase Backend NoticeBoard table cointent.
  */
 export type NoticeBoardType = {

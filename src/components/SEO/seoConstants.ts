@@ -134,4 +134,18 @@ export const pageSEO = {
     keywords:
       'DHE, Directorate Higher Education Tripura, BTCST DHE, Tripura education department, higher education directorate, DHE documents, DHE approvals',
   },
+  prospectus: {
+    title: 'Prospectus | BTCST Agartala',
+    description:
+      "Download the official prospectus of Bhavan's Tripura College of Science & Technology. Complete information about courses, admission process, and college details.",
+    keywords:
+      'BTCST prospectus, college prospectus, admission prospectus, course details, college brochure, admission information, BTCST brochure',
+  },
+  permanentAffiliation: {
+    title: 'Permanent Affiliation | BTCST Agartala',
+    description:
+      "Permanent affiliation certificate of Bhavan's Tripura College of Science & Technology with Tripura University. Official affiliation document and recognition.",
+    keywords:
+      'BTCST affiliation, permanent affiliation, Tripura University affiliation, college affiliation certificate, university recognition, affiliation document',
+  },
 };
