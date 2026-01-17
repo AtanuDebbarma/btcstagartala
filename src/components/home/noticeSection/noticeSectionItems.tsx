@@ -1,4 +1,7 @@
-import type {NoticeBoardType, PermanentAffiliationType} from '@/types/homeTypes';
+import type {
+  NoticeBoardType,
+  PermanentAffiliationType,
+} from '@/types/homeTypes';
 import {convertFirebaseTimestampToDate} from '@/utils/dateTransform';
 import React, {useState} from 'react';
 import {useNavigate} from 'react-router-dom';
@@ -135,10 +138,13 @@ export const AccreditationCard = React.memo(
 
         if (!querySnapshot.empty) {
           const permanentAffiliationDoc = querySnapshot.docs
-            .map(doc => ({
-              id: doc.id,
-              ...doc.data(),
-            } as PermanentAffiliationType))
+            .map(
+              doc =>
+                ({
+                  id: doc.id,
+                  ...doc.data(),
+                }) as PermanentAffiliationType,
+            )
             .find(item => item.name === 'Permanent_Affiliation');
 
           await setPermanentAffiliation(permanentAffiliationDoc || null);
