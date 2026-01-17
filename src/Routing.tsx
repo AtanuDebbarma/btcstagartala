@@ -63,6 +63,9 @@ const MiscDocumentsPage = lazy(() => import('./pages/MiscDocumentsPage'));
 const ResultPage = lazy(() => import('./pages/ResultPage'));
 const AISHEPage = lazy(() => import('./pages/AISHEPage'));
 const DHEPage = lazy(() => import('./pages/DHEPage'));
+const ProspectusRedirectPage = lazy(
+  () => import('./pages/ProspectusRedirectPage'),
+);
 
 // Loading fallback component
 const PageLoader = () => (
@@ -352,6 +355,14 @@ const RoutesWrapper = ({
             element={
               <Suspense fallback={<PageLoader />}>
                 <AISHEPage />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/prospectus"
+            element={
+              <Suspense fallback={<PageLoader />}>
+                <ProspectusRedirectPage />
               </Suspense>
             }
           />
