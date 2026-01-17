@@ -1,9 +1,8 @@
 import {
-  addGalleryImage,
-  deleteGalleryImage,
-  getGalleryImageById,
-  updateGalleryImage,
-} from '@/services/gallery/galleryFirebase';
+  addGalleryImageBackend,
+  deleteGalleryImageBackend,
+  updateGalleryImageBackend,
+} from '@/services/gallery/galleryBackend';
 import type {GalleryImageType} from '@/types/galleryTypes';
 import {Timestamp} from 'firebase/firestore';
 import type React from 'react';
@@ -56,15 +55,16 @@ export const handleAddGalleryImage = async (
     // Use negative timestamp for descending order (newest first by default)
     const order = -timestamp.toMillis();
 
-    // Add to Firestore
-    const firebaseSuccess = await addGalleryImage(
+    // Add to Firestore via backend
+    const result = await addGalleryImageBackend(
       url.trim(),
       title.trim(),
       timestamp,
       order,
+      handleUploadErrorMessage,
     );
 
-    if (firebaseSuccess) {
+    if (result.success) {
       setLoading(false);
       setUploading(false);
       setProcessSuccess(true);
@@ -127,21 +127,15 @@ export const handleEditGalleryImage = async (
       return;
     }
 
-    const result = await getGalleryImageById(selectedImage.id);
-
-    if (!result) {
-      setLoading(false);
-      setUploading(false);
-      handleUploadErrorMessage('Image not found!');
-      setOpenModal(false);
-      return;
-    }
-
-    // Keep the original createdAt timestamp when editing
-    const firebaseSuccess = await updateGalleryImage(result.ref, {
-      url: url.trim(),
-      title: title.trim(),
-    });
+    // Update via backend (no need to get document reference)
+    const firebaseSuccess = await updateGalleryImageBackend(
+      selectedImage.id,
+      {
+        url: url.trim(),
+        title: title.trim(),
+      },
+      handleUploadErrorMessage,
+    );
 
     if (firebaseSuccess) {
       setLoading(false);
@@ -190,8 +184,11 @@ export const handleDeleteGalleryImage = async (
       return;
     }
 
-    // Delete from Firestore
-    const firebaseSuccess = await deleteGalleryImage(selectedImage.id);
+    // Delete from Firestore via backend
+    const firebaseSuccess = await deleteGalleryImageBackend(
+      selectedImage.id,
+      handleUploadErrorMessage,
+    );
 
     if (firebaseSuccess) {
       setLoading(false);

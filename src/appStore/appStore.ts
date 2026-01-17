@@ -24,6 +24,10 @@ import type {MiscDocumentsSlice} from './miscDocumentsSlice';
 import {createMiscDocumentsSlice} from './miscDocumentsSlice';
 import type {ResultsSlice} from './resultsSlice';
 import {createResultsSlice} from './resultsSlice';
+import type {AISHESlice} from './aisheSlice';
+import {createAISHESlice} from './aisheSlice';
+import type {DHESlice} from './dheSlice';
+import {createDHESlice} from './dheSlice';
 
 export type AppState = AdminSliceType &
   DimentionsSliceType &
@@ -36,7 +40,9 @@ export type AppState = AdminSliceType &
   CollegeResourcesSliceType &
   AICTESlice &
   MiscDocumentsSlice &
-  ResultsSlice;
+  ResultsSlice &
+  AISHESlice &
+  DHESlice;
 
 export const appStore = create<AppState>()(
   immer((...store) => ({
@@ -52,5 +58,7 @@ export const appStore = create<AppState>()(
     ...createAICTESlice(...store),
     ...createMiscDocumentsSlice(...store),
     ...createResultsSlice(...store),
+    ...createAISHESlice(...store),
+    ...createDHESlice(...store),
   })),
 );

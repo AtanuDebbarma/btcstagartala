@@ -1,6 +1,6 @@
 import type {GalleryImageType} from '@/types/galleryTypes';
 import React, {useState, useRef} from 'react';
-import {updateGalleryImagesOrder} from '@/services/gallery/galleryFirebase';
+import {updateGalleryImagesOrderBackend} from '@/services/gallery/galleryBackend';
 
 type PropTypes = {
   openModal: boolean;
@@ -57,7 +57,10 @@ export const ReorderGalleryModal = ({
       order: index,
     }));
 
-    const result = await updateGalleryImagesOrder(updates);
+    const result = await updateGalleryImagesOrderBackend(
+      updates,
+      (message: string) => setError(message),
+    );
 
     if (result) {
       setSuccess(true);

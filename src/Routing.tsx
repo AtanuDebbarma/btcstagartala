@@ -61,6 +61,8 @@ const StudentUniformPage = lazy(() => import('./pages/StudentUniformPage'));
 const CommitteeCellsPage = lazy(() => import('./pages/CommitteeCellsPage'));
 const MiscDocumentsPage = lazy(() => import('./pages/MiscDocumentsPage'));
 const ResultPage = lazy(() => import('./pages/ResultPage'));
+const AISHEPage = lazy(() => import('./pages/AISHEPage'));
+const DHEPage = lazy(() => import('./pages/DHEPage'));
 
 // Loading fallback component
 const PageLoader = () => (
@@ -311,7 +313,11 @@ const RoutesWrapper = ({
           />
           <Route
             path={RouteNames.DHE}
-            element={<PlaceholderPage title="DHE" />}
+            element={
+              <Suspense fallback={<PageLoader />}>
+                <DHEPage />
+              </Suspense>
+            }
           />
           <Route
             path={RouteNames.ACADEMIC_CALENDAR}
@@ -343,7 +349,11 @@ const RoutesWrapper = ({
           />
           <Route
             path={RouteNames.AISHE}
-            element={<PlaceholderPage title="AISHE" />}
+            element={
+              <Suspense fallback={<PageLoader />}>
+                <AISHEPage />
+              </Suspense>
+            }
           />
         </Routes>
       </main>

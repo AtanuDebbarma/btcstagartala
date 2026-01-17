@@ -120,4 +120,18 @@ export const pageSEO = {
     keywords:
       'BTCST results, exam results, semester results, college results, academic results, examination results, student results, result download',
   },
+  aishe: {
+    title: 'AISHE Documents | BTCST Agartala',
+    description:
+      "All India Survey on Higher Education (AISHE) related documents for Bhavan's Tripura College of Science & Technology. AISHE reports and submissions.",
+    keywords:
+      'AISHE, All India Survey Higher Education, BTCST AISHE, education survey, higher education survey, AISHE documents, AISHE reports',
+  },
+  dhe: {
+    title: 'DHE Documents | BTCST Agartala',
+    description:
+      "Directorate of Higher Education of Tripura related documents for Bhavan's Tripura College of Science & Technology. DHE approvals and communications.",
+    keywords:
+      'DHE, Directorate Higher Education Tripura, BTCST DHE, Tripura education department, higher education directorate, DHE documents, DHE approvals',
+  },
 };
